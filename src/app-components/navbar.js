@@ -19,20 +19,21 @@ export default () => {
             <div className="tabs is-right">
               <ul>
                 <li className="is-active">
-                  <a>Map</a>
+                  <a href="#map">Map</a>
                 </li>
                 <li>
-                  <a href="#">Archive</a>
+                  <a href="#archive">Archive</a>
                 </li>
                 <li>
-                  <a href="#">Docs</a>
+                  <a href="#docs">Docs</a>
                 </li>
                 <li>
-                  <a href="">Help</a>
+                  <a href="#help">Help</a>
                 </li>
                 <li>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://cwbi-cumulus-42795431.us-east-1.elb.amazonaws.com/admin/"
                   >
                     Login

@@ -9,7 +9,7 @@ import "./home.scss";
 const BannerContent = () => (
   <span>
     <span className="tag is-primary">Coming Soon...</span> Products Available as{" "}
-    <a target="_blank" href="https://stacspec.org/">
+    <a rel="noopener noreferrer" target="_blank" href="https://stacspec.org/">
       SpatioTemporal Asset Catalogs (STAC)
     </a>
   </span>
