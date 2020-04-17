@@ -21,8 +21,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build
-    
-    - name: zip minified site
     - run: zip -r cumulus-ui.zip build/*
     
     - name: Create Release
