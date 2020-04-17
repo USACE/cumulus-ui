@@ -30,12 +30,15 @@ export default () => {
                 <li>
                   <a href="">Help</a>
                 </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://cwbi-cumulus-42795431.us-east-1.elb.amazonaws.com/admin/"
+                  >
+                    Login
+                  </a>
+                </li>
               </ul>
-              <span className="navbar-item">
-                <button className="button is-white">
-                  <span title="Login">Login</span>
-                </button>
-              </span>
             </div>
           </div>
         </div>
