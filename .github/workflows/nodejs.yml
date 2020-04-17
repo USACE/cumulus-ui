@@ -5,7 +5,8 @@ name: CI Build User Interface
 
 on:
   push:
-    branches: []
+    branches:
+      - 'release*'
 jobs:
   build:
     runs-on: ubuntu-latest
