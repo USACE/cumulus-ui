@@ -1,13 +1,15 @@
 import {
   composeBundles,
   createCacheBundle,
-  createUrlBundle
+  createUrlBundle,
 } from "redux-bundler";
 
 import {
   createOlBasemapBundle,
-  createOlMapBundle
+  createOlMapBundle,
+  createNestedUrlBundle,
 } from "@corpsmap/corpsmap-bundles";
+import pkg from "../../package.json";
 
 import routeBundle from "./route.js";
 
@@ -15,7 +17,10 @@ import cache from "./../cache.js";
 
 export default composeBundles(
   createCacheBundle({
-    cacheFn: cache.set
+    cacheFn: cache.set,
+  }),
+  createNestedUrlBundle({
+    pkg: pkg,
   }),
   createUrlBundle(),
   createOlBasemapBundle(),
