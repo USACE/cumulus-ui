@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 rm s3://cwbi-cumulus-site --recursive && aws s3 cp ./build/ s3://cwbi-cumulus-site --recursive"
+    "deploy": "aws s3 rm s3://corpsmap-appz/cumulus --recursive && aws s3 cp ./build/ s3://corpsmap-appz/cumulus --recursive"
   },
   "eslintConfig": {
     "extends": "react-app"
