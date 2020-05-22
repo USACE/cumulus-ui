@@ -2,7 +2,7 @@
   "name": "cumulus-site",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://d1ycfr9v4fzpxx.cloudfront.net/cumulus",
+  "homepage": "https://apps.rsgis.dev/cumulus",
   "dependencies": {
     "@corpsmap/corpsmap-bundles": "^2.0.2",
     "@testing-library/jest-dom": "^4.2.4",

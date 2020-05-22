@@ -5,6 +5,7 @@ import fourOhFour from "../app-pages/fourOhFour";
 
 export default createRouteBundle(
   {
+    "": Home,
     "/": Home,
     "*": fourOhFour,
   },

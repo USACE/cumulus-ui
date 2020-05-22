@@ -11,7 +11,7 @@ import {
 } from "@corpsmap/corpsmap-bundles";
 import pkg from "../../package.json";
 
-import routeBundle from "./route.js";
+import routeBundle from "./routes-bundle.js";
 
 import cache from "./../cache.js";
 
