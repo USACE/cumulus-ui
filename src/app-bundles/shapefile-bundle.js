@@ -1,7 +1,6 @@
 import shp from "shpjs";
 // import dissolve from "@turf/dissolve";
-import bbox from "@turf/bbox";
-import simplify from "@turf/simplify";
+import { bbox, flatten, simplify, truncate } from "@turf/turf";
 import proj4 from "proj4";
 
 import { createSelector } from "redux-bundler";
@@ -88,16 +87,14 @@ export default {
 
     const fcRaw = store.selectShapefileJson();
     // @todo do not purge multipolygons blindly
-    const fc = {
-      ...fcRaw,
-      features: fcRaw.features.filter((f) => f.geometry.type === "Polygon"),
-    };
-    const ss = simplify(fc, { tolerance: 0.0001 });
+    const fc = flatten(fcRaw);
+    const tt = truncate(fc, { precision: 6, coordinates: 2 });
+    const ss = simplify(tt, { tolerance: 1 });
     const bb = bbox(ss);
 
     dispatch({
       type: "SHAPEFILE_DISSOLVE_FINISH",
-      payload: { _isDissolving: false, bbox: bb },
+      payload: { _isDissolving: false, bbox: bb, dissolve: ss },
     });
   },
   selectShapefileZip: (state) => state.shapefile.zip,

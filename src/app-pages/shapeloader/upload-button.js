@@ -10,11 +10,12 @@ export default connect("doShapefileQueueZip", ({ doShapefileQueueZip }) => {
   };
 
   const handleInputChange = (e) => {
-    doShapefileQueueZip(inputEl.current.files[0]);
+    inputEl.current.files.length &&
+      doShapefileQueueZip(inputEl.current.files[0]);
   };
 
   const btnClass = classnames({
-    "p-4 rounded border-2 border-green-400": true,
+    "bg-transparent text-gray-200 font-semibold hover:text-white py-2 px-4 border border-gray-200 hover:border-transparent hover:bg-green-400 rounded-full block": true,
   });
 
   return (
