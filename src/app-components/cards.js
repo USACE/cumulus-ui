@@ -4,64 +4,44 @@ import book from "../img/book.jpg";
 import books from "../img/books.jpg";
 import chart from "../img/chart.jpg";
 
-import "./cards.scss";
-
-const CardExplore = () => (
-  <div className="card is-shady">
-    <div className="card-image">
-      <figure className="image is-3by2">
-        <img src={chart} alt="graph on computer screen" />
-      </figure>
-    </div>
-    <div className="card-content">
-      <div className="content">
-        <h4>Explore the Data</h4>
-        <p>Browse the map, and visualize the data for powerful data insights</p>
-        <p>
-          <a href="#map">Learn more</a>
-        </p>
+const Card = ({ title, text, img, imgAlt, href }) => {
+  return (
+    <a href={href}>
+      <div className="max-w-xs rounded overflow-hidden shadow-lg hover:shadow-2xl">
+        <img className="w-full" src={img} alt={imgAlt} />
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">{title}</div>
+          <p className="text-gray-700 text-base">{text}</p>
+        </div>
+        <div className="px-6 py-4"></div>
       </div>
-    </div>
-  </div>
-);
+    </a>
+  );
+};
 
-const CardBrowse = () => (
-  <div className="card is-shady">
-    <div className="card-image">
-      <figure className="image is-3by2">
-        <img src={books} alt="library" />
-      </figure>
-    </div>
-    <div className="card-content">
-      <div className="content">
-        <h4>Browse the Archive</h4>
-        <p>Learn what's available for your study or realtime model</p>
-        <p>
-          <a href="#browse">Learn more</a>
-        </p>
-      </div>
-    </div>
-  </div>
-);
+export const CardExplore = () =>
+  Card({
+    title: "Explore the Data",
+    text: "Browse the map, and visualize the data for powerful data insights",
+    img: chart,
+    imgAlt: "Computer screen showing graph",
+    href: "/#explore",
+  });
 
-const CardDocs = () => (
-  <div className="card is-shady">
-    <div className="card-image">
-      <figure className="image is-3by2">
-        <img src={book} alt="book" />
-      </figure>
-    </div>
-    <div className="card-content">
-      <div className="content">
-        <h4>Documentation</h4>
-        <p>How it works and how it's built. User Guide and API Docs.</p>
-        <br />
-        <p>
-          <a href="#docs">Learn more</a>
-        </p>
-      </div>
-    </div>
-  </div>
-);
+export const CardBrowse = () =>
+  Card({
+    title: "Browse the Archive",
+    text: "Learn what's available for your study or realtime model",
+    img: books,
+    imgAlt: "stack of books",
+    href: "/#data",
+  });
 
-export { CardBrowse, CardDocs, CardExplore };
+export const CardDocs = () =>
+  Card({
+    title: "Documentation",
+    text: "How it works and how it's built. User Guide and API Docs.",
+    img: book,
+    imgAlt: "open book on a table",
+    href: "/#docs",
+  });

@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/App.scss";
+import "./css/tailwind.generated.css";
 
 import { connect } from "redux-bundler-react";
 
