@@ -2,13 +2,15 @@ import React from "react";
 import { connect } from "redux-bundler-react";
 
 const ShapeFileInfo = connect("selectShapefileZip", ({ shapefileZip: zip }) => (
-  <h1>
-    {zip === null
-      ? ""
-      : `Filename: ${zip.name}; Filesize: ${
-          zip.size * 0.000001
-        } MB; Last Modified: ${zip.lastModifiedDate}`}
-  </h1>
+  <div>
+    <h1>
+      {zip === null
+        ? ""
+        : `Filename: ${zip.name}; Filesize: ${
+            zip.size * 0.000001
+          } MB; Last Modified: ${zip.lastModifiedDate}`}
+    </h1>
+  </div>
 ));
 
 const ShapeGeoInfo = connect(
