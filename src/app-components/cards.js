@@ -28,13 +28,13 @@ export const CardExplore = () =>
     href: "/#explore",
   });
 
-export const CardBrowse = () =>
+export const CardCatalog = () =>
   Card({
-    title: "Browse the Archive",
+    title: "Search the Catalog",
     text: "Learn what's available for your study or realtime model",
     img: books,
     imgAlt: "stack of books",
-    href: "/#data",
+    href: "/catalog",
   });
 
 export const CardDocs = () =>

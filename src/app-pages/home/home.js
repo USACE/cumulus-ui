@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../app-components/navbar";
-import { CardDocs, CardExplore } from "../../app-components/cards";
+import { CardDocs, CardExplore, CardCatalog } from "../../app-components/cards";
 // import background from "../../img/clouds.jpg";
 
 export default () => (
@@ -38,7 +38,7 @@ export default () => (
 
       <div className="container mt-24 mx-auto flex justify-around">
         <CardExplore />
-        {/* <CardBrowse /> */}
+        <CardCatalog />
         <CardDocs />
       </div>
       <div className="container mx-auto mt-24">
