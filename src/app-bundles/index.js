@@ -5,12 +5,12 @@ import {
 } from "redux-bundler";
 
 import {
-  createAuthBundle,
-  createJwtApiBundle,
   createOlBasemapBundle,
   createOlMapBundle,
   createNestedUrlBundle,
 } from "@corpsmap/corpsmap-bundles";
+import createAuthBundle from "@corpsmap/create-auth-bundle";
+import createJwtApiBundle from "@corpsmap/create-jwt-api-bundle";
 import pkg from "../../package.json";
 
 import routeBundle from "./routes-bundle";
@@ -18,6 +18,7 @@ import shapefileBundle from "./shapefile-bundle";
 import mapsBundle from "./maps-bundle";
 
 import cache from "./../cache.js";
+import productBundle from "./product-bundle";
 
 export default composeBundles(
   createAuthBundle({
@@ -29,8 +30,11 @@ export default composeBundles(
   createJwtApiBundle({
     root:
       process.env.NODE_ENV === "development"
-        ? `http://localhost:3030/cumulus`
-        : `https://api.rsgis.dev/development/cumulus`,
+        ? `https://api.rsgis.dev/development`
+        : `https://api.rsgis.dev/development`,
+    unless: {
+      method: "GET",
+    },
   }),
   createCacheBundle({
     cacheFn: cache.set,
@@ -45,7 +49,8 @@ export default composeBundles(
     center: [-80.79, 26.94],
     zoom: 5,
   }),
+  mapsBundle,
+  productBundle,
   routeBundle,
-  shapefileBundle,
-  mapsBundle
+  shapefileBundle
 );
