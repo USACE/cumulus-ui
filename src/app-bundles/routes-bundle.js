@@ -13,7 +13,7 @@ export default createRouteBundle(
     "": Home,
     "/": Home,
     "/catalog": Catalog,
-    "/catalog/products/:product_id": ProductDetails,
+    "/catalog/:product_id": ProductDetails,
     "/admin": Admin,
     "/admin/shapeloader": Shapeloader,
     "/logout": Logout,

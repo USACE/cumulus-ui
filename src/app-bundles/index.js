@@ -19,6 +19,7 @@ import mapsBundle from "./maps-bundle";
 
 import cache from "./../cache.js";
 import productBundle from "./product-bundle";
+import productAvailabilityBundle from "./product-availability-bundle"
 
 export default composeBundles(
   createAuthBundle({
@@ -30,7 +31,7 @@ export default composeBundles(
   createJwtApiBundle({
     root:
       process.env.NODE_ENV === "development"
-        ? `https://api.rsgis.dev/development`
+        ? `http://localhost:3030`
         : `https://api.rsgis.dev/development`,
     unless: {
       method: "GET",
@@ -51,6 +52,7 @@ export default composeBundles(
   }),
   mapsBundle,
   productBundle,
+  productAvailabilityBundle,
   routeBundle,
   shapefileBundle
 );

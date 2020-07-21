@@ -47,7 +47,7 @@ const Availability = (p) => {
 
 const ProductSection = (p) => (
   <div className="shadow-lg hover:shadow-2xl">
-    <a href={`/catalog/products/${p.id}`}>
+    <a href={`/catalog/${p.id}`}>
       <div className="flex justify-between border border-blue-800 px-4 py-2 text-blue-800 rounded-t">
         <div className="text-lg font-bold ">{p.name}</div>
         <div className="font-light">
@@ -59,7 +59,7 @@ const ProductSection = (p) => (
         {/* Image */}
         <div>
           <img
-            class="rounded-lg md:w-56"
+            className="rounded-lg md:w-56"
             src="https://images.unsplash.com/photo-1578924825042-31d14cf13c35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             alt="Placeholder Map"
           />

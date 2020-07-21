@@ -28,7 +28,7 @@ export default () => (
       </div>
       <div className="text-center mt-12">
         <h1 className="text-5xl">
-          <strong className="font-sans font-font-black">Meteorology</strong>
+          <strong className="font-sans font-black">Meteorology</strong>
           <span className="font-light"> With Simple Data Access</span>
         </h1>
         <p className="text-gray-800 mt-2 font-thin text-2xl">
