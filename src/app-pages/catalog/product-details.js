@@ -6,6 +6,8 @@ import "react-calendar-heatmap/dist/styles.css";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 
+import Loader from "../../app-components/loader";
+
 const colorClassBinary = (value) => {
   if (!value || !value.count) {
     return "fill-current text-gray-300";
@@ -17,14 +19,14 @@ const colorClassBinary = (value) => {
 const colorClassHourly = (value) => {
   const color = ({ count }) =>
     count === 24
-      ? "text-green"
+      ? "text-green-500"
       : count < 24 && count > 20
-      ? "text-green-lighter"
+      ? "text-green-300"
       : count < 20 && count > 0
-      ? "text-yellow-light"
-      : "text-gray-300";
+      ? "text-green-100"
+      : "text-gray-100";
 
-  return `fill-current ${value ? color(value) : "text-gray-300"}`;
+  return `fill-current ${value ? color(value) : "text-gray-100"}`;
 };
 
 const AvailabilityCalendar = ({ year, dates, classForValue }) => {
@@ -58,15 +60,19 @@ export default connect(
   "selectProductByRoute",
   "selectProductYearsByRoute",
   "selectProductavailabilityByRoute",
+  "selectProductavailabilityIsLoading",
   ({
     productByRoute: product,
     productYearsByRoute: productYears,
     productavailabilityByRoute: productAvailability,
+    productavailabilityIsLoading: isLoading,
   }) => {
     // Color Ramp Depends on Hourly vs. Daily temporal_resolution
-    const classForValue = (resolution) =>
-      resolution === 3600 ? colorClassHourly : colorClassBinary;
-
+    const classForValue = (resolution) => {
+      return parseInt(resolution) === 3600
+        ? colorClassHourly
+        : colorClassBinary;
+    };
     return (
       product && (
         <main>
@@ -79,7 +85,9 @@ export default connect(
                 <div className="border border-2 m-2 p-2">
                   <h1 className="font-sans text-lg">Availability Details</h1>
                   <hr />
-                  {productAvailability &&
+                  {isLoading || !productAvailability ? (
+                    <Loader opt={"dissolve-cube"} color={"#9ae6b4"} />
+                  ) : (
                     productYears.map((year, idx) => (
                       <AvailabilityCalendar
                         key={idx}
@@ -89,7 +97,8 @@ export default connect(
                           product.temporal_resolution
                         )}
                       />
-                    ))}
+                    ))
+                  )}
                 </div>
               </div>
               <div className="w-1/4">
