@@ -31,7 +31,7 @@ export default composeBundles(
   createJwtApiBundle({
     root:
       process.env.NODE_ENV === "development"
-        ? `http://localhost:3030`
+        ? `http://api.rsgis.dev/development`
         : `https://api.rsgis.dev/development`,
     unless: {
       method: "GET",
