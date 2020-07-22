@@ -43,7 +43,7 @@ export default () => (
       </div>
       <div className="container mx-auto mt-24">
         <p className="font-light text-center italic">
-          Never let missing data get in the way of modeling again.
+          Connecting Modelers with Meteorological Data
         </p>
       </div>
     </div>
