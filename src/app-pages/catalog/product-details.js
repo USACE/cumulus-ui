@@ -4,8 +4,9 @@ import { connect } from "redux-bundler-react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import ReactTooltip from "react-tooltip";
+import moment from "moment";
 
-const colorClass = (value) => {
+const colorClassBinary = (value) => {
   if (!value || !value.count) {
     return "fill-current text-gray-300";
   } else {
@@ -13,10 +14,20 @@ const colorClass = (value) => {
   }
 };
 
+const colorClassHourly = (value) => {
+  const color = ({ count }) =>
+    count === 24
+      ? "text-green"
+      : count < 24 && count > 20
+      ? "text-green-lighter"
+      : count < 20 && count > 0
+      ? "text-yellow-light"
+      : "text-gray-300";
 
+  return `fill-current ${value ? color(value) : "text-gray-300"}`;
+};
 
-
-const AvailabilityCalendar = ({year, dates}) => {
+const AvailabilityCalendar = ({ year, dates, classForValue }) => {
   return (
     <div className="flex flex-row justify-between items-center p-2 m-4">
       <div className="w-1/12">
@@ -27,23 +38,34 @@ const AvailabilityCalendar = ({year, dates}) => {
           startDate={new Date(`${year - 1}-10-01`)}
           endDate={new Date(`${year}-09-30`)}
           values={dates}
-          classForValue={colorClass}
+          classForValue={classForValue}
           tooltipDataAttrs={(value) =>
-            value && { "data-tip": `${value.date}: ${value.count}/${1} Grids` }
+            value &&
+            value.date && {
+              "data-tip": `${moment(value.date).format("YYYY-MM-DD")}: ${
+                value.count
+              } Grids`,
+            }
           }
         />
         <ReactTooltip />
       </div>
     </div>
   );
-}
-
+};
 
 export default connect(
   "selectProductByRoute",
   "selectProductYearsByRoute",
   "selectProductavailabilityByRoute",
-  ({ productByRoute: product, productYearsByRoute: productYears, productavailabilityByRoute: productAvailability }) => {
+  ({
+    productByRoute: product,
+    productYearsByRoute: productYears,
+    productavailabilityByRoute: productAvailability,
+  }) => {
+    // Color Ramp Depends on Hourly vs. Daily temporal_resolution
+    const classForValue = (resolution) =>
+      resolution === 3600 ? colorClassHourly : colorClassBinary;
 
     return (
       product && (
@@ -57,8 +79,17 @@ export default connect(
                 <div className="border border-2 m-2 p-2">
                   <h1 className="font-sans text-lg">Availability Details</h1>
                   <hr />
-                  { (productAvailability && productAvailability.date_counts) &&
-                  productYears.map((year, idx) => <AvailabilityCalendar key={idx} year={year} dates={productAvailability.date_counts} />)}
+                  {productAvailability &&
+                    productYears.map((year, idx) => (
+                      <AvailabilityCalendar
+                        key={idx}
+                        year={year}
+                        dates={productAvailability.date_counts}
+                        classForValue={classForValue(
+                          product.temporal_resolution
+                        )}
+                      />
+                    ))}
                 </div>
               </div>
               <div className="w-1/4">
