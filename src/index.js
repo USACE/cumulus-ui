@@ -7,14 +7,14 @@ import cache from "./cache";
 
 import App from "./App";
 
-cache.getAll().then(initialData => {
+cache.getAll().then((initialData) => {
   const store = getStore(initialData);
 
   if (process.env.NODE_ENV === "development") window.store = store;
 
   ReactDOM.render(
     <Provider store={store}>
-      <div onClick={getNavHelper(store.doUpdateUrl)}>
+      <div onClick={getNavHelper(store.doUpdateUrlWithHomepage)}>
         <App />
       </div>
     </Provider>,
