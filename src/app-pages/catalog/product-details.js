@@ -44,7 +44,7 @@ const AvailabilityCalendar = ({ year, dates, classForValue }) => {
           tooltipDataAttrs={(value) =>
             value &&
             value.date && {
-              "data-tip": `${moment(value.date).format("YYYY-MM-DD")}: ${
+              "data-tip": `${moment.utc(value.date).format("YYYY-MM-DD")}: ${
                 value.count
               } Grids`,
             }
