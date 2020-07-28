@@ -22,7 +22,7 @@ const LoginDropdown = connect(
 
     const loginClass = classnames({
       hidden: !isOpen,
-      "absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl": true,
+      "z-50 absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl": true,
     });
 
     return (
@@ -31,7 +31,7 @@ const LoginDropdown = connect(
           <>
             <button
               onClick={toggleIsOpen}
-              className="block h-16 w-16 text-gray-200 rounded-full overflow-hidden border-2 border-green-400 focus:outline-none hover:border-green-600"
+              className="block h-12 w-12 text-gray-200 rounded-full overflow-hidden border-2 border-green-400 focus:outline-none hover:border-green-600"
             >
               <UserInitials />
             </button>
@@ -60,14 +60,14 @@ const LoginDropdown = connect(
 );
 
 const NavItem = connect(
-  "selectPathname",
-  ({ pathname, href, handler, children }) => {
+  "selectPathnameMinusHomepage",
+  ({ pathnameMinusHomepage, href, handler, children }) => {
     const handleClick = (e) => {
       if (handler && typeof handler === "function") handler(e);
     };
 
     const cls = classnames({
-      "text-green-400 font-bold bg-gray-800": pathname === href,
+      "text-green-400 font-bold bg-gray-800": pathnameMinusHomepage === href,
       "mt-1 block px-2 py-1 text-white rounded hover:text-green-300 sm:mt-0 sm:ml-2": true,
     });
 
@@ -90,8 +90,8 @@ const NavItem = connect(
 
 export default connect(
   "selectAuthIsLoggedIn",
-  "selectPathname",
-  ({ authIsLoggedIn, pathname }) => {
+  "selectPathnameMinusHomepage",
+  ({ authIsLoggedIn, pathnameMinusHomepage }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleIsOpen = () => {
       setIsOpen(!isOpen);
@@ -104,18 +104,19 @@ export default connect(
     });
 
     return (
-      <header className="bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
-        <div className="px-4 py-3 flex items-center justify-between px-4 py-3 sm:p-0">
+      <header className="h-18 bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 py-1">
+        <div className="px-4 py-3 flex items-center justify-between px-4 py-3 ">
           <div>
             <h3 className="text-white text-2xl">
               <a className="hover:text-green-400" href="/">
                 Cumulus
               </a>
-              {pathname === "/" ? null : (
+              {pathnameMinusHomepage === "" ||
+              pathnameMinusHomepage === "/" ? null : (
                 <span className="px-2 font-light">|</span>
               )}
               <span className="font-light text-lg">
-                {pathname.split("/")[1]}
+                {pathnameMinusHomepage.split("/")[1]}
               </span>
             </h3>
           </div>

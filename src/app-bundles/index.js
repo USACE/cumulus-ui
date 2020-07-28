@@ -19,7 +19,8 @@ import mapsBundle from "./maps-bundle";
 
 import cache from "./../cache.js";
 import productBundle from "./product-bundle";
-import productAvailabilityBundle from "./product-availability-bundle"
+import productAvailabilityBundle from "./product-availability-bundle";
+import exploreMapBundle from "./explore-map-bundle";
 
 export default composeBundles(
   createAuthBundle({
@@ -51,6 +52,7 @@ export default composeBundles(
     zoom: 5,
   }),
   mapsBundle,
+  exploreMapBundle,
   productBundle,
   productAvailabilityBundle,
   routeBundle,
