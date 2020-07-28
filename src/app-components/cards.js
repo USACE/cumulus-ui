@@ -25,7 +25,7 @@ export const CardExplore = () =>
     text: "Browse the map, and visualize the data for powerful data insights",
     img: chart,
     imgAlt: "Computer screen showing graph",
-    href: "/#explore",
+    href: "/explorer",
   });
 
 export const CardCatalog = () =>

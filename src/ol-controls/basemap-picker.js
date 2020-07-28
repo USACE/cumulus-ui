@@ -163,7 +163,7 @@ class BasemapControl extends Control {
 
   setMap(map) {
     super.setMap(map);
-    this.setBasemap(0);
+    this.setBasemap(1);
   }
 
   setBasemap(idx) {

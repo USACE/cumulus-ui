@@ -84,7 +84,7 @@ export default connect(
           <p className="mt-12 text-3xl">Available Products</p>
           <p>Ready for real-time modeling or historic calibration</p>
           <hr className="mt-4" />
-          <div className="space-y-12 mt-16 mb-10 max-w-3xl">
+          <div className="space-y-12 mt-10 mb-10 max-w-3xl">
             {products.map((p) => ProductSection(p))}
           </div>
         </div>
