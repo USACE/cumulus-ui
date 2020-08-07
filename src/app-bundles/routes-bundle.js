@@ -8,6 +8,7 @@ import Shapeloader from "../app-pages/shapeloader/shapeloader";
 import Catalog from "../app-pages/catalog/catalog";
 import ProductDetails from "../app-pages/catalog/product-details";
 import Explorer from "../app-pages/explorer/explorer";
+import Contact from "../app-pages/help/contact";
 
 export default createRouteBundle(
   {
@@ -19,6 +20,7 @@ export default createRouteBundle(
     "/admin": Admin,
     "/admin/shapeloader": Shapeloader,
     "/logout": Logout,
+    "/contact": Contact,
     "*": fourOhFour,
   },
   {

@@ -41,7 +41,12 @@ export default () => (
         <CardCatalog />
         <CardDocs />
       </div>
-      <div className="container mx-auto mt-24">
+
+      <div className="container mx-auto mt-12 text-center text-2xl">
+        Need Help?  <a href="/contact">Contact the support team.</a>
+      </div>
+
+      <div className="container mx-auto mt-12">
         <p className="font-light text-center italic">
           Connecting Modelers with Meteorological Data
         </p>
