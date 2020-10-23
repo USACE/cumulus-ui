@@ -30,16 +30,27 @@ export default createRestBundle({
       "selectProductByRoute",
       (product) => {
         if (product && product.after && product.before) {
-          const yearAfter = moment(product.after).year()
-          const yearBefore = moment(product.before).year()
-          let years = []
+          // Water year runs October --> September
+          // (not Jan - Dec). If in October, add a year
+          const momentAfter = moment(product.after);
+          const yearAfter =
+            momentAfter.month() > 8
+              ? momentAfter.year() + 1
+              : momentAfter.year();
+          const momentBefore = moment(product.before);
+          const yearBefore =
+            momentBefore.month() > 8
+              ? momentBefore.year() + 1
+              : momentBefore.year();
+
+          let years = [];
           for (var y = yearAfter; y <= yearBefore; y++) {
-            years.push(y)
+            years.push(y);
           }
-          return years
+          return years;
+        }
+        return [];
       }
-      return []
-    }
-    )
+    ),
   },
 });
