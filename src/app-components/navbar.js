@@ -36,12 +36,19 @@ const LoginDropdown = connect(
               <UserInitials />
             </button>
             <div className={loginClass}>
+              <div className="px-3 py-2 text-gray-800 bg-gray-500 text-white">
+                <small className="text-white">{`Currently logged in as ${user.name}`}</small>
+              </div>
+              <a
+                href="/profile"
+                className="block px-5 py-2 text-gray-800 hover:bg-green-500 hover:text-white"
+              >
+                My Profile
+              </a>
               <a
                 href="/logout"
-                className="block px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white"
+                className="block px-5 py-2 text-gray-800 hover:bg-green-500 hover:text-white"
               >
-                <small>{`Currently logged in as ${user.name}`}</small>
-                <br />
                 Logout
               </a>
             </div>

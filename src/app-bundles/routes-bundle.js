@@ -9,12 +9,14 @@ import Catalog from "../app-pages/catalog/catalog";
 import ProductDetails from "../app-pages/catalog/product-details";
 import Explorer from "../app-pages/explorer/explorer";
 import Contact from "../app-pages/help/contact";
+import Profile from "../app-pages/profile/profile";
 
 export default createRouteBundle(
   {
     "": Home,
     "/": Home,
     "/catalog": Catalog,
+    "/profile": Profile,
     "/catalog/:product_id": ProductDetails,
     "/explorer": Explorer,
     "/admin": Admin,
