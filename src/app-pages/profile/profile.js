@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../../app-components/navbar";
 
 //temp style to see div borders
-const style = `div{border:1px solid red;}`;
+//const style = `div{border:1px solid red;}`;
 
 export default () => (
   <main>
