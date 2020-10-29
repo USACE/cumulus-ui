@@ -37,7 +37,7 @@ const LoginDropdown = connect(
             </button>
             <div className={loginClass}>
               <div className="px-3 py-2 text-gray-800 bg-gray-500 text-white">
-                <small className="text-white">{`Currently logged in as ${user.name}`}</small>
+                <small className="text-white">{`Logged in as ${user.name}`}</small>
               </div>
               <a
                 href="/profile"
