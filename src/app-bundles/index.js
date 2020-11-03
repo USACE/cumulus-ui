@@ -22,9 +22,10 @@ import cache from "./../cache.js";
 import productBundle from "./product-bundle";
 import productAvailabilityBundle from "./product-availability-bundle";
 import exploreMapBundle from "./explore-map-bundle";
+import profileBundle from "./profile-bundle"
 
 const mockTokenTestUser =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwIiwibmFtZSI6IlVzZXIuVGVzdCIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyMDAwMDAwMDAwLCJyb2xlcyI6WyJQVUJMSUMuVVNFUiJdfQ.Igbrcn-3Sk-bysuvCUgX5gFW5AuDfPidswIsZg4Oaos";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwIiwibmFtZSI6IlVzZXIuVGVzdCIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyMDAwMDAwMDAwLCJyb2xlcyI6WyJQVUJMSUMuVVNFUiJdfQ.q7TG-5QKo19raWrTz2A7639tB-V7RKJMPJ5-4qwdNd4";
 
 export default composeBundles(
   createAuthBundle({
@@ -60,5 +61,6 @@ export default composeBundles(
   productBundle,
   productAvailabilityBundle,
   routeBundle,
-  shapefileBundle
+  shapefileBundle,
+  profileBundle
 );
