@@ -8,6 +8,7 @@ import { connect } from "redux-bundler-react";
 export default connect(
   "selectProfileMyProfile",
   "selectAuthUsername",
+  "doProfileCreateToken",
   (props) => {
     const profile = props.profileMyProfile;
     const user = props.authUsername;
@@ -19,6 +20,11 @@ export default connect(
       } else {
         return parts[0] + ", " + parts[1] + " " + parts[2];
       }
+    }
+
+    function CreateToken(e) {
+      //e.preventDefault();
+      props.doProfileCreateToken();
     }
 
     return (
@@ -50,7 +56,12 @@ export default connect(
             <div className="col-start-2 col-end-7 truncate">{"<token>"}</div>
 
             <div className="col-start-1 col-end-7">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">
+              <button
+                onClick={(e) => {
+                  CreateToken(e);
+                }}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Generate Token
               </button>
             </div>

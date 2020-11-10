@@ -71,6 +71,27 @@ export default {
         store.doUpdateUrlWithHomepage("/profile");
       });
   },
+  doProfileCreateToken: () => ({ store, dispatch }) => {
+    const authToken = store.selectAuthTokenRaw();
+
+    fetch("http://localhost:3030/cumulus/my_tokens", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authToken,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log("ERROR Creating Token");
+          console.log(`Request returned a ${response.status}`);
+        }
+        response.json();
+      })
+      .then((j) => {
+        dispatch({ type: "PROFILE_SAVED" });
+      });
+  },
   selectProfileRaw: (state) => state.profile,
   selectProfileShouldFetch: (state) => state.profile._shouldFetch,
   selectProfileMyProfile: (state) => state.profile.myProfile,
