@@ -12,8 +12,11 @@ export default {
       switch (type) {
         case "PROFILE_FETCH_START":
           return Object.assign({}, state, { _shouldFetch: false });
-        case "PROFILE_DATA":
+        case "PROFILE_FETCH_FINISH":
           return Object.assign({}, state, { myProfile: payload });
+        case "PROFILE_TOKEN_CREATE_START":
+          return state;
+        case "PROFILE_TOKEN_CREATE_FINISH":
         case "AUTH_LOGGED_IN":
         case "AUTH_VERIFY_TOKEN":
         case "PROFILE_SAVED":
@@ -26,9 +29,10 @@ export default {
   doProfileFetch: () => ({ store, dispatch }) => {
     dispatch({ type: "PROFILE_FETCH_START" });
 
+    const apiRoot = store.selectApiRoot();
     const token = store.selectAuthTokenRaw();
 
-    fetch("http://localhost:3030/cumulus/my_profile", {
+    fetch(`${apiRoot}/cumulus/my_profile`, {
       headers: { Authorization: "Bearer " + token },
     })
       .then((resp) => {
@@ -42,16 +46,17 @@ export default {
       })
       .then((j) => {
         console.log(j);
-        dispatch({ type: "PROFILE_DATA", payload: j });
+        dispatch({ type: "PROFILE_FETCH_FINISH", payload: j });
       })
       .catch((err) => {
         console.log(err);
       });
   },
   doProfileSave: (payload) => ({ store, dispatch }) => {
+    const apiRoot = store.selectApiRoot();
     const authToken = store.selectAuthTokenRaw();
 
-    fetch("http://localhost:3030/cumulus/profiles", {
+    fetch(`${apiRoot}/cumulus/profiles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,9 +77,12 @@ export default {
       });
   },
   doProfileCreateToken: () => ({ store, dispatch }) => {
-    const authToken = store.selectAuthTokenRaw();
+    dispatch({ type: "PROFILE_TOKEN_CREATE_START" });
 
-    fetch("http://localhost:3030/cumulus/my_tokens", {
+    const authToken = store.selectAuthTokenRaw();
+    const apiRoot = store.selectApiRoot();
+
+    fetch(`${apiRoot}/cumulus/my_tokens`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +97,7 @@ export default {
         response.json();
       })
       .then((j) => {
-        dispatch({ type: "PROFILE_SAVED" });
+        dispatch({ type: "PROFILE_TOKEN_CREATE_FINISH", payload: {} });
       });
   },
   selectProfileRaw: (state) => state.profile,
