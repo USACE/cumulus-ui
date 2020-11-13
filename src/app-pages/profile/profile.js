@@ -5,7 +5,7 @@ import { connect } from "redux-bundler-react";
 import MyTokens from "./my-tokens";
 
 //temp style to see div borders
-const style = `div{border:1px solid red;}`;
+// const style = `div{border:1px solid red;}`;
 
 export default connect(
   "selectProfileMyProfile",
