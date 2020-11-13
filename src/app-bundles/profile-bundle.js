@@ -14,13 +14,13 @@ export default {
           return Object.assign({}, state, { _shouldFetch: false });
         case "PROFILE_FETCH_FINISH":
           return Object.assign({}, state, { myProfile: payload });
-        case "PROFILE_TOKEN_CREATE_START":
-          return state;
-        case "PROFILE_TOKEN_CREATE_FINISH":
+        case "PROFILE_TOKEN_DELETE_FINISH":
         case "AUTH_LOGGED_IN":
         case "AUTH_VERIFY_TOKEN":
         case "PROFILE_SAVED":
           return Object.assign({}, state, { _shouldFetch: true });
+        case "PROFILE_TOKEN_DELETE_START":
+          return state;
         default:
           return state;
       }
@@ -76,14 +76,14 @@ export default {
         store.doUpdateUrlWithHomepage("/profile");
       });
   },
-  doProfileCreateToken: () => ({ store, dispatch }) => {
-    dispatch({ type: "PROFILE_TOKEN_CREATE_START" });
+  doProfileTokenDelete: (item) => ({ store, dispatch }) => {
+    dispatch({ type: "PROFILE_TOKEN_DELETE_START" });
 
-    const authToken = store.selectAuthTokenRaw();
     const apiRoot = store.selectApiRoot();
+    const authToken = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/my_tokens`, {
-      method: "POST",
+    fetch(`${apiRoot}/cumulus/my_tokens/${item.token_id}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + authToken,
@@ -91,18 +91,21 @@ export default {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("ERROR Creating Token");
+          console.log("Error!");
           console.log(`Request returned a ${response.status}`);
         }
         response.json();
       })
       .then((j) => {
-        dispatch({ type: "PROFILE_TOKEN_CREATE_FINISH", payload: {} });
+        dispatch({ type: "PROFILE_TOKEN_DELETE_FINISH" });
       });
   },
   selectProfileRaw: (state) => state.profile,
   selectProfileShouldFetch: (state) => state.profile._shouldFetch,
   selectProfileMyProfile: (state) => state.profile.myProfile,
+  selectProfileTokens: createSelector("selectProfileMyProfile", (profile) =>
+    profile && profile.tokens && profile.tokens.length ? profile.tokens : []
+  ),
   reactProfileShouldFetch: createSelector(
     "selectProfileShouldFetch",
     (shouldFetch) => {
