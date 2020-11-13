@@ -50,10 +50,12 @@ const DeleteTokenButton = connect(
     };
 
     return (
-      <i
-        className="mdi mdi-close hover:bg-blue-400 hover:shadow-2xl"
+      <button
+        className="bg-red-400 py-2 px-4 text-white rounded hover:bg-red-600 hover:shadow-2xl"
         onClick={handleClick}
-      />
+      >
+        Delete
+      </button>
     );
   }
 );
@@ -63,21 +65,24 @@ export default connect("selectProfileTokens", ({ profileTokens: tokens }) => (
     <div className="flex flex-row justify-between mb-2">
       <span className="text-3xl text-gray-600">
         My Tokens
-        <span className="text-xl ml-3 p-3 rounded-full bg-blue-200 rounded">
+        <span className="text-xl ml-3 px-2 py-1 rounded-full bg-blue-800 text-white rounded">
           {tokens.length}
         </span>
       </span>
       <CreateTokenButton />
     </div>
-    <div className="rounded-lg border hover:border-blue-400 bg-gray-100 p-4 shadow-lg">
+    <div className="border-gray-400 border-t-4">
       <div>
         {tokens.map((t, idx) => (
-          <div key={idx} className="flex flex-row justify-between">
+          <div
+            key={idx}
+            className="flex flex-row justify-between p-2 m-2 bg-gray-100"
+          >
             <div className="flex flex-row">
               <DeleteTokenButton item={t} />
-              <div className="ml-5 font-mono">{t.token_id}</div>
+              <div className="ml-5 p-2 font-mono">{t.token_id}</div>
             </div>
-            <div className="ml-2">{t.issued}</div>
+            <div className="ml-2 p-2">{t.issued}</div>
           </div>
         ))}
       </div>

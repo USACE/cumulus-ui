@@ -42,7 +42,7 @@ export default connect("doModalClose", ({ doModalClose, secretTokenInfo }) => {
               Token Generated
             </h3>
             <div className="mt-3 mb-8">
-              <p className="text-sm leading-5 text-gray-500">
+              <p className="text-sm leading-5 text-gray-800 bg-yellow-200 p-2 border-l-4 border-yellow-400">
                 You will not see this token again after closing this box. This
                 token gives anyone who has it the same system permissions you
                 have sitting at your keyboard. Please protect it accordingly.
