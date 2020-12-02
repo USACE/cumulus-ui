@@ -30,8 +30,8 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
     <main>
       <Navbar />
       {/* {`Name is set to: ${name}`} */}
-      {`Name is valid: ${nameIsValid}`}
-      {`Email is set to: ${email}`}
+      {/* {`Name is valid: ${nameIsValid}`}
+      {`Email is set to: ${email}`} */}
       <div className="container mx-auto">
         <form id="profile-form" onSubmit="">
           {/* <style>{style}</style> */}
