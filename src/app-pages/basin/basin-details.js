@@ -26,7 +26,7 @@ export default connect(
     function getProductAlias(p) {
       const aliases = {
         PRECIPITATION: "Precip",
-        AIRTEMPERATURE: "AirTemp",
+        TEMPERATURE: "AirTemp",
         SNOW: "Snow",
       };
       if (Object.keys(aliases).includes(p)) {
@@ -87,7 +87,7 @@ export default connect(
         <main className="bg-gray-200 h-full lg:h-screen">
           <Navbar />
           <div className="mx-auto max-w-screen-2xl sm:p-10">
-            <div className="mb-3 bg-white rounded">
+            <div className="mb-3 bg-white rounded shadow-md">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium pl-3 font-bold text-gray-800 lg:inline-block sm:block lg:mr-2">
                 {basin.name}
               </h2>
@@ -95,7 +95,7 @@ export default connect(
                 ({basin.office_symbol})
               </span>
 
-              <div className="flex lg:flex-row-reverse sm:text-2xl text-gray-500 bg-gray-800">
+              <div className="flex lg:flex-row-reverse sm:text-xl text-gray-600 bg-gray-300">
                 {/* <div className="flex-initial inline-flex w-1/3"></div> */}
                 <div className="flex-initial sm:inline-flex block">
                   <span className="mr-3 p-1">Statistics Time Window:</span>
