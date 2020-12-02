@@ -52,5 +52,29 @@ export default createRestBundle({
         return [];
       }
     ),
+
+    selectProductByParameter: createSelector(
+      "selectProductItemsArray",
+      (items) => {
+        const obj = {};
+        items.forEach((item) => {
+          if (obj.hasOwnProperty(item.group)) {
+            obj[item.group].push(item);
+            return;
+          }
+          obj[item.group] = [item];
+        });
+        return obj;
+      }
+    ),
+    selectProductParameters: createSelector(
+      "selectProductByParameter",
+      (obj) => {
+        if (!obj || !Object.keys(obj).length) {
+          return [];
+        }
+        return Object.keys(obj);
+      }
+    ),
   },
 });

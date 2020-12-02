@@ -24,6 +24,7 @@ import productAvailabilityBundle from "./product-availability-bundle";
 import exploreMapBundle from "./explore-map-bundle";
 import profileBundle from "./profile-bundle";
 import modalBundle from "./modal-bundle";
+import basinBundle from "./basin-bundle";
 
 const mockTokenTestUser =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwIiwibmFtZSI6IlVzZXIuVGVzdCIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyMDAwMDAwMDAwLCJyb2xlcyI6WyJQVUJMSUMuVVNFUiJdfQ.q7TG-5QKo19raWrTz2A7639tB-V7RKJMPJ5-4qwdNd4";
@@ -64,5 +65,6 @@ export default composeBundles(
   routeBundle,
   shapefileBundle,
   profileBundle,
+  basinBundle,
   modalBundle
 );
