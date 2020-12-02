@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "./app-components/modal";
 import "./css/tailwind.generated.css";
 import "./css/mdi/css/materialdesignicons.min.css";
+// import "./css/wireframe.css";
 
 import { connect } from "redux-bundler-react";
 
