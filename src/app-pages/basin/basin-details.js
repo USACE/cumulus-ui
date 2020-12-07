@@ -3,6 +3,7 @@ import Navbar from "../../app-components/navbar";
 import { connect } from "redux-bundler-react";
 import Map from "../../app-components/class-map";
 import Plot from "react-plotly.js";
+import moment from "moment";
 
 export default connect(
   "selectProductByParameter",
@@ -34,31 +35,6 @@ export default connect(
       }
       return p;
     }
-
-    // const productTypes = [
-    //   {
-    //     name: "Precip",
-    //   },
-    //   {
-    //     name: "Snow",
-    //   },
-    //   {
-    //     name: "AirTemp",
-    //   },
-    // ];
-    // function toggleTabContent(target) {
-    //   // const currentVisbility = document.getElementById(target).style.display;
-    //   const productPanels = document.getElementsByClassName("product");
-
-    //   // Set all products to hidden when any tab is clicked
-    //   // to clear the contents
-    //   for (let i = 0; i < productPanels.length; i++) {
-    //     productPanels[i].style.display = "none";
-    //   }
-
-    //   //show the product panel
-    //   document.getElementById(target).style.display = "block";
-    // }
 
     const Tabs = ({ tabs, activeTab, setActiveTab }) =>
       tabs && tabs.length
@@ -147,7 +123,13 @@ export default connect(
                         className="overflow-ellipsis	overflow-hidden"
                       >
                         <ul>
-                          <li className="p-2 border-b-2">{p.name}</li>
+                          <li className="p-2 border-b-2">
+                            {p.name}{" "}
+                            <span className="text-sm text-gray-600">
+                              ({moment.utc(p.after).format("DD-MMM-YY")} -{" "}
+                              {moment.utc(p.before).format("DD-MMM-YY")})
+                            </span>
+                          </li>
                         </ul>
                       </div>
                     </>
