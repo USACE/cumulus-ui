@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../app-components/navbar";
+import PageHeading from "../../app-components/page-heading";
 import Basins from "./basins";
 import Downloads from "./downloads";
 
@@ -9,14 +10,18 @@ function dashboard() {
       <main className="bg-gray-200 h-full lg:h-screen">
         <Navbar />
         <div className="mx-auto max-w-screen-2xl sm:p-10">
-          <div className="mb-3 pl-3">
+          {/* <div className="mb-3 pl-3">
             <h2 className="text-4xl font-medium font-bold text-gray-800 m-0">
               Cumulus Dashboard
             </h2>
             <div className="text-secondary text-gray-600 font-bold tracking-tight">
               Meteorology With Simple Data Access
-            </div>
-          </div>
+            </div> 
+          </div>*/}
+          <PageHeading
+            heading={"Cumulus Dashboard"}
+            subHeading="Meteorology With Simple Data Access"
+          />
 
           {/* <!--top row --> */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3">
