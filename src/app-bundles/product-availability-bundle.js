@@ -7,12 +7,11 @@ export default createRestBundle({
   staleAfter: 10000,
   persist: false,
   routeParam: "product_id",
-  getTemplate: "/cumulus/products/:product_id/availability",
+  getTemplate: "/cumulus/v1/products/:product_id/availability",
   fetchActions: ["URL_UPDATED"],
   urlParamSelectors: ["selectProductIdByRoute"],
   forceFetchActions: [],
   sortBy: "name",
   sortAsc: true,
-  addons: {
-  },
+  addons: {},
 });
