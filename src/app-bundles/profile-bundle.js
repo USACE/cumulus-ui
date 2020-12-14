@@ -32,7 +32,7 @@ export default {
     const apiRoot = store.selectApiRoot();
     const token = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/my_profile`, {
+    fetch(`${apiRoot}/cumulus/v1/my_profile`, {
       headers: { Authorization: "Bearer " + token },
     })
       .then((resp) => {
@@ -56,7 +56,7 @@ export default {
     const apiRoot = store.selectApiRoot();
     const authToken = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/profiles`, {
+    fetch(`${apiRoot}/cumulus/v1/profiles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default {
     const apiRoot = store.selectApiRoot();
     const authToken = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/my_tokens/${item.token_id}`, {
+    fetch(`${apiRoot}/cumulus/v1/my_tokens/${item.token_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
