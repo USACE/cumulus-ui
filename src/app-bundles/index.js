@@ -5,12 +5,11 @@ import {
 } from "redux-bundler";
 
 import {
-  createOlBasemapBundle,
   createOlMapBundle,
+  createOlBasemapBundle,
 } from "@corpsmap/corpsmap-bundles";
 import createNestedUrlBundle from "./create-nested-url-bundle";
 import createAuthBundle from "./create-auth-bundle";
-// Required change from @corpsmap/create-jwt-api-bundle;
 import createJwtApiBundle from "./create-jwt-api-bundle";
 import pkg from "../../package.json";
 

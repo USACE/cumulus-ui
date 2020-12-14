@@ -1,50 +1,48 @@
 {
-  "name": "cumulus-site",
+  "name": "cumulus-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://apps.rsgis.dev/cumulus",
   "dependencies": {
     "@corpsmap/corpsmap-bundles": "^2.0.2",
-    "@corpsmap/create-auth-bundle": "^0.3.0",
-    "@corpsmap/create-jwt-api-bundle": "^0.5.0",
-    "@fullhuman/postcss-purgecss": "^2.3.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@craco/craco": "^6.0.0",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "@turf/turf": "^5.1.6",
+    "autoprefixer": "^9.8.6",
     "classnames": "^2.2.6",
     "internal-nav-helper": "^3.1.0",
     "lodash.debounce": "^4.0.8",
-    "moment": "^2.27.0",
+    "moment": "^2.29.1",
     "money-clip": "^3.0.2",
-    "node-sass": "^4.14.1",
-    "npm-run-all": "^4.1.5",
-    "ol": "^6.3.1",
-    "proj4": "^2.6.2",
-    "react": "^16.13.1",
+    "ol": "^6.4.3",
+    "postcss": "^7.0.35",
+    "proj4": "^2.6.3",
+    "react": "^17.0.1",
     "react-calendar-heatmap": "^1.8.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-panelgroup": "^1.0.12",
-    "react-scripts": "3.4.1",
-    "react-tooltip": "^4.2.7",
-    "redux-bundler": "^27.0.2",
+    "react-scripts": "4.0.1",
+    "react-tooltip": "^4.2.11",
+    "redux-bundler": "^28.0.0",
     "redux-bundler-react": "^1.2.0",
-    "shpjs": "^3.5.0",
-    "xhr": "^2.5.0"
+    "shpjs": "^3.6.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "web-vitals": "^0.2.4",
+    "xhr": "^2.6.0"
   },
   "scripts": {
-    "build:tailwind": "postcss src/css/tailwind.css -o src/css/tailwind.generated.css",
-    "watch:tailwind": "postcss -w src/css/tailwind.css -o src/css/tailwind.generated.css",
-    "start": "run-p watch:tailwind start:react",
-    "start:react": "react-scripts start",
-    "prebuild": "npm run build:tailwind",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "aws s3 rm s3://corpsmap-appz/cumulus --recursive && aws s3 cp ./build/ s3://corpsmap-appz/cumulus --recursive"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -57,10 +55,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.8.5",
-    "postcss-cli": "^7.1.1",
-    "tailwindcss": "^1.5.2"
   }
 }

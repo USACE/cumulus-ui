@@ -13,6 +13,7 @@ const basemaps = [
     attributions:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   },
+  /* These are invalid. Either remove, or update URL and/or token.
   {
     id: "MapBoxStreets",
     name: "MapBox Streets",
@@ -28,7 +29,7 @@ const basemaps = [
       "https://api.tiles.mapbox.com/v4/willbreitkreutzwork.pki0cla6/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXNhY2UiLCJhIjoiY2o1MDZscms4MDI4MjMycG1wa3puc212MCJ9.CW7edZMtlx5vFLNF5P-zTA",
     attributions:
       'Imagery from <a href="https://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  },
+  },*/
   {
     id: "MapBoxOutdoor",
     name: "MapBox Outdoor",

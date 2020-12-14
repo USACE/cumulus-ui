@@ -5,6 +5,7 @@ import { getNavHelper } from "internal-nav-helper";
 import getStore from "./app-bundles";
 import cache from "./cache";
 
+import './index.css';
 import App from "./App";
 
 cache.getAll().then((initialData) => {
