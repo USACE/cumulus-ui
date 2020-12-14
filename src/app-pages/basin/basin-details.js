@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../app-components/navbar";
+import PageHeading from "../../app-components/page-heading";
 import { connect } from "redux-bundler-react";
 import Map from "../../app-components/class-map";
 import Plot from "react-plotly.js";
@@ -63,13 +64,17 @@ export default connect(
         <main className="bg-gray-200 h-full lg:h-screen">
           <Navbar />
           <div className="mx-auto max-w-screen-2xl sm:p-10">
+            <PageHeading
+              heading={basin.name}
+              subHeading={basin.office_symbol}
+            />
             <div className="mb-3 bg-white rounded shadow-md">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium pl-3 font-bold text-gray-800 lg:inline-block sm:block lg:mr-2">
+              {/* <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium pl-3 font-bold text-gray-800 lg:inline-block sm:block lg:mr-2">
                 {basin.name}
               </h2>
               <span className="text-gray-500 font-normal sm:text-3xl lg:inline-block block text-center">
                 ({basin.office_symbol})
-              </span>
+              </span> */}
 
               <div className="flex lg:flex-row-reverse sm:text-xl text-gray-600 bg-gray-300">
                 {/* <div className="flex-initial inline-flex w-1/3"></div> */}
