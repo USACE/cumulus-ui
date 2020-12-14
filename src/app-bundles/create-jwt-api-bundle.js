@@ -30,7 +30,7 @@ const shouldSkipToken = (method, path, unless) => {
   return skip;
 };
 
-export default (opts) => {
+export default function createJwtApiBundle(opts) {
   const defaults = {
     name: "api",
     root: "",
@@ -241,4 +241,4 @@ export default (opts) => {
       };
     },
   };
-};
+}

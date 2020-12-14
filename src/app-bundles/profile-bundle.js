@@ -1,6 +1,6 @@
 import { createSelector } from "redux-bundler";
 
-export default {
+const profileBundle = {
   name: "profile",
   getReducer: () => {
     const initialState = {
@@ -116,3 +116,5 @@ export default {
     }
   ),
 };
+
+export default profileBundle;

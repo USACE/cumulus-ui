@@ -19,7 +19,7 @@ const readFileAsync = (file) => {
   });
 };
 
-export default {
+const shapefileBundle = {
   name: "shapefile",
   getReducer: () => {
     const initialData = {
@@ -150,3 +150,5 @@ export default {
       return { actionCreator: "doShapefileDissolve" };
   },
 };
+
+export default shapefileBundle;

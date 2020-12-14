@@ -1,4 +1,4 @@
-export default {
+const exploreMapBundle = {
   name: "exploreMap",
 
   getReducer: () => {
@@ -63,3 +63,5 @@ export default {
       return { actionCreator: "doExploreMapInitialize" };
   },
 };
+
+export default exploreMapBundle;

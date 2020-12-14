@@ -13,7 +13,7 @@ const actions = {
   MAPS_SHUTDOWN: `MAPS_SHUTDOWN`,
 };
 
-export default {
+const mapsBundle = {
   name: "maps",
 
   getReducer: () => {
@@ -82,3 +82,5 @@ export default {
     return flags;
   }),
 };
+
+export default mapsBundle;

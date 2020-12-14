@@ -3,7 +3,7 @@ import React from "react";
 import cfg from "../../package.json";
 
 // https://tailwindcomponents.com/component/error-404
-export default () => {
+export default function FourOhFour() {
   const url = `${cfg.homepage}`;
   return (
     <>
@@ -21,4 +21,4 @@ export default () => {
       </div>
     </>
   );
-};
+}
