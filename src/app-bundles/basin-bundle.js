@@ -31,7 +31,7 @@ export default {
     const apiRoot = store.selectApiRoot();
     // const token = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/basins`, {
+    fetch(`${apiRoot}/cumulus/v1/basins`, {
       //   headers: { Authorization: "Bearer " + token },
     })
       .then((resp) => {
@@ -42,7 +42,7 @@ export default {
           return {};
         }
         console.log("FETCHING BASINS FROM API");
-        console.log(`${apiRoot}/cumulus/basins`);
+        console.log(`${apiRoot}/cumulus/v1/basins`);
         return resp.json();
       })
       .then((j) => {
