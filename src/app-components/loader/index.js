@@ -2,7 +2,7 @@ import React from "react";
 
 import "./loader.css";
 
-export default ({ opt, color }) => {
+export default function Loader({ opt, color }) {
   const customStyle = {};
   if (color) customStyle.backgroundColor = color;
   if (opt === "dissolve-cube") {
@@ -47,4 +47,4 @@ export default ({ opt, color }) => {
       </div>
     );
   }
-};
+}

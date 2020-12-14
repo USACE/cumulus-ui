@@ -6,7 +6,7 @@ const getTokenPart = function (token, part) {
   return splitToken[part];
 };
 
-export default (opts) => {
+export default function createAuthBundle(opts) {
   const defaults = {
     url: "https://corpsmap-dev.sec.usace.army.mil/cwbi/auth/basic",
     name: "auth",
@@ -190,4 +190,4 @@ export default (opts) => {
 
     persistActions: ["AUTH_LOGGED_IN", "AUTH_LOGGED_OUT"],
   };
-};
+}

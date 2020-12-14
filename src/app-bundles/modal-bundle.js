@@ -1,4 +1,4 @@
-export default {
+const modalBundle = {
   name: "modal",
   getReducer: () => {
     const initialData = {
@@ -33,3 +33,5 @@ export default {
   selectModalContent: (state) => state.modal.content,
   selectModalProps: (state) => state.modal.props,
 };
+
+export default modalBundle;

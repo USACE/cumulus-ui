@@ -9,10 +9,10 @@ export default createRestBundle({
   staleAfter: 10000,
   persist: false,
   routeParam: "product_id",
-  getTemplate: "/cumulus/products",
-  putTemplate: "/cumulus/products/:item.id",
-  postTemplate: "/cumulus/products/:item.id",
-  deleteTemplate: "/cumulus/products/:item.id",
+  getTemplate: "/cumulus/v1/products",
+  putTemplate: "/cumulus/v1/products/:item.id",
+  postTemplate: "/cumulus/v1/products/:item.id",
+  deleteTemplate: "/cumulus/v1/products/:item.id",
   fetchActions: ["AUTH_LOGGED_IN"],
   urlParamSelectors: ["selectProductIdByRoute"],
   forceFetchActions: [],
@@ -50,6 +50,30 @@ export default createRestBundle({
           return years;
         }
         return [];
+      }
+    ),
+
+    selectProductByParameter: createSelector(
+      "selectProductItemsArray",
+      (items) => {
+        const obj = {};
+        items.forEach((item) => {
+          if (obj.hasOwnProperty(item.group)) {
+            obj[item.group].push(item);
+            return;
+          }
+          obj[item.group] = [item];
+        });
+        return obj;
+      }
+    ),
+    selectProductParameters: createSelector(
+      "selectProductByParameter",
+      (obj) => {
+        if (!obj || !Object.keys(obj).length) {
+          return [];
+        }
+        return Object.keys(obj);
       }
     ),
   },

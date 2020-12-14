@@ -88,7 +88,7 @@ function checkRoles(roles, tokenRolesJoined, orgsActiveSlug) {
 /**
  * Main Bundle Creator export
  */
-export default (opts) => {
+export default function createRestBundle(opts) {
   const defaults = {
     name: null,
     uid: "id",
@@ -785,4 +785,4 @@ export default (opts) => {
   if (config.persistActions) result.persistActions = config.persistActions;
 
   return result;
-};
+}
