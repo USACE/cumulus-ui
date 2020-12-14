@@ -3,7 +3,7 @@ import Navbar from "../../app-components/navbar";
 import { CardDocs, CardExplore, CardCatalog } from "../../app-components/cards";
 // import background from "../../img/clouds.jpg";
 
-export default () => (
+const Home = () => (
   <main>
     {/* <div
       className="bg-auto"
@@ -43,7 +43,7 @@ export default () => (
       </div>
 
       <div className="container mx-auto mt-12 text-center text-2xl">
-        Need Help?  <a href="/contact">Contact the support team.</a>
+        Need Help? <a href="/contact">Contact the support team.</a>
       </div>
 
       <div className="container mx-auto mt-12">
@@ -54,3 +54,5 @@ export default () => (
     </div>
   </main>
 );
+
+export default Home;

@@ -1,3 +1,4 @@
+// tailwind.config.js
 module.exports = {
   purge: ["./public/**/*.html", "./src/**/*.js"],
   darkMode: false, // or 'media' or 'class'
@@ -7,5 +8,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

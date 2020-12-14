@@ -1,7 +1,7 @@
 import Url from "url-parse";
 import { createSelector } from "redux-bundler";
 
-export default (options) => {
+export default function createNestedUrlBundle(options) {
   const defaults = {
     name: "nestedUrl",
     pkg: null,
@@ -56,4 +56,4 @@ export default (options) => {
     },
     config.addons
   );
-};
+}
