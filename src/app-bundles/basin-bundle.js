@@ -1,6 +1,6 @@
 import { createSelector } from "redux-bundler";
 
-export default {
+const basinBundle = {
   name: "basins",
   getReducer: () => {
     const initialState = {
@@ -66,3 +66,5 @@ export default {
     }
   ),
 };
+
+export default basinBundle;

@@ -11,9 +11,12 @@ export default connect(
   "selectProductParameters",
   ({ productByParameter: products, productParameters: tabs }) => {
     const [activeTab, setActiveTab] = useState(null);
-    useEffect(() => {
-      products && tabs && tabs.length && setActiveTab(tabs[0]);
-    }, [products]);
+    useEffect(
+      (products, tabs) => {
+        products && tabs && tabs.length && setActiveTab(tabs[0]);
+      },
+      [products, tabs]
+    );
 
     const basin = {
       id: "d4c3c6ed-4745-4683-8287-563bba8f6ca4",

@@ -1,7 +1,6 @@
 import createRestBundle from "./create-rest-bundle";
-import { createSelector } from "redux-bundler";
 
-export default createRestBundle({
+const watershedBundle = createRestBundle({
   name: "watershed",
   uid: "slug",
   prefetch: true,
@@ -27,3 +26,5 @@ export default createRestBundle({
     // ),
   },
 });
+
+export default watershedBundle;
