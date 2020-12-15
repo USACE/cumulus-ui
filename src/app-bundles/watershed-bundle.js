@@ -19,7 +19,7 @@ const watershedBundle = createRestBundle({
     selectWatershedFakeByRoute: createSelector(
       "selectWatershedByRoute",
       (watershed) => {
-        if (!watershed) {
+        if (!watershed || !Object.keys(watershed).length) {
           return {
             id: "d4c3c6ed-4745-4683-8287-563bba8f6ca4",
             name: "Apalachicola Chattahoochee Flint Rivers",
@@ -30,6 +30,7 @@ const watershedBundle = createRestBundle({
             office_symbol: "SAM",
           };
         }
+        return watershed;
       }
     ),
   },
