@@ -11,7 +11,7 @@ const CreateTokenButton = connect(
     const handleClick = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      fetch(`${apiRoot}/cumulus/my_tokens`, {
+      fetch(`${apiRoot}/my_tokens`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

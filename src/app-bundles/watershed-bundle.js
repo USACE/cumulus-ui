@@ -8,10 +8,10 @@ const watershedBundle = createRestBundle({
   staleAfter: 10000,
   persist: false,
   routeParam: "ws_slug",
-  getTemplate: "/cumulus/v1/watersheds",
-  putTemplate: "/cumulus/v1/watersheds/:item.id",
-  postTemplate: "/cumulus/v1/watersheds",
-  deleteTemplate: "/cumulus/v1/watersheds/:item.id",
+  getTemplate: "/watersheds",
+  putTemplate: "/watersheds/:item.id",
+  postTemplate: "/watersheds",
+  deleteTemplate: "/watersheds/:item.id",
   fetchActions: ["URL_UPDATED", "AUTH_LOGGED_IN"],
   forceFetchActions: [],
   urlParamSelectors: [],
@@ -19,7 +19,7 @@ const watershedBundle = createRestBundle({
     selectWatershedFakeByRoute: createSelector(
       "selectWatershedByRoute",
       (watershed) => {
-        if (!watershed) {
+        if (!watershed || !Object.keys(watershed).length) {
           return {
             id: "d4c3c6ed-4745-4683-8287-563bba8f6ca4",
             name: "Apalachicola Chattahoochee Flint Rivers",
@@ -30,6 +30,7 @@ const watershedBundle = createRestBundle({
             office_symbol: "SAM",
           };
         }
+        return watershed;
       }
     ),
   },

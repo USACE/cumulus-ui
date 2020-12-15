@@ -31,7 +31,7 @@ const basinBundle = {
     const apiRoot = store.selectApiRoot();
     // const token = store.selectAuthTokenRaw();
 
-    fetch(`${apiRoot}/cumulus/v1/basins`, {
+    fetch(`${apiRoot}/basins`, {
       //   headers: { Authorization: "Bearer " + token },
     })
       .then((resp) => {
@@ -42,7 +42,7 @@ const basinBundle = {
           return {};
         }
         console.log("FETCHING BASINS FROM API");
-        console.log(`${apiRoot}/cumulus/v1/basins`);
+        console.log(`${apiRoot}/basins`);
         return resp.json();
       })
       .then((j) => {

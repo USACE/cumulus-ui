@@ -16,13 +16,15 @@ import WatershedDetail from "../app-pages/watershed/ws-details";
 import Basins from "../app-pages/basins/basins";
 import Dashboard from "../app-pages/dashboard/dashboard";
 import Download from "../app-pages/download/download";
+import WatershedList from "../app-pages/watershed/watershed-list";
 
 export default createRouteBundle(
   {
     "": Home,
     "/": Home,
-    "/watershed/:ws_slug": WatershedDetail,
-    // "/basin/:basin_slug": Basin,
+    "/ws": WatershedList,
+    "/ws/:ws_slug": WatershedDetail,
+    "/basin/:basin_slug": Basin,
     "/basins": Basins,
     "/dashboard": Dashboard,
     "/download": Download,
