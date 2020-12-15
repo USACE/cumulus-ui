@@ -40,7 +40,7 @@ export default composeBundles(
     root:
       process.env.NODE_ENV === "development"
         ? `http://localhost`
-        : `https://api.rsgis.dev/development`,
+        : `https://cumulus-api.rsgis.dev`,
     unless: {
       method: "GET",
     },
