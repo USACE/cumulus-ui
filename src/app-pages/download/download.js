@@ -512,32 +512,47 @@ export default connect("selectAuthUsername", (props) => {
           subHeading={"Meteorology With Simple Data Access"}
         />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="order-1 min-w-full sm:min-w-0 m-3 p-3 bg-white min-h-0 rounded shadow-md border-l-8 border-gray-600">
+          <div className="order-1 min-w-full sm:min-w-0 m-3 p-3 bg-white min-h-0 rounded shadow-md border-l-8 border-gray-400">
             <form className="">
               <fieldset>
                 <legend className="mb-3 text-2xl">DSS Download</legend>
                 <div className="">
-                  <div className="p-1 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider">
+                  <div className="p-1 mb-2 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider">
                     Time Window
                   </div>
-                  <label forHtml="startDate">Start:</label>
-                  <input id="startDate" type="date" />
-                  <label forHtml="endDate" className="ml-2">
-                    End:
+                  {/* <label forHtml="startDate">Start:</label> */}
+                  <label className="block mt-5 sm:inline" forHtml="startDate">
+                    <span className="text-gray-700">Start</span>
                   </label>
-                  <input id="endDate" type="date" />
+
+                  <input
+                    id="startDate"
+                    name="startDate"
+                    type="date"
+                    className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                  />
+
+                  <label
+                    className="block mt-5 sm:inline sm:ml-5"
+                    forHtml="endDate"
+                  >
+                    <span className="text-gray-700">End</span>
+                  </label>
+                  <input
+                    id="endDate"
+                    name="endDate"
+                    type="date"
+                    className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                  />
                 </div>
                 <div className="mt-3">
-                  <label
-                    forHtml="watershed"
-                    className="p-1 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider"
-                  >
-                    Watershed
+                  <label className="block mt-5" forHtml="watershed">
+                    <span className="text-gray-700">Watershed</span>
                   </label>
                   <select
                     name="watershed"
                     id="watershed"
-                    className="p-1 bg-white"
+                    className="p-1 w-full bg-white border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                   >
                     {basins.map((value, index) => {
                       return (
@@ -550,16 +565,19 @@ export default connect("selectAuthUsername", (props) => {
                   </select>
                 </div>
                 <div className="">
-                  <label
+                  {/* <label
                     forHtml="products"
                     className="block xl:bg-gray-300 w-full p-1 mt-5 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider"
                   >
                     Products
+                  </label> */}
+                  <label className="block mt-5" forHtml="products">
+                    <span className="text-gray-700">Products</span>
                   </label>
                   <select
                     name="products"
                     id="products"
-                    className="p-1 h-48 block"
+                    className="p-1 w-full h-48 block border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                     multiple
                   >
                     {products.map((value, index) => {
