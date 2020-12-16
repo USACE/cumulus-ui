@@ -39,7 +39,7 @@ export default composeBundles(
   }),
   createJwtApiBundle({
     root:
-      process.env.NODE_ENV == "development"
+      process.env.NODE_ENV === "development"
         ? `http://localhost/cumulus/v1`
         : `https://cumulus-api.rsgis.dev/cumulus/v1`,
     unless: {
