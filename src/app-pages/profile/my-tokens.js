@@ -63,15 +63,15 @@ const DeleteTokenButton = connect(
 export default connect("selectProfileTokens", ({ profileTokens: tokens }) => (
   <>
     <div className="flex flex-row justify-between mb-2">
-      <span className="text-3xl text-gray-600">
+      <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
         My Tokens
-        <span className="text-xl ml-3 px-2 py-1 rounded-full bg-blue-800 text-white rounded">
+        <span className=" ml-3 px-2 py-1 rounded-full bg-blue-800 text-white rounded">
           {tokens.length}
         </span>
       </span>
       <CreateTokenButton />
     </div>
-    <div className="border-gray-400 border-t-4">
+    <div className="border-gray-300 border-t-4">
       <div>
         {tokens.map((t, idx) => (
           <div
