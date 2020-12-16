@@ -1,8 +1,26 @@
 import React from "react";
 import { connect } from "redux-bundler-react";
-import { DateTime, toRelativeCalendar } from "luxon";
+import { DateTime } from "luxon";
 
-const HEADERS = ["Basin", "Requested", "Processing Time (sec)", "Download"];
+const HEADERS = ["Basin", "Requested", "Processing Time", "Download"];
+
+const ProgressBar = ({ percent }) => {
+  return (
+    <div className="flex flex-col">
+      {/* Percent Complete */}
+      <div className="w-100 text-right">
+        <span className="text-xs font-mono">{percent}%</span>
+      </div>
+      {/* Progress Bar */}
+      <div className="flex overflow-hidden h-2 mb-4 text-xs rounded bg-blue-200">
+        <div
+          style={{ width: `${percent}%` }}
+          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+        ></div>
+      </div>
+    </div>
+  );
+};
 
 const TableRow = ({ item }) => {
   const procStart = DateTime.fromISO(item.processing_start);
@@ -39,10 +57,13 @@ const TableRow = ({ item }) => {
       <td className="p-2 text-left">{procStart.toRelativeCalendar()}</td>
       <td className="p-2 text-left">{`${parseInt(dur.as("seconds"))}s`}</td>
       <td>
-        {item.status === "SUCCESS" && item.progress === 100 && (
+        {item.status === "SUCCESS" && item.progress === 100 ? (
           <DownloadNow href={item.file} />
-        )}
-        {item.status === "FAILED" && <DownloadFailed />}
+        ) : item.status === "INITIATED" ? (
+          <ProgressBar percent={50} />
+        ) : item.status === "FAILED" ? (
+          <DownloadFailed />
+        ) : null}
       </td>
     </tr>
   );
@@ -62,7 +83,6 @@ export default connect(
   ({ downloadItemsArray: items }) => {
     return (
       <>
-        {JSON.stringify(items)}
         <table className="min-w-full divide-y divide-gray-200 mt-5">
           <thead>
             <tr>
