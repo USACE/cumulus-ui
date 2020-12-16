@@ -25,6 +25,7 @@ import profileBundle from "./profile-bundle";
 import modalBundle from "./modal-bundle";
 import basinBundle from "./basin-bundle";
 import watershedBundle from "./watershed-bundle";
+import downloadBundle from "./download-bundle";
 
 const mockTokenTestUser =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwIiwibmFtZSI6IlVzZXIuVGVzdCIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyMDAwMDAwMDAwLCJyb2xlcyI6WyJQVUJMSUMuVVNFUiJdfQ.q7TG-5QKo19raWrTz2A7639tB-V7RKJMPJ5-4qwdNd4";
@@ -38,7 +39,7 @@ export default composeBundles(
   }),
   createJwtApiBundle({
     root:
-      process.env.NODE_ENV === "development"
+      process.env.NODE_ENV !== "development"
         ? `http://localhost/cumulus/v1`
         : `https://cumulus-api.rsgis.dev/cumulus/v1`,
     unless: {
@@ -58,6 +59,7 @@ export default composeBundles(
     center: [-80.79, 26.94],
     zoom: 5,
   }),
+  downloadBundle,
   mapsBundle,
   exploreMapBundle,
   productBundle,
