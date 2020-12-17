@@ -71,7 +71,7 @@ export default connect("selectProfileTokens", ({ profileTokens: tokens }) => (
       </span>
       <CreateTokenButton />
     </div>
-    <div className="border-gray-300 border-t-4">
+    <div className="border-gray-100 border-t-4">
       <div>
         {tokens.map((t, idx) => (
           <div
