@@ -50,7 +50,7 @@ function dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="m-3 p-3 bg-white min-h-0 shadow-md border-l-4 border-gray-600 rounded">
               <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
-                My Basins
+                My Watersheds
               </div>
               <div className="float-right">
                 <svg
