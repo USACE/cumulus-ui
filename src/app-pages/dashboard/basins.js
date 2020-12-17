@@ -26,8 +26,8 @@ export default connect(
     !watersheds || !watersheds.length ? (
       <Loader />
     ) : (
-      <div className="h-60 overflow-y-auto">
-        <table className="min-w-full divide-y divide-gray-200 mt-5">
+      <div className="h-96 block overflow-y-hidden w-full">
+        <table className="w-full divide-y divide-gray-200 mt-5 ">
           <thead>
             <tr>
               <th
@@ -50,7 +50,7 @@ export default connect(
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="w-full bg-white divide-y divide-gray-200">
             {watersheds.map((w, index) => (
               <tr key={index}>
                 <td className="p-2 text-left">

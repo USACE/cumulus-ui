@@ -83,20 +83,22 @@ export default connect(
   ({ downloadItemsArray: items }) => {
     return (
       <>
-        <table className="min-w-full divide-y divide-gray-200 mt-5">
-          <thead>
-            <tr>
-              {HEADERS.map((h, idx) => (
-                <TableHeader title={h} />
+        <div className="h-96 block overflow-y-hidden w-full">
+          <table className="min-w-full divide-y divide-gray-200 mt-5">
+            <thead>
+              <tr>
+                {HEADERS.map((h, idx) => (
+                  <TableHeader title={h} />
+                ))}
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {items.map((item, index) => (
+                <TableRow key={index} item={item} />
               ))}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {items.map((item, index) => (
-              <TableRow key={index} item={item} />
-            ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </>
     );
   }

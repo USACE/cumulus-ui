@@ -11,6 +11,11 @@ li,
 form,
 input,
 select,
-label {
+label,
+table,
+th,
+td,
+thead,
+tbody {
   border: 1px solid red;
 }
