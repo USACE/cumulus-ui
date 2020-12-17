@@ -52,7 +52,7 @@ const TableRow = ({ item }) => {
   return (
     <tr>
       {/* Basin */}
-      <td className="p-2 text-left">{item.basin_id}</td>
+      <td className="p-2 text-left">{item.watershed_name}</td>
       {/* Requested */}
       <td className="p-2 text-left">{procStart.toRelativeCalendar()}</td>
       <td className="p-2 text-left">{`${parseInt(dur.as("seconds"))}s`}</td>
@@ -60,7 +60,7 @@ const TableRow = ({ item }) => {
         {item.status === "SUCCESS" && item.progress === 100 ? (
           <DownloadNow href={item.file} />
         ) : item.status === "INITIATED" ? (
-          <ProgressBar percent={50} />
+          <ProgressBar percent={item.progress} />
         ) : item.status === "FAILED" ? (
           <DownloadFailed />
         ) : null}
