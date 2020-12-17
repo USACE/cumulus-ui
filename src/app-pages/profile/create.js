@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../app-components/navbar";
+import PageHeading from "../../app-components/page-heading";
 import { connect } from "redux-bundler-react";
 
 //temp style to see div borders
@@ -27,19 +28,16 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
   }
 
   return (
-    <main>
+    <main className="bg-gray-200 h-full lg:h-screen">
       <Navbar />
       {/* {`Name is set to: ${name}`} */}
       {/* {`Name is valid: ${nameIsValid}`}
       {`Email is set to: ${email}`} */}
-      <div className="container mx-auto">
+      <div className="mx-auto max-w-screen-2xl sm:p-10">
+        <PageHeading heading={"Create Profile"} subHeading="" />
         <form id="profile-form" onSubmit="">
-          {/* <style>{style}</style> */}
-
-          <h2 className="mt-10 text-5xl">Create Profile</h2>
-
-          <div className="mt-10 grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 rounded-lg border hover:border-blue-400 bg-gray-300 p-8 shadow-lg">
-            <label className="block text-gray-700 md:text-right text-lg font-bold pt-3">
+          <div className="mt-10 grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 rounded-lg border bg-white p-8 shadow-lg">
+            <label className="block text-gray-700 md:text-right text-lg font-medium pt-3">
               Name
             </label>
 
@@ -47,7 +45,7 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
               <input
                 type="text"
                 size="50"
-                className={`appearance-none border-8 block text-gray-700 border rounded py-3 px-4 leading-tight ${
+                className={`cursor-not-allowed border-0 border-b-2 border-gray-200 text-gray-500 focus:ring-0 focus:border-black ${
                   !nameIsValid ? "border-red-500" : ""
                 }`}
                 value={authUsername}
@@ -58,14 +56,14 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
                 onBlur={(e) => validateName(e.target.value)}
               />
             </div>
-            <label className="block text-gray-700 md:text-right text-lg font-bold pt-3">
+            <label className="block text-gray-700 md:text-right text-lg font-medium pt-3">
               Email
             </label>
             <div className="col-start-2 col-end-7">
               <input
                 size="50"
                 type="text"
-                className="appearance-none block text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-n"
+                className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
