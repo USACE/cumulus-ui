@@ -25,12 +25,14 @@ function dashboard() {
 
           {/* <!--top row --> */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3">
-            <div className="order-1 min-w-full sm:min-w-0 m-3 p-3 bg-white min-h-0 rounded shadow-md border-l-8 border-green-600">
-              <div className="text-5xl">19</div>
-              <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
-                Available Products
-              </span>
-            </div>
+            <a href="/catalog">
+              <div className="order-1 min-w-full sm:min-w-0 m-3 p-3 bg-white min-h-0 rounded shadow-md border-l-8 border-green-600 hover:text-green-700">
+                <div className="text-5xl">19</div>
+                <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
+                  Available Products
+                </span>
+              </div>
+            </a>
             <div className="order-2 min-w-full sm:min-w-0 m-3 p-3 bg-white min-h-0 rounded shadow-md border-l-8 border-blue-600">
               <div className="text-5xl">211</div>
               <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
@@ -48,7 +50,7 @@ function dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="m-3 p-3 bg-white min-h-0 shadow-md border-l-4 border-gray-600 rounded">
               <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
-                My Basins
+                My Watersheds
               </div>
               <div className="float-right">
                 <svg

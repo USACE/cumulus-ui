@@ -33,7 +33,7 @@ export default connect(
               <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
                 My Profile
               </div>
-              <div className="grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 p-4 border-gray-300 border-t-4">
+              <div className="grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 p-4 border-gray-100 border-t-4">
                 <div className="font-semibold text-lg">Name:</div>
                 <div className="col-start-2 col-end-7 text-lg">
                   {formatAuthUsername(user)}
