@@ -110,12 +110,14 @@ export default connect(
       "pb-4 pt-2 px-2 sm:flex sm:p-0 items-center": true,
     });
 
+    const siteHomeUrl = authIsLoggedIn ? "/dashboard" : "/";
+
     return (
       <header className="h-18 bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 py-1">
         <div className="px-4 py-3 flex items-center justify-between px-4 py-3 ">
           <div>
             <h3 className="text-white text-2xl">
-              <a className="hover:text-green-400" href="/">
+              <a className="hover:text-green-400" href={siteHomeUrl}>
                 Cumulus
               </a>
               {pathnameMinusHomepage === "" ||
