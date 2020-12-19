@@ -94,7 +94,7 @@ export default connect(
           </div>
         </div>
 
-        <div className="h-96 block overflow-y-hidden w-full">
+        <div className="h-96 block overflow-y-auto w-full">
           <table className="min-w-full divide-y divide-gray-200 mt-5">
             <thead>
               <tr>
