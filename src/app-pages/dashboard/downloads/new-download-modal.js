@@ -51,7 +51,7 @@ const NewDownloadModal = connect(
         <form className="p-6" onSubmit={handleSubmit}>
           <fieldset>
             <legend className="mb-3 text-2xl">DSS Download</legend>
-            <div className="">
+            <div className="mt-4">
               <div className="p-1 mb-2 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider">
                 Time Window
               </div>
@@ -133,12 +133,22 @@ const NewDownloadModal = connect(
               <div>{JSON.stringify(payload)}</div>
             </div>
 
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3"
-            >
-              Submit
-            </button>
+            <div className="flex">
+              <button
+                onClick={handleSubmit}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3"
+              >
+                Submit
+              </button>
+              <button
+                onClick={(e) => {
+                  doModalClose();
+                }}
+                className="ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3"
+              >
+                Cancel
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>
