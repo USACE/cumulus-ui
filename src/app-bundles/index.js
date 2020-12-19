@@ -23,7 +23,6 @@ import productAvailabilityBundle from "./product-availability-bundle";
 import exploreMapBundle from "./explore-map-bundle";
 import profileBundle from "./profile-bundle";
 import modalBundle from "./modal-bundle";
-import basinBundle from "./basin-bundle";
 import watershedBundle from "./watershed-bundle";
 import downloadBundle from "./download-bundle";
 
@@ -67,7 +66,6 @@ export default composeBundles(
   routeBundle,
   shapefileBundle,
   profileBundle,
-  basinBundle,
   modalBundle,
   watershedBundle
 );

@@ -34,7 +34,7 @@ export default function createJwtApiBundle(opts) {
   const defaults = {
     name: "api",
     root: "",
-    tokenSelector: "selectAuthToken",
+    tokenSelector: "selectAuthTokenRaw",
     unless: null,
   };
 

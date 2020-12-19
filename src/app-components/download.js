@@ -508,8 +508,8 @@ const Download = (props) => {
           <div className="p-1 mb-2 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider">
             Time Window
           </div>
-          {/* <label forHtml="startDate">Start:</label> */}
-          <label className="block mt-5 sm:inline" forHtml="startDate">
+          {/* <label forhtml="startDate">Start:</label> */}
+          <label className="block mt-5 sm:inline" forhtml="startDate">
             <span className="text-gray-700">Start</span>
           </label>
 
@@ -520,7 +520,7 @@ const Download = (props) => {
             className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
           />
 
-          <label className="block mt-5 sm:inline sm:ml-5" forHtml="endDate">
+          <label className="block mt-5 sm:inline sm:ml-5" forhtml="endDate">
             <span className="text-gray-700">End</span>
           </label>
           <input
@@ -531,7 +531,7 @@ const Download = (props) => {
           />
         </div>
         <div className="mt-3">
-          <label className="block mt-5" forHtml="watershed">
+          <label className="block mt-5" forhtml="watershed">
             <span className="text-gray-700">Watershed</span>
           </label>
           <select
@@ -551,12 +551,12 @@ const Download = (props) => {
         </div>
         <div className="">
           {/* <label
-                    forHtml="products"
+                    forhtml="products"
                     className="block xl:bg-gray-300 w-full p-1 mt-5 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider"
                   >
                     Products
                   </label> */}
-          <label className="block mt-5" forHtml="products">
+          <label className="block mt-5" forhtml="products">
             <span className="text-gray-700">Products</span>
           </label>
           <select

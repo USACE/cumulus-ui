@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../../app-components/navbar";
 import PageHeading from "../../app-components/page-heading";
 import Basins from "./basins";
-import Downloads from "./downloads";
+import Downloads from "./downloads/downloads";
 
 function dashboard() {
   return (
@@ -72,9 +72,6 @@ function dashboard() {
               <Basins />
             </div>
             <div className="m-3 p-3 bg-white min-h-0 shadow-md rounded">
-              <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
-                My Recent Downloads
-              </span>
               <Downloads />
             </div>
           </div>

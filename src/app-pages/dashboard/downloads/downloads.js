@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "redux-bundler-react";
 import { DateTime } from "luxon";
 
+import NewDownloadButton from "./new-download-button";
+
 const HEADERS = ["Basin", "Requested", "Processing Time", "Download"];
 
 const ProgressBar = ({ percent }) => {
@@ -83,6 +85,15 @@ export default connect(
   ({ downloadItemsArray: items }) => {
     return (
       <>
+        <div className="flex justify-between">
+          <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
+            Downloads
+          </div>
+          <div className="mr-2">
+            <NewDownloadButton />
+          </div>
+        </div>
+
         <div className="h-96 block overflow-y-hidden w-full">
           <table className="min-w-full divide-y divide-gray-200 mt-5">
             <thead>
