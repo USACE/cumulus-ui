@@ -21,9 +21,15 @@ import Loader from "../../app-components/loader";
 //   },
 // ];
 export default connect(
-  "selectWatershedItemsArray",
-  ({ watershedItemsArray: watersheds }) =>
-    !watersheds || !watersheds.length ? (
+  "selectMyWatershedsItemsArray",
+  "selectMyWatershedsIsLoading",
+  "doMyWatershedsRemove",
+  ({
+    myWatershedsItemsArray: watersheds,
+    myWatershedsIsLoading: isLoading,
+    doMyWatershedsRemove,
+  }) =>
+    isLoading ? (
       <Loader />
     ) : (
       <div className="h-96 block overflow-y-hidden w-full">
@@ -61,12 +67,15 @@ export default connect(
                 <td className="p-2 text-left">{w.office_symbol || "OFFICE"}</td>
                 <td>
                   <svg
-                    className="w-6"
+                    className="w-6 cursor-pointer text-gray-500 hover:text-gray-800"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     width="24"
+                    onClick={(e) => {
+                      doMyWatershedsRemove(w);
+                    }}
                   >
                     <path
                       strokeLinecap="round"

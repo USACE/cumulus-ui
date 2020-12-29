@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../app-components/navbar";
 import PageHeading from "../../app-components/page-heading";
-import Basins from "./basins";
+import MyWatersheds from "./my-watersheds";
 import Downloads from "./downloads/downloads";
 
 function dashboard() {
@@ -69,7 +69,7 @@ function dashboard() {
                 Add
               </div>
 
-              <Basins />
+              <MyWatersheds />
             </div>
             <div className="m-3 p-3 bg-white min-h-0 shadow-md rounded">
               <Downloads />
