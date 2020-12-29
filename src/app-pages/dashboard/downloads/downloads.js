@@ -105,7 +105,7 @@ export default connect(
       <>
         <div className="flex justify-between">
           <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
-            Downloads
+            My Downloads
           </div>
           <div className="mr-2">
             <NewDownloadButton />
