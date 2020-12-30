@@ -17,6 +17,7 @@ import routeBundle from "./routes-bundle";
 import shapefileBundle from "./shapefile-bundle";
 import mapsBundle from "./maps-bundle";
 import notificationBundle from "./notification-bundle";
+import selectBundle from "./select-bundle";
 
 import cache from "./../cache.js";
 import productBundle from "./product-bundle";
@@ -70,6 +71,7 @@ export default composeBundles(
     center: [-80.79, 26.94],
     zoom: 5,
   }),
+  selectBundle,
   downloadBundle,
   mapsBundle,
   exploreMapBundle,
