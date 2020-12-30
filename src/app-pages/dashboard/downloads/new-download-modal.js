@@ -83,6 +83,7 @@ const NewDownloadModal = connect(
                 className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                 onChange={(e) => {
                   const d = new Date(e.target.value);
+                  d.setUTCHours(23, 59, 59);
                   setPayload({
                     ...payload,
                     datetime_end: d.toISOString(),
@@ -129,8 +130,15 @@ const NewDownloadModal = connect(
               />
             </div>
             <div className="mt-6">
-              <h6>JSON Payload</h6>
-              <div>{JSON.stringify(payload)}</div>
+              <label className="block mt-6 mb-2">
+                <span className="text-gray-700">JSON Payload</span>
+              </label>
+              <div className="">
+                <textarea
+                  className="w-full  border-gray-200 focus:ring-0 text-gray-500"
+                  value={JSON.stringify(payload)}
+                />
+              </div>
             </div>
 
             <div className="flex">

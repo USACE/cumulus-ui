@@ -32,13 +32,14 @@ const TableRow = ({ item }) => {
   const DownloadNow = ({ href }) => (
     <a href={href}>
       <svg
-        className="w-6"
+        className="w-6 text-gray-500 hover:text-gray-800"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
         width="24"
       >
+        <title>Click to Download</title>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -49,7 +50,24 @@ const TableRow = ({ item }) => {
     </a>
   );
 
-  const DownloadFailed = () => <span>FAILED!!!</span>;
+  const DownloadFailed = () => (
+    <>
+      <svg
+        className="w-6 text-red-600"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 20"
+        fill="currentColor"
+        width="24"
+      >
+        <title>Failed Download</title>
+        <path
+          fillRule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </>
+  );
 
   return (
     <tr>
@@ -58,7 +76,7 @@ const TableRow = ({ item }) => {
       {/* Requested */}
       <td className="p-2 text-left">{procStart.toRelativeCalendar()}</td>
       <td className="p-2 text-left">{`${parseInt(dur.as("seconds"))}s`}</td>
-      <td>
+      <td className="">
         {item.status === "SUCCESS" && item.progress === 100 ? (
           <DownloadNow href={item.file} />
         ) : item.status === "INITIATED" ? (
@@ -87,7 +105,7 @@ export default connect(
       <>
         <div className="flex justify-between">
           <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4">
-            Downloads
+            My Downloads
           </div>
           <div className="mr-2">
             <NewDownloadButton />

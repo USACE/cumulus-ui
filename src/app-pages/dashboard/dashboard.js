@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../app-components/navbar";
 import PageHeading from "../../app-components/page-heading";
-import Basins from "./basins";
+import MyWatersheds from "./my-watersheds/my-watersheds";
 import Downloads from "./downloads/downloads";
 
 function dashboard() {
@@ -49,27 +49,7 @@ function dashboard() {
           {/* <!--second row --> */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="m-3 p-3 bg-white min-h-0 shadow-md border-l-4 border-gray-600 rounded">
-              <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
-                My Watersheds
-              </div>
-              <div className="float-right">
-                <svg
-                  className="w-6 float-left"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  width="20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Add
-              </div>
-
-              <Basins />
+              <MyWatersheds />
             </div>
             <div className="m-3 p-3 bg-white min-h-0 shadow-md rounded">
               <Downloads />
