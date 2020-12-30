@@ -83,6 +83,7 @@ const NewDownloadModal = connect(
                 className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                 onChange={(e) => {
                   const d = new Date(e.target.value);
+                  d.setUTCHours(23, 59, 59);
                   setPayload({
                     ...payload,
                     datetime_end: d.toISOString(),
