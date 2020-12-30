@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { connect } from "redux-bundler-react";
 
+import Pill from "../../../app-components/pill";
+
 import Select from "react-select";
 
 const NewDownloadModal = connect(
+  "selectAppDefaultsFormSelectPlaceholder",
   "selectWatershedItemsArray",
   "selectProductItemsArray",
   "doModalClose",
   "doDownloadRequest",
   ({
+    appDefaultsFormSelectPlaceholder,
     watershedItemsArray: watersheds,
     productItemsArray: products,
     doDownloadRequest,
@@ -41,6 +45,59 @@ const NewDownloadModal = connect(
       doDownloadRequest(payload);
       doModalClose();
     };
+
+    const ProductTypePill = ({ product }) => (
+      <Pill
+        bgClass="bg-gradient-to-b from-gray-400 to-gray-500"
+        iconClass={
+          product.is_forecast
+            ? "mdi mdi-chart-line"
+            : "mdi mdi-clock-check-outline"
+        }
+        label={product.is_forecast ? "forecast" : "observed"}
+      />
+    );
+
+    const ProductGroupPill = ({ product }) => {
+      const productIconGroupClasses = {
+        PRECIPITATION: {
+          icon: "mdi-weather-pouring text-blue-800",
+          background: "bg-blue-600",
+          text: "text-white",
+        },
+        SNOW: {
+          icon: "mdi-snowflake text-blue-500",
+          background: "bg-blue-400",
+          text: "text-white",
+        },
+        TEMPERATURE: {
+          icon: "mdi-thermometer text-red-600",
+          background: "bg-red-500",
+          text: "text-white",
+        },
+      };
+
+      return (
+        <Pill
+          bgClass={productIconGroupClasses[product.group]["background"]}
+          iconClass={productIconGroupClasses[product.group]["icon"]}
+          label={product.group}
+        />
+      );
+    };
+
+    const ProductLabel = ({ product }) => {
+      return (
+        <div className="flex justify-between">
+          <div className="">{product.name}</div>
+          <div className="flex justify-between">
+            <ProductGroupPill product={product} />
+            <ProductTypePill product={product} />
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div
         className="inline-block overflow-visible align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full"
@@ -96,6 +153,7 @@ const NewDownloadModal = connect(
                 <span className="text-gray-700">Watershed</span>
               </label>
               <Select
+                placeholder={appDefaultsFormSelectPlaceholder}
                 options={watersheds.map((w, index) => ({
                   value: w.id,
                   label: `${w.office_symbol} - ${w.name}`,
@@ -113,9 +171,13 @@ const NewDownloadModal = connect(
                 <span className="text-gray-700">Products</span>
               </label>
               <Select
+                placeholder={appDefaultsFormSelectPlaceholder}
                 isMulti
+                formatOptionLabel={({ value, label, customAbbreviation }) => (
+                  <ProductLabel product={value} />
+                )}
                 options={products.map((p, index) => ({
-                  value: p.id,
+                  value: p,
                   label: p.name,
                 }))}
                 onChange={(selectedOption) => {
@@ -123,7 +185,7 @@ const NewDownloadModal = connect(
                     ...payload,
                     product_id:
                       selectedOption && selectedOption.length
-                        ? selectedOption.map((s) => s.value)
+                        ? selectedOption.map((s) => s.value.id)
                         : [],
                   });
                 }}
