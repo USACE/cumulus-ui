@@ -1,6 +1,10 @@
 import {
-  composeBundles,
+  appTimeBundle,
+  createDebugBundle,
+  asyncCountBundle,
+  composeBundlesRaw,
   createCacheBundle,
+  createReactorBundle,
   createUrlBundle,
 } from "redux-bundler";
 
@@ -32,7 +36,15 @@ import myWatershedsBundle from "./my-watersheds-bundle";
 const mockTokenTestUser =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwIiwibmFtZSI6IlVzZXIuVGVzdCIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoyMDAwMDAwMDAwLCJyb2xlcyI6WyJQVUJMSUMuVVNFUiJdfQ.q7TG-5QKo19raWrTz2A7639tB-V7RKJMPJ5-4qwdNd4";
 
-export default composeBundles(
+export default composeBundlesRaw(
+  // start of out-of-the-box bundles typically included with composeBundles()
+  // composeBundlesRaw() used to customize createReactorBundle();
+  appTimeBundle,
+  asyncCountBundle,
+  createUrlBundle(),
+  createReactorBundle({ idleTimeout: 5000 }),
+  createDebugBundle(),
+  // end of out-of-the-box bundles
   createAuthBundle({
     appId: "20a4794c-91c3-4080-a42c-d9c0bda332a4",
     redirectOnLogout: pkg.homepage,
