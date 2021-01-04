@@ -13,7 +13,7 @@ const downloadBundle = createRestBundle({
   postTemplate: ":/",
   deleteTemplate: ":/",
   fetchActions: [],
-  forceFetchActions: [],
+  forceFetchActions: ["DOWNLOAD_REQUEST_FINISH"],
   urlParamSelectors: [],
   sortBy: "processing_start",
   sortAsc: false,
