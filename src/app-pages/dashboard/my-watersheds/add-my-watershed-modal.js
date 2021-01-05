@@ -27,8 +27,7 @@ const AddMyWatershedModal = connect(
       }
 
       if (payload.id.length > 1) {
-        payload.id.map((w_id, index) => {
-          console.log(w_id);
+        payload.id.forEach((w_id, index) => {
           doMyWatershedsAdd({ id: w_id });
         });
       } else {
