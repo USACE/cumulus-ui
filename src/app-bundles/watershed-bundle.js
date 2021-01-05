@@ -15,6 +15,8 @@ const watershedBundle = createRestBundle({
   fetchActions: ["URL_UPDATED", "AUTH_LOGGED_IN"],
   forceFetchActions: [],
   urlParamSelectors: [],
+  sortBy: "office_symbol",
+  sortAsc: true,
   addons: {
     selectWatershedFakeByRoute: createSelector(
       "selectWatershedByRoute",

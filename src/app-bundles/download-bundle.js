@@ -36,27 +36,31 @@ const downloadBundle = createRestBundle({
           console.log("ERROR in Download Request");
           console.log(`Request returned a ${response.status}`);
         }
-        dispatch({ type: "DOWNLOAD_REQUEST_FINISH" });
+        dispatch({
+          type: "DOWNLOAD_REQUEST_FINISH",
+        });
       });
     },
-  },
-  reactDownloadInProgress: createSelector(
-    "selectDownloadItemsArray",
-    "selectDownloadIsLoading",
-    (downloads, isLoading) => {
-      // Short-Circuit; If isLoading, do not trigger another fetch
-      // If state change from isLoading: True --> False then check for in
-      // progress downloads and kick-off another fetch as necessary
-      if (!!isLoading) {
-        return null;
+    reactDownloadInProgress: createSelector(
+      "selectDownloadItemsArray",
+      "selectDownloadIsLoading",
+      "selectAppTime",
+      "selectDownloadLastFetch",
+      (downloads, isLoading, now, lastFetch) => {
+        // Short-Circuit; If isLoading or last fetch < 2s ago, do not trigger another fetch
+        // If state change from isLoading: True --> False then check for in
+        // progress downloads and kick-off another fetch as necessary
+        if (isLoading || now - new Date(lastFetch) < 2000) {
+          return null;
+        }
+        return downloads.filter(
+          (d) => d.status === "INITIATED" && d.progress < 100
+        ).length
+          ? { actionCreator: "doDownloadFetch" }
+          : null;
       }
-      return downloads.filter(
-        (d) => d.status === "INITIATED" && d.progress < 100
-      ).length
-        ? { actionCreator: "doDownloadFetch" }
-        : null;
-    }
-  ),
+    ),
+  },
   reduceFurther: (state, { type, payload }) => {
     switch (type) {
       case "DOWNLOAD_REQUEST_START":

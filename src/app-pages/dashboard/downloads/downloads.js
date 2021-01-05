@@ -14,7 +14,11 @@ const ProgressBar = ({ percent }) => {
         <span className="text-xs font-mono">{percent}%</span>
       </div>
       {/* Progress Bar */}
-      <div className="flex overflow-hidden h-2 mb-4 text-xs rounded bg-blue-200">
+      <div
+        className={`flex overflow-hidden h-2 mb-4 text-xs rounded bg-blue-200 ${
+          percent < 100 && "animate-pulse"
+        }`}
+      >
         <div
           style={{ width: `${percent}%` }}
           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"

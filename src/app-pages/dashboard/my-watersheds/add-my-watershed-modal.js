@@ -4,20 +4,37 @@ import { connect } from "redux-bundler-react";
 import Select from "react-select";
 
 const AddMyWatershedModal = connect(
+  "selectAppDefaultsFormSelectPlaceholder",
   "selectWatershedItemsArray",
   "doModalClose",
-  ({ watershedItemsArray: watersheds, doModalClose, watershedSelected }) => {
+  "doMyWatershedsAdd",
+  ({
+    appDefaultsFormSelectPlaceholder,
+    watershedItemsArray: watersheds,
+    doModalClose,
+    doMyWatershedsAdd,
+    watershedSelected,
+  }) => {
     const [payload, setPayload] = useState({
-      watershed_id: watershedSelected || null,
+      id: watershedSelected || [],
     });
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (!payload || !payload.watershed_id) {
+      if (!payload || !payload.id || !payload.id.length) {
         console.log("Missing one or more required fields");
         return;
       }
-      //   doDownloadRequest(payload);
+
+      if (payload.id.length > 1) {
+        payload.id.map((w_id, index) => {
+          console.log(w_id);
+          doMyWatershedsAdd({ id: w_id });
+        });
+      } else {
+        doMyWatershedsAdd(payload);
+      }
+
       doModalClose();
     };
     return (
@@ -36,6 +53,8 @@ const AddMyWatershedModal = connect(
                 <span className="text-gray-700">Watershed</span>
               </label>
               <Select
+                placeholder={appDefaultsFormSelectPlaceholder}
+                isMulti
                 options={watersheds.map((w, index) => ({
                   value: w.id,
                   label: `${w.office_symbol} - ${w.name}`,
@@ -43,10 +62,25 @@ const AddMyWatershedModal = connect(
                 onChange={(selectedOption) => {
                   setPayload({
                     ...payload,
-                    watershed_id: selectedOption.value,
+                    id:
+                      selectedOption && selectedOption.length
+                        ? selectedOption.map((s) => s.value)
+                        : [],
                   });
                 }}
               />
+            </div>
+
+            <div className="mt-6">
+              <label className="block mt-6 mb-2">
+                <span className="text-gray-700">JSON Payload</span>
+              </label>
+              <div className="">
+                <textarea
+                  className="w-full  border-gray-200 focus:ring-0 text-gray-500"
+                  value={JSON.stringify(payload)}
+                />
+              </div>
             </div>
 
             <div className="flex">
@@ -54,7 +88,7 @@ const AddMyWatershedModal = connect(
                 onClick={handleSubmit}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3"
               >
-                Submit
+                Add
               </button>
               <button
                 onClick={(e) => {
