@@ -55,7 +55,7 @@ export default composeBundlesRaw(
     root:
       process.env.NODE_ENV === "development"
         ? `http://localhost/cumulus/v1`
-        : `https://cumulus-api.rsgis.dev/cumulus/v1`,
+        : `https://water-api.rsgis.dev/cumulus/v1`,
     unless: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
