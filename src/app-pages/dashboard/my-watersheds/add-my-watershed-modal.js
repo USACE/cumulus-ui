@@ -70,7 +70,7 @@ const AddMyWatershedModal = connect(
               />
             </div>
 
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <label className="block mt-6 mb-2">
                 <span className="text-gray-700">JSON Payload</span>
               </label>
@@ -80,7 +80,7 @@ const AddMyWatershedModal = connect(
                   value={JSON.stringify(payload)}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="flex">
               <button

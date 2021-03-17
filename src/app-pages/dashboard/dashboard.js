@@ -7,7 +7,7 @@ import Downloads from "./downloads/downloads";
 function dashboard() {
   return (
     <>
-      <main className="bg-gray-200 h-full lg:h-screen">
+      <main className="bg-gray-100 h-full lg:h-screen">
         <Navbar />
         <div className="mx-auto max-w-screen-2xl sm:p-10">
           {/* <div className="mb-3 pl-3">

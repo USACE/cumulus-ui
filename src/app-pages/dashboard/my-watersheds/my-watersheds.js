@@ -24,34 +24,23 @@ import AddMyWatershedButton from "./add-my-watershed-button";
 export default connect(
   "selectMyWatershedsItemsArray",
   "selectMyWatershedsIsLoading",
+  "selectAuthIsLoggedIn",
   "doMyWatershedsRemove",
   ({
     myWatershedsItemsArray: watersheds,
     myWatershedsIsLoading: isLoading,
+    authIsLoggedIn: user,
     doMyWatershedsRemove,
   }) =>
-    isLoading ? (
+    isLoading && user ? (
       <Loader />
     ) : (
-      <>
+      <div>
         <div className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline">
           My Watersheds
         </div>
         <div className="float-right">
-          {/* <svg
-            className="w-6 float-left"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            width="20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-              clipRule="evenodd"
-            />
-          </svg> */}
-          <AddMyWatershedButton />
+          {user ? <AddMyWatershedButton /> : "Login to manage watersheds."}
         </div>
         <div className="h-96 block overflow-y-hidden w-full">
           <table className="w-full divide-y divide-gray-200 mt-5 ">
@@ -113,6 +102,6 @@ export default connect(
             </tbody>
           </table>
         </div>
-      </>
+      </div>
     )
 );
