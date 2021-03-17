@@ -3,6 +3,7 @@ import { connect } from "redux-bundler-react";
 import { DateTime } from "luxon";
 
 import NewDownloadButton from "./new-download-button";
+import DownloadDetailsModal from "./download-details-modal";
 
 const HEADERS = ["Basin", "Requested", "Processing Time", "Download"];
 
@@ -28,7 +29,7 @@ const ProgressBar = ({ percent }) => {
   );
 };
 
-const TableRow = ({ item }) => {
+const TableRow = ({ item, doModalOpen }) => {
   const procStart = DateTime.fromISO(item.processing_start);
   const procEnd = DateTime.fromISO(item.processing_end);
   const dur = procEnd.diff(procStart, "seconds");
@@ -74,7 +75,13 @@ const TableRow = ({ item }) => {
   );
 
   return (
-    <tr>
+    <tr
+      onClick={(e) => {
+        doModalOpen(DownloadDetailsModal, item);
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        console.log(item);
+      }}
+    >
       {/* Basin */}
       <td className="p-2 text-left">{item.watershed_name}</td>
       {/* Requested */}
@@ -104,7 +111,8 @@ const TableHeader = ({ title }) => (
 
 export default connect(
   "selectDownloadItemsArray",
-  ({ downloadItemsArray: items }) => {
+  "doModalOpen",
+  ({ downloadItemsArray: items, doModalOpen }) => {
     return (
       <>
         <div className="flex justify-between">
@@ -127,7 +135,7 @@ export default connect(
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {items.map((item, index) => (
-                <TableRow key={index} item={item} />
+                <TableRow key={index} item={item} doModalOpen={doModalOpen} />
               ))}
             </tbody>
           </table>
