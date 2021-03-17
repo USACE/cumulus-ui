@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { connect } from "redux-bundler-react";
+import React, { useState } from 'react';
+import { connect } from 'redux-bundler-react';
 
-import Pill from "../../../app-components/pill";
+// import Pill from '../../../app-components/pill';
 
-import Select from "react-select";
+// import Select from "react-select";
 
 const DownloadDetailsModal = connect(
-  "selectAppDefaultsFormSelectPlaceholder",
-  "selectWatershedItemsArray",
-  "selectProductItemsArray",
-  "selectModalProps",
-  "doModalClose",
-  "doDownloadRequest",
+  'selectAppDefaultsFormSelectPlaceholder',
+  'selectWatershedItemsArray',
+  'selectProductItemsArray',
+  'selectModalProps',
+  'doModalClose',
+  'doDownloadRequest',
   ({
     appDefaultsFormSelectPlaceholder,
     watershedItemsArray: watersheds,
@@ -24,14 +24,14 @@ const DownloadDetailsModal = connect(
     watershedSelected,
     productsSelected,
   }) => {
-    const [payload, setPayload] = useState({
+    const [payload] = useState({
       datetime_start: datetimeStart,
       datetime_end: datetimeEnd,
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],
     });
 
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     console.log(modalProps);
 
     const handleSubmit = (e) => {
@@ -44,64 +44,64 @@ const DownloadDetailsModal = connect(
         !payload.product_id ||
         !payload.product_id.length
       ) {
-        console.log("Missing one or more required fields for download");
+        console.log('Missing one or more required fields for download');
         return;
       }
       doDownloadRequest(payload);
       doModalClose();
     };
 
-    const ProductTypePill = ({ product }) => (
-      <Pill
-        bgClass="bg-gradient-to-b from-gray-400 to-gray-500"
-        iconClass={
-          product.is_forecast
-            ? "mdi mdi-chart-line"
-            : "mdi mdi-clock-check-outline"
-        }
-        label={product.is_forecast ? "forecast" : "observed"}
-      />
-    );
+    // const ProductTypePill = ({ product }) => (
+    //   <Pill
+    //     bgClass="bg-gradient-to-b from-gray-400 to-gray-500"
+    //     iconClass={
+    //       product.is_forecast
+    //         ? 'mdi mdi-chart-line'
+    //         : 'mdi mdi-clock-check-outline'
+    //     }
+    //     label={product.is_forecast ? 'forecast' : 'observed'}
+    //   />
+    // );
 
-    const ProductGroupPill = ({ product }) => {
-      const productIconGroupClasses = {
-        PRECIPITATION: {
-          icon: "mdi-weather-pouring text-blue-800",
-          background: "bg-blue-600",
-          text: "text-white",
-        },
-        SNOW: {
-          icon: "mdi-snowflake text-blue-500",
-          background: "bg-blue-400",
-          text: "text-white",
-        },
-        TEMPERATURE: {
-          icon: "mdi-thermometer text-red-600",
-          background: "bg-red-500",
-          text: "text-white",
-        },
-      };
+    // const ProductGroupPill = ({ product }) => {
+    //   const productIconGroupClasses = {
+    //     PRECIPITATION: {
+    //       icon: 'mdi-weather-pouring text-blue-800',
+    //       background: 'bg-blue-600',
+    //       text: 'text-white',
+    //     },
+    //     SNOW: {
+    //       icon: 'mdi-snowflake text-blue-500',
+    //       background: 'bg-blue-400',
+    //       text: 'text-white',
+    //     },
+    //     TEMPERATURE: {
+    //       icon: 'mdi-thermometer text-red-600',
+    //       background: 'bg-red-500',
+    //       text: 'text-white',
+    //     },
+    //   };
 
-      return (
-        <Pill
-          bgClass={productIconGroupClasses[product.group]["background"]}
-          iconClass={productIconGroupClasses[product.group]["icon"]}
-          label={product.group}
-        />
-      );
-    };
+    //   return (
+    //     <Pill
+    //       bgClass={productIconGroupClasses[product.group]['background']}
+    //       iconClass={productIconGroupClasses[product.group]['icon']}
+    //       label={product.group}
+    //     />
+    //   );
+    // };
 
-    const ProductLabel = ({ product }) => {
-      return (
-        <div className="flex justify-between">
-          <div className="">{product.name}</div>
-          <div className="flex justify-between">
-            <ProductGroupPill product={product} />
-            <ProductTypePill product={product} />
-          </div>
-        </div>
-      );
-    };
+    // const ProductLabel = ({ product }) => {
+    //   return (
+    //     <div className="flex justify-between">
+    //       <div className="">{product.name}</div>
+    //       <div className="flex justify-between">
+    //         <ProductGroupPill product={product} />
+    //         <ProductTypePill product={product} />
+    //       </div>
+    //     </div>
+    //   );
+    // };
 
     return (
       <div
@@ -176,7 +176,7 @@ const DownloadDetailsModal = connect(
 
             <div className="mt-3">
               <span className="block mt-6 mb-2 text-gray-700">File</span>
-              {modalProps.file || "Not Available"}
+              {modalProps.file || 'Not Available'}
             </div>
 
             <div className="mt-6">
