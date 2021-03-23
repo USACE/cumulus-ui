@@ -24,7 +24,7 @@ const colorClassHourly = (value) => {
       ? 'text-green-500'
       : count < 24 && count > 10
       ? 'text-green-300'
-      : count < 10 && count > 0
+      : count <= 10 && count > 0
       ? 'text-green-100'
       : 'text-gray-200';
 
