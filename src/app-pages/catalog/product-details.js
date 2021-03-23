@@ -1,34 +1,34 @@
-import React from "react";
-import Navbar from "../../app-components/navbar";
-import { connect } from "redux-bundler-react";
-import CalendarHeatmap from "react-calendar-heatmap";
-import "react-calendar-heatmap/dist/styles.css";
-import ReactTooltip from "react-tooltip";
-import moment from "moment";
+import React from 'react';
+import Navbar from '../../app-components/navbar';
+import { connect } from 'redux-bundler-react';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
+import ReactTooltip from 'react-tooltip';
+import moment from 'moment';
 
-import Map from "../../app-components/class-map";
+import Map from '../../app-components/class-map';
 
-import Loader from "../../app-components/loader";
+import Loader from '../../app-components/loader';
 
 const colorClassBinary = (value) => {
   if (!value || !value.count) {
-    return "fill-current text-gray-300";
+    return 'fill-current text-gray-300';
   } else {
-    return "fill-current text-green-400";
+    return 'fill-current text-green-400';
   }
 };
 
 const colorClassHourly = (value) => {
   const color = ({ count }) =>
     count === 24
-      ? "text-green-500"
-      : count < 24 && count > 20
-      ? "text-green-300"
-      : count < 20 && count > 0
-      ? "text-green-200"
-      : "text-gray-200";
+      ? 'text-green-500'
+      : count < 24 && count > 10
+      ? 'text-green-300'
+      : count < 10 && count > 0
+      ? 'text-green-100'
+      : 'text-gray-200';
 
-  return `fill-current ${value ? color(value) : "text-gray-200"}`;
+  return `fill-current ${value ? color(value) : 'text-gray-200'}`;
 };
 
 const AvailabilityCalendar = ({ year, dates, classForValue }) => {
@@ -46,7 +46,7 @@ const AvailabilityCalendar = ({ year, dates, classForValue }) => {
           tooltipDataAttrs={(value) =>
             value &&
             value.date && {
-              "data-tip": `${moment.utc(value.date).format("YYYY-MM-DD")}: ${
+              'data-tip': `${moment.utc(value.date).format('YYYY-MM-DD')}: ${
                 value.count
               } Grids`,
             }
@@ -59,10 +59,10 @@ const AvailabilityCalendar = ({ year, dates, classForValue }) => {
 };
 
 export default connect(
-  "selectProductByRoute",
-  "selectProductYearsByRoute",
-  "selectProductavailabilityByRoute",
-  "selectProductavailabilityIsLoading",
+  'selectProductByRoute',
+  'selectProductYearsByRoute',
+  'selectProductavailabilityByRoute',
+  'selectProductavailabilityIsLoading',
   ({
     productByRoute: product,
     productYearsByRoute: productYears,
@@ -88,7 +88,7 @@ export default connect(
                   <h1 className="font-sans text-lg">Availability Details</h1>
                   <hr />
                   {isLoading || !productAvailability ? (
-                    <Loader opt={"dissolve-cube"} color={"#9ae6b4"} />
+                    <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
                   ) : (
                     productYears.map((year, idx) => (
                       <AvailabilityCalendar
@@ -107,7 +107,7 @@ export default connect(
                 {/* MAP */}
                 <div className="mb-8 border border-2 rounded-lg m-2 overflow-hidden">
                   <Map
-                    mapKey={"productDetailMap"}
+                    mapKey={'productDetailMap'}
                     height={300}
                     options={{
                       center: [-98.0, 37.0],
