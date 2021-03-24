@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "redux-bundler-react";
-import { DateTime } from "luxon";
+import React from 'react';
+import { connect } from 'redux-bundler-react';
+import { DateTime } from 'luxon';
 
-import NewDownloadButton from "./new-download-button";
-import DownloadDetailsModal from "./download-details-modal";
+import NewDownloadButton from './new-download-button';
+import DownloadDetailsModal from './download-details-modal';
 
-const HEADERS = ["Basin", "Requested", "Processing Time", "Download"];
+const HEADERS = ['Basin', 'Requested', 'Processing Time', 'Download'];
 
 const ProgressBar = ({ percent }) => {
   return (
@@ -17,7 +17,7 @@ const ProgressBar = ({ percent }) => {
       {/* Progress Bar */}
       <div
         className={`flex overflow-hidden h-2 mb-4 text-xs rounded bg-blue-200 ${
-          percent < 100 && "animate-pulse"
+          percent < 100 && 'animate-pulse'
         }`}
       >
         <div
@@ -32,7 +32,7 @@ const ProgressBar = ({ percent }) => {
 const TableRow = ({ item, doModalOpen }) => {
   const procStart = DateTime.fromISO(item.processing_start);
   const procEnd = DateTime.fromISO(item.processing_end);
-  const dur = procEnd.diff(procStart, "seconds");
+  const dur = procEnd.diff(procStart, 'seconds');
 
   const DownloadNow = ({ href }) => (
     <a href={href}>
@@ -78,21 +78,21 @@ const TableRow = ({ item, doModalOpen }) => {
     <tr
       onClick={(e) => {
         doModalOpen(DownloadDetailsModal, item);
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
         console.log(item);
       }}
     >
       {/* Basin */}
-      <td className="p-2 text-left">{item.watershed_name}</td>
+      <td className="p-2 text-left cursor-pointer">{item.watershed_name}</td>
       {/* Requested */}
       <td className="p-2 text-left">{procStart.toRelativeCalendar()}</td>
-      <td className="p-2 text-left">{`${parseInt(dur.as("seconds"))}s`}</td>
+      <td className="p-2 text-left">{`${parseInt(dur.as('seconds'))}s`}</td>
       <td className="">
-        {item.status === "SUCCESS" && item.progress === 100 ? (
+        {item.status === 'SUCCESS' && item.progress === 100 ? (
           <DownloadNow href={item.file} />
-        ) : item.status === "INITIATED" ? (
+        ) : item.status === 'INITIATED' ? (
           <ProgressBar percent={item.progress} />
-        ) : item.status === "FAILED" ? (
+        ) : item.status === 'FAILED' ? (
           <DownloadFailed />
         ) : null}
       </td>
@@ -110,8 +110,8 @@ const TableHeader = ({ title }) => (
 );
 
 export default connect(
-  "selectDownloadItemsArray",
-  "doModalOpen",
+  'selectDownloadItemsArray',
+  'doModalOpen',
   ({ downloadItemsArray: items, doModalOpen }) => {
     return (
       <>
