@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { connect } from "redux-bundler-react";
+import React, { useState } from 'react';
+import { connect } from 'redux-bundler-react';
+// import DatePicker from 'react-datepicker';
 
-import Pill from "../../../app-components/pill";
+// import 'react-datepicker/dist/react-datepicker.css';
 
-import Select from "react-select";
+import Pill from '../../../app-components/pill';
+
+import Select from 'react-select';
 
 const NewDownloadModal = connect(
-  "selectAppDefaultsFormSelectPlaceholder",
-  "selectWatershedItemsArray",
-  "selectProductItemsArray",
-  "doModalClose",
-  "doDownloadRequest",
+  'selectAppDefaultsFormSelectPlaceholder',
+  'selectWatershedItemsArray',
+  'selectProductItemsArray',
+  'doModalClose',
+  'doDownloadRequest',
   ({
     appDefaultsFormSelectPlaceholder,
     watershedItemsArray: watersheds,
@@ -39,7 +42,7 @@ const NewDownloadModal = connect(
         !payload.product_id ||
         !payload.product_id.length
       ) {
-        console.log("Missing one or more required fields for download");
+        console.log('Missing one or more required fields for download');
         return;
       }
       doDownloadRequest(payload);
@@ -51,36 +54,36 @@ const NewDownloadModal = connect(
         bgClass="bg-gradient-to-b from-gray-400 to-gray-500"
         iconClass={
           product.is_forecast
-            ? "mdi mdi-chart-line"
-            : "mdi mdi-clock-check-outline"
+            ? 'mdi mdi-chart-line'
+            : 'mdi mdi-clock-check-outline'
         }
-        label={product.is_forecast ? "forecast" : "observed"}
+        label={product.is_forecast ? 'forecast' : 'observed'}
       />
     );
 
     const ProductGroupPill = ({ product }) => {
       const productIconGroupClasses = {
         PRECIPITATION: {
-          icon: "mdi-weather-pouring text-blue-800",
-          background: "bg-blue-600",
-          text: "text-white",
+          icon: 'mdi-weather-pouring text-blue-800',
+          background: 'bg-blue-600',
+          text: 'text-white',
         },
         SNOW: {
-          icon: "mdi-snowflake text-blue-500",
-          background: "bg-blue-400",
-          text: "text-white",
+          icon: 'mdi-snowflake text-blue-500',
+          background: 'bg-blue-400',
+          text: 'text-white',
         },
         TEMPERATURE: {
-          icon: "mdi-thermometer text-red-600",
-          background: "bg-red-500",
-          text: "text-white",
+          icon: 'mdi-thermometer text-red-600',
+          background: 'bg-red-500',
+          text: 'text-white',
         },
       };
 
       return (
         <Pill
-          bgClass={productIconGroupClasses[product.group]["background"]}
-          iconClass={productIconGroupClasses[product.group]["icon"]}
+          bgClass={productIconGroupClasses[product.group]['background']}
+          iconClass={productIconGroupClasses[product.group]['icon']}
           label={product.group}
         />
       );
@@ -97,6 +100,33 @@ const NewDownloadModal = connect(
         </div>
       );
     };
+
+    // const StartDatePicker = () => {
+    //   const [startDate, setStartDate] = useState(new Date());
+    //   return (
+    //     <DatePicker
+    //       className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+    //       selected={startDate}
+    //       // id="startDate"
+    //       // name="startDate"
+    //       // type="date"
+    //       onChange={(date) => setStartDate(date)}
+    //       onCalendarClose={(e) => {
+    //         setPayload({
+    //           ...payload,
+    //           datetime_start: startDate.toISOString(),
+    //         });
+    //       }}
+    //       // onCalendarClose={(e) => {
+    //       //   alert(e);
+    //       //   setPayload({
+    //       //     ...payload,
+    //       //     datetime_start: startDate.toISOString(),
+    //       //   });
+    //       // }}
+    //     />
+    //   );
+    // };
 
     return (
       <div
@@ -116,6 +146,7 @@ const NewDownloadModal = connect(
               <label className="block mt-5 sm:inline" forhtml="startDate">
                 <span className="text-gray-700">Start</span>
               </label>
+              {/* <StartDatePicker /> */}
               <input
                 id="startDate"
                 name="startDate"
@@ -197,6 +228,7 @@ const NewDownloadModal = connect(
               </label>
               <div className="">
                 <textarea
+                  readOnly
                   className="w-full  border-gray-200 focus:ring-0 text-gray-500"
                   value={JSON.stringify(payload)}
                 />
