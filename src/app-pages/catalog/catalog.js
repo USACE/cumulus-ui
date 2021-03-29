@@ -1,91 +1,124 @@
-import React from "react";
-import Navbar from "../../app-components/navbar";
-import { connect } from "redux-bundler-react";
-import moment from "moment";
+import React from 'react';
+import Navbar from '../../app-components/navbar';
+import SubNavbar from '../../app-components/sub-navbar';
+import { connect } from 'redux-bundler-react';
+// import moment from 'moment';
+import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
 
-const Availability = (p) => {
-  const availability_fields = {
-    From: "after",
-    To: "before",
-    "% Coverage": "percent_coverage",
-    "Grid Count": "productfile_count",
-  };
+function ProductImage(group) {
+  switch (group) {
+    case 'PRECIPITATION':
+      return 'https://cdn.pixabay.com/photo/2016/03/18/15/09/light-rain-1265212_960_720.png';
+    case 'TEMPERATURE':
+      return 'https://cdn.pixabay.com/photo/2016/03/31/15/27/cold-1293305_960_720.png';
+    case 'SNOW':
+      return 'https://cdn.pixabay.com/photo/2016/10/20/10/16/snow-flake-1755115_960_720.png';
+    default:
+      return 'https://cdn.pixabay.com/photo/2016/03/18/15/09/light-rain-1265212_960_720.png';
+  }
+}
 
-  const ListItem = ({ k }) => {
-    return (
-      <li>
-        <div className="flex">
-          <div className="font-bold w-32">{k}</div>
-          {k === "From" || k === "To" ? (
-            <p className="ml-4 font-mono">
-              {moment
-                .utc(p[availability_fields[k]])
-                .format("DD MMM YYYY hh:mm z")}
-              <span className="ml-4 italic text-xs">
-                {moment.utc(p[availability_fields[k]]).fromNow()}
-              </span>
-            </p>
-          ) : (
-            <p className="ml-4 font-mono">{p[availability_fields[k]]}</p>
-          )}
+const ProductRow = (p) => (
+  <tr className="hover:bg-gray-100">
+    <td className="px-6 py-4 whitespace-nowrap">
+      <a href={`/catalog/${p.id}`}>
+        <div className="flex items-center">
+          <div className="flex-shrink-0 h-10 w-10">
+            {/* <i className="mdi mdi-weather-pouring text-blue-800" /> */}
+            <img
+              className="h-10 w-10 object-contain"
+              src={ProductImage(p.group)}
+              alt={p.group}
+              title={p.group}
+            />
+          </div>
+          <div className="ml-4">
+            <div className="text-md font-semibold text-gray-900">{p.name}</div>
+            <div className="text-sm text-gray-500">
+              {p.parameter} measured in {p.unit}
+            </div>
+          </div>
         </div>
-      </li>
-    );
-  };
-  return (
-    <>
-      <h1 className="text-lg">Availability</h1>
-      <hr />
-      <ul className="list-none mt-2">
-        {Object.keys(availability_fields).map((k, idx) => {
-          return <ListItem key={idx} k={k} />;
-        })}
-      </ul>
-    </>
-  );
-};
+      </a>
+    </td>
 
-const ProductSection = (p) => (
-  <div className="shadow-lg hover:shadow-2xl">
-    <a href={`/catalog/${p.id}`}>
-      <div className="flex justify-between border border-blue-800 px-4 py-2 text-blue-800 rounded-t">
-        <div className="text-lg font-bold ">{p.name}</div>
-        <div className="font-light">
-          {p.parameter}, {p.unit}
-        </div>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+        {p.is_realtime && 'Realtime'}
+      </span>
+      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+        {p.is_forecast && 'Forecast'}
+      </span>
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <div className="text-sm text-gray-900">
+        {p.after && formatDistanceToNow(parseISO(p.after)) + ' ago'}
       </div>
-
-      <div className="flex border border-t-0 border-blue-800 rounded-b bg-gray-100 px-4 py-3 text-blue-700">
-        {/* Image */}
-        <div>
-          <img
-            className="rounded-lg md:w-56"
-            src="https://images.unsplash.com/photo-1578924825042-31d14cf13c35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt="Placeholder Map"
-          />
-        </div>
-        {/* Availability */}
-        <div className="ml-8 flex-grow">{Availability(p)}</div>
-
-        {/* Metadata */}
-        {/* {Metadata(p)} */}
+      <div className="text-sm text-gray-500">{p.after}</div>
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <div className="text-sm text-gray-900">
+        {p.before && formatDistanceToNow(parseISO(p.before)) + ' ago'}
       </div>
-    </a>
-  </div>
+      <div className="text-sm text-gray-500">{p.before}</div>
+    </td>
+
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <div className="text-sm text-gray-500">
+        Coverage: {Math.round(p.percent_coverage, 1)}%
+      </div>
+      <div className="text-sm text-gray-500">
+        Grid Count: {p.productfile_count}
+      </div>
+      <div className="text-sm text-gray-500">
+        Duration:{' '}
+        {p.after &&
+          p.before &&
+          formatDistance(parseISO(p.after), parseISO(p.before))}
+      </div>
+    </td>
+  </tr>
+);
+
+const ProductTableHeader = () => (
+  <thead className="bg-gray-100">
+    <tr>
+      {['Product Name', 'Type', 'First Record', 'Last Record', 'Stats'].map(
+        (c) => {
+          return (
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              {c}
+            </th>
+          );
+        }
+      )}
+    </tr>
+  </thead>
 );
 
 export default connect(
-  "selectProductItemsArray",
+  'selectProductItemsArray',
   ({ productItemsArray: products }) => {
     return (
-      <main>
+      <main className="bg-gray-100">
         <Navbar />
-        <div className="container mx-auto">
-          <p className="mt-12 text-3xl">Available Products</p>
-          <p>Ready for real-time modeling or historic calibration</p>
-          <hr className="mt-4" />
-          <div className="space-y-12 mt-10 mb-10 max-w-3xl">
-            {products.map((p) => ProductSection(p))}
+        <SubNavbar />
+        <div className="flex flex-col">
+          <div className="container-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <ProductTableHeader />
+
+                  <tbody className="bg-white divide-y divide-gray-300">
+                    {products.map((p) => ProductRow(p))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </main>
