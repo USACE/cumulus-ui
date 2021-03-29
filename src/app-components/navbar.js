@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { connect } from "redux-bundler-react";
-import classnames from "classnames";
+import React, { useState } from 'react';
+import { connect } from 'redux-bundler-react';
+import classnames from 'classnames';
+// import SubNavbar from '../../app-components/sub-navbar';
 
 const LoginDropdown = connect(
-  "selectAuthTokenPayload",
-  "selectAuthIsLoggedIn",
-  "doAuthLogin",
+  'selectAuthTokenPayload',
+  'selectAuthIsLoggedIn',
+  'doAuthLogin',
   ({ authIsLoggedIn, authTokenPayload: user, doAuthLogin }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleIsOpen = () => {
@@ -14,7 +15,7 @@ const LoginDropdown = connect(
     // Helper function to parse user initials from name
     const UserInitials = () => {
       if (authIsLoggedIn) {
-        const parts = user.name.split(".");
+        const parts = user.name.split('.');
         return `${parts[1][0]}${parts[0][0]}`;
       }
       return null;
@@ -22,7 +23,7 @@ const LoginDropdown = connect(
 
     const loginClass = classnames({
       hidden: !isOpen,
-      "z-50 absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl": true,
+      'z-50 absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl': true,
     });
 
     return (
@@ -67,15 +68,15 @@ const LoginDropdown = connect(
 );
 
 const NavItem = connect(
-  "selectPathnameMinusHomepage",
+  'selectPathnameMinusHomepage',
   ({ pathnameMinusHomepage, href, handler, children }) => {
     const handleClick = (e) => {
-      if (handler && typeof handler === "function") handler(e);
+      if (handler && typeof handler === 'function') handler(e);
     };
 
     const cls = classnames({
-      "text-green-400 font-bold bg-gray-800": pathnameMinusHomepage === href,
-      "mt-1 block px-2 py-1 text-white rounded hover:text-green-300 sm:mt-0 sm:ml-2": true,
+      'text-green-400 font-bold bg-gray-800': pathnameMinusHomepage === href,
+      'mt-1 block px-2 py-1 text-white rounded hover:text-green-300 sm:mt-0 sm:ml-2': true,
     });
 
     if (href) {
@@ -96,8 +97,8 @@ const NavItem = connect(
 );
 
 export default connect(
-  "selectAuthIsLoggedIn",
-  "selectPathnameMinusHomepage",
+  'selectAuthIsLoggedIn',
+  'selectPathnameMinusHomepage',
   ({ authIsLoggedIn, pathnameMinusHomepage }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleIsOpen = () => {
@@ -107,59 +108,68 @@ export default connect(
     const dropdownClass = classnames({
       hidden: !isOpen,
       block: isOpen,
-      "pb-4 pt-2 px-2 sm:flex sm:p-0 items-center": true,
+      'pb-4 pt-2 px-2 sm:flex sm:p-0 items-center': true,
     });
 
-    const siteHomeUrl = authIsLoggedIn ? "/dashboard" : "/";
+    const siteHomeUrl = authIsLoggedIn ? '/dashboard' : '/';
 
     return (
-      <header className="h-18 bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 py-1">
-        <div className="px-4 py-3 flex items-center justify-between px-4 py-3 ">
-          <div>
-            <h3 className="text-white text-2xl">
-              <a className="hover:text-green-400" href={siteHomeUrl}>
-                Cumulus
-              </a>
-              {pathnameMinusHomepage === "" ||
-              pathnameMinusHomepage === "/" ? null : (
-                <span className="px-2 font-light">|</span>
-              )}
-              <span className="font-light text-lg">
-                {pathnameMinusHomepage.split("/")[1]}
-              </span>
-            </h3>
-          </div>
-          <div className="sm:hidden">
-            <button
-              type="button"
-              className="block text-gray-500 hover:text-white focus:text-white focus:outline-none"
-              onClick={toggleIsOpen}
-            >
-              <svg className="h-6 w-6 fill-current">
-                {isOpen ? (
-                  <path
-                    className="heroicon-ui"
-                    d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-                  />
-                ) : (
-                  <path
-                    className="heroicon-ui"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                  />
+      <>
+        <header className="h-18 bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 py-1">
+          <div className="px-4 py-3 flex items-center justify-between px-4 py-3 ">
+            <div>
+              <h3 className="text-white text-2xl">
+                <a className="hover:text-green-400" href={siteHomeUrl}>
+                  Cumulus
+                </a>
+                {pathnameMinusHomepage === '' ||
+                pathnameMinusHomepage === '/' ? null : (
+                  <span className="px-2 font-light">|</span>
                 )}
-              </svg>
-            </button>
+                <span className="font-light text-lg">
+                  {pathnameMinusHomepage.split('/')[1]}
+                </span>
+              </h3>
+            </div>
+            <div className="sm:hidden">
+              <button
+                type="button"
+                className="block text-gray-500 hover:text-white focus:text-white focus:outline-none"
+                onClick={toggleIsOpen}
+              >
+                <svg className="h-6 w-6 fill-current">
+                  {isOpen ? (
+                    <path
+                      className="heroicon-ui"
+                      d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
+                    />
+                  ) : (
+                    <path
+                      className="heroicon-ui"
+                      d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
-        <nav className={dropdownClass}>
-          <NavItem href="/contact">Contact</NavItem>
-          <NavItem href="/#docs">Docs</NavItem>
-          {authIsLoggedIn ? (
-            <NavItem href="/admin/shapeloader">Admin</NavItem>
-          ) : null}
-          <LoginDropdown />
-        </nav>
-      </header>
+          <nav className={dropdownClass}>
+            <NavItem href="/contact">Contact</NavItem>
+            <NavItem href="/#docs">Docs</NavItem>
+            {authIsLoggedIn ? (
+              <NavItem href="/admin/shapeloader">Admin</NavItem>
+            ) : null}
+            <LoginDropdown />
+          </nav>
+        </header>
+
+        {/* <div class="max-w-full py-3 px-4 sm:px-6 lg:px-8 bg-white border-b-2">
+          <h1 class="text-2xl font-bold text-gray-900">
+            {' '}
+            {pathnameMinusHomepage.split('/')[1]}
+          </h1>
+        </div> */}
+      </>
     );
   }
 );
