@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../../app-components/navbar';
+import SubNavbar from '../../app-components/sub-navbar';
 import { connect } from 'redux-bundler-react';
 // import moment from 'moment';
 import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
@@ -80,7 +81,7 @@ const ProductRow = (p) => (
 );
 
 const ProductTableHeader = () => (
-  <thead className="bg-gray-50">
+  <thead className="bg-gray-100">
     <tr>
       {['Product Name', 'Type', 'First Record', 'Last Record', 'Stats'].map(
         (c) => {
@@ -102,17 +103,17 @@ export default connect(
   'selectProductItemsArray',
   ({ productItemsArray: products }) => {
     return (
-      <main>
+      <main className="bg-gray-100">
         <Navbar />
-
+        <SubNavbar />
         <div className="flex flex-col">
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="container-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <ProductTableHeader />
 
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-gray-300">
                     {products.map((p) => ProductRow(p))}
                   </tbody>
                 </table>
