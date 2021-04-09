@@ -38,7 +38,7 @@
 //         console.log(resp.status);
 //         if (resp.status === 404) {
 //           console.log("404 Error");
-//           //   store.doUpdateUrlWithHomepage("/profile/create");
+//           //   store.doUpdateUrl("/profile/create");
 //           return {};
 //         }
 //         console.log("FETCHING BASINS FROM API");

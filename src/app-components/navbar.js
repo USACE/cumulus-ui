@@ -68,14 +68,14 @@ const LoginDropdown = connect(
 );
 
 const NavItem = connect(
-  'selectPathnameMinusHomepage',
-  ({ pathnameMinusHomepage, href, handler, children }) => {
+  'selectPathname',
+  ({ pathname, href, handler, children }) => {
     const handleClick = (e) => {
       if (handler && typeof handler === 'function') handler(e);
     };
 
     const cls = classnames({
-      'text-green-400 font-bold bg-gray-800': pathnameMinusHomepage === href,
+      'text-green-400 font-bold bg-gray-800': pathname === href,
       'mt-1 block px-2 py-1 text-white rounded hover:text-green-300 sm:mt-0 sm:ml-2': true,
     });
 
@@ -98,8 +98,8 @@ const NavItem = connect(
 
 export default connect(
   'selectAuthIsLoggedIn',
-  'selectPathnameMinusHomepage',
-  ({ authIsLoggedIn, pathnameMinusHomepage }) => {
+  'selectPathname',
+  ({ authIsLoggedIn, pathname }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleIsOpen = () => {
       setIsOpen(!isOpen);
@@ -122,12 +122,12 @@ export default connect(
                 <a className="hover:text-green-400" href={siteHomeUrl}>
                   Cumulus
                 </a>
-                {pathnameMinusHomepage === '' ||
-                pathnameMinusHomepage === '/' ? null : (
+                {pathname === '' ||
+                pathname === '/' ? null : (
                   <span className="px-2 font-light">|</span>
                 )}
                 <span className="font-light text-lg">
-                  {pathnameMinusHomepage.split('/')[1]}
+                  {pathname.split('/')[1]}
                 </span>
               </h3>
             </div>
@@ -166,7 +166,7 @@ export default connect(
         {/* <div class="max-w-full py-3 px-4 sm:px-6 lg:px-8 bg-white border-b-2">
           <h1 class="text-2xl font-bold text-gray-900">
             {' '}
-            {pathnameMinusHomepage.split('/')[1]}
+            {pathname.split('/')[1]}
           </h1>
         </div> */}
       </>

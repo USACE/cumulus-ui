@@ -1,12 +1,14 @@
 /* eslint-disable no-mixed-operators */
-import { createSelector } from "redux-bundler";
-import olMap from "ol/Map.js";
-import View from "ol/View";
+import { createSelector } from 'redux-bundler';
+import olMap from 'ol/Map.js';
+import View from 'ol/View';
 
-import ScaleBar from "ol/control/ScaleLine";
+import ScaleBar from 'ol/control/ScaleLine';
 // import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 // import { OSM, Vector as VectorSource } from "ol/source";
-import BasemapPicker from "../ol-controls/basemap-picker";
+import BasemapPicker from '../ol-controls/basemap-picker';
+
+import 'ol/ol.css';
 
 const actions = {
   MAPS_INITIALIZED: `MAPS_INITIALIZED`,
@@ -14,7 +16,7 @@ const actions = {
 };
 
 const mapsBundle = {
-  name: "maps",
+  name: 'maps',
 
   getReducer: () => {
     const initialData = {};
@@ -34,7 +36,7 @@ const mapsBundle = {
     const map = new olMap(
       Object.assign(
         {
-          controls: [new ScaleBar({ units: "us" }), new BasemapPicker()],
+          controls: [new ScaleBar({ units: 'us' }), new BasemapPicker()],
           target: el,
           view: new View({
             center: (options && options.center) || [-11000000, 4600000],
@@ -66,18 +68,18 @@ const mapsBundle = {
     return state.maps;
   },
 
-  selectMapsObject: createSelector("selectMapsState", (state) => {
+  selectMapsObject: createSelector('selectMapsState', (state) => {
     const items = {};
     Object.keys(state).forEach((key) => {
-      if (key[0] !== "_") items[key] = state[key];
+      if (key[0] !== '_') items[key] = state[key];
     });
     return items;
   }),
 
-  selectMapsFlags: createSelector("selectMapsState", (state) => {
+  selectMapsFlags: createSelector('selectMapsState', (state) => {
     const flags = {};
     Object.keys(state).forEach((key) => {
-      if (key[0] === "_") flags[key] = state[key];
+      if (key[0] === '_') flags[key] = state[key];
     });
     return flags;
   }),

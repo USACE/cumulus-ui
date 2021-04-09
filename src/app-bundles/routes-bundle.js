@@ -16,26 +16,21 @@ import Dashboard from "../app-pages/dashboard/dashboard";
 import Download from "../app-pages/download/download";
 import WatershedList from "../app-pages/watershed/watershed-list";
 
-export default createRouteBundle(
-  {
-    "": Home,
-    "/": Home,
-    "/ws": WatershedList,
-    "/ws/:ws_slug": WatershedDetail,
-    "/dashboard": Dashboard,
-    "/download": Download,
-    "/catalog": Catalog,
-    "/profile": Profile,
-    "/profile/create": ProfileCreate,
-    "/catalog/:product_id": ProductDetails,
-    "/explorer": Explorer,
-    "/admin": Admin,
-    "/admin/shapeloader": Shapeloader,
-    "/logout": Logout,
-    "/contact": Contact,
-    "*": fourOhFour,
-  },
-  {
-    routeInfoSelector: "selectPathnameMinusHomepage",
-  }
-);
+export default createRouteBundle({
+  "": Home,
+  "/": Home,
+  "/ws": WatershedList,
+  "/ws/:ws_slug": WatershedDetail,
+  "/dashboard": Dashboard,
+  "/download": Download,
+  "/catalog": Catalog,
+  "/profile": Profile,
+  "/profile/create": ProfileCreate,
+  "/catalog/:product_id": ProductDetails,
+  "/explorer": Explorer,
+  "/admin": Admin,
+  "/admin/shapeloader": Shapeloader,
+  "/logout": Logout,
+  "/contact": Contact,
+  "*": fourOhFour,
+});

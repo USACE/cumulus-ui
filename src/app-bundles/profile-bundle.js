@@ -39,7 +39,7 @@ const profileBundle = {
         console.log(resp.status);
         if (resp.status === 404) {
           console.log("New User; Redirect to /profile/create");
-          store.doUpdateUrlWithHomepage("/profile/create");
+          store.doUpdateUrl("/profile/create");
           return {};
         }
         return resp.json();
@@ -73,7 +73,7 @@ const profileBundle = {
       })
       .then((j) => {
         dispatch({ type: "PROFILE_SAVED" });
-        store.doUpdateUrlWithHomepage("/profile");
+        store.doUpdateUrl("/profile");
       });
   },
   doProfileTokenDelete: (item) => ({ store, dispatch }) => {
