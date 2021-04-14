@@ -94,18 +94,7 @@ export default connect(
                 <span className="font-bold text-gray-600 text-md text-secondary uppercase tracking-wider block border-b-2 border-gray-100">
                   Product Description
                 </span>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  at erat sit amet est imperdiet aliquet. Cras lorem turpis,
-                  consectetur sit amet finibus vel, molestie non elit. Fusce
-                  blandit feugiat dui, vel rhoncus odio accumsan non. Integer
-                  vel ligula finibus, blandit dolor aliquam, blandit enim.
-                  Integer eget eros consequat, placerat ex at, finibus tortor.
-                  Etiam rhoncus nulla id diam posuere malesuada. Fusce sem eros,
-                  tincidunt sed consequat at, porta in libero. Mauris bibendum
-                  malesuada erat, sed consectetur nulla molestie in. Proin purus
-                  justo, pretium ut mauris sit amet, ultricies rutrum eros.
-                </p>
+                <p className="p-2">{product.description}</p>
                 <button
                   disabled
                   className="bg-gray-400 hover:bg-blue-700 text-white font-bold ml-2 mt-2 py-2 px-2 rounded"
