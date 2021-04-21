@@ -52,8 +52,8 @@ export default composeBundlesRaw(
   createJwtApiBundle({
     root:
       process.env.NODE_ENV === 'development'
-        ? `http://localhost/cumulus/v1`
-        : `https://develop-cumulus-api.rsgis.dev/cumulus/v1`,
+        ? `http://localhost`
+        : process.env.REACT_APP_CUMULUS_API_URL,
     unless: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is

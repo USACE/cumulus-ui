@@ -10,6 +10,8 @@ on:
       - new-develop
 jobs:
   build:
+    env:
+      REACT_APP_CUMULUS_API_URL: https://develop-cumulus-api.rsgis.dev
     runs-on: ubuntu-latest
     strategy:
       matrix:
