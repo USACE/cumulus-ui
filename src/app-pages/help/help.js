@@ -1,6 +1,10 @@
 import React from 'react';
 import Navbar from '../../app-components/navbar';
 
+import cavi_script_downloader_copy_paste from '../../img/help/cavi-script-downloader-copy-paste.png';
+import cumulus_rts_ui from '../../img/help/cumulus-rts-ui.png';
+import script_downloader from '../../img/help/script_downloader.png';
+
 export default function Help(props) {
   return (
     <main>
@@ -39,13 +43,10 @@ export default function Help(props) {
                 script created above.
                 <img
                   alt="screenshot showing how to copy past code into CAVI script editor"
-                  src="https://cumulus.rsgis.dev/static/media/help/cavi-script-downloader-copy-paste.png"
+                  src={cavi_script_downloader_copy_paste}
                   className="w-1/2 ml-5"
                 />
-                <a
-                  className="text-blue-700"
-                  href="https://cumulus.rsgis.dev/static/media/help/cavi-script-downloader-copy-paste.png"
-                >
+                <a className="text-blue-700" href={script_downloader}>
                   Enlarge image
                 </a>
               </li>
@@ -57,7 +58,7 @@ export default function Help(props) {
                 download and install the Cumulus RTS UI script.
                 <img
                   alt="screenshot showing script_downloader interface"
-                  src="https://cumulus.rsgis.dev/static/media/help/script_downloader.png"
+                  src={script_downloader}
                   className="ml-5 mb-5"
                 />
               </li>
@@ -66,7 +67,7 @@ export default function Help(props) {
                 to your script panel and run the Cumulus RTS UI script
                 <img
                   alt="screenshot showing Cumulus CAVI RTS UI"
-                  src="https://cumulus.rsgis.dev/static/media/help/cumulus-rts-ui.png"
+                  src={cumulus_rts_ui}
                   className="ml-5 mb-5"
                 />
               </li>
