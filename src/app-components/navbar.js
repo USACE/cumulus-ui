@@ -122,8 +122,7 @@ export default connect(
                 <a className="hover:text-green-400" href={siteHomeUrl}>
                   Cumulus
                 </a>
-                {pathname === '' ||
-                pathname === '/' ? null : (
+                {pathname === '' || pathname === '/' ? null : (
                   <span className="px-2 font-light">|</span>
                 )}
                 <span className="font-light text-lg">
@@ -154,7 +153,7 @@ export default connect(
             </div>
           </div>
           <nav className={dropdownClass}>
-            <NavItem href="/contact">Contact</NavItem>
+            <NavItem href="/help">Help</NavItem>
             <NavItem href="/#docs">Docs</NavItem>
             {authIsLoggedIn ? (
               <NavItem href="/admin/shapeloader">Admin</NavItem>
