@@ -9,7 +9,7 @@ export default function Help(props) {
   return (
     <main>
       <Navbar />
-      <div className="container mt-12 mx-auto">
+      <div className="container mt-12 prose mx-auto">
         <h1 className="text-5xl text-center">
           <span className="font-light"> Need Help?</span>
         </h1>
