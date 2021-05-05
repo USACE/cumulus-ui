@@ -12,10 +12,9 @@ import {
   createOlMapBundle,
   createOlBasemapBundle,
 } from '@corpsmap/corpsmap-bundles';
-import createNestedUrlBundle from './create-nested-url-bundle';
+
 import createAuthBundle from './create-auth-bundle';
 import createJwtApiBundle from './create-jwt-api-bundle';
-import pkg from '../../package.json';
 
 import routeBundle from './routes-bundle';
 import shapefileBundle from './shapefile-bundle';
@@ -47,7 +46,7 @@ export default composeBundlesRaw(
   // end of out-of-the-box bundles
   createAuthBundle({
     appId: '20a4794c-91c3-4080-a42c-d9c0bda332a4',
-    redirectOnLogout: pkg.homepage,
+    redirectOnLogout: '/',
     mock: process.env.NODE_ENV === 'development' ? true : false,
     token: process.env.NODE_ENV === 'development' ? mockTokenTestUser : null,
   }),
@@ -74,9 +73,6 @@ export default composeBundlesRaw(
     cacheFn: cache.set,
   }),
   createUrlBundle(),
-  createNestedUrlBundle({
-    pkg: pkg,
-  }),
   createOlBasemapBundle(),
   createOlMapBundle({
     name: 'map',

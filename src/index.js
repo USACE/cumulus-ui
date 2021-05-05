@@ -15,7 +15,7 @@ cache.getAll().then((initialData) => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <div onClick={getNavHelper(store.doUpdateUrlWithHomepage)}>
+      <div onClick={getNavHelper(store.doUpdateUrl)}>
         <App />
       </div>
     </Provider>,
