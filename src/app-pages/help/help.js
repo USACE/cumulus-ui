@@ -46,7 +46,10 @@ export default function Help(props) {
                   src={cavi_script_downloader_copy_paste}
                   className="w-1/2 ml-5"
                 />
-                <a className="text-blue-700" href={script_downloader}>
+                <a
+                  className="text-blue-700"
+                  href={cavi_script_downloader_copy_paste}
+                >
                   Enlarge image
                 </a>
               </li>
