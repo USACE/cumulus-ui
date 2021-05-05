@@ -154,7 +154,7 @@ export default connect(
             </div>
           </div>
           <nav className={dropdownClass}>
-            <NavItem href="/contact">Contact</NavItem>
+            <NavItem href="/help">Help</NavItem>
             <NavItem href="/#docs">Docs</NavItem>
             {authIsLoggedIn ? (
               <NavItem href="/admin/shapeloader">Admin</NavItem>
