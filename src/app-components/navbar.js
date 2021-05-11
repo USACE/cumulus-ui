@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import classnames from 'classnames';
+import DevBanner from './dev-banner.js';
 // import SubNavbar from '../../app-components/sub-navbar';
 
 const LoginDropdown = connect(
@@ -113,8 +114,11 @@ export default connect(
 
     const siteHomeUrl = authIsLoggedIn ? '/dashboard' : '/';
 
+    const isDevelopment = process.env.REACT_APP_ISDEVELOPMENT;
+
     return (
       <>
+        {isDevelopment && <DevBanner />}
         <header className="h-18 bg-gray-800 sm:flex sm:justify-between sm:items-center sm:px-4 py-1">
           <div className="px-4 py-3 flex items-center justify-between px-4 py-3 ">
             <div>
