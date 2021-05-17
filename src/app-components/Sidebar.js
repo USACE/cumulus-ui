@@ -75,8 +75,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </svg>
           </button>
           {/* Logo */}
-          <NavLink exact to='/' className='block'>
-            <svg width='32' height='32' viewBox='0 0 32 32'>
+          <NavLink exact to='/' className='block text-xl text-white font-bold'>
+            Cumulus
+            {/* <svg width='32' height='32' viewBox='0 0 32 32'>
               <defs>
                 <linearGradient
                   x1='28.538%'
@@ -112,7 +113,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 d='M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z'
                 fill='url(#logo-b)'
               />
-            </svg>
+            </svg> */}
           </NavLink>
         </div>
 

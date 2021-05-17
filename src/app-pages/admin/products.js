@@ -1,28 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'redux-bundler-react';
+import Sidebar from './Sidebar';
+import Header from '../../app-components/Header';
 
-import Sidebar from '../partials/Sidebar';
-import Header from '../partials/Header';
-import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
-// import DashboardAvatars from '../partials/dashboard/DashboardAvatars';
-import FilterButton from '../partials/actions/FilterButton';
-import Datepicker from '../partials/actions/Datepicker';
-// import DashboardCard01 from '../partials/dashboard/DashboardCard01';
-// import DashboardCard02 from '../partials/dashboard/DashboardCard02';
-// import DashboardCard03 from '../partials/dashboard/DashboardCard03';
-// import DashboardCard04 from '../partials/dashboard/DashboardCard04';
-// import DashboardCard05 from '../partials/dashboard/DashboardCard05';
-// import DashboardCard06 from '../partials/dashboard/DashboardCard06';
-// import DashboardCard07 from '../partials/dashboard/DashboardCard07';
-// import DashboardCard08 from '../partials/dashboard/DashboardCard08';
-// import DashboardCard09 from '../partials/dashboard/DashboardCard09';
-// import DashboardCard10 from '../partials/dashboard/DashboardCard10';
-// import DashboardCard11 from '../partials/dashboard/DashboardCard11';
-// import DashboardCard12 from '../partials/dashboard/DashboardCard12';
-// import DashboardCard13 from '../partials/dashboard/DashboardCard13';
-import Banner from '../partials/Banner';
-
-function Dashboard() {
+function Products({ doProductFetch, productItemsArray: products }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  useEffect(() => {
+    doProductFetch();
+  }, [doProductFetch]);
 
   return (
     <div className='flex h-screen overflow-hidden'>
@@ -37,7 +22,7 @@ function Dashboard() {
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
             {/* Welcome banner */}
-            <WelcomeBanner />
+            {/* <WelcomeBanner /> */}
 
             {/* Dashboard actions */}
             <div className='sm:flex sm:justify-between sm:items-center mb-8'>
@@ -46,9 +31,9 @@ function Dashboard() {
               {/* Right: Actions */}
               <div className='grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2'>
                 {/* Filter button */}
-                <FilterButton />
+                {/* <FilterButton /> */}
                 {/* Datepicker built with flatpickr */}
-                <Datepicker />
+                {/* <Datepicker /> */}
                 {/* Add view button */}
                 <button className='btn bg-indigo-500 hover:bg-indigo-600 text-white'>
                   <svg
@@ -63,14 +48,18 @@ function Dashboard() {
             </div>
 
             {/* Cards */}
-            <div className='grid grid-cols-12 gap-6'>cards deleted</div>
+            <div className='grid grid-cols-12 gap-6'>
+              {products && products.length
+                ? products.map((p, idx) => JSON.stringify(p.name))
+                : null}
+            </div>
           </div>
         </main>
 
-        <Banner />
+        {/* <Banner /> */}
       </div>
     </div>
   );
 }
 
-export default Dashboard;
+export default connect('selectProductItemsArray', 'doProductFetch', Products);
