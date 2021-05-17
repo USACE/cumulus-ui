@@ -66,7 +66,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-5 w-5'
+          className='h-6 w-6 mr-2'
           viewBox='0 0 20 20'
           fill='currentColor'
         >
@@ -80,7 +80,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-5 w-5'
+          className='h-6 w-6 mr-2'
           viewBox='0 0 20 20'
           fill='currentColor'
         >
@@ -94,7 +94,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6'
+          className='h-6 w-6 mr-2'
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -148,10 +148,13 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </svg>
           </button>
           {/* Logo */}
-          <span className='block text-sm text-gray-400 cursor-pointer'>
-            <a href='/'>Back to Public</a>
-          </span>
-          Cumulus Admin
+
+          <div className='block'>
+            <span className='block text-sm text-gray-400 cursor-pointer'>
+              <a href='/'>Back to Public</a>
+            </span>
+            <span className='block text-xl text-white'>Cumulus Admin</span>
+          </div>
         </div>
 
         {/* Links */}
