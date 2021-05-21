@@ -5,7 +5,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
   // const location = useLocation();
   // const { pathname } = location;
   // const page = pathname.split('/')[1];
-  const page = 'home';
+  const page = 'home1';
   // const NavLink = 'home';
 
   const trigger = useRef(null);
@@ -40,7 +40,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const SideBarItem = ({ name, href, icon }) => {
     return (
       <li
-        className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+        className={`px-3 py-2 rounded-sm mb-0.5 hover:bg-indigo-800 last:mb-0 ${
           page === '' && 'bg-gray-900'
         }`}
       >
@@ -63,6 +63,20 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     {
       name: 'Products',
       href: '/admin/products',
+      icon: (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 mr-2'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+        >
+          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+        </svg>
+      ),
+    },
+    {
+      name: 'Product Tags',
+      href: '/admin/product-tags',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -124,7 +138,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <div
         id='sidebar'
         ref={sidebar}
-        className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-blue-800 p-4 transition-transform duration-200 ease-in-out ${
+        className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-indigo-700 p-4 transition-transform duration-200 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-64'
         }`}
       >
@@ -153,7 +167,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             <span className='block text-sm text-gray-400 cursor-pointer'>
               <a href='/'>Back to Public</a>
             </span>
-            <span className='block text-xl text-white'>Cumulus Admin</span>
+            <span className='block text-xl text-white'>
+              <a href='/admin'>Cumulus Admin</a>
+            </span>
           </div>
         </div>
 

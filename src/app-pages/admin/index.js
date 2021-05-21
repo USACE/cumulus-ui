@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from '../../app-components/Header';
+import HomeStats from './home-stats';
+import Footer from '../../app-components/footer/footer';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,42 +17,46 @@ function Dashboard() {
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-        <main>
+        <main className='container mx-auto h-screen'>
+          <HomeStats />
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            {/* Welcome banner */}
-            {/* <WelcomeBanner /> */}
+            {/* Main home content */}
 
-            {/* Dashboard actions */}
-            <div className='sm:flex sm:justify-between sm:items-center mb-8'>
-              {/* Left: Avatars */}
-
-              {/* Right: Actions */}
-              <div className='grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2'>
-                {/* Filter button */}
-                {/* <FilterButton /> */}
-                {/* Datepicker built with flatpickr */}
-                {/* <Datepicker /> */}
-                {/* Add view button */}
-                <button className='btn bg-indigo-500 hover:bg-indigo-600 text-white'>
-                  <svg
-                    className='w-4 h-4 fill-current opacity-50 flex-shrink-0'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z' />
-                  </svg>
-                  <span className='hidden xs:block ml-2'>Add view</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Cards */}
-            <div className='grid grid-cols-12 gap-6'>
-              This is the admin dashboard
+            <div className=''>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum auctor pretium lectus, at rutrum lorem finibus ut.
+              Morbi pulvinar vestibulum imperdiet. Praesent non libero fermentum
+              est gravida porta eget eget turpis. Donec nec sodales risus.
+              Aliquam finibus, dolor vel imperdiet rhoncus, augue tellus posuere
+              lacus, a vulputate ante lectus vitae lorem. Curabitur vehicula
+              imperdiet arcu eu efficitur. Quisque congue pellentesque arcu.
+              Quisque imperdiet sollicitudin justo sed dictum. Nunc purus odio,
+              aliquam vitae lorem sed, porttitor lobortis nunc. Ut pretium
+              congue pharetra. Phasellus dui massa, semper in malesuada non,
+              mollis non ipsum. Nullam bibendum sem non ornare dignissim.
+              Integer ornare nisi at sapien efficitur semper. Sed id elementum
+              arcu, vitae sodales ex. Mauris rhoncus sem vitae metus ultricies,
+              ut sollicitudin enim ornare. Duis feugiat id ante vitae varius. In
+              interdum tincidunt mi sed sagittis. Duis sed faucibus orci.
+              Aliquam tristique accumsan tempus. Etiam eleifend, nisi nec
+              euismod consequat, ipsum purus lacinia massa, ut blandit velit
+              nisi eget quam. Mauris malesuada arcu eu tempus egestas. Donec
+              suscipit cursus semper. Cras sit amet ligula massa. Fusce sed
+              magna egestas magna varius tincidunt. Vivamus dapibus nulla vitae
+              diam egestas gravida. Etiam eget risus et lectus finibus ultricies
+              vitae non eros. Morbi lobortis hendrerit mi vitae vulputate. Fusce
+              id turpis quis nibh ultricies tempor. In ante nulla, auctor ac
+              risus in, tincidunt egestas dolor. Donec id nisl facilisis,
+              condimentum erat in, aliquam ex. Aliquam volutpat aliquet varius.
+              Suspendisse lobortis tellus pharetra massa ultricies aliquam. Sed
+              sodales nulla odio, a vehicula nisl volutpat quis. Phasellus eget
+              semper purus, et rutrum urna. Aliquam ultricies vel arcu ac
+              luctus.
             </div>
           </div>
         </main>
 
-        {/* <Banner /> */}
+        <Footer />
       </div>
     </div>
   );
