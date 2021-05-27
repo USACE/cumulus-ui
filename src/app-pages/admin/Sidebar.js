@@ -75,8 +75,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       ),
     },
     {
-      name: 'Product Tags',
-      href: '/admin/product-tags',
+      name: 'Tags',
+      href: '/admin/tags',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -164,11 +164,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           {/* Logo */}
 
           <div className='block'>
+            <span className='block text-xl text-white'>
+              <a href='/admin'>Cumulus | Admin</a>
+            </span>
             <span className='block text-sm text-gray-400 cursor-pointer'>
               <a href='/'>Back to Public</a>
-            </span>
-            <span className='block text-xl text-white'>
-              <a href='/admin'>Cumulus Admin</a>
             </span>
           </div>
         </div>
