@@ -38,7 +38,10 @@ export default (props) => (
         <legend className='mb-3 text-2xl'>Edit Tag</legend>
 
         <div className='mt-3'>
-          <label className='block mt-6 mb-2' forhtml='name'>
+          <label
+            className='block sm:inline-block mt-6 sm:mr-5 mb-2 w-full bg-yellow-700 sm:bg-green-50 sm:w-32'
+            forhtml='name'
+          >
             <span className='text-gray-700'>Name</span>
           </label>
           <input
@@ -48,7 +51,10 @@ export default (props) => (
         </div>
 
         <div className='mt-3'>
-          <label className='block mt-6 mb-2' forhtml='description'>
+          <label
+            className='block sm:inline-block mt-6 sm:mr-5 mb-2'
+            forhtml='description'
+          >
             <span className='text-gray-700'>Description</span>
           </label>
           <input
