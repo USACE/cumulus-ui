@@ -11,4 +11,4 @@ const inputLabelLeft = (props) => {
   />;
 };
 
-export default inputLabelLeft;
+export default { inputLabelLeft };
