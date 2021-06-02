@@ -57,11 +57,31 @@ const NewDownloadModal = connect(
             ? 'mdi mdi-chart-line'
             : 'mdi mdi-clock-check-outline'
         }
-        label={product.is_forecast ? 'forecast' : 'observed'}
+        label={
+          product.tags.includes('cc93b3f9-fbe1-4b35-8f9c-2d1515961c6a')
+            ? 'forecast'
+            : 'observed'
+        }
       />
     );
 
     const ProductGroupPill = ({ product }) => {
+      const oldProductGroup = (product) => {
+        if (product.tags.includes('726039da-2f21-4393-a15c-5f6e7ea41b1f')) {
+          return 'PRECIPITATION';
+        } else if (
+          product.tags.includes('d9613031-7cf0-4722-923e-e5c3675a163b')
+        ) {
+          return 'TEMPERATURE';
+        } else if (
+          product.tags.includes('57bda84f-ecec-4cd7-b3b1-c0c36f838a05')
+        ) {
+          return 'SNOW';
+        } else {
+          return null;
+        }
+      };
+
       const productIconGroupClasses = {
         PRECIPITATION: {
           icon: 'mdi-weather-pouring text-blue-800',
@@ -80,13 +100,7 @@ const NewDownloadModal = connect(
         },
       };
 
-      return (
-        <Pill
-          bgClass={productIconGroupClasses[product.group]['background']}
-          iconClass={productIconGroupClasses[product.group]['icon']}
-          label={product.group}
-        />
-      );
+      return <Pill bgClass={'bg-blue-300'} label={oldProductGroup(product)} />;
     };
 
     const ProductLabel = ({ product }) => {
