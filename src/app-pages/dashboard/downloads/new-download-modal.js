@@ -82,23 +82,23 @@ const NewDownloadModal = connect(
         }
       };
 
-      const productIconGroupClasses = {
-        PRECIPITATION: {
-          icon: 'mdi-weather-pouring text-blue-800',
-          background: 'bg-blue-600',
-          text: 'text-white',
-        },
-        SNOW: {
-          icon: 'mdi-snowflake text-blue-500',
-          background: 'bg-blue-400',
-          text: 'text-white',
-        },
-        TEMPERATURE: {
-          icon: 'mdi-thermometer text-red-600',
-          background: 'bg-red-500',
-          text: 'text-white',
-        },
-      };
+      // const productIconGroupClasses = {
+      //   PRECIPITATION: {
+      //     icon: 'mdi-weather-pouring text-blue-800',
+      //     background: 'bg-blue-600',
+      //     text: 'text-white',
+      //   },
+      //   SNOW: {
+      //     icon: 'mdi-snowflake text-blue-500',
+      //     background: 'bg-blue-400',
+      //     text: 'text-white',
+      //   },
+      //   TEMPERATURE: {
+      //     icon: 'mdi-thermometer text-red-600',
+      //     background: 'bg-red-500',
+      //     text: 'text-white',
+      //   },
+      // };
 
       return <Pill bgClass={'bg-blue-300'} label={oldProductGroup(product)} />;
     };
