@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
+import FormInput from '../forms/forms';
 
-const ColorPicker = () => {
-  const [color, setColor] = useState('#aabbcc');
-  return <HexColorPicker color={color} onChange={setColor} />;
-};
+// const ColorPicker = (currentColor) => {
+//   const [color, setColor] = useState(currentColor);
+//   return <HexColorPicker color={color} onChange={setColor} />;
+// };
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -23,75 +24,62 @@ const handleSubmit = (e) => {
   // doModalClose();
 };
 
-const payload = '';
-const setPayload = '';
+export default (props) => {
+  const [color, setColor] = useState(props.color);
+  return (
+    <div
+      className='inline-block overflow-visible align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full md:w-3/4 max-w-xl'
+      role='dialog'
+      aria-modal='true'
+      aria-labelledby='modal-headline'
+    >
+      <form className='p-6' onSubmit={handleSubmit}>
+        <fieldset>
+          <legend className='mb-3 text-2xl'>Edit Tag</legend>
 
-export default (props) => (
-  <div
-    className='inline-block overflow-visible align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full'
-    role='dialog'
-    aria-modal='true'
-    aria-labelledby='modal-headline'
-  >
-    <form className='p-6' onSubmit={handleSubmit}>
-      <fieldset>
-        <legend className='mb-3 text-2xl'>Edit Tag</legend>
+          <div className='mt-3'>
+            <FormInput
+              label='Name'
+              id='name'
+              maxLength={15}
+              value={props.name}
+            />
+          </div>
 
-        <div className='mt-3'>
-          <label
-            className='block sm:inline-block mt-6 sm:mr-5 mb-2 w-full bg-yellow-700 sm:bg-green-50 sm:w-32'
-            forhtml='name'
-          >
-            <span className='text-gray-700'>Name</span>
-          </label>
-          <input
-            className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
-            value='MyTagName'
-          />
-        </div>
+          <div className='mt-3'>
+            <FormInput
+              label='Description'
+              id='description'
+              value={props.description}
+            />
+          </div>
 
-        <div className='mt-3'>
-          <label
-            className='block sm:inline-block mt-6 sm:mr-5 mb-2'
-            forhtml='description'
-          >
-            <span className='text-gray-700'>Description</span>
-          </label>
-          <input
-            className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
-            value='My Super Special Tag'
-          />
-        </div>
+          <div className='mt-3'>
+            <FormInput label='Color' id='color' maxLength={6} value={color} />
+            <div className='mt-3'>
+              <HexColorPicker color={color} onChange={setColor} />
+            </div>
+          </div>
 
-        <div className='mt-3'>
-          <label className='block mt-6 mb-2' forhtml='color'>
-            <span className='text-gray-700'>Color</span>
-          </label>
-          <input
-            className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
-            value='A7F3F0'
-          />
-          <ColorPicker />
-        </div>
-
-        <div className='flex'>
-          <button
-            onClick={handleSubmit}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-          >
-            Submit
-          </button>
-          <button
-            onClick={(e) => {
-              // doModalClose();
-              return;
-            }}
-            className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-          >
-            Cancel
-          </button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-);
+          <div className='flex'>
+            <button
+              onClick={handleSubmit}
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
+            >
+              Submit
+            </button>
+            <button
+              onClick={(e) => {
+                // doModalClose();
+                return;
+              }}
+              className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
+            >
+              Cancel
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  );
+};
