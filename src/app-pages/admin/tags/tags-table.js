@@ -35,7 +35,7 @@ export default connect(
             ? null
             : items.map((t, idx) => (
                 // Item Attributes
-                <tr className='border-b'>
+                <tr className='border-b' key={t.name}>
                   <td className='px-4 py-3'>{t.name}</td>
                   <td className='px-4 py-3'>
                     <span
