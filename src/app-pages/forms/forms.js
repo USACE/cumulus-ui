@@ -8,8 +8,8 @@ const FormInput = (props) => {
       </label>
       <input
         className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-        // defaultValue={props.value}
-        value={props.value}
+        defaultValue={props.value}
+        // value={props.value}
         maxLength={props.maxLength}
       />
     </>

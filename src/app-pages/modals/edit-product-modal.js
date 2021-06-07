@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
-import { HexColorPicker } from 'react-colorful';
+import Select from 'react-select';
 // import FormInput from '../forms/forms';
 
-const EditTagModal = connect(
+const EditProductModal = connect(
   'selectModalProps',
-  'doTagSave',
+  'doProductSave',
+  'selectTagItemsArray',
+  'doTagFetch',
   'doModalClose',
-  ({ modalProps: t, doModalClose, doTagSave }) => {
+  ({ modalProps: p, doModalClose, doProductSave, tagItemsArray: tags }) => {
     const [payload, setPayload] = useState({
-      id: t.id,
-      name: t.name,
-      description: t.description,
-      color: t.color,
+      id: p.id,
+      slug: p.slug,
+      tags: p.tags,
+      name: p.name,
+      description: p.description,
+      temporal_resolution: p.temporal_resolution,
+      temporal_duration: p.temporal_duration,
+      dss_fpart: p.dss_fpart,
+      parameter_id: p.parameter_id,
+      parameter: p.parameter,
+      unit_id: p.unit_id,
+      unit: p.unit,
     });
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (
-        !payload ||
-        !payload.id ||
-        !payload.name ||
-        !payload.description ||
-        !payload.color
-      ) {
-        console.log('Missing one or more required fields for tag');
+      if (!payload || !payload.id || !payload.name || !payload.description) {
+        console.log('Missing one or more required fields for product');
         return;
       }
-      doTagSave(payload);
+      doProductSave(payload);
       doModalClose();
     };
 
@@ -35,7 +39,7 @@ const EditTagModal = connect(
 
     return (
       <div
-        className='inline-block overflow-visible align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full md:w-3/4 max-w-xl'
+        className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full md:w-3/4 max-w-2xl'
         role='dialog'
         aria-modal='true'
         aria-labelledby='modal-headline'
@@ -43,7 +47,7 @@ const EditTagModal = connect(
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
-              <legend className='mb-3 text-2xl'>Edit Tag</legend>
+              <legend className='mb-3 text-2xl'>Edit Product</legend>
               <svg
                 className='w-6 h-6 cursor-pointer'
                 fill='none'
@@ -69,8 +73,8 @@ const EditTagModal = connect(
               </label>
               <input
                 className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-                defaultValue={t.name}
-                maxLength={15}
+                defaultValue={p.name}
+                maxLength={50}
                 onChange={(e) =>
                   setPayload({ ...payload, name: e.target.value })
                 }
@@ -81,52 +85,72 @@ const EditTagModal = connect(
               <label className='block mt-6 mb-2 w-full' forhtml='description'>
                 <span className='text-gray-600'>Description</span>
               </label>
-              <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-                defaultValue={t.description}
-                maxLength={60}
+              <textarea
+                className='w-full h-48 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                defaultValue={p.description}
                 onChange={(e) =>
                   setPayload({ ...payload, description: e.target.value })
+                }
+              ></textarea>
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='parameter'>
+                <span className='text-gray-600'>Parameter</span>
+              </label>
+              <Select placeholder={p.parameter} />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='unit'>
+                <span className='text-gray-600'>Unit</span>
+              </label>
+              <Select placeholder={p.unit} />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='dss_fpart'>
+                <span className='text-gray-600'>DSS F-Part</span>
+              </label>
+              <input
+                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                defaultValue={p.dss_fpart}
+                maxLength={30}
+                onChange={(e) =>
+                  setPayload({ ...payload, dss_fpart: e.target.value })
                 }
               />
             </div>
 
             <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='color'>
-                <span className='text-gray-600'>Color</span>
+              <label className='block mt-6 mb-2 w-full' forhtml='tags'>
+                <span className='text-gray-600'>Tags</span>
               </label>
-              <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-                value={payload.color}
-                maxLength={6}
-                onChange={(e) => {
-                  setPayload({ ...payload, color: e.target.value });
+              <Select
+                isMulti
+                placeholder={p.tags}
+                options={tags.map((t, index) => ({
+                  value: t.id,
+                  label: t.name,
+                }))}
+                onChange={(selectedOption) => {
+                  setPayload({
+                    ...payload,
+                    tags:
+                      selectedOption && selectedOption.length
+                        ? selectedOption.map((s) => s.value)
+                        : [],
+                  });
                 }}
               />
-              <div className='flex mt-3'>
-                <HexColorPicker
-                  className='border-black border-2 w-1/2'
-                  color={payload.color}
-                  onChange={(e) =>
-                    setPayload({ ...payload, color: e.replace('#', '') })
-                  }
-                />
-                <div className='flex w-1/2 border-black border-0 items-center place-content-center'>
-                  <span
-                    style={{ backgroundColor: `#${payload.color}` }}
-                    className='text-lg font-light px-2 py-1 rounded-xl'
-                  >
-                    {t.name}
-                  </span>
-                </div>
-              </div>
             </div>
+
+            <hr className='mt-10' />
 
             <div className='mt-3'>
               <textarea
+                className='w-full h-20'
                 readOnly
-                cols='50'
-                rows='5'
                 value={JSON.stringify(payload)}
               ></textarea>
             </div>
@@ -154,4 +178,4 @@ const EditTagModal = connect(
   }
 );
 
-export default EditTagModal;
+export default EditProductModal;
