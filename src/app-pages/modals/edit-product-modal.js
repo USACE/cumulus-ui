@@ -4,12 +4,26 @@ import Select from 'react-select';
 // import FormInput from '../forms/forms';
 
 const EditProductModal = connect(
+  'selectAppDefaultsFormSelectPlaceholder',
   'selectModalProps',
   'doProductSave',
   'selectTagItemsArray',
+  'selectUnitItemsArray',
+  'selectParameterItemsArray',
   'doTagFetch',
+  'doParameterFetch',
   'doModalClose',
-  ({ modalProps: p, doModalClose, doProductSave, tagItemsArray: tags }) => {
+  ({
+    appDefaultsFormSelectPlaceholder,
+    modalProps: p,
+    doTagFetch,
+    doProductSave,
+    tagItemsArray: tags,
+    unitItemsArray: units,
+    parameterItemsArray: parameters,
+    doParameterFetch,
+    doModalClose,
+  }) => {
     const [payload, setPayload] = useState({
       id: p.id,
       slug: p.slug,
@@ -32,7 +46,10 @@ const EditProductModal = connect(
         return;
       }
       doProductSave(payload);
+      doParameterFetch();
+      doTagFetch();
       doModalClose();
+      console.log(parameters);
     };
 
     // const [color, setColor] = useState(t.color);
@@ -72,7 +89,7 @@ const EditProductModal = connect(
                 <span className='text-gray-600'>Name</span>
               </label>
               <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
                 defaultValue={p.name}
                 maxLength={50}
                 onChange={(e) =>
@@ -86,7 +103,7 @@ const EditProductModal = connect(
                 <span className='text-gray-600'>Description</span>
               </label>
               <textarea
-                className='w-full h-48 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                className='w-full h-48 border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
                 defaultValue={p.description}
                 onChange={(e) =>
                   setPayload({ ...payload, description: e.target.value })
@@ -98,7 +115,20 @@ const EditProductModal = connect(
               <label className='block mt-6 mb-2 w-full' forhtml='parameter'>
                 <span className='text-gray-600'>Parameter</span>
               </label>
-              <Select placeholder={p.parameter} />
+              <Select
+                placeholder={p.parameter}
+                options={parameters.map((param, index) => ({
+                  value: param.id,
+                  label: param.name,
+                }))}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    parameter_id: e.value,
+                    parameter: e.label,
+                  })
+                }
+              />
             </div>
 
             <div className='mt-3'>
@@ -113,7 +143,7 @@ const EditProductModal = connect(
                 <span className='text-gray-600'>DSS F-Part</span>
               </label>
               <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
                 defaultValue={p.dss_fpart}
                 maxLength={30}
                 onChange={(e) =>
@@ -128,7 +158,7 @@ const EditProductModal = connect(
               </label>
               <Select
                 isMulti
-                placeholder={p.tags}
+                placeholder={appDefaultsFormSelectPlaceholder}
                 options={tags.map((t, index) => ({
                   value: t.id,
                   label: t.name,

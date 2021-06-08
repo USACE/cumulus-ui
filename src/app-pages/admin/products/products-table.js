@@ -53,7 +53,7 @@ export default connect(
               Parameter
             </th>
             <th className='px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
-              Unit
+              Duration
             </th>
             <th className='hidden 2xl:block px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
               DSS F-PART
@@ -76,7 +76,9 @@ export default connect(
                 <tr className='border-b' key={p.name}>
                   <td className='px-4 py-3'>{p.name}</td>
                   <td className='px-4 py-3'>{p.parameter}</td>
-                  <td className='px-4 py-3'>{p.unit}</td>
+                  <td className='px-4 py-3'>
+                    {p.temporal_duration / 60 / 60} hr
+                  </td>
                   <td className='px-4 py-3 hidden 2xl:block'>{p.dss_fpart}</td>
 
                   <td className='px-4 py-3'>
