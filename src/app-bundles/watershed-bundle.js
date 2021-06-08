@@ -1,16 +1,16 @@
 import createRestBundle from './create-rest-bundle';
 
 export default createRestBundle({
-  name: 'unit',
+  name: 'watershed',
   uid: 'id',
-  prefetch: true,
+  prefetch: false,
   staleAfter: 30000, //5min
   persist: true,
-  routeParam: 'unit_id',
-  getTemplate: '/units',
-  putTemplate: '/units/:item.id',
-  postTemplate: '/units',
-  deleteTemplate: '/units/:item.id',
+  routeParam: 'watershed_id',
+  getTemplate: '/watersheds',
+  putTemplate: '/watersheds/:item.id',
+  postTemplate: '/watersheds',
+  deleteTemplate: '/watersheds/:item.id',
   fetchActions: [],
   urlParamSelectors: [],
   forceFetchActions: [],

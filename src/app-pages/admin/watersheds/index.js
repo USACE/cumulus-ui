@@ -4,9 +4,9 @@ import Sidebar from '../Sidebar';
 import Header from '../../../app-components/Header';
 // import HomeStats from './home-stats';
 import Footer from '../../../app-components/footer/footer';
-import ProductsTable from './products-table';
+import WatershedsTable from './watersheds-table';
 
-function AdminProducts() {
+function AdminWatersheds() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ function AdminProducts() {
         <main className='container mx-auto'>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
             {/* Main content */}
-            <ProductsTable />
+            <WatershedsTable />
           </div>
         </main>
         <Footer />
@@ -31,4 +31,4 @@ function AdminProducts() {
   );
 }
 
-export default AdminProducts;
+export default AdminWatersheds;

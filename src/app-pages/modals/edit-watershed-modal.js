@@ -1,61 +1,43 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
-import Select from 'react-select';
+// import Select from 'react-select';
 // import FormInput from '../forms/forms';
 
-const EditProductModal = connect(
+const EditWatershedModal = connect(
   'selectAppDefaultsFormSelectPlaceholder',
   'selectModalProps',
-  'doProductSave',
-  'selectTagItemsArray',
-  'selectUnitItemsArray',
-  'selectParameterItemsArray',
-  'doTagFetch',
-  'doParameterFetch',
-  'doUnitFetch',
+  'doWatershedSave',
   'doModalClose',
   ({
     appDefaultsFormSelectPlaceholder,
-    modalProps: p,
-    doTagFetch,
-    doProductSave,
-    tagItemsArray: tags,
-    unitItemsArray: units,
-    parameterItemsArray: parameters,
-    doParameterFetch,
-    doUnitFetch,
+    modalProps: w,
+    doWatershedSave,
     doModalClose,
   }) => {
     const [payload, setPayload] = useState({
-      id: p.id,
-      slug: p.slug,
-      tags: p.tags,
-      name: p.name,
-      description: p.description,
-      temporal_resolution: p.temporal_resolution,
-      temporal_duration: p.temporal_duration,
-      dss_fpart: p.dss_fpart,
-      parameter_id: p.parameter_id,
-      parameter: p.parameter,
-      unit_id: p.unit_id,
-      unit: p.unit,
+      id: (w && w.id) || null,
+      slug: (w && w.slug) || null,
+      name: (w && w.name) || null,
+      bbox: (w && w.bbox) || [],
+      area_groups: (w && w.area_groups) || [],
+      office_symbol: (w && w.office_symbol) || null,
     });
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (!payload || !payload.id || !payload.name || !payload.description) {
-        console.log('Missing one or more required fields for product');
+      if (
+        !payload ||
+        (!payload.id && w) ||
+        !payload.name ||
+        !payload.bbox ||
+        !payload.office_symbol
+      ) {
+        console.log('Missing one or more required fields for watershed');
         return;
       }
-      doProductSave(payload);
-      doParameterFetch();
-      doUnitFetch();
-      doTagFetch();
+      doWatershedSave(payload);
       doModalClose();
-      console.log(parameters);
     };
-
-    // const [color, setColor] = useState(t.color);
 
     return (
       <div
@@ -67,7 +49,7 @@ const EditProductModal = connect(
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
-              <legend className='mb-3 text-2xl'>Edit Product</legend>
+              <legend className='mb-3 text-2xl'>Edit Watershed</legend>
               <svg
                 className='w-6 h-6 cursor-pointer'
                 fill='none'
@@ -93,7 +75,7 @@ const EditProductModal = connect(
               </label>
               <input
                 className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.name}
+                defaultValue={payload.name}
                 maxLength={50}
                 onChange={(e) =>
                   setPayload({ ...payload, name: e.target.value })
@@ -102,24 +84,116 @@ const EditProductModal = connect(
             </div>
 
             <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='description'>
-                <span className='text-gray-600'>Description</span>
+              <label className='block mt-6 mb-2 w-full' forhtml='office_symbol'>
+                <span className='text-gray-600'>Office</span>
               </label>
-              <textarea
-                className='w-full h-48 border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.description}
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.office_symbol}
+                maxLength={5}
                 onChange={(e) =>
-                  setPayload({ ...payload, description: e.target.value })
+                  setPayload({
+                    ...payload,
+                    office_symbol: e.target.value.toUpperCase(),
+                  })
                 }
-              ></textarea>
+              />
             </div>
 
             <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='x_min'>
+                <span className='text-gray-600'>X Min (top left)</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.bbox[0]}
+                maxLength={15}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    bbox: [
+                      parseInt(e.target.value),
+                      payload.bbox[1],
+                      payload.bbox[2],
+                      payload.bbox[3],
+                    ],
+                  })
+                }
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                <span className='text-gray-600'>Y Min (bottom left)</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.bbox[1]}
+                maxLength={15}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    bbox: [
+                      payload.bbox[0],
+                      parseInt(e.target.value),
+                      payload.bbox[2],
+                      payload.bbox[3],
+                    ],
+                  })
+                }
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                <span className='text-gray-600'>X Max (top right)</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.bbox[2]}
+                maxLength={15}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    bbox: [
+                      payload.bbox[0],
+                      payload.bbox[1],
+                      parseInt(e.target.value),
+                      payload.bbox[3],
+                    ],
+                  })
+                }
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                <span className='text-gray-600'>Y Max (bottom right)</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.bbox[3]}
+                maxLength={15}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    bbox: [
+                      payload.bbox[0],
+                      payload.bbox[1],
+                      payload.bbox[2],
+                      parseInt(e.target.value),
+                    ],
+                  })
+                }
+              />
+            </div>
+
+            {/* <div className='mt-3'>
               <label className='block mt-6 mb-2 w-full' forhtml='parameter'>
                 <span className='text-gray-600'>Parameter</span>
               </label>
               <Select
-                placeholder={p.parameter}
+                placeholder={w.parameter}
                 options={parameters.map((param, index) => ({
                   value: param.id,
                   label: param.name,
@@ -132,9 +206,9 @@ const EditProductModal = connect(
                   })
                 }
               />
-            </div>
+            </div> */}
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <label className='block mt-6 mb-2 w-full' forhtml='unit'>
                 <span className='text-gray-600'>Unit</span>
               </label>
@@ -152,9 +226,9 @@ const EditProductModal = connect(
                   })
                 }
               />
-            </div>
+            </div> */}
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <label className='block mt-6 mb-2 w-full' forhtml='dss_fpart'>
                 <span className='text-gray-600'>DSS F-Part</span>
               </label>
@@ -166,9 +240,9 @@ const EditProductModal = connect(
                   setPayload({ ...payload, dss_fpart: e.target.value })
                 }
               />
-            </div>
+            </div> */}
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <label className='block mt-6 mb-2 w-full' forhtml='tags'>
                 <span className='text-gray-600'>Tags</span>
               </label>
@@ -189,15 +263,15 @@ const EditProductModal = connect(
                   });
                 }}
               />
-            </div>
+            </div> */}
 
-            {/* <div className='mt-3'>
+            <div className='mt-3'>
               <textarea
                 className='w-full h-20'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div> */}
+            </div>
 
             <div className='flex'>
               <button
@@ -222,4 +296,4 @@ const EditProductModal = connect(
   }
 );
 
-export default EditProductModal;
+export default EditWatershedModal;

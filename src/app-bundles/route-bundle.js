@@ -5,7 +5,7 @@ import Dashboard from '../app-pages/home';
 import AdminDashboard from '../app-pages/admin';
 import AdminProducts from '../app-pages/admin/products/index';
 import AdminTags from '../app-pages/admin/tags/index';
-import AdminWatersheds from '../app-pages/admin/watersheds';
+import AdminWatersheds from '../app-pages/admin/watersheds/index';
 import AdminAccounts from '../app-pages/admin/accounts';
 import Products from '../app-pages/products/products';
 

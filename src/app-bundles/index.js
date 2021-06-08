@@ -16,6 +16,7 @@ import profileBundle from './profile-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
 import parameterBundle from './parameter-bundle';
+import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
 
 // import AdminDashboard from '../pages/admin/Dashboard';
@@ -46,6 +47,7 @@ export default composeBundles(
   tagBundle,
   unitBundle,
   parameterBundle,
+  watershedBundle,
   selectBundle,
   createAuthBundle({
     appId: '20a4794c-91c3-4080-a42c-d9c0bda332a4',

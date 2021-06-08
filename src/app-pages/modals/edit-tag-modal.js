@@ -122,14 +122,14 @@ const EditTagModal = connect(
               </div>
             </div>
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <textarea
                 readOnly
                 cols='50'
                 rows='5'
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div>
+            </div> */}
 
             <div className='flex'>
               <button
