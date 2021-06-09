@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import Navbar from "../../app-components/navbar";
-import PageHeading from "../../app-components/page-heading";
-import { connect } from "redux-bundler-react";
+import React, { useState } from 'react';
+import Navbar from '../../app-components/navbar';
+import PageHeading from '../../app-components/page-heading';
+import { connect } from 'redux-bundler-react';
 
 //temp style to see div borders
 //const style = `div,label{border:1px solid red;}`;
 
-export default connect("selectAuthUsername", "doProfileSave", (props) => {
+export default connect('selectAuthUsername', 'doProfileSave', (props) => {
   const authUsername = props.authUsername;
 
   // const [name, setName] = useState("");
   const [nameIsValid, setNameIsValid] = useState(true);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   function validateName(str) {
     // Name must be first name space last name
-    if (str.split(" ").length >= 2) {
+    if (str.split(' ').length >= 2) {
       setNameIsValid(true);
       return;
     }
@@ -24,7 +24,7 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
 
   function CreateProfile(e) {
     e.preventDefault();
-    props.doProfileSave({ email: email });
+    props.doProfileSave({ username: authUsername, email: email });
   }
 
   return (
@@ -34,7 +34,7 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
       {/* {`Name is valid: ${nameIsValid}`}
       {`Email is set to: ${email}`} */}
       <div className="mx-auto max-w-screen-2xl sm:p-10">
-        <PageHeading heading={"Create Profile"} subHeading="" />
+        <PageHeading heading={'Create Profile'} subHeading="" />
         <form id="profile-form" onSubmit="">
           <div className="mt-10 grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 rounded-lg border bg-white p-8 shadow-lg">
             <label className="block text-gray-700 md:text-right text-lg font-medium pt-3">
@@ -46,7 +46,7 @@ export default connect("selectAuthUsername", "doProfileSave", (props) => {
                 type="text"
                 size="50"
                 className={`cursor-not-allowed border-0 border-b-2 border-gray-200 text-gray-500 focus:ring-0 focus:border-black ${
-                  !nameIsValid ? "border-red-500" : ""
+                  !nameIsValid ? 'border-red-500' : ''
                 }`}
                 value={authUsername}
                 disabled={true}
