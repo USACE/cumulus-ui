@@ -21,7 +21,7 @@
     "money-clip": "^3.0.2",
     "ol": "^6.4.3",
     "plotly.js": "^1.58.2",
-    "postcss": "^7.0.35",
+    "postcss": "^8.2.10",
     "proj4": "^2.6.3",
     "react": "^17.0.1",
     "react-calendar": "^3.3.1",
