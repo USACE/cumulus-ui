@@ -36,6 +36,7 @@ export default function Help(props) {
                 <a
                   className="text-blue-700"
                   href="https://raw.githubusercontent.com/USACE/rts-utils/master/watershed_scripts/script_downloader.py"
+                  target="_blank"
                 >
                   here{' '}
                 </a>
@@ -49,6 +50,7 @@ export default function Help(props) {
                 <a
                   className="text-blue-700"
                   href={cavi_script_downloader_copy_paste}
+                  target="_blank"
                 >
                   Enlarge image
                 </a>
