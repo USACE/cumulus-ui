@@ -169,8 +169,8 @@ export default connect(
                                 Availability:
                               </td>
                               <td className="p-1">
-                                {Math.round(product.percent_coverage)}%
-                                {' over '}
+                                {/* {Math.round(product.percent_coverage)}%
+                                {' over '} */}
                                 {product.after &&
                                   product.before &&
                                   formatDistance(
