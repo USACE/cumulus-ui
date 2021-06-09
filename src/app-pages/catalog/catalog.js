@@ -7,9 +7,9 @@ import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
 
 function ProductImage(group) {
   switch (group) {
-    case 'PRECIPITATION':
+    case 'PRECIP':
       return 'https://cdn.pixabay.com/photo/2016/03/18/15/09/light-rain-1265212_960_720.png';
-    case 'TEMPERATURE':
+    case 'AIRTEMP':
       return 'https://cdn.pixabay.com/photo/2016/03/31/15/27/cold-1293305_960_720.png';
     case 'SNOW':
       return 'https://cdn.pixabay.com/photo/2016/10/20/10/16/snow-flake-1755115_960_720.png';
@@ -27,9 +27,9 @@ const ProductRow = (p) => (
             {/* <i className="mdi mdi-weather-pouring text-blue-800" /> */}
             <img
               className="h-10 w-10 object-contain"
-              src={ProductImage(p.group)}
-              alt={p.group}
-              title={p.group}
+              src={ProductImage(p.parameter)}
+              alt={p.parameter}
+              title={p.parameter}
             />
           </div>
           <div className="ml-4">
@@ -64,9 +64,9 @@ const ProductRow = (p) => (
     </td>
 
     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-      <div className="text-sm text-gray-500">
+      {/* <div className="text-sm text-gray-500">
         Coverage: {Math.round(p.percent_coverage, 1)}%
-      </div>
+      </div> */}
       <div className="text-sm text-gray-500">
         Grid Count: {p.productfile_count}
       </div>
