@@ -64,9 +64,6 @@ const ProductRow = (p, idx) => (
 
     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
       <div className='text-sm text-gray-500'>
-        Coverage: {Math.round(p.percent_coverage, 1)}%
-      </div>
-      <div className='text-sm text-gray-500'>
         Grid Count: {p.productfile_count}
       </div>
       <div className='text-sm text-gray-500'>
@@ -82,7 +79,7 @@ const ProductRow = (p, idx) => (
 const ProductTableHeader = () => (
   <thead className='bg-gray-100'>
     <tr>
-      {['Product Name', 'Type', 'First Record', 'Last Record', 'Stats'].map(
+      {['Product Name', 'Tags', 'First Record', 'Last Record', 'Stats'].map(
         (c) => {
           return (
             <th

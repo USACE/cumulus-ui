@@ -19,7 +19,7 @@ import Datepicker from '../../app-components/actions/Datepicker';
 // import DashboardCard11 from '../partials/dashboard/DashboardCard11';
 // import DashboardCard12 from '../partials/dashboard/DashboardCard12';
 // import DashboardCard13 from '../partials/dashboard/DashboardCard13';
-import Banner from '../../app-components/Banner';
+// import Banner from '../../app-components/Banner';
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -66,8 +66,6 @@ function Dashboard() {
             <div className='grid grid-cols-12 gap-6'>cards deleted</div>
           </div>
         </main>
-
-        <Banner />
       </div>
     </div>
   );
