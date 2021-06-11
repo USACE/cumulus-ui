@@ -3,10 +3,13 @@ import React, { useEffect, useRef } from 'react';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   // const location = useLocation();
-  // const { pathname } = location;
-  // const page = pathname.split('/')[1];
-  const page = 'home1';
+  const location = window.location;
+  const { pathname } = location;
+  const page = pathname.split('/')[2];
+  //const page = 'home1';
   // const NavLink = 'home';
+  console.log('** PAGE **');
+  console.log(page);
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -61,6 +64,40 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const sideBarItems = [
     {
+      name: 'Accounts',
+      href: '/admin/accounts',
+      icon: (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 mr-2'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
+          />
+        </svg>
+      ),
+    },
+    {
+      name: 'Parameters',
+      href: '/admin/parameters',
+      icon: (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 mr-2'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+        >
+          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+        </svg>
+      ),
+    },
+    {
       name: 'Products',
       href: '/admin/products',
       icon: (
@@ -89,8 +126,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       ),
     },
     {
-      name: 'Watersheds',
-      href: '/admin/watersheds',
+      name: 'Units',
+      href: '/admin/units',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -103,28 +140,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       ),
     },
     {
-      name: 'Accounts',
-      href: '/admin/accounts',
-      icon: (
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6 mr-2'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
-          />
-        </svg>
-      ),
-    },
-    {
-      name: 'Units',
-      href: '/admin/units',
+      name: 'Watersheds',
+      href: '/admin/watersheds',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'

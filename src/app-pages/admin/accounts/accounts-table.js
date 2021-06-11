@@ -15,7 +15,7 @@ export default connect(
   }) => {
     useEffect(() => {
       doWatershedFetch();
-    }, []);
+    }, [doWatershedFetch]);
 
     return (
       <>

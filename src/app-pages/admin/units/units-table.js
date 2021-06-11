@@ -10,7 +10,7 @@ export default connect(
   ({ unitItemsArray: units, doUnitFetch, doUnitDelete, doModalOpen }) => {
     useEffect(() => {
       doUnitFetch();
-    }, []);
+    }, [doUnitFetch]);
 
     return (
       <>

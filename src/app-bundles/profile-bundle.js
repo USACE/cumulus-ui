@@ -1,4 +1,5 @@
 import { createSelector } from 'redux-bundler';
+const apiRoot = process.env.REACT_APP_CUMULUS_API_URL;
 
 const profileBundle = {
   name: 'profile',
@@ -36,7 +37,6 @@ const profileBundle = {
     ({ store, dispatch }) => {
       dispatch({ type: 'PROFILE_FETCH_START' });
 
-      const apiRoot = store.selectApiRoot();
       const token = store.selectAuthTokenRaw();
 
       fetch(`${apiRoot}/my_profile`, {

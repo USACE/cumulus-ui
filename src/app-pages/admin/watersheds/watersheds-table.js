@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import EditWatershedModal from '../../modals/edit-watershed-modal';
+import EditWatershedRolesModal from '../../modals/edit-watershed-roles-modal';
 
 export default connect(
   'selectWatershedItemsArray',
@@ -15,15 +16,29 @@ export default connect(
   }) => {
     useEffect(() => {
       doWatershedFetch();
-    }, []);
+    }, [doWatershedFetch]);
 
     return (
       <>
-        <div className='py-3'>
+        <div className='flex justify-end py-3'>
           <button
-            className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded'
+            className='bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded'
             onClick={() => doModalOpen(EditWatershedModal)}
           >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5 inline mb-1'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M12 6v6m0 0v6m0-6h6m-6 0H6'
+              />
+            </svg>
             New Watershed
           </button>
         </div>
@@ -76,17 +91,40 @@ export default connect(
                     {/* Tools */}
                     <td className='px-4 py-3'>
                       <div className='flex justify-around'>
+                        {/* Manage Roles Button */}
+                        <button
+                          onClick={() =>
+                            doModalOpen(EditWatershedRolesModal, w)
+                          }
+                        >
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6 text-gray-400 hover:text-blue-500'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                          >
+                            <title>Manage Watershed Roles</title>
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth={2}
+                              d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
+                            />
+                          </svg>
+                        </button>
                         {/* Edit Button */}
                         <button
                           onClick={() => doModalOpen(EditWatershedModal, w)}
                         >
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6'
+                            className='h-6 w-6 text-gray-400 hover:text-green-500'
                             fill='none'
                             viewBox='0 0 24 24'
                             stroke='currentColor'
                           >
+                            <title>Edit Watershed</title>
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'
@@ -99,11 +137,12 @@ export default connect(
                         <button onClick={() => doWatershedDelete(w)}>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6'
+                            className='h-6 w-6 text-gray-400 hover:text-red-500'
                             fill='none'
                             viewBox='0 0 24 24'
                             stroke='currentColor'
                           >
+                            <title>Delete Watershed</title>
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'

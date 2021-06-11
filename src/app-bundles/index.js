@@ -16,6 +16,7 @@ import productBundle from './product-bundle';
 import profileBundle from './profile-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
+import officeBundle from './office-bundle';
 import parameterBundle from './parameter-bundle';
 import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
@@ -44,6 +45,7 @@ export default composeBundles(
   modalBundle,
   routeBundle,
   accountdBundle,
+  officeBundle,
   productBundle,
   profileBundle,
   tagBundle,
@@ -59,10 +61,6 @@ export default composeBundles(
       process.env.NODE_ENV === 'development' ? mockTokenExistingAdmin : null,
   }),
   createJwtApiBundle({
-    root:
-      process.env.NODE_ENV === 'development'
-        ? `http://localhost`
-        : process.env.REACT_APP_CUMULUS_API_URL,
     unless: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is

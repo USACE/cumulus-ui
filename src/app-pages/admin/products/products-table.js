@@ -20,7 +20,7 @@ export default connect(
     useEffect(() => {
       doProductFetch();
       doTagFetch();
-    }, []);
+    }, [doProductFetch, doTagFetch]);
 
     const DisplayTags = ({ productTags }) => {
       return tagsObj && Object.keys(tagsObj).length !== 0 ? (

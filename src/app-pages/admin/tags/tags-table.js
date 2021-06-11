@@ -10,7 +10,7 @@ export default connect(
   ({ tagItemsArray: items, doTagFetch, doTagDelete, doModalOpen }) => {
     useEffect(() => {
       doTagFetch();
-    }, []);
+    }, [doTagFetch]);
     return (
       <table className='table-auto w-full text-left whitespace-no-wrap'>
         <thead>
