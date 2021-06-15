@@ -2,6 +2,8 @@ import createRestBundle from './create-rest-bundle';
 import { createSelector } from 'redux-bundler';
 import moment from 'moment';
 
+const apiUrl = process.env.REACT_APP_CUMULUS_API_URL;
+
 export default createRestBundle({
   name: 'product',
   uid: 'id',
@@ -9,10 +11,10 @@ export default createRestBundle({
   staleAfter: 300000, //5min
   persist: true,
   routeParam: 'product_id',
-  getTemplate: '/products',
-  putTemplate: '/products/:item.id',
-  postTemplate: '/products/:item.id',
-  deleteTemplate: '/products/:item.id',
+  getTemplate: `${apiUrl}/products`,
+  putTemplate: `${apiUrl}/products/:item.id`,
+  postTemplate: `${apiUrl}/products/:item.id`,
+  deleteTemplate: `${apiUrl}/products/:item.id`,
   fetchActions: ['AUTH_LOGGED_IN'],
   urlParamSelectors: ['selectProductIdByRoute'],
   forceFetchActions: [],

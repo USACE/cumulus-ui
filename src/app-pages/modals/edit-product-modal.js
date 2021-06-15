@@ -94,7 +94,7 @@ const EditProductModal = connect(
               <input
                 className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
                 defaultValue={p.name}
-                maxLength={50}
+                maxLength={60}
                 onChange={(e) =>
                   setPayload({ ...payload, name: e.target.value })
                 }
@@ -191,13 +191,13 @@ const EditProductModal = connect(
               />
             </div>
 
-            {/* <div className='mt-3'>
+            <div className='mt-3'>
               <textarea
                 className='w-full h-20'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div> */}
+            </div>
 
             <div className='flex'>
               <button

@@ -61,6 +61,7 @@ export default composeBundles(
       process.env.NODE_ENV === 'development' ? mockTokenExistingAdmin : null,
   }),
   createJwtApiBundle({
+    root: process.env.REACT_APP_CUMULUS_API_URL,
     unless: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is

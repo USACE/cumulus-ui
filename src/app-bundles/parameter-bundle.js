@@ -1,5 +1,7 @@
 import createRestBundle from './create-rest-bundle';
 
+const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
+
 export default createRestBundle({
   name: 'parameter',
   uid: 'id',
@@ -7,10 +9,10 @@ export default createRestBundle({
   staleAfter: 30000, //5min
   persist: true,
   routeParam: 'parameter_id',
-  getTemplate: '/parameters',
-  putTemplate: '/parameters/:item.id',
-  postTemplate: '/parameters',
-  deleteTemplate: '/parameters/:item.id',
+  getTemplate: `${apiURL}/parameters`,
+  putTemplate: `${apiURL}/parameters/:item.id`,
+  postTemplate: `${apiURL}/parameters`,
+  deleteTemplate: `${apiURL}/parameters/:item.id`,
   fetchActions: [],
   urlParamSelectors: [],
   forceFetchActions: [],
