@@ -10,7 +10,9 @@ const EditProductModal = connect(
   'selectTagItemsArray',
   'selectUnitItemsArray',
   'selectParameterItemsArray',
+  'selectSuiteItems',
   'doTagFetch',
+  'doSuiteFetch',
   'doParameterFetch',
   'doUnitFetch',
   'doModalClose',
@@ -20,17 +22,20 @@ const EditProductModal = connect(
     doTagFetch,
     doProductSave,
     tagItemsArray: tags,
+    suiteItems: suites,
     unitItemsArray: units,
     parameterItemsArray: parameters,
     doParameterFetch,
     doUnitFetch,
+    doSuiteFetch,
     doModalClose,
   }) => {
     const [payload, setPayload] = useState({
       id: p.id,
       slug: p.slug,
       tags: p.tags,
-      name: p.name,
+      // name: p.name,
+      label: p.label,
       description: p.description,
       temporal_resolution: p.temporal_resolution,
       temporal_duration: p.temporal_duration,
@@ -39,11 +44,21 @@ const EditProductModal = connect(
       parameter: p.parameter,
       unit_id: p.unit_id,
       unit: p.unit,
+      suite_id: p.suite_id,
     });
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (!payload || !payload.id || !payload.name || !payload.description) {
+      if (
+        !payload ||
+        !payload.id ||
+        !payload.label ||
+        // !payload.name ||
+        !payload.temporal_resolution ||
+        !payload.temporal_duration ||
+        !payload.description ||
+        !payload.suite_id
+      ) {
         console.log('Missing one or more required fields for product');
         return;
       }
@@ -51,6 +66,7 @@ const EditProductModal = connect(
       doParameterFetch();
       doUnitFetch();
       doTagFetch();
+      doSuiteFetch();
       doModalClose();
       console.log(parameters);
     };
@@ -88,15 +104,49 @@ const EditProductModal = connect(
             </div>
 
             <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='unit'>
+                <span className='text-gray-600'>Product Suite</span>
+              </label>
+              <Select
+                placeholder={p.suite}
+                options={suites.map((s, idx) => ({
+                  value: s.id,
+                  label: s.name,
+                }))}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    suite_id: e.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className='mt-3'>
               <label className='block mt-6 mb-2 w-full' forhtml='name'>
                 <span className='text-gray-600'>Name</span>
               </label>
               <input
-                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.name}
+                readOnly
+                className='w-full text-gray-400 bg-gray-100 border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={p && p.name}
                 maxLength={60}
+                // onChange={(e) =>
+                //   setPayload({ ...payload, name: e.target.value })
+                // }
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label className='block mt-6 mb-2 w-full' forhtml='label'>
+                <span className='text-gray-600'>Label</span>
+              </label>
+              <input
+                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.label}
+                maxLength={40}
                 onChange={(e) =>
-                  setPayload({ ...payload, name: e.target.value })
+                  setPayload({ ...payload, label: e.target.value })
                 }
               />
             </div>
@@ -107,7 +157,7 @@ const EditProductModal = connect(
               </label>
               <textarea
                 className='w-full h-48 border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.description}
+                defaultValue={payload.description}
                 onChange={(e) =>
                   setPayload({ ...payload, description: e.target.value })
                 }
@@ -160,7 +210,7 @@ const EditProductModal = connect(
               </label>
               <input
                 className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.dss_fpart}
+                defaultValue={payload.dss_fpart}
                 maxLength={30}
                 onChange={(e) =>
                   setPayload({ ...payload, dss_fpart: e.target.value })
@@ -188,6 +238,46 @@ const EditProductModal = connect(
                         : [],
                   });
                 }}
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label
+                className='block mt-6 mb-2 w-full'
+                forhtml='temporal_resolution'
+              >
+                <span className='text-gray-600'>Temporal Resolution</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.temporal_resolution}
+                maxLength={5}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    temporal_resolution: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className='mt-3'>
+              <label
+                className='block mt-6 mb-2 w-full'
+                forhtml='temporal_duration'
+              >
+                <span className='text-gray-600'>Temporal Duration</span>
+              </label>
+              <input
+                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.temporal_duration}
+                maxLength={5}
+                onChange={(e) =>
+                  setPayload({
+                    ...payload,
+                    temporal_duration: e.target.value,
+                  })
+                }
               />
             </div>
 

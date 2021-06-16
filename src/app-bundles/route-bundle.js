@@ -8,6 +8,7 @@ import AdminTags from '../app-pages/admin/tags/index';
 import AdminWatersheds from '../app-pages/admin/watersheds/index';
 import AdminAccounts from '../app-pages/admin/accounts/index';
 import AdminUnits from '../app-pages/admin/units/index';
+import AdminSuites from '../app-pages/admin/suites/index';
 import AdminParameters from '../app-pages/admin/parameters/index';
 import Products from '../app-pages/products/products';
 
@@ -19,6 +20,7 @@ export default createRouteBundle({
   '/admin/watersheds': AdminWatersheds,
   '/admin/accounts': AdminAccounts,
   '/admin/units': AdminUnits,
+  '/admin/suites': AdminSuites,
   '/admin/parameters': AdminParameters,
   '/products': Products,
 });

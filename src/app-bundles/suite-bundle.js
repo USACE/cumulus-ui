@@ -1,0 +1,22 @@
+import createRestBundle from './create-rest-bundle';
+
+const apiUrl = process.env.REACT_APP_CUMULUS_API_URL;
+
+export default createRestBundle({
+  name: 'suite',
+  uid: 'id',
+  prefetch: false,
+  staleAfter: 30000, //5min
+  persist: true,
+  routeParam: 'suite_id',
+  getTemplate: `${apiUrl}/suites`,
+  putTemplate: `${apiUrl}/suites/:item.id`,
+  postTemplate: `${apiUrl}/suites`,
+  deleteTemplate: `${apiUrl}/suites/:item.id`,
+  fetchActions: [],
+  urlParamSelectors: [],
+  forceFetchActions: [],
+  sortBy: 'name',
+  sortAsc: true,
+  addons: {},
+});

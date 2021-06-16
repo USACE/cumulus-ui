@@ -18,6 +18,7 @@ import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
 import officeBundle from './office-bundle';
 import parameterBundle from './parameter-bundle';
+import suiteBundle from './suite-bundle';
 import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
 
@@ -48,6 +49,7 @@ export default composeBundles(
   officeBundle,
   productBundle,
   profileBundle,
+  suiteBundle,
   tagBundle,
   unitBundle,
   parameterBundle,

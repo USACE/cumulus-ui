@@ -73,7 +73,7 @@ export default connect(
             ? null
             : items.map((p, idx) => (
                 // Item Attributes
-                <tr className='border-b' key={p.name}>
+                <tr className='border-b' key={p.slug}>
                   <td className='px-4 py-3'>{p.name}</td>
                   <td className='px-4 py-3 text-gray-600 text-sm'>
                     {p.parameter}
