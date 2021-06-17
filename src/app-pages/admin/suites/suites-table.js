@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'redux-bundler-react';
 import { Table } from '../table';
 import EditSuiteModal from '../../modals/edit-suite-modal';
@@ -15,6 +15,7 @@ const SuiteTable = connect(
       <Table
         headers={['Name', 'Slug', 'Tools']}
         items={items}
+        itemFields={['name', 'slug']}
         tools={[
           {
             icon: <EditIcon />,

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'redux-bundler-react';
 import EditParameterModal from '../../modals/edit-parameter-modal';
 import { Table } from '../table';
 import { EditIcon, DeleteIcon } from '../icons';
+import { NewButton } from '../../forms/buttons';
 
 const ParameterTable = connect(
   'doModalOpen',
@@ -14,6 +15,7 @@ const ParameterTable = connect(
       <Table
         headers={['Name', 'Tools']}
         items={items}
+        itemFields={['name']}
         tools={[
           {
             icon: <EditIcon />,
@@ -40,12 +42,12 @@ export default connect('doModalOpen', ({ doModalOpen }) => (
         Warning: Changing the Parameter Name could impact applications consuming
         DSS files.
       </div>
-      <button
-        className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded'
-        onClick={() => doModalOpen(EditParameterModal)}
-      >
-        New Parameter
-      </button>
+      <div className='flex justify-end'>
+        <NewButton
+          label={'New Parameter'}
+          onClick={() => doModalOpen(EditParameterModal)}
+        />
+      </div>
     </div>
     <ParameterTable />
   </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table = ({ headers, items, tools }) => {
+const Table = ({ headers, items, itemFields, tools }) => {
   const TableHead = ({ items }) => {
     const lenItems = items.length;
 
@@ -9,11 +9,12 @@ const Table = ({ headers, items, tools }) => {
         <tr>
           {items.map((t, idx) => (
             <th
+              key={idx}
               className={`px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100${
                 idx === 0
                   ? ' rounded-tl rounded-bl'
                   : idx === lenItems - 1
-                  ? ' rounded-tr rounded-br'
+                  ? ' rounded-tr rounded-br flex justify-end'
                   : ''
               }`}
             >
@@ -31,15 +32,26 @@ const Table = ({ headers, items, tools }) => {
         ? null
         : items.map((p, idx) => (
             // Item Attributes
-            <tr className='border-b' key={idx}>
-              <td className='px-4 py-3'>{p.name}</td>
+            <tr className='border-b' key={p.id}>
+              {/* Item Fields */}
+              {!itemFields || !itemFields.length
+                ? null
+                : itemFields.map((f, idx) => (
+                    <td className='px-4 py-3' key={f}>
+                      {p[f]}
+                    </td>
+                  ))}
 
               {/* Tools */}
               <td className='px-4 py-3'>
                 <div className='flex justify-end'>
                   {/* Edit Button */}
                   {tools.map((t, idx) => (
-                    <button className='px-2' onClick={(e) => t.handleClick(p)}>
+                    <button
+                      key={idx}
+                      className='px-2'
+                      onClick={(e) => t.handleClick(p)}
+                    >
                       {t.icon}
                     </button>
                   ))}

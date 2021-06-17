@@ -8,16 +8,16 @@ export default createRestBundle({
   name: 'product',
   uid: 'id',
   prefetch: false,
-  staleAfter: 300000, //5min
+  staleAfter: 30000, //5min
   persist: true,
   routeParam: 'product_id',
   getTemplate: `${apiUrl}/products`,
   putTemplate: `${apiUrl}/products/:item.id`,
-  postTemplate: `${apiUrl}/products/:item.id`,
+  postTemplate: `${apiUrl}/products`,
   deleteTemplate: `${apiUrl}/products/:item.id`,
   fetchActions: ['AUTH_LOGGED_IN'],
   urlParamSelectors: ['selectProductIdByRoute'],
-  forceFetchActions: [],
+  forceFetchActions: ['PRODUCT_SAVE_FINISHED'],
   sortBy: 'name',
   sortAsc: true,
   addons: {

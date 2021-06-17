@@ -81,7 +81,7 @@ export default connect(
                     <td className='px-4 py-3 text-gray-600 text-sm'>
                       {w.bbox &&
                         w.bbox.map((ext, idx) => (
-                          <span>
+                          <span key={idx}>
                             {ext}
                             {idx !== w.bbox.length - 1 ? ', ' : ''}
                           </span>
