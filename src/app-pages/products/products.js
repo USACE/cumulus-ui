@@ -123,7 +123,7 @@ function Products({ doProductFetch, productItemsArray: products }) {
               <table className='min-w-full divide-y divide-gray-200'>
                 <ProductTableHeader />
 
-                <tbody className='bg-white divide-y divide-gray-300'>
+                <tbody className='bg-white divide-y divide-gray-300 border-2 border-red-500 h-30 overflow-scroll'>
                   {products && products.length
                     ? products.map((p, idx) => ProductRow(p, idx))
                     : null}

@@ -38,7 +38,7 @@ const Table = ({ headers, items, itemFields, tools }) => {
                 ? null
                 : itemFields.map((f, idx) => (
                     <td className='px-4 py-3' key={f}>
-                      {p[f]}
+                      {!f.render ? p[f.key] : f.render(p[f.key])}
                     </td>
                   ))}
 
@@ -48,7 +48,7 @@ const Table = ({ headers, items, itemFields, tools }) => {
                   {/* Edit Button */}
                   {tools.map((t, idx) => (
                     <button
-                      key={idx}
+                      key={t}
                       className='px-2'
                       onClick={(e) => t.handleClick(p)}
                     >

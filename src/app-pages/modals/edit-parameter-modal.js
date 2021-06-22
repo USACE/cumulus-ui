@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 // import Select from 'react-select';
 // import FormInput from '../forms/forms';
+import { SaveButton, CancelButton } from '../forms/buttons';
 
 const EditParameterModal = connect(
   'selectAppDefaultsFormSelectPlaceholder',
@@ -39,7 +40,9 @@ const EditParameterModal = connect(
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
-              <legend className='mb-3 text-2xl'>Edit Parameter</legend>
+              <legend className='mb-3 text-2xl'>
+                {payload.id ? 'Edit Parameter' : 'New Parameter'}
+              </legend>
               <svg
                 className='w-6 h-6 cursor-pointer'
                 fill='none'
@@ -73,29 +76,24 @@ const EditParameterModal = connect(
               />
             </div>
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <textarea
                 className='w-full h-20'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div>
+            </div> */}
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='mt-6'>
+              <SaveButton label='Save' onClick={handleSubmit} />
+
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>

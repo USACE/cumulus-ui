@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import Select from 'react-select';
 // import FormInput from '../forms/forms';
+import { SaveButton, CancelButton } from '../forms/buttons';
 
 const EditProductModal = connect(
   'selectAppDefaultsFormSelectPlaceholder',
@@ -40,8 +41,8 @@ const EditProductModal = connect(
       name: p && p.name,
       label: (p && p.label) || null,
       description: (p && p.description) || null,
-      temporal_resolution: (p && parseInt(p.temporal_resolution)) || null,
-      temporal_duration: (p && parseInt(p.temporal_duration)) || null,
+      temporal_resolution: (p && parseInt(p.temporal_resolution)) || 0,
+      temporal_duration: (p && parseInt(p.temporal_duration)) || 0,
       dss_fpart: (p && p.dss_fpart) || null,
       parameter_id: (p && p.parameter_id) || null,
       // parameter: (p && p.parameter) || null,
@@ -57,12 +58,12 @@ const EditProductModal = connect(
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      console.log(typeof payload.temporal_duration);
       if (
         !payload ||
         (!payload.id && p) ||
         // !payload.name ||
-        !payload.temporal_resolution ||
-        !payload.temporal_duration ||
+
         !payload.description ||
         !payload.parameter_id ||
         !payload.unit_id ||
@@ -294,27 +295,22 @@ const EditProductModal = connect(
 
             <div className='mt-3'>
               <textarea
-                className='w-full h-20'
+                className='w-full h-20 text-gray-400'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
             </div>
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='mt-6'>
+              <SaveButton label='Save' onClick={handleSubmit} />
+
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>

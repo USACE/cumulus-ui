@@ -104,10 +104,16 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6 mr-2'
-          viewBox='0 0 20 20'
-          fill='currentColor'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
         >
-          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z'
+          />
         </svg>
       ),
     },
@@ -132,10 +138,16 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6 mr-2'
-          viewBox='0 0 20 20'
-          fill='currentColor'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
         >
-          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z'
+          />
         </svg>
       ),
     },
@@ -159,11 +171,17 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6 mr-2'
-          viewBox='0 0 20 20'
-          fill='currentColor'
+          class='h-6 w-6 mr-2'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
         >
-          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='2'
+            d='M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z'
+          />
         </svg>
       ),
     },

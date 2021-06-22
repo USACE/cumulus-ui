@@ -15,7 +15,7 @@ export default createRestBundle({
   fetchActions: [],
   urlParamSelectors: [],
   forceFetchActions: [],
-  sortBy: 'name',
-  sortAsc: true,
+  sortBy: '',
+  sortAsc: false,
   addons: {},
 });

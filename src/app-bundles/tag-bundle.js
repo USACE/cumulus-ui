@@ -5,7 +5,7 @@ const apiUrl = process.env.REACT_APP_CUMULUS_API_URL;
 export default createRestBundle({
   name: 'tag',
   uid: 'id',
-  prefetch: false,
+  prefetch: true,
   staleAfter: 30000, //5min
   persist: true,
   routeParam: 'tag_id',

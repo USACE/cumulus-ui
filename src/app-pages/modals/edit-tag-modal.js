@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import { HexColorPicker } from 'react-colorful';
-// import FormInput from '../forms/forms';
+import { SaveButton, CancelButton } from '../forms/buttons';
 
 const EditTagModal = connect(
   'selectModalProps',
@@ -9,17 +9,17 @@ const EditTagModal = connect(
   'doModalClose',
   ({ modalProps: t, doModalClose, doTagSave }) => {
     const [payload, setPayload] = useState({
-      id: t.id,
-      name: t.name,
-      description: t.description,
-      color: t.color,
+      id: (t && t.id) || null,
+      name: (t && t.name) || null,
+      description: (t && t.description) || null,
+      color: (t && t.color) || '',
     });
 
     const handleSubmit = (e) => {
       e.preventDefault();
       if (
         !payload ||
-        !payload.id ||
+        (!payload.id && t) ||
         !payload.name ||
         !payload.description ||
         !payload.color
@@ -43,7 +43,9 @@ const EditTagModal = connect(
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
-              <legend className='mb-3 text-2xl'>Edit Tag</legend>
+              <legend className='mb-3 text-2xl'>
+                {payload.id ? 'Edit Tag' : 'New Tag'}
+              </legend>
               <svg
                 className='w-6 h-6 cursor-pointer'
                 fill='none'
@@ -68,8 +70,8 @@ const EditTagModal = connect(
                 <span className='text-gray-600'>Name</span>
               </label>
               <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-                defaultValue={t.name}
+                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.name}
                 maxLength={15}
                 onChange={(e) =>
                   setPayload({ ...payload, name: e.target.value })
@@ -82,8 +84,8 @@ const EditTagModal = connect(
                 <span className='text-gray-600'>Description</span>
               </label>
               <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
-                defaultValue={t.description}
+                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
+                defaultValue={payload.description}
                 maxLength={60}
                 onChange={(e) =>
                   setPayload({ ...payload, description: e.target.value })
@@ -96,19 +98,22 @@ const EditTagModal = connect(
                 <span className='text-gray-600'>Color</span>
               </label>
               <input
-                className='w-full border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-gray-100 p-2'
+                className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
                 value={payload.color}
                 maxLength={6}
                 onChange={(e) => {
                   setPayload({ ...payload, color: e.target.value });
                 }}
               />
-              <div className='flex mt-3'>
+              <div className='flex mt-6'>
                 <HexColorPicker
                   className='border-black border-2 w-1/2'
                   color={payload.color}
                   onChange={(e) =>
-                    setPayload({ ...payload, color: e.replace('#', '') })
+                    setPayload({
+                      ...payload,
+                      color: e.replace('#', ''),
+                    })
                   }
                 />
                 <div className='flex w-1/2 border-black border-0 items-center place-content-center'>
@@ -116,7 +121,7 @@ const EditTagModal = connect(
                     style={{ backgroundColor: `#${payload.color}` }}
                     className='text-lg font-light px-2 py-1 rounded-xl'
                   >
-                    {t.name}
+                    {payload.name}
                   </span>
                 </div>
               </div>
@@ -126,26 +131,21 @@ const EditTagModal = connect(
               <textarea
                 readOnly
                 cols='50'
-                rows='5'
+                rows='3'
                 value={JSON.stringify(payload)}
               ></textarea>
             </div> */}
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='mt-6'>
+              <SaveButton label='Save' onClick={handleSubmit} />
+
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>

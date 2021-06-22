@@ -15,7 +15,7 @@ const ParameterTable = connect(
       <Table
         headers={['Name', 'Tools']}
         items={items}
-        itemFields={['name']}
+        itemFields={[{ key: 'name' }]}
         tools={[
           {
             icon: <EditIcon />,

@@ -15,7 +15,7 @@ const SuiteTable = connect(
       <Table
         headers={['Name', 'Slug', 'Tools']}
         items={items}
-        itemFields={['name', 'slug']}
+        itemFields={[{ key: 'name' }, { key: 'slug' }]}
         tools={[
           {
             icon: <EditIcon />,

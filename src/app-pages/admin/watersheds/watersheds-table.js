@@ -1,163 +1,77 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'redux-bundler-react';
 import EditWatershedModal from '../../modals/edit-watershed-modal';
 import EditWatershedRolesModal from '../../modals/edit-watershed-roles-modal';
+import { Table } from '../table';
+import { EditIcon, DeleteIcon, UsersIcon } from '../icons';
+import { NewButton } from '../../forms/buttons';
 
-export default connect(
-  'selectWatershedItemsArray',
+const WatershedTable = connect(
+  'doModalOpen',
+  'selectWatershedItems',
   'doWatershedDelete',
   'doWatershedFetch',
-  'doModalOpen',
-  ({
-    watershedItemsArray: watersheds,
-    doWatershedFetch,
-    doWatershedDelete,
-    doModalOpen,
-  }) => {
-    useEffect(() => {
-      doWatershedFetch();
-    }, [doWatershedFetch]);
-
+  ({ doModalOpen, watershedItems: items, doWatershedDelete }) => {
     return (
-      <>
-        <div className='flex justify-end py-3'>
-          <button
-            className='bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded'
-            onClick={() => doModalOpen(EditWatershedModal)}
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5 inline mb-1'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 6v6m0 0v6m0-6h6m-6 0H6'
-              />
-            </svg>
-            New Watershed
-          </button>
-        </div>
-        <table className='table-auto w-full text-left whitespace-no-wrap'>
-          <thead>
-            <tr>
-              <th className='px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
-                Name
-              </th>
-
-              <th className='px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
-                Office
-              </th>
-              <th className='px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
-                Area Groups
-              </th>
-              <th className='px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl'>
-                Extents
-              </th>
-
-              <th className='px-4 py-3 w-32 text-center title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br'>
-                Tools
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {!watersheds || !watersheds.length
-              ? null
-              : watersheds.map((w, idx) => (
-                  // Item Attributes
-                  <tr className='border-b' key={w.name + idx}>
-                    <td className='px-4 py-3'>{w.name}</td>
-                    <td className='px-4 py-3 text-gray-600 text-sm'>
-                      {w.office_symbol}
-                    </td>
-                    <td className='px-4 py-3 text-gray-600 text-sm'>
-                      {w.area_groups && w.area_groups.length}
-                    </td>
-                    <td className='px-4 py-3 text-gray-600 text-sm'>
-                      {w.bbox &&
-                        w.bbox.map((ext, idx) => (
-                          <span key={idx}>
-                            {ext}
-                            {idx !== w.bbox.length - 1 ? ', ' : ''}
-                          </span>
-                        ))}
-                    </td>
-
-                    {/* Tools */}
-                    <td className='px-4 py-3'>
-                      <div className='flex justify-around'>
-                        {/* Manage Roles Button */}
-                        <button
-                          onClick={() =>
-                            doModalOpen(EditWatershedRolesModal, w)
-                          }
-                        >
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6 text-gray-400 hover:text-blue-500'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                          >
-                            <title>Manage Watershed Roles</title>
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
-                            />
-                          </svg>
-                        </button>
-                        {/* Edit Button */}
-                        <button
-                          onClick={() => doModalOpen(EditWatershedModal, w)}
-                        >
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6 text-gray-400 hover:text-green-500'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                          >
-                            <title>Edit Watershed</title>
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
-                            />
-                          </svg>
-                        </button>
-                        {/* Delete Button */}
-                        <button onClick={() => doWatershedDelete(w)}>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6 text-gray-400 hover:text-red-500'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                          >
-                            <title>Delete Watershed</title>
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-          </tbody>
-        </table>
-      </>
+      <Table
+        headers={['Name', 'Office', 'Area Groups', 'Extents', 'Tools']}
+        items={items}
+        itemFields={[
+          { key: 'name' },
+          { key: 'office_symbol' },
+          {
+            key: 'area_groups',
+            render: (area_groups) => {
+              return area_groups.length;
+            },
+          },
+          {
+            key: 'bbox',
+            render: (bbox) => {
+              return bbox.map((ext, idx) => (
+                <span key={idx}>
+                  {ext}
+                  {idx !== bbox.length - 1 ? ', ' : ''}
+                </span>
+              ));
+            },
+          },
+        ]}
+        tools={[
+          {
+            icon: <UsersIcon title='Manage User Roles' />,
+            handleClick: (item) => {
+              doModalOpen(EditWatershedRolesModal, item);
+            },
+          },
+          {
+            icon: <EditIcon />,
+            handleClick: (item) => {
+              doModalOpen(EditWatershedModal, item);
+            },
+          },
+          {
+            icon: <DeleteIcon />,
+            handleClick: (item) => {
+              doWatershedDelete(item);
+            },
+          },
+        ]}
+      />
     );
   }
 );
+
+export default connect('doModalOpen', ({ doModalOpen }) => (
+  <>
+    <div className='py-3'>
+      <div className='flex justify-end'>
+        <NewButton
+          label={'New Watershed'}
+          onClick={() => doModalOpen(EditWatershedModal)}
+        />
+      </div>
+    </div>
+    <WatershedTable />
+  </>
+));

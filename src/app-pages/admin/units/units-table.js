@@ -15,7 +15,7 @@ const UnitTable = connect(
       <Table
         headers={['Name', 'Abbreviation', 'Tools']}
         items={items}
-        itemFields={['name', 'abbreviation']}
+        itemFields={[{ key: 'name' }, { key: 'abbreviation' }]}
         tools={[
           {
             icon: <EditIcon />,
@@ -38,7 +38,7 @@ const UnitTable = connect(
 export default connect('doModalOpen', ({ doModalOpen }) => (
   <>
     <div className='py-3'>
-      <div className='w-full bg-red-400 p-2 mb-5 text-white font-medium rounded-md'>
+      <div className='w-full bg-yellow-200 text-gray-600 p-2 mb-5 font-medium rounded-md'>
         Warning: Changing the Unit Name could break the DSS Packager.
       </div>
       <div className='flex justify-end'>

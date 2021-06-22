@@ -7,7 +7,7 @@ const apiUrl = process.env.REACT_APP_CUMULUS_API_URL;
 export default createRestBundle({
   name: 'product',
   uid: 'id',
-  prefetch: false,
+  prefetch: true,
   staleAfter: 30000, //5min
   persist: true,
   routeParam: 'product_id',
@@ -20,6 +20,22 @@ export default createRestBundle({
   forceFetchActions: ['PRODUCT_SAVE_FINISHED'],
   sortBy: 'name',
   sortAsc: true,
+  reduceFurther: (state, { type, payload }) => {
+    switch (type) {
+      case 'PRODUCT_TAG_REMOVE_START':
+      case 'PRODUCT_TAG_REMOVE_FINISH':
+      case 'PRODUCT_TAG_REMOVE_ERROR':
+      case 'PRODUCT_TAG_ADD_START':
+      case 'PRODUCT_TAG_ADD_FINISH':
+      case 'PRODUCT_TAG_ADD_ERROR':
+        return {
+          ...state,
+          ...payload,
+        };
+      default:
+        return state;
+    }
+  },
   addons: {
     selectProductIdByRoute: createSelector(
       'selectProductByRoute',
@@ -78,5 +94,44 @@ export default createRestBundle({
         return Object.keys(obj);
       }
     ),
+    doProductTagRemove:
+      (productId, tagId) =>
+      ({ dispatch, store, apiDelete }) => {
+        dispatch({ type: 'PRODUCT_TAG_REMOVE_START', payload: {} });
+        apiDelete(
+          `${apiUrl}/products/${productId}/tags/${tagId}`,
+          (err, respObj) => {
+            if (!err) {
+              dispatch({
+                type: 'PRODUCT_TAG_REMOVE_FINISH',
+                payload: { [respObj.id]: respObj },
+              });
+            } else {
+              dispatch({ type: 'PRODUCT_TAG_REMOVE_ERROR', payload: {} });
+            }
+          }
+        );
+      },
+    doProductTagAdd:
+      (productId, tagId) =>
+      ({ dispatch, store, apiPost }) => {
+        dispatch({ type: 'PRODUCT_TAG_ADD_START' });
+        apiPost(
+          `${apiUrl}/products/${productId}/tags/${tagId}`,
+          {},
+          (err, respObj) => {
+            if (!err) {
+              dispatch({
+                type: 'PRODUCT_TAG_ADD_FINISH',
+                payload: {
+                  [respObj.id]: respObj,
+                },
+              });
+            } else {
+              dispatch({ type: 'PRODUCT_TAG_ADD_ERROR', payload: {} });
+            }
+          }
+        );
+      },
   },
 });

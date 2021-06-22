@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 // import Select from 'react-select';
-// import FormInput from '../forms/forms';
+import { SaveButton, CancelButton } from '../forms/buttons';
 
 const EditWatershedModal = connect(
   'selectAppDefaultsFormSelectPlaceholder',
@@ -48,8 +48,13 @@ const EditWatershedModal = connect(
       >
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
+            <div className='w-full bg-red-500 text-white p-2 mb-5 font-medium rounded-md'>
+              NOT FUNCTIONAL
+            </div>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
-              <legend className='mb-3 text-2xl'>Edit Watershed</legend>
+              <legend className='mb-3 text-2xl'>
+                {payload.id ? 'Edit Watershed' : 'New Watershed'}
+              </legend>
               <svg
                 className='w-6 h-6 cursor-pointer'
                 fill='none'
@@ -100,170 +105,113 @@ const EditWatershedModal = connect(
               />
             </div>
 
-            <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='x_min'>
-                <span className='text-gray-600'>X Min (top left)</span>
-              </label>
-              <input
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={payload.bbox[0]}
-                maxLength={15}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    bbox: [
-                      parseInt(e.target.value),
-                      payload.bbox[1],
-                      payload.bbox[2],
-                      payload.bbox[3],
-                    ],
-                  })
-                }
-              />
+            {/* Main div wrapper for two column grid form */}
+            <div className='grid grid-cols-1 gap-6 mt-2 md:grid-cols-4'>
+              <div>
+                <label className='block mt-6 mb-2 w-full' forhtml='x_min'>
+                  <span className='text-gray-600'>
+                    X Min
+                    <span className=' ml-1 text-xs text-gray-400'>
+                      (top left)
+                    </span>
+                  </span>
+                </label>
+                <input
+                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  defaultValue={payload.bbox[0]}
+                  maxLength={15}
+                  onChange={(e) =>
+                    setPayload({
+                      ...payload,
+                      bbox: [
+                        parseInt(e.target.value),
+                        payload.bbox[1],
+                        payload.bbox[2],
+                        payload.bbox[3],
+                      ],
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                  <span className='text-gray-600'>
+                    Y Min
+                    <span className=' ml-1 text-xs text-gray-400'>
+                      (bottom left)
+                    </span>
+                  </span>
+                </label>
+                <input
+                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  defaultValue={payload.bbox[1]}
+                  maxLength={15}
+                  onChange={(e) =>
+                    setPayload({
+                      ...payload,
+                      bbox: [
+                        payload.bbox[0],
+                        parseInt(e.target.value),
+                        payload.bbox[2],
+                        payload.bbox[3],
+                      ],
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                  <span className='text-gray-600'>
+                    X Max
+                    <span className=' ml-1 text-xs text-gray-400'>
+                      (top right)
+                    </span>
+                  </span>
+                </label>
+                <input
+                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  defaultValue={payload.bbox[2]}
+                  maxLength={15}
+                  onChange={(e) =>
+                    setPayload({
+                      ...payload,
+                      bbox: [
+                        payload.bbox[0],
+                        payload.bbox[1],
+                        parseInt(e.target.value),
+                        payload.bbox[3],
+                      ],
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
+                  <span className='text-gray-600'>
+                    Y Max{' '}
+                    <span className=' ml-1 text-xs text-gray-400'>
+                      (bottom right)
+                    </span>
+                  </span>
+                </label>
+                <input
+                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  defaultValue={payload.bbox[3]}
+                  maxLength={15}
+                  onChange={(e) =>
+                    setPayload({
+                      ...payload,
+                      bbox: [
+                        payload.bbox[0],
+                        payload.bbox[1],
+                        payload.bbox[2],
+                        parseInt(e.target.value),
+                      ],
+                    })
+                  }
+                />
+              </div>
             </div>
-
-            <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
-                <span className='text-gray-600'>Y Min (bottom left)</span>
-              </label>
-              <input
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={payload.bbox[1]}
-                maxLength={15}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    bbox: [
-                      payload.bbox[0],
-                      parseInt(e.target.value),
-                      payload.bbox[2],
-                      payload.bbox[3],
-                    ],
-                  })
-                }
-              />
-            </div>
-
-            <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
-                <span className='text-gray-600'>X Max (top right)</span>
-              </label>
-              <input
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={payload.bbox[2]}
-                maxLength={15}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    bbox: [
-                      payload.bbox[0],
-                      payload.bbox[1],
-                      parseInt(e.target.value),
-                      payload.bbox[3],
-                    ],
-                  })
-                }
-              />
-            </div>
-
-            <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='y_min'>
-                <span className='text-gray-600'>Y Max (bottom right)</span>
-              </label>
-              <input
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={payload.bbox[3]}
-                maxLength={15}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    bbox: [
-                      payload.bbox[0],
-                      payload.bbox[1],
-                      payload.bbox[2],
-                      parseInt(e.target.value),
-                    ],
-                  })
-                }
-              />
-            </div>
-
-            {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='parameter'>
-                <span className='text-gray-600'>Parameter</span>
-              </label>
-              <Select
-                placeholder={w.parameter}
-                options={parameters.map((param, index) => ({
-                  value: param.id,
-                  label: param.name,
-                }))}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    parameter_id: e.value,
-                    parameter: e.label,
-                  })
-                }
-              />
-            </div> */}
-
-            {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='unit'>
-                <span className='text-gray-600'>Unit</span>
-              </label>
-              <Select
-                placeholder={p.unit}
-                options={units.map((u, idx) => ({
-                  value: u.id,
-                  label: u.name,
-                }))}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    unit_id: e.value,
-                    unit: e.label,
-                  })
-                }
-              />
-            </div> */}
-
-            {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='dss_fpart'>
-                <span className='text-gray-600'>DSS F-Part</span>
-              </label>
-              <input
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={p.dss_fpart}
-                maxLength={30}
-                onChange={(e) =>
-                  setPayload({ ...payload, dss_fpart: e.target.value })
-                }
-              />
-            </div> */}
-
-            {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='tags'>
-                <span className='text-gray-600'>Tags</span>
-              </label>
-              <Select
-                isMulti
-                placeholder={appDefaultsFormSelectPlaceholder}
-                options={tags.map((t, index) => ({
-                  value: t.id,
-                  label: t.name,
-                }))}
-                onChange={(selectedOption) => {
-                  setPayload({
-                    ...payload,
-                    tags:
-                      selectedOption && selectedOption.length
-                        ? selectedOption.map((s) => s.value)
-                        : [],
-                  });
-                }}
-              />
-            </div> */}
 
             <div className='mt-3'>
               <textarea
@@ -273,21 +221,16 @@ const EditWatershedModal = connect(
               ></textarea>
             </div>
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='mt-6'>
+              <SaveButton label='Save' onClick={handleSubmit} />
+
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>

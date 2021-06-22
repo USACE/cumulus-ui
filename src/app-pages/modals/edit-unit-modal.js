@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 // import Select from 'react-select';
 // import FormInput from '../forms/forms';
+import { SaveButton, CancelButton } from '../forms/buttons';
 
 const EditWatershedModal = connect(
   'selectAppDefaultsFormSelectPlaceholder',
@@ -17,7 +18,7 @@ const EditWatershedModal = connect(
     const [payload, setPayload] = useState({
       id: (u && u.id) || null,
       name: (u && u.name) || null,
-      abbreviation: (u && u.abbreviation) || [],
+      abbreviation: (u && u.abbreviation) || null,
     });
 
     const handleSubmit = (e) => {
@@ -96,29 +97,24 @@ const EditWatershedModal = connect(
               />
             </div>
 
-            <div className='mt-3'>
+            {/* <div className='mt-3'>
               <textarea
                 className='w-full h-20'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div>
+            </div> */}
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='mt-6'>
+              <SaveButton label='Save' onClick={handleSubmit} />
+
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>
