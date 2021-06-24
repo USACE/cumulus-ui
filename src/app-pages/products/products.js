@@ -3,36 +3,67 @@ import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
 import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
+import rainCloud from '../../images/rain-cloud.png';
+import tempThermometer from '../../images/temperature.png';
+import snowFlake from '../../images/snow.png';
+import Select from 'react-select';
 
-function ProductImage(group) {
-  switch (group) {
+function ProductImage(param) {
+  switch (param) {
     case 'PRECIPITATION':
-      return 'https://cdn.pixabay.com/photo/2016/03/18/15/09/light-rain-1265212_960_720.png';
-    case 'TEMPERATURE':
-      return 'https://cdn.pixabay.com/photo/2016/03/31/15/27/cold-1293305_960_720.png';
-    case 'SNOW':
-      return 'https://cdn.pixabay.com/photo/2016/10/20/10/16/snow-flake-1755115_960_720.png';
+      return rainCloud;
+    case 'AIRTEMP':
+      return tempThermometer;
+    case 'SNOW DEPTH':
+    case 'SNOW MELT':
+    case 'SNOWTEMP':
+    case 'SWE':
+      return snowFlake;
     default:
-      return 'https://cdn.pixabay.com/photo/2016/03/18/15/09/light-rain-1265212_960_720.png';
+      return rainCloud;
   }
 }
 
-const ProductRow = (p, idx) => (
+const DisplayTags = ({ productTags, tagsObj }) => {
+  return tagsObj && Object.keys(tagsObj).length !== 0 ? (
+    <div>
+      {productTags &&
+        productTags.map((productTagId, idx) => (
+          <span
+            key={idx}
+            style={{
+              backgroundColor: `#${tagsObj[productTagId].color}`,
+            }}
+            className='text-xs font-light px-2 py-1 rounded-xl mr-1'
+          >
+            {tagsObj[productTagId].name}
+          </span>
+        ))}
+    </div>
+  ) : null;
+};
+
+const ProductRow = (p, idx, tagsObj) => (
   <tr className='hover:bg-gray-100' key={idx}>
     <td className='px-6 py-4 whitespace-nowrap'>
-      <a href={`/catalog/${p.id}`}>
+      <a href={`/products/${p.id}`}>
         <div className='flex items-center'>
           <div className='flex-shrink-0 h-10 w-10'>
             {/* <i className="mdi mdi-weather-pouring text-blue-800" /> */}
             <img
               className='h-10 w-10 object-contain'
-              src={ProductImage(p.group)}
-              alt={p.group}
-              title={p.group}
+              src={ProductImage(p.parameter)}
+              alt={p.parameter}
+              title={p.parameter}
             />
           </div>
           <div className='ml-4'>
-            <div className='text-md font-semibold text-gray-900'>{p.name}</div>
+            <div
+              className='text-md font-semibold text-gray-900'
+              title={p.description}
+            >
+              {p.name}
+            </div>
             <div className='text-sm text-gray-500'>
               {p.parameter} measured in {p.unit}
             </div>
@@ -42,12 +73,7 @@ const ProductRow = (p, idx) => (
     </td>
 
     <td className='px-6 py-4 whitespace-nowrap'>
-      <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-        {p.is_realtime && 'Realtime'}
-      </span>
-      <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800'>
-        {p.is_forecast && 'Forecast'}
-      </span>
+      <DisplayTags productTags={p.tags} tagsObj={tagsObj} />
     </td>
     <td className='px-6 py-4 whitespace-nowrap'>
       <div className='text-sm text-gray-900'>
@@ -96,11 +122,17 @@ const ProductTableHeader = () => (
   </thead>
 );
 
-function Products({ doProductFetch, productItemsArray: products }) {
+function Products({
+  doProductFetch,
+  productItems: products,
+  tagItemsObject: tagsObj,
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   useEffect(() => {
     doProductFetch();
   }, [doProductFetch]);
+
+  const [payload, setPayload] = useState({ param: null });
 
   return (
     <div className='flex h-screen overflow-hidden'>
@@ -114,18 +146,41 @@ function Products({ doProductFetch, productItemsArray: products }) {
 
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            {/* Cards */}
-            {/* <div className='grid grid-cols-12 gap-6'> */}
-            {/* {products && products.length
-                ? products.map((p, idx) => JSON.stringify(p.name))
-                : null} */}
+            {/* {Param Filter} */}
+            <label className='inline-block mb-2 mr-2' forhtml='param'>
+              <span className='text-gray-600'>Parameter Filter</span>
+            </label>
+            <Select
+              name='param'
+              className='inline-block w-60 mb-2'
+              placeholder={'Show All'}
+              options={[
+                { value: null, label: 'Show All' },
+                { value: 'PRECIP', label: 'Precip' },
+                { value: 'AIRTEMP', label: 'AirTemp' },
+              ]}
+              onChange={(e) =>
+                setPayload({
+                  ...payload,
+                  param: e.value,
+                })
+              }
+            ></Select>
             <div className='shadow overflow-hidden w-full border-b border-gray-200 '>
+              {/* {Product Table} */}
               <table className='min-w-full divide-y divide-gray-200'>
                 <ProductTableHeader />
 
-                <tbody className='bg-white divide-y divide-gray-300 border-2 border-red-500 h-30 overflow-scroll'>
+                <tbody className='bg-white divide-y divide-gray-30 h-30 overflow-scroll'>
                   {products && products.length
-                    ? products.map((p, idx) => ProductRow(p, idx))
+                    ? products.map(
+                        (p, idx) =>
+                          (payload &&
+                            payload.param === p.parameter &&
+                            ProductRow(p, idx, tagsObj)) ||
+                          (payload.param === null &&
+                            ProductRow(p, idx, tagsObj))
+                      )
                     : null}
                 </tbody>
               </table>
@@ -140,4 +195,9 @@ function Products({ doProductFetch, productItemsArray: products }) {
   );
 }
 
-export default connect('selectProductItemsArray', 'doProductFetch', Products);
+export default connect(
+  'selectProductItems',
+  'selectTagItemsObject',
+  'doProductFetch',
+  Products
+);

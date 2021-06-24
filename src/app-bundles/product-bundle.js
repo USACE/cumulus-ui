@@ -18,8 +18,8 @@ export default createRestBundle({
   fetchActions: ['AUTH_LOGGED_IN'],
   urlParamSelectors: ['selectProductIdByRoute'],
   forceFetchActions: ['PRODUCT_SAVE_FINISHED'],
-  sortBy: 'name',
-  sortAsc: true,
+  sortBy: '',
+  sortAsc: false,
   reduceFurther: (state, { type, payload }) => {
     switch (type) {
       case 'PRODUCT_TAG_REMOVE_START':

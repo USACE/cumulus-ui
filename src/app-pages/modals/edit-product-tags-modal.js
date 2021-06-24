@@ -27,22 +27,22 @@ const EditProductTagsModal = connect(
       doTagFetch();
     }, [doTagFetch]);
 
-    const [payload, setPayload] = useState(p);
+    const [payload] = useState(p);
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (!payload || (!payload.tags.length > 0 && p)) {
-        console.log('Missing one or more required fields for parameter');
-        return;
-      }
-      // doProductSave(payload);
-      doModalClose();
-    };
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   if (!payload || (!payload.tags.length > 0 && p)) {
+    //     console.log('Missing one or more required fields for parameter');
+    //     return;
+    //   }
+    //   // doProductSave(payload);
+    //   doModalClose();
+    // };
 
-    const handleToggle = (e) => {
-      e.preventDefault();
-      return;
-    };
+    // const handleToggle = (e) => {
+    //   e.preventDefault();
+    //   return;
+    // };
 
     const TagsTable = ({ payload }) => {
       return (
@@ -100,7 +100,7 @@ const EditProductTagsModal = connect(
         aria-modal='true'
         aria-labelledby='modal-headline'
       >
-        <form className='p-6' onSubmit={handleSubmit}>
+        <form className='p-6'>
           <fieldset>
             <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
               <legend className='mb-3 text-2xl'>
@@ -126,46 +126,6 @@ const EditProductTagsModal = connect(
             </div>
 
             <TagsTable payload={payload} />
-
-            {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='name'>
-                <span className='text-gray-600'>Product Tags</span>
-              </label>
-              <Select
-                isMulti
-                placeholder={p && p.tags}
-                options={tags.map((t, index) => ({
-                  value: t.id,
-                  label: t.name,
-                }))}
-                onChange={(e) =>
-                  setPayload({
-                    ...payload,
-                    tags: e.value,
-                  })
-                }
-              />
-            </div> */}
-
-            {/* <div className='mt-3'>
-              <textarea
-                className='w-full h-20'
-                readOnly
-                value={JSON.stringify(payload)}
-              ></textarea>
-            </div> */}
-
-            {/* <div className='mt-6'>
-              <SaveButton label='Save' onClick={handleSubmit} />
-
-              <CancelButton
-                className='ml-2'
-                label='Cancel'
-                onClick={(e) => {
-                  doModalClose();
-                }}
-              />
-            </div> */}
           </fieldset>
         </form>
       </div>

@@ -66,6 +66,20 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
+          className='h-5 w-5 mr-2'
+          viewBox='0 0 18 18'
+          fill='currentColor'
+        >
+          <path d='M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z' />
+        </svg>
+      ),
+    },
+    {
+      name: 'My Watersheds',
+      href: '/my-watersheds',
+      icon: (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6 mr-2'
           viewBox='0 0 20 20'
           fill='currentColor'
@@ -75,16 +89,22 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       ),
     },
     {
-      name: 'Watersheds',
-      href: '/watersheds',
+      name: 'My Downloads',
+      href: '/downloads',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6 mr-2'
-          viewBox='0 0 20 20'
-          fill='currentColor'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
         >
-          <path d='M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z' />
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
+          />
         </svg>
       ),
     },

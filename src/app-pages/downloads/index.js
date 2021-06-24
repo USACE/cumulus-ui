@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
-// import WelcomeBanner from '../../app-components/dashboard/WelcomeBanner';
-// import FilterButton from '../../app-components/actions/FilterButton';
-// import Datepicker from '../../app-components/actions/Datepicker';
-import LatestUpdates from './latest-updates';
-import HomeBanner from './home-banner';
+
 // import Banner from '../../app-components/Banner';
 
 function Dashboard() {
@@ -26,29 +22,26 @@ function Dashboard() {
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
             {/* Welcome banner */}
             {/* <WelcomeBanner /> */}
-            <HomeBanner />
 
             <div className='flex flex-wrap'>
               <div className='p-5 w-full xl:w-1/2'>
-                <a href='/products'>
-                  <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-blue-800 text-white text-2xl rounded-lg'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-6 w-6 inline mr-2 mb-1'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth='2'
-                        d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'
-                      />
-                    </svg>
-                    Explore Products
-                  </button>
-                </a>
+                <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-blue-800 text-white text-2xl rounded-lg'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6 inline mr-2 mb-1'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'
+                    />
+                  </svg>
+                  Explore Products
+                </button>
                 <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-green-800 text-white text-2xl rounded-lg'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -84,9 +77,7 @@ function Dashboard() {
                   View Documentation
                 </button>
               </div>
-              <div className='w-full xl:w-1/2'>
-                <LatestUpdates />
-              </div>
+              <div className='w-full xl:w-1/2'>hello</div>
             </div>
           </div>
         </main>

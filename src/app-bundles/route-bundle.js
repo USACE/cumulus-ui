@@ -11,6 +11,8 @@ import AdminUnits from '../app-pages/admin/units/index';
 import AdminSuites from '../app-pages/admin/suites/index';
 import AdminParameters from '../app-pages/admin/parameters/index';
 import Products from '../app-pages/products/products';
+import ProductDetails from '../app-pages/products/product-details';
+import Downloads from '../app-pages/downloads/index';
 
 export default createRouteBundle({
   '/': Dashboard,
@@ -23,4 +25,6 @@ export default createRouteBundle({
   '/admin/suites': AdminSuites,
   '/admin/parameters': AdminParameters,
   '/products': Products,
+  '/products/:product_id': ProductDetails,
+  '/downloads': Downloads,
 });

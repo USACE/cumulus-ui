@@ -40,15 +40,15 @@ const ProductTable = connect(
 
     return (
       <Table
-        headers={['Name', 'Parameter', 'Duration', 'Tags', 'Tools']}
+        headers={['Name', 'Parameter', 'Interval', 'Tags', 'Tools']}
         items={items}
         itemFields={[
           { key: 'name' },
           { key: 'parameter' },
           {
-            key: 'temporal_duration',
-            render: (duration) => {
-              return duration / 60 / 60 + 'hr';
+            key: 'temporal_resolution',
+            render: (temporal_resolution) => {
+              return temporal_resolution / 60 / 60 + 'hr';
             },
           },
 

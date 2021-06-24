@@ -67,7 +67,8 @@ const EditProductModal = connect(
         !payload.description ||
         !payload.parameter_id ||
         !payload.unit_id ||
-        !payload.suite_id
+        !payload.suite_id ||
+        !payload.dss_fpart
       ) {
         console.log('Missing one or more required fields for product');
         return;
