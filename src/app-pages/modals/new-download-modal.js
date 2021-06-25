@@ -6,16 +6,16 @@ import { connect } from 'redux-bundler-react';
 
 // import Pill from '../../../app-components/pill';
 
-// import Select from 'react-select';
+import Select from 'react-select';
 
 const NewDownloadModal = connect(
-  //   'selectAppDefaultsFormSelectPlaceholder',
-  //   'selectWatershedItemsArray',
-  //   'selectProductItemsArray',
+  'selectAppDefaultsFormSelectPlaceholder',
+  'selectWatershedItemsArray',
+  'selectProductItemsArray',
   'doModalClose',
-  //   'doDownloadRequest',
+  'doDownloadRequest',
   ({
-    // appDefaultsFormSelectPlaceholder,
+    appDefaultsFormSelectPlaceholder,
     watershedItemsArray: watersheds,
     productItemsArray: products,
     doDownloadRequest,
@@ -185,7 +185,7 @@ const NewDownloadModal = connect(
               <label className='block mt-6 mb-2' forhtml='watershed'>
                 <span className='text-gray-700'>Watershed</span>
               </label>
-              {/* <Select
+              <Select
                 placeholder={appDefaultsFormSelectPlaceholder}
                 options={watersheds.map((w, index) => ({
                   value: w.id,
@@ -222,7 +222,7 @@ const NewDownloadModal = connect(
                         : [],
                   });
                 }}
-              /> */}
+              />
             </div>
             <div className='mt-6'>
               <label className='block mt-6 mb-2'>

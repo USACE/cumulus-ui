@@ -1,89 +1,176 @@
 import React, { useState } from 'react';
-
+import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
+import { NewButton } from '../forms/buttons';
+import NewDownloadModal from '../modals/new-download-modal';
+import { formatDistanceStrict, formatDistanceToNow, parseISO } from 'date-fns';
 
 // import Banner from '../../app-components/Banner';
 
-function Dashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+const HEADERS = ['Basin', 'Requested', 'Processing Time', 'Download'];
 
+const ProgressBar = ({ percent }) => {
   return (
-    <div className='flex h-screen overflow-hidden'>
-      {/* Sidebar */}
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Content area */}
-      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
-        {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-        <main>
-          <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            {/* Welcome banner */}
-            {/* <WelcomeBanner /> */}
-
-            <div className='flex flex-wrap'>
-              <div className='p-5 w-full xl:w-1/2'>
-                <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-blue-800 text-white text-2xl rounded-lg'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 inline mr-2 mb-1'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'
-                    />
-                  </svg>
-                  Explore Products
-                </button>
-                <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-green-800 text-white text-2xl rounded-lg'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 inline mr-2 mb-1'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
-                    />
-                  </svg>
-                  Download Data
-                </button>
-                <button className='w-full xl:w-2/3 text-left p-5 bg-gray-500 text-white text-2xl rounded-lg'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 inline mr-2 mb-1'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
-                    />
-                  </svg>
-                  View Documentation
-                </button>
-              </div>
-              <div className='w-full xl:w-1/2'>hello</div>
-            </div>
-          </div>
-        </main>
+    <div className='flex flex-col'>
+      {/* Percent Complete */}
+      <div className='w-100 text-right'>
+        <span className='text-xs font-mono'>{percent}%</span>
+      </div>
+      {/* Progress Bar */}
+      <div
+        className={`flex overflow-hidden h-2 mb-4 text-xs rounded bg-blue-200 ${
+          percent < 100 && 'animate-pulse'
+        }`}
+      >
+        <div
+          style={{ width: `${percent}%` }}
+          className='shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500'
+        ></div>
       </div>
     </div>
   );
-}
+};
 
-export default Dashboard;
+const TableRow = ({ item, doModalOpen }) => {
+  // const procStart = DateTime.fromISO(item.processing_start);
+  // const procEnd = DateTime.fromISO(item.processing_end);
+  // const dur = procEnd.diff(procStart, 'seconds');
+  const dur = formatDistanceStrict(
+    parseISO(item.processing_start),
+    parseISO(item.processing_end)
+  );
+
+  const DownloadNow = ({ href }) => (
+    <a href={href}>
+      <svg
+        className='w-6 text-gray-500 hover:text-gray-800'
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
+        width='24'
+      >
+        <title>Click to Download</title>
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth={2}
+          d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
+        />
+      </svg>
+    </a>
+  );
+
+  const DownloadFailed = () => (
+    <>
+      <svg
+        className='w-6 text-red-600'
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 24 20'
+        fill='currentColor'
+        width='24'
+      >
+        <title>Failed Download</title>
+        <path
+          fillRule='evenodd'
+          d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z'
+          clipRule='evenodd'
+        />
+      </svg>
+    </>
+  );
+
+  return (
+    <tr>
+      {/* Basin */}
+      <td className='p-2 text-left cursor-pointer'>{item.watershed_name}</td>
+      {/* Requested */}
+      <td className='p-2 text-left'>
+        {formatDistanceToNow(parseISO(item.processing_start), {
+          addSuffix: true,
+        })}
+      </td>
+      <td className='p-2 text-left'>{`${parseInt(dur.as('seconds'))}s`}</td>
+      <td className=''>
+        {item.status === 'SUCCESS' && item.progress === 100 ? (
+          <DownloadNow href={item.file} />
+        ) : item.status === 'INITIATED' ? (
+          <ProgressBar percent={item.progress} />
+        ) : item.status === 'FAILED' ? (
+          <DownloadFailed />
+        ) : null}
+      </td>
+    </tr>
+  );
+};
+
+const TableHeader = ({ title }) => (
+  <th
+    scope='col'
+    className='px-1 py-3 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+  >
+    {title}
+  </th>
+);
+
+export default connect(
+  'selectDownloadItemsArray',
+  'doModalOpen',
+  ({ downloadItemsArray: items, doModalOpen }) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    return (
+      <div className='flex h-screen overflow-hidden'>
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        {/* Content area */}
+        <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
+          {/*  Site header */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+          <main>
+            <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
+              {/* Welcome banner */}
+              {/* <WelcomeBanner /> */}
+
+              <div className='flex justify-between'>
+                <div className='font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4'>
+                  My Downloads
+                </div>
+
+                {/* <NewDownloadButton /> */}
+                <NewButton
+                  label={'New Download'}
+                  onClick={() => doModalOpen(NewDownloadModal, {})}
+                />
+              </div>
+
+              <div className='h-96 block overflow-y-auto w-full'>
+                <table className='min-w-full divide-y divide-gray-200 mt-5'>
+                  <thead>
+                    <tr>
+                      {HEADERS.map((h, idx) => (
+                        <TableHeader title={h} />
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className='bg-white divide-y divide-gray-200'>
+                    {items.map((item, index) => (
+                      <TableRow
+                        key={index}
+                        item={item}
+                        doModalOpen={doModalOpen}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
+);

@@ -27,7 +27,9 @@ const colorClassHourly = (value) => {
       : count < 24 && count > 10
       ? 'text-green-300'
       : count <= 10 && count > 0
-      ? 'text-green-100'
+      ? 'text-green-200'
+      : count > 24
+      ? 'text-green-700'
       : 'text-gray-200';
 
   return `fill-current ${value ? color(value) : 'text-gray-200'}`;
@@ -86,7 +88,7 @@ export default connect(
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {/* Content area */}
-          <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
+          <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden  lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
             {/*  Site header */}
             <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -114,7 +116,7 @@ export default connect(
                       Product Description
                     </span>
 
-                    <p className='p-2 lg:max-h-60 lg:overflow-y-auto'>
+                    <p className='p-2 h-56 lg:max-h-60 lg:overflow-y-auto'>
                       {product.description}
                     </p>
 
@@ -124,7 +126,7 @@ export default connect(
                         Availability Details
                       </span>
                       <hr />
-                      <div className='w-full overflow-y-scroll overscroll-contain h-96'>
+                      <div className='w-full overflow-y-auto overscroll-contain h-96'>
                         {isLoading || !productAvailability ? (
                           <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
                         ) : (
@@ -176,8 +178,9 @@ export default connect(
                               {product.after}
                               <div className='text-sm text-gray-900'>
                                 {product.after &&
-                                  formatDistanceToNow(parseISO(product.after)) +
-                                    ' ago'}
+                                  formatDistanceToNow(parseISO(product.after), {
+                                    addSuffix: true,
+                                  })}
                               </div>
                             </td>
                           </tr>
@@ -190,8 +193,9 @@ export default connect(
                               <div className='text-sm text-gray-900'>
                                 {product.before &&
                                   formatDistanceToNow(
-                                    parseISO(product.before)
-                                  ) + ' ago'}
+                                    parseISO(product.before),
+                                    { addSuffix: true }
+                                  )}
                               </div>
                             </td>
                           </tr>

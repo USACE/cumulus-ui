@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
-import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
+import {
+  formatDistance,
+  formatDistanceToNow,
+  formatDistanceToNowStrict,
+  parseISO,
+} from 'date-fns';
 import rainCloud from '../../images/rain-cloud.png';
 import tempThermometer from '../../images/temperature.png';
 import snowFlake from '../../images/snow.png';
@@ -77,13 +82,14 @@ const ProductRow = (p, idx, tagsObj) => (
     </td>
     <td className='px-6 py-4 whitespace-nowrap'>
       <div className='text-sm text-gray-900'>
-        {p.after && formatDistanceToNow(parseISO(p.after)) + ' ago'}
+        {p.after && formatDistanceToNow(parseISO(p.after), { addSuffix: true })}
       </div>
       <div className='text-sm text-gray-500'>{p.after}</div>
     </td>
     <td className='px-6 py-4 whitespace-nowrap'>
       <div className='text-sm text-gray-900'>
-        {p.before && formatDistanceToNow(parseISO(p.before)) + ' ago'}
+        {p.before &&
+          formatDistanceToNowStrict(parseISO(p.before), { addSuffix: true })}
       </div>
       <div className='text-sm text-gray-500'>{p.before}</div>
     </td>

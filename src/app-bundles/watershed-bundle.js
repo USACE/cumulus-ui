@@ -4,7 +4,7 @@ const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 export default createRestBundle({
   name: 'watershed',
   uid: 'id',
-  prefetch: false,
+  prefetch: true,
   staleAfter: 30000, //5min
   persist: true,
   routeParam: 'watershed_id',

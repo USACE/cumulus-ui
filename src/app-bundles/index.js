@@ -22,6 +22,7 @@ import suiteBundle from './suite-bundle';
 import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
 import selectProductAvailabilityBundle from './product-availability-bundle';
+import downloadBundle from './download-bundle';
 
 // import AdminDashboard from '../pages/admin/Dashboard';
 //const mockTokenTestUser =
@@ -57,6 +58,7 @@ export default composeBundles(
   watershedBundle,
   selectBundle,
   selectProductAvailabilityBundle,
+  downloadBundle,
   createAuthBundle({
     appId: '20a4794c-91c3-4080-a42c-d9c0bda332a4',
     redirectOnLogout: '/',
