@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
+import { parseISO, isValid } from 'date-fns';
 // import DatePicker from 'react-datepicker';
-
 // import 'react-datepicker/dist/react-datepicker.css';
 
 // import Pill from '../../../app-components/pill';
@@ -155,13 +155,22 @@ const NewDownloadModal = connect(
                 type='date'
                 className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
                 onChange={(e) => {
-                  const d = new Date(e.target.value);
+                  const d = isValid(new Date(e.target.value))
+                    ? new Date(e.target.value)
+                    : new Date();
                   setPayload({
                     ...payload,
                     datetime_start: d.toISOString(),
                   });
                 }}
               />
+
+              {/* <DatePicker
+                selected={payload.datetime_start}
+                onChange={(date) =>
+                  setPayload({ ...payload, datetime_start: date.toISOString() })
+                }
+              /> */}
 
               <label className='block mt-5 sm:inline sm:ml-5' forhtml='endDate'>
                 <span className='text-gray-700'>End</span>
@@ -203,6 +212,7 @@ const NewDownloadModal = connect(
               <label className='block mt-6 mb-2' forhtml='products'>
                 <span className='text-gray-700'>Products</span>
               </label>
+
               <Select
                 placeholder={appDefaultsFormSelectPlaceholder}
                 isMulti
@@ -212,7 +222,14 @@ const NewDownloadModal = connect(
                 options={products.map((p, index) => ({
                   value: p,
                   label: p.name,
+                  enabled:
+                    (!p.before && !p.after) ||
+                    parseISO(payload.datetime_start) > parseISO(p.before) ||
+                    parseISO(payload.datetime_end) < parseISO(p.after)
+                      ? false
+                      : true,
                 }))}
+                isOptionDisabled={(option) => option.enabled !== true}
                 onChange={(selectedOption) => {
                   setPayload({
                     ...payload,

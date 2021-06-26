@@ -138,12 +138,24 @@ const UserMenu = connect(
                 <div
                   className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3 cursor-pointer'
                   onClick={() => {
-                    doUpdateUrl('/admin');
+                    doUpdateUrl('/profile');
                   }}
                 >
-                  Settings
+                  My Profile
                 </div>
               </li>
+              {profile.is_admin && (
+                <li>
+                  <div
+                    className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3 cursor-pointer'
+                    onClick={() => {
+                      doUpdateUrl('/admin');
+                    }}
+                  >
+                    {(profile.is_admin && 'Admin') || null}
+                  </div>
+                </li>
+              )}
               <li>
                 <div
                   className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3 cursor-pointer'

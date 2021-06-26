@@ -23,6 +23,7 @@ import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
 import selectProductAvailabilityBundle from './product-availability-bundle';
 import downloadBundle from './download-bundle';
+//import myWatershedsBundle from './my-watersheds-bundle';
 
 // import AdminDashboard from '../pages/admin/Dashboard';
 //const mockTokenTestUser =
@@ -40,6 +41,7 @@ const mockTokenExistingAdmin =
 // Include Token With GET Request on These Routes
 const includeTokenRoutes = {
   '/downloads': true,
+  [`${process.env.REACT_APP_CUMULUS_API_URL}/my_downloads`]: true,
 };
 
 export default composeBundles(
@@ -59,6 +61,7 @@ export default composeBundles(
   selectBundle,
   selectProductAvailabilityBundle,
   downloadBundle,
+  // myWatershedsBundle,
   createAuthBundle({
     appId: '20a4794c-91c3-4080-a42c-d9c0bda332a4',
     redirectOnLogout: '/',
@@ -75,10 +78,7 @@ export default composeBundles(
         if (method === 'GET') {
           // Include Token on Any Routes that start with /my_
           // or are explicitly whitelisted in the object
-          if (
-            path.slice(0, 4) === '/my_' ||
-            includeTokenRoutes.hasOwnProperty(path)
-          ) {
+          if (includeTokenRoutes.hasOwnProperty(path)) {
             return false;
           }
           return true;

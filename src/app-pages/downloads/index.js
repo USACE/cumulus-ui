@@ -8,7 +8,13 @@ import { formatDistanceStrict, formatDistanceToNow, parseISO } from 'date-fns';
 
 // import Banner from '../../app-components/Banner';
 
-const HEADERS = ['Basin', 'Requested', 'Processing Time', 'Download'];
+const HEADERS = [
+  'Watershed',
+  'Products',
+  'Requested',
+  'Processing Time',
+  'Download',
+];
 
 const ProgressBar = ({ percent }) => {
   return (
@@ -36,10 +42,14 @@ const TableRow = ({ item, doModalOpen }) => {
   // const procStart = DateTime.fromISO(item.processing_start);
   // const procEnd = DateTime.fromISO(item.processing_end);
   // const dur = procEnd.diff(procStart, 'seconds');
-  const dur = formatDistanceStrict(
-    parseISO(item.processing_start),
-    parseISO(item.processing_end)
-  );
+  const dur =
+    item && item.processing_start && item.processing_end
+      ? formatDistanceStrict(
+          parseISO(item.processing_start),
+          parseISO(item.processing_end),
+          { roundingMethod: 'ceil' }
+        )
+      : '';
 
   const DownloadNow = ({ href }) => (
     <a href={href}>
@@ -85,13 +95,15 @@ const TableRow = ({ item, doModalOpen }) => {
     <tr>
       {/* Basin */}
       <td className='p-2 text-left cursor-pointer'>{item.watershed_name}</td>
+      {/* Products */}
+      <td className='p-2 text-left cursor-pointer'>{item.product_id}</td>
       {/* Requested */}
       <td className='p-2 text-left'>
         {formatDistanceToNow(parseISO(item.processing_start), {
           addSuffix: true,
         })}
       </td>
-      <td className='p-2 text-left'>{`${parseInt(dur.as('seconds'))}s`}</td>
+      <td className='p-2 text-left'>{dur}</td>
       <td className=''>
         {item.status === 'SUCCESS' && item.progress === 100 ? (
           <DownloadNow href={item.file} />
@@ -108,7 +120,7 @@ const TableRow = ({ item, doModalOpen }) => {
 const TableHeader = ({ title }) => (
   <th
     scope='col'
-    className='px-1 py-3 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+    className='px-2 py-3 bg-gray-300 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
   >
     {title}
   </th>
@@ -116,8 +128,9 @@ const TableHeader = ({ title }) => (
 
 export default connect(
   'selectDownloadItemsArray',
+  'selectProfileMyProfile',
   'doModalOpen',
-  ({ downloadItemsArray: items, doModalOpen }) => {
+  ({ downloadItemsArray: items, profileMyProfile: profile, doModalOpen }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -126,7 +139,7 @@ export default connect(
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* Content area */}
-        <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
+        <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-gray-100'>
           {/*  Site header */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -141,29 +154,38 @@ export default connect(
                 </div>
 
                 {/* <NewDownloadButton /> */}
-                <NewButton
-                  label={'New Download'}
-                  onClick={() => doModalOpen(NewDownloadModal, {})}
-                />
+                {profile && (
+                  <NewButton
+                    label={'New Download'}
+                    onClick={() => doModalOpen(NewDownloadModal, {})}
+                  />
+                )}
               </div>
 
               <div className='h-96 block overflow-y-auto w-full'>
                 <table className='min-w-full divide-y divide-gray-200 mt-5'>
                   <thead>
                     <tr>
-                      {HEADERS.map((h, idx) => (
-                        <TableHeader title={h} />
-                      ))}
+                      {profile &&
+                        HEADERS.map((h, idx) => <TableHeader title={h} />)}
                     </tr>
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200'>
-                    {items.map((item, index) => (
-                      <TableRow
-                        key={index}
-                        item={item}
-                        doModalOpen={doModalOpen}
-                      />
-                    ))}
+                    {profile ? (
+                      items.map((item, index) => (
+                        <TableRow
+                          key={index}
+                          item={item}
+                          doModalOpen={doModalOpen}
+                        />
+                      ))
+                    ) : (
+                      <tr>
+                        <td>
+                          Login or create an account to view/create downloads
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

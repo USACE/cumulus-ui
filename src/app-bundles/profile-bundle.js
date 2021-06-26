@@ -59,7 +59,7 @@ const profileBundle = {
   doProfileSave:
     (payload) =>
     ({ store, dispatch }) => {
-      const apiRoot = store.selectApiRoot();
+      //const apiRoot = store.selectApiRoot();
       const authToken = store.selectAuthTokenRaw();
 
       fetch(`${apiRoot}/my_profile`, {
@@ -78,12 +78,13 @@ const profileBundle = {
         })
         .then((j) => {
           dispatch({ type: 'PROFILE_SAVED' });
+          store.doUpdateUrl('/profile');
         });
     },
   doProfileTokenCreate:
     (item) =>
     ({ dispatch, store }) => {
-      const apiRoot = store.selectApiRoot();
+      //const apiRoot = store.selectApiRoot();
       const authToken = store.selectAuthTokenRaw();
 
       dispatch({ type: 'PROFILE_TOKEN_CREATE_START' });
@@ -112,7 +113,7 @@ const profileBundle = {
     ({ store, dispatch }) => {
       dispatch({ type: 'PROFILE_TOKEN_DELETE_START' });
 
-      const apiRoot = store.selectApiRoot();
+      //const apiRoot = store.selectApiRoot();
       const authToken = store.selectAuthTokenRaw();
 
       fetch(`${apiRoot}/my_tokens/${item.token_id}`, {

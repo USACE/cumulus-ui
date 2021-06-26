@@ -2,7 +2,7 @@ import React from 'react';
 
 function HomeBanner() {
   return (
-    <section class='text-gray-600 body-font'>
+    <section className='text-gray-600 body-font'>
       <div className='text-center mb-10'>
         <h1 className='text-5xl'>
           <strong className='font-sans font-black'>Meteorology</strong>

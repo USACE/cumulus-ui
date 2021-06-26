@@ -88,7 +88,7 @@ export default connect(
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {/* Content area */}
-          <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden  lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
+          <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden  bg-gray-100'>
             {/*  Site header */}
             <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -111,38 +111,42 @@ export default connect(
 
                 <div className='grid grid-cols-1 xl:grid-cols-3 gap-8'>
                   {/* {Start Left Grid Column} */}
-                  <div className='col-span-2 p-3 bg-white'>
-                    <span className='block font-bold text-gray-500 text-md text-secondary uppercase tracking-wider border-gray-100 border-b-2'>
-                      Product Description
-                    </span>
+                  <div className='col-span-2'>
+                    <div className='bg-white p-3 shadow-md'>
+                      <span className='block font-bold text-gray-500 text-md text-secondary uppercase tracking-wider border-gray-100 border-b-2'>
+                        Product Description
+                      </span>
 
-                    <p className='p-2 h-56 lg:max-h-60 lg:overflow-y-auto'>
-                      {product.description}
-                    </p>
+                      <p className='p-2 h-56 lg:max-h-60 lg:overflow-y-auto'>
+                        {product.description}
+                      </p>
+                    </div>
 
                     {/* {Start Availability} */}
-                    <div className='mt-8 bg-white min-h-0'>
-                      <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider mr-4 border-gray-100 border-b-2'>
-                        Availability Details
-                      </span>
-                      <hr />
-                      <div className='w-full overflow-y-auto overscroll-contain h-96'>
-                        {isLoading || !productAvailability ? (
-                          <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
-                        ) : (
-                          productYears
-                            .reverse()
-                            .map((year, idx) => (
-                              <AvailabilityCalendar
-                                key={idx}
-                                year={year}
-                                dates={productAvailability.date_counts}
-                                classForValue={classForValue(
-                                  product.temporal_resolution
-                                )}
-                              />
-                            ))
-                        )}
+                    <div className='mt-8 min-h-0'>
+                      <div className='bg-white p-3 shadow-md'>
+                        <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider mr-4 border-gray-100 border-b-2'>
+                          Availability Details
+                        </span>
+                        <hr />
+                        <div className='w-full overflow-y-auto overscroll-contain h-96'>
+                          {isLoading || !productAvailability ? (
+                            <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
+                          ) : (
+                            productYears
+                              .reverse()
+                              .map((year, idx) => (
+                                <AvailabilityCalendar
+                                  key={idx}
+                                  year={year}
+                                  dates={productAvailability.date_counts}
+                                  classForValue={classForValue(
+                                    product.temporal_resolution
+                                  )}
+                                />
+                              ))
+                          )}
+                        </div>
                       </div>
                     </div>
                     {/* {End Availability} */}
@@ -150,7 +154,7 @@ export default connect(
                   {/* {Start Left Grid Column} */}
 
                   {/* {Start Right Grid Column} */}
-                  <div className='col-span-1 row-span-1 m-0 p-3 min-h-0 bg-gray-50 border-2 border-gray-100'>
+                  <div className='col-span-1 row-span-1 m-0 p-3 min-h-0 bg-white shadow-md'>
                     <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider block'>
                       Product Metadata
                     </span>

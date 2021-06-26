@@ -9,7 +9,7 @@ import LatestUpdates from './latest-updates';
 import HomeBanner from './home-banner';
 // import Banner from '../../app-components/Banner';
 
-function Dashboard() {
+function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -18,7 +18,7 @@ function Dashboard() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Content area */}
-      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden lg:bg-red-200 sm:bg-yellow-300 xl:bg-green-400 2xl:bg-white'>
+      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-gray-100'>
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -31,7 +31,7 @@ function Dashboard() {
             <div className='flex flex-wrap'>
               <div className='p-5 w-full xl:w-1/2'>
                 <a href='/products'>
-                  <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-blue-800 text-white text-2xl rounded-lg'>
+                  <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-blue-800 text-white text-2xl rounded-lg shadow-md'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       className='h-6 w-6 inline mr-2 mb-1'
@@ -49,24 +49,26 @@ function Dashboard() {
                     Explore Products
                   </button>
                 </a>
-                <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-green-800 text-white text-2xl rounded-lg'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 inline mr-2 mb-1'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
-                    />
-                  </svg>
-                  Download Data
-                </button>
-                <button className='w-full xl:w-2/3 text-left p-5 bg-gray-500 text-white text-2xl rounded-lg'>
+                <a href='/downloads'>
+                  <button className='w-full xl:w-2/3 text-left p-5 mb-5 bg-green-800 text-white text-2xl rounded-lg shadow-md'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-6 w-6 inline mr-2 mb-1'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
+                      />
+                    </svg>
+                    Download Data
+                  </button>
+                </a>
+                <button className='w-full xl:w-2/3 text-left p-5 bg-gray-500 text-white text-2xl rounded-lg shadow-md'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-6 w-6 inline mr-2 mb-1'
@@ -95,4 +97,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Home;

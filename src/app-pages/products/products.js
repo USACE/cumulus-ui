@@ -23,6 +23,7 @@ function ProductImage(param) {
     case 'SNOW MELT':
     case 'SNOWTEMP':
     case 'SWE':
+    case 'COLD CONTENT':
       return snowFlake;
     default:
       return rainCloud;
@@ -109,7 +110,7 @@ const ProductRow = (p, idx, tagsObj) => (
 );
 
 const ProductTableHeader = () => (
-  <thead className='bg-gray-100'>
+  <thead className='bg-gray-300'>
     <tr>
       {['Product Name', 'Tags', 'First Record', 'Last Record', 'Stats'].map(
         (c) => {
@@ -146,7 +147,7 @@ function Products({
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Content area */}
-      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
+      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-gray-100'>
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
