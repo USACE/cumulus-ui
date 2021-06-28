@@ -29,23 +29,38 @@ const Entry = (props) => {
 
 function LatestUpdates() {
   return (
-    <section className='text-gray-600 body-font bg-white rounded-lg shadow-md'>
+    <section className='text-gray-600 body-font bg-white rounded-lg shadow-md h-96 lg:h-screen overflow-y-auto'>
       <div className='container px-5 py-5 mx-auto flex flex-wrap'>
         <div className='w-full text-2xl font-bold py-5'>Latest Updates</div>
         <Entry
           date='June 2021'
           title='MBRFC (KRF) Forecast and Airtemp Products Added'
-          content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus sagittis est sed accumsan. '
+          content='Added additional gridded products krf qpe, krf qpf, krf airtemp to Cumulus. KRF products are related to the Missouri Basin River Forecast Center (MBRFC).'
         />
         <Entry
           date='June 2021'
-          title='NAEFS QPF and QTF Products Added'
-          content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus sagittis est sed accumsan. Morbi volutpat, ex vitae blandit hendrerit, felis nibh suscipit urna, non malesuada lacus libero vitae lorem. Duis quis aliquam nibh. Morbi tempor eros risus, sit amet bibendum nibh scelerisque eu. Etiam eu lobortis nunc. Duis vulputate odio magna, non consectetur nisi vulputate sit amet. Vivamus quis ipsum elementum, congue libero eget, viverra lorem. Etiam a porta justo. Ut vel vestibulum nunc. Phasellus vitae egestas quam.'
+          title='NAEFS QPF and QTF (CONUS, Forecast) Products Added'
+          content='Added additional gridded products NAEFS QPF and NAEFS QTF to Cumulus. North America Ensemble Forecast System (NAEFS) products where requested by MVD for precipitation and air temperature forecasts.'
         />
         <Entry
           date='May 2021'
-          title='WRF Columbia Precip and AirTemp Archive Loaded'
-          content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus sagittis est sed accumsan. Morbi volutpat, ex vitae blandit hendrerit, felis nibh suscipit urna, non malesuada lacus libero vitae lorem. Duis quis aliquam nibh. Morbi tempor eros risus, sit amet bibendum nibh scelerisque eu. Etiam eu lobortis nunc. Duis vulputate odio magna, non consectetur nisi vulputate sit amet.'
+          title='WRF Columbia Precip and AirTemp Archive Added'
+          content='Weather Research and Forecasting (WRF) Model is a mesocale numerical weather prediction framework designed for operational forecasting and atmospheric research needs.  Precip and AirTemp data for the period of Water Year 1928-2017 was loaded for the Columbia River Basin.'
+        />
+        <Entry
+          date='May 2021'
+          title='NDFD QPF and AirTemp Products (CONUS, Forecast) Added'
+          content='The National Digital Forecast Database (NDFD) is a suite of gridded forecasts of sensible weather elements (e.g., cloud cover, maximum temperature).'
+        />
+        <Entry
+          date='May 2021'
+          title='NBM QPF and AirTemp Products (CONUS, Forecast) Added'
+          content='The National Blend of Models (NBM) is a nationally consistent and skillful suite of calibrated forecast guidance based on a blend of both NWS and non-NWS numerical weather prediction model data and post-processed model guidance. The goal of the NBM is to create a highly accurate, skillful and consistent starting point for the gridded forecast. This new way to produce NDFD grids will be helpful providing forecasters with a suite of information to use for their forecasts. The NBM is considered an important part of the efforts to evolve NWS capabilities to achieve a Weather-Ready Nation.'
+        />
+        <Entry
+          date='April 2021'
+          title='Added SNODAS Interpolated'
+          content='Added processing for SNODAS Interpolated Products and loaded archive back to 2010.  SNODAS Interpolated provides estimates of snow pack parameters over water bodies. This may be useful for modeling water volume contained in the snowpack atop frozen lakes in cold climates.'
         />
       </div>
     </section>

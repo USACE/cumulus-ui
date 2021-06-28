@@ -2,6 +2,7 @@ import { createRouteBundle } from 'redux-bundler';
 
 // import Home from '../app-pages/home';
 import Dashboard from '../app-pages/home';
+import fourOhFour from '../app-pages/fourOhFour';
 import AdminDashboard from '../app-pages/admin';
 import AdminProducts from '../app-pages/admin/products/index';
 import AdminTags from '../app-pages/admin/tags/index';
@@ -31,4 +32,5 @@ export default createRouteBundle({
   '/downloads': Downloads,
   '/profile': Profile,
   '/profile/create': ProfileCreate,
+  '*': fourOhFour,
 });

@@ -1,24 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
 import { NewButton } from '../forms/buttons';
 import NewDownloadModal from '../modals/new-download-modal';
-import { formatDistanceStrict, formatDistanceToNow, parseISO } from 'date-fns';
+import {
+  formatDistanceStrict,
+  formatDistanceToNow,
+  parseISO,
+  format,
+} from 'date-fns';
 
 // import Banner from '../../app-components/Banner';
 
 const HEADERS = [
   'Watershed',
   'Products',
+  'Time Window',
   'Requested',
   'Processing Time',
   'Download',
 ];
 
+const Products = connect(
+  'selectProductItemsObject',
+  'doProductFetch',
+  ({ productItemsObject: productsObj, downloadProducts, doProductFetch }) => {
+    useEffect(() => {
+      doProductFetch();
+    }, [doProductFetch]);
+    return (
+      <div className='max-w-md'>
+        {/* {JSON.stringify(productsObj)} */}
+        {downloadProducts &&
+          productsObj &&
+          downloadProducts.map((dp, idx) => (
+            <span
+              className='inline-block bg-gray-300 mr-1 mb-1 p-1 text-xs rounded'
+              key={idx}
+            >
+              {productsObj[dp].name}
+            </span>
+          ))}
+      </div>
+    );
+  }
+);
+
 const ProgressBar = ({ percent }) => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col px-2'>
       {/* Percent Complete */}
       <div className='w-100 text-right'>
         <span className='text-xs font-mono'>{percent}%</span>
@@ -96,7 +127,18 @@ const TableRow = ({ item, doModalOpen }) => {
       {/* Basin */}
       <td className='p-2 text-left cursor-pointer'>{item.watershed_name}</td>
       {/* Products */}
-      <td className='p-2 text-left cursor-pointer'>{item.product_id}</td>
+      <td className='p-2 text-left cursor-pointer'>
+        {/* {item.product_id} */}
+        <Products downloadProducts={item.product_id} />
+      </td>
+      <td className='p-2 text-left text-sm text-gray-500'>
+        <span className='block mb-1'>
+          Start: {format(parseISO(item.datetime_start), 'ddLLLyyyy @ p')}
+        </span>
+        <span className='block'>
+          End: {format(parseISO(item.datetime_end), 'ddLLLyyyy @ p')}
+        </span>
+      </td>
       {/* Requested */}
       <td className='p-2 text-left'>
         {formatDistanceToNow(parseISO(item.processing_start), {

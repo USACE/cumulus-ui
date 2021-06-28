@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import { parseISO, isValid } from 'date-fns';
+import { SaveButton, CancelButton } from '../forms/buttons';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
 
-// import Pill from '../../../app-components/pill';
+// import Pill from '../../app-components/pill';
 
 import Select from 'react-select';
 
@@ -63,29 +64,29 @@ const NewDownloadModal = connect(
     );
 
     const ProductGroupPill = ({ product }) => {
-      const productIconGroupClasses = {
-        PRECIPITATION: {
-          icon: 'mdi-weather-pouring text-blue-800',
-          background: 'bg-blue-600',
-          text: 'text-white',
-        },
-        SNOW: {
-          icon: 'mdi-snowflake text-blue-500',
-          background: 'bg-blue-400',
-          text: 'text-white',
-        },
-        TEMPERATURE: {
-          icon: 'mdi-thermometer text-red-600',
-          background: 'bg-red-500',
-          text: 'text-white',
-        },
-      };
+      // const productIconGroupClasses = {
+      //   PRECIPITATION: {
+      //     icon: 'mdi-weather-pouring text-blue-800',
+      //     background: 'bg-blue-600',
+      //     text: 'text-white',
+      //   },
+      //   SNOW: {
+      //     icon: 'mdi-snowflake text-blue-500',
+      //     background: 'bg-blue-400',
+      //     text: 'text-white',
+      //   },
+      //   TEMPERATURE: {
+      //     icon: 'mdi-thermometer text-red-600',
+      //     background: 'bg-red-500',
+      //     text: 'text-white',
+      //   },
+      // };
 
       return (
         // <Pill
-        //   bgClass={productIconGroupClasses[product.group]['background']}
-        //   iconClass={productIconGroupClasses[product.group]['icon']}
-        //   label={product.group}
+        //   bgClass={productIconGroupClasses[product.parameter]['background']}
+        //   iconClass={productIconGroupClasses[product.parameter]['icon']}
+        //   label={product.parameter}
         // />
         <></>
       );
@@ -139,13 +140,33 @@ const NewDownloadModal = connect(
       >
         <form className='p-6' onSubmit={handleSubmit}>
           <fieldset>
-            <legend className='mb-3 text-2xl'>DSS Download</legend>
+            <div className='flex flex-row justify-between p-2 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg'>
+              <legend className='mb-3 text-2xl'>DSS Download</legend>
+              <svg
+                className='w-6 h-6 cursor-pointer'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'
+                onClick={(e) => {
+                  doModalClose();
+                }}
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M6 18L18 6M6 6l12 12'
+                ></path>
+              </svg>
+            </div>
+
             <div className='mt-4'>
               <div className='p-1 mb-2 block xl:bg-gray-100 font-bold text-gray-600 text-sm text-secondary uppercase tracking-wider'>
                 Time Window
               </div>
               {/* <label forhtml="startDate">Start:</label> */}
-              <label className='block mt-5 sm:inline' forhtml='startDate'>
+              <label className='block mt-5 sm:inline mr-2' forhtml='startDate'>
                 <span className='text-gray-700'>Start</span>
               </label>
               {/* <StartDatePicker /> */}
@@ -153,7 +174,7 @@ const NewDownloadModal = connect(
                 id='startDate'
                 name='startDate'
                 type='date'
-                className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
+                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 onChange={(e) => {
                   const d = isValid(new Date(e.target.value))
                     ? new Date(e.target.value)
@@ -172,14 +193,17 @@ const NewDownloadModal = connect(
                 }
               /> */}
 
-              <label className='block mt-5 sm:inline sm:ml-5' forhtml='endDate'>
+              <label
+                className='block mt-5 sm:inline sm:ml-5 mr-2'
+                forhtml='endDate'
+              >
                 <span className='text-gray-700'>End</span>
               </label>
               <input
                 id='endDate'
                 name='endDate'
                 type='date'
-                className='border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'
+                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 onChange={(e) => {
                   const d = new Date(e.target.value);
                   d.setUTCHours(23, 59, 59);
@@ -241,7 +265,7 @@ const NewDownloadModal = connect(
                 }}
               />
             </div>
-            <div className='mt-6'>
+            <div className='mt-6 hidden'>
               <label className='block mt-6 mb-2'>
                 <span className='text-gray-700'>JSON Payload</span>
               </label>
@@ -254,21 +278,15 @@ const NewDownloadModal = connect(
               </div>
             </div>
 
-            <div className='flex'>
-              <button
-                onClick={handleSubmit}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Submit
-              </button>
-              <button
+            <div className='flex mt-6'>
+              <SaveButton label='Submit' onClick={handleSubmit} />
+              <CancelButton
+                className='ml-2'
+                label='Cancel'
                 onClick={(e) => {
                   doModalClose();
                 }}
-                className='ml-3 bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 mt-10 rounded mt-3'
-              >
-                Cancel
-              </button>
+              />
             </div>
           </fieldset>
         </form>
