@@ -67,7 +67,7 @@ export default connect('selectProfileTokens', ({ profileTokens: tokens }) => (
     <div className='flex flex-row justify-between mb-2'>
       <span className='font-bold text-gray-600 text-md text-secondary uppercase tracking-wider inline'>
         My Tokens
-        <span className=' ml-3 px-2 py-1 rounded-full bg-blue-800 text-white rounded'>
+        <span className=' ml-3 px-2 py-1 rounded-full bg-blue-800 text-white'>
           {tokens.length}
         </span>
       </span>

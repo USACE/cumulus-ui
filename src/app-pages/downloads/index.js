@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
+import PageHeading from '../../app-components/page-heading';
+
 import { NewButton } from '../forms/buttons';
 import NewDownloadModal from '../modals/new-download-modal';
 import {
@@ -35,12 +37,14 @@ const Products = connect(
         {downloadProducts &&
           productsObj &&
           downloadProducts.map((dp, idx) => (
-            <span
-              className='inline-block bg-gray-300 mr-1 mb-1 p-1 text-xs rounded'
-              key={idx}
-            >
-              {productsObj[dp].name}
-            </span>
+            <a href={'/products/' + productsObj[dp].id}>
+              <span
+                className='inline-block bg-gray-300 hover:bg-blue-300 cursor-pointer mr-1 mb-1 p-1 text-xs rounded'
+                key={idx}
+              >
+                {productsObj[dp].name}
+              </span>
+            </a>
           ))}
       </div>
     );
@@ -125,9 +129,9 @@ const TableRow = ({ item, doModalOpen }) => {
   return (
     <tr>
       {/* Basin */}
-      <td className='p-2 text-left cursor-pointer'>{item.watershed_name}</td>
+      <td className='p-2 text-left'>{item.watershed_name}</td>
       {/* Products */}
-      <td className='p-2 text-left cursor-pointer'>
+      <td className='p-2 text-left'>
         {/* {item.product_id} */}
         <Products downloadProducts={item.product_id} />
       </td>
@@ -191,9 +195,7 @@ export default connect(
               {/* <WelcomeBanner /> */}
 
               <div className='flex justify-between'>
-                <div className='font-bold text-gray-600 text-md text-secondary uppercase tracking-wider mr-4'>
-                  My Downloads
-                </div>
+                <PageHeading heading='My Downloads' />
 
                 {/* <NewDownloadButton /> */}
                 {profile && (

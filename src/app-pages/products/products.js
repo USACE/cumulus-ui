@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
+import PageHeading from '../../app-components/page-heading';
 import {
   formatDistance,
   formatDistanceToNow,
@@ -153,6 +154,7 @@ function Products({
 
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
+            <PageHeading heading='Product Catalog' className='mb-5' />
             {/* {Param Filter} */}
             <label className='inline-block mb-2 mr-2' forhtml='param'>
               <span className='text-gray-600'>Parameter Filter</span>

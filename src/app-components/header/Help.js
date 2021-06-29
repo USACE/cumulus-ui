@@ -72,11 +72,17 @@ function Help() {
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className='text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4'>
+          <div className='text-xs font-semibold text-gray-400 hover:text-blue-500 uppercase pt-1.5 pb-2 px-4'>
             Need help?
           </div>
           <ul>
             <li>
+              <a
+                className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3'
+                href='/help'
+              >
+                Need help?
+              </a>
               {/* <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
                 to="#0"

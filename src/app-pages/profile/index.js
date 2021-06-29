@@ -58,7 +58,7 @@ export default connect(
                   </div>
 
                   {/* <!--second row --> */}
-                  <div className='grid grid-cols-1'>
+                  <div className='grid grid-cols-1 w-full 2xl:w-2/3'>
                     <div className='m-3 p-3 bg-white min-h-0 shadow-md rounded'>
                       <MyTokens />
                     </div>

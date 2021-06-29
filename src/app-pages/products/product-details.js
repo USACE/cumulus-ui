@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
-import PageHeading from '../../app-components/page-heading';
 
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
@@ -97,10 +96,14 @@ export default connect(
                 {/* Welcome banner */}
                 {/* <WelcomeBanner /> */}
 
-                <PageHeading
-                  heading={product.name}
-                  subHeading={product.suite}
-                />
+                <div className='mb-3 pl-3 bg-gray-100 rounded-md p-3'>
+                  <h2 className='text-2xl lg:text-4xl font-bold text-gray-600 m-0'>
+                    {product.name}
+                  </h2>
+                  <div className='text-secondary text-gray-600 font-medium tracking-tight'>
+                    {product.suite}
+                  </div>
+                </div>
 
                 {/* <div className='flex flex-wrap'>
                   <div className='p-5 w-full xl:w-1/2'></div>
