@@ -64,7 +64,7 @@ function Home() {
                 </a>
               </div>
               <div className='p-4 md:w-1/3 sm:w-1/2 w-full'>
-                <a href='/docs#cavi-script'>
+                <a href='/docs/rts-script'>
                   <div className='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-xl'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

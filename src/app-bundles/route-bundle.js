@@ -20,6 +20,7 @@ import Help from '../app-pages/help/index';
 import Docs from '../app-pages/docs/index';
 import Contact from '../app-pages/contact/index';
 import DocsApi from '../app-pages/docs/api';
+import DocsRtsScript from '../app-pages/docs/rts-script';
 
 export default createRouteBundle({
   '/': Dashboard,
@@ -40,5 +41,6 @@ export default createRouteBundle({
   '/docs': Docs,
   '/contact': Contact,
   '/docs/api': DocsApi,
+  '/docs/rts-script': DocsRtsScript,
   '*': fourOhFour,
 });
