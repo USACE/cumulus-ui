@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import { parseISO, isValid } from 'date-fns';
 import { SaveButton, CancelButton } from '../forms/buttons';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 // import Pill from '../../app-components/pill';
 
@@ -27,8 +27,8 @@ const NewDownloadModal = connect(
     productsSelected,
   }) => {
     const [payload, setPayload] = useState({
-      datetime_start: datetimeStart,
-      datetime_end: datetimeEnd,
+      datetime_start: datetimeStart || new Date(),
+      datetime_end: datetimeEnd || new Date(),
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],
     });
@@ -37,8 +37,8 @@ const NewDownloadModal = connect(
       e.preventDefault();
       if (
         !payload ||
-        !payload.datetime_start ||
-        !payload.datetime_end ||
+        (!payload.datetime_start && isValid(payload.datetime_start)) ||
+        (!payload.datetime_end && isValid(payload.datetime_end)) ||
         !payload.watershed_id ||
         !payload.product_id ||
         !payload.product_id.length
@@ -104,36 +104,9 @@ const NewDownloadModal = connect(
       );
     };
 
-    // const StartDatePicker = () => {
-    //   const [startDate, setStartDate] = useState(new Date());
-    //   return (
-    //     <DatePicker
-    //       className="border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-    //       selected={startDate}
-    //       // id="startDate"
-    //       // name="startDate"
-    //       // type="date"
-    //       onChange={(date) => setStartDate(date)}
-    //       onCalendarClose={(e) => {
-    //         setPayload({
-    //           ...payload,
-    //           datetime_start: startDate.toISOString(),
-    //         });
-    //       }}
-    //       // onCalendarClose={(e) => {
-    //       //   alert(e);
-    //       //   setPayload({
-    //       //     ...payload,
-    //       //     datetime_start: startDate.toISOString(),
-    //       //   });
-    //       // }}
-    //     />
-    //   );
-    // };
-
     return (
       <div
-        className='inline-block overflow-visible align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full'
+        className='inline-block overflow-visible align-bottom bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full'
         role='dialog'
         aria-modal='true'
         aria-labelledby='modal-headline'
@@ -166,11 +139,25 @@ const NewDownloadModal = connect(
                 Time Window
               </div>
               {/* <label forhtml="startDate">Start:</label> */}
-              <label className='block mt-5 sm:inline mr-2' forhtml='startDate'>
+              <label className='block mt-5 mr-2' forhtml='startDate'>
                 <span className='text-gray-700'>Start</span>
               </label>
               {/* <StartDatePicker /> */}
-              <input
+              <DatePicker
+                id='startDate'
+                name='startDate'
+                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
+                selected={payload.datetime_start}
+                showTimeSelect
+                dateFormat='MMMM d, yyyy h:mm aa'
+                onChange={(date) =>
+                  setPayload({
+                    ...payload,
+                    datetime_start: date,
+                  })
+                }
+              />
+              {/* <input
                 id='startDate'
                 name='startDate'
                 type='date'
@@ -184,22 +171,13 @@ const NewDownloadModal = connect(
                     datetime_start: d.toISOString(),
                   });
                 }}
-              />
-
-              {/* <DatePicker
-                selected={payload.datetime_start}
-                onChange={(date) =>
-                  setPayload({ ...payload, datetime_start: date.toISOString() })
-                }
               /> */}
-
-              <label
-                className='block mt-5 sm:inline sm:ml-5 mr-2'
-                forhtml='endDate'
-              >
-                <span className='text-gray-700'>End</span>
+            </div>
+            <div className='mt-3'>
+              <label className='block mt-5' forhtml='endDate'>
+                <span className='blocktext-gray-700 w-48'>End</span>
               </label>
-              <input
+              {/* <input
                 id='endDate'
                 name='endDate'
                 type='date'
@@ -212,6 +190,21 @@ const NewDownloadModal = connect(
                     datetime_end: d.toISOString(),
                   });
                 }}
+              /> */}
+
+              <DatePicker
+                id='endDate'
+                name='endDate'
+                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
+                selected={payload.datetime_end}
+                showTimeSelect
+                dateFormat='MMMM d, yyyy h:mm aa'
+                onChange={(date) =>
+                  setPayload({
+                    ...payload,
+                    datetime_end: date,
+                  })
+                }
               />
             </div>
             <div className='mt-3'>
@@ -239,6 +232,7 @@ const NewDownloadModal = connect(
 
               <Select
                 placeholder={appDefaultsFormSelectPlaceholder}
+                closeMenuOnSelect={false}
                 isMulti
                 formatOptionLabel={({ value, label, customAbbreviation }) => (
                   <ProductLabel product={value} />

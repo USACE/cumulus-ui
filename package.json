@@ -12,6 +12,7 @@
     "ag-grid-react": "^25.3.0",
     "date-fns": "^2.21.3",
     "internal-nav-helper": "^3.1.0",
+    "mobx": "^6.3.2",
     "moment": "^2.29.1",
     "money-clip": "^3.0.3",
     "ol": "^6.5.0",
@@ -24,8 +25,10 @@
     "react-select": "^4.3.1",
     "react-tooltip": "^4.2.21",
     "react-transition-group": "^4.4.1",
+    "redoc": "^2.0.0-rc.54",
     "redux-bundler": "^28.0.2",
     "redux-bundler-react": "^1.2.0",
+    "styled-components": "^5.3.0",
     "web-vitals": "^1.1.2",
     "xhr": "^2.6.0"
   },

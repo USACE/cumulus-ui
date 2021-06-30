@@ -19,6 +19,7 @@ import ProfileCreate from '../app-pages/profile/create';
 import Help from '../app-pages/help/index';
 import Docs from '../app-pages/docs/index';
 import Contact from '../app-pages/contact/index';
+import DocsApi from '../app-pages/docs/api';
 
 export default createRouteBundle({
   '/': Dashboard,
@@ -38,5 +39,6 @@ export default createRouteBundle({
   '/help': Help,
   '/docs': Docs,
   '/contact': Contact,
+  '/docs/api': DocsApi,
   '*': fourOhFour,
 });
