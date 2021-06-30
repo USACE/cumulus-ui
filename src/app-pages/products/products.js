@@ -140,7 +140,7 @@ function Products({
     doProductFetch();
   }, [doProductFetch]);
 
-  const [payload, setPayload] = useState({ param: null });
+  const [payload, setPayload] = useState({ param: '' });
 
   return (
     <div className='flex h-screen overflow-hidden'>
@@ -164,7 +164,7 @@ function Products({
               className='inline-block w-60 mb-2'
               placeholder={'Show All'}
               options={[
-                { value: null, label: 'Show All' },
+                { value: '', label: 'Show All' },
                 { value: 'PRECIP', label: 'Precip' },
                 { value: 'AIRTEMP', label: 'AirTemp' },
               ]}
@@ -187,8 +187,7 @@ function Products({
                           (payload &&
                             payload.param === p.parameter &&
                             ProductRow(p, idx, tagsObj)) ||
-                          (payload.param === null &&
-                            ProductRow(p, idx, tagsObj))
+                          (payload.param === '' && ProductRow(p, idx, tagsObj))
                       )
                     : null}
                 </tbody>
