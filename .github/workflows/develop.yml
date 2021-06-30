@@ -7,7 +7,7 @@ name: CI Build User Interface
 on:
   push:
     branches:
-      - new-develop
+      - develop
 jobs:
   build:
     env:
