@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
@@ -66,11 +66,13 @@ export default connect(
   'selectProductYearsByRoute',
   'selectProductavailabilityByRoute',
   'selectProductavailabilityIsLoading',
+  'doProductavailabilityFetch',
   ({
     productByRoute: product,
     productYearsByRoute: productYears,
     productavailabilityByRoute: productAvailability,
     productavailabilityIsLoading: isLoading,
+    doProductavailabilityFetch,
   }) => {
     // Color Ramp Depends on Hourly vs. Daily temporal_resolution
     const classForValue = (resolution) => {
@@ -79,6 +81,20 @@ export default connect(
         : colorClassBinary;
     };
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    let heatmap_truncate_message = null;
+    if (productYears.length > 20) {
+      productYears = productYears.slice(-20);
+      heatmap_truncate_message =
+        'The heatmap below has been truncated for performance reasons.';
+    }
+
+    // const [reload, setReload] = useState(1);
+
+    const handleRefreshClick = useCallback(() => {
+      doProductavailabilityFetch();
+      //setReload((p) => p + 1);
+    }, [doProductavailabilityFetch]);
 
     return (
       product && (
@@ -128,15 +144,41 @@ export default connect(
                     {/* {Start Availability} */}
                     <div className='mt-8 min-h-0'>
                       <div className='bg-white p-3 shadow-md'>
-                        <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider mr-4 border-gray-100 border-b-2'>
-                          Availability Details
-                        </span>
+                        <div className='flex justify-between'>
+                          <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider mr-4 border-gray-100 border-b-2'>
+                            Availability Details
+                          </span>
+                          <span className='text-sm text-gray-500 bg-yellow-200'>
+                            {heatmap_truncate_message}
+                          </span>
+                          <span
+                            className='cursor-pointer text-gray-400 hover:text-black'
+                            onClick={handleRefreshClick}
+                          >
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              className='h-5 w-5 inline'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth={2}
+                                d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
+                              />
+                            </svg>
+                          </span>
+                        </div>
+
                         <hr />
                         <div className='w-full overflow-y-auto overscroll-contain h-96'>
                           {isLoading || !productAvailability ? (
                             <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
                           ) : (
                             productYears
+                              .reverse()
                               .reverse()
                               .map((year, idx) => (
                                 <AvailabilityCalendar
