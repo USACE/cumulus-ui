@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { connect } from 'redux-bundler-react';
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
+import ProductTags from '../../app-components/ProductTags';
 
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
@@ -121,11 +122,6 @@ export default connect(
                   </div>
                 </div>
 
-                {/* <div className='flex flex-wrap'>
-                  <div className='p-5 w-full xl:w-1/2'></div>
-                  <div className='w-full xl:w-1/2'>hello</div>
-                </div> */}
-
                 {/* <!--main grid container--> */}
 
                 <div className='grid grid-cols-1 xl:grid-cols-3 gap-8'>
@@ -200,7 +196,7 @@ export default connect(
 
                   {/* {Start Right Grid Column} */}
                   <div className='col-span-1 row-span-1 m-0 p-3 min-h-0 bg-white shadow-md'>
-                    <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider block'>
+                    <span className='font-bold text-gray-500 text-md text-secondary uppercase tracking-wider block border-b-2 border-gray-100'>
                       Product Metadata
                     </span>
 
@@ -280,12 +276,7 @@ export default connect(
                               Tags:
                             </td>
                             <td className='p-1'>
-                              <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-                                {product.is_realtime && 'Realtime'}
-                              </span>
-                              <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800'>
-                                {product.is_forecast && 'Forecast'}
-                              </span>
+                              <ProductTags productTags={product.tags} />
                             </td>
                           </tr>
                         </tbody>
