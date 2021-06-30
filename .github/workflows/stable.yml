@@ -13,6 +13,7 @@ jobs:
     env:
       REACT_APP_CUMULUS_API_URL: https://cumulus-api.rsgis.dev
       REACT_APP_SHARED_API_URL: https://shared-api.rsgis.dev
+      REACT_APP_ISDEVELOPMENT: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
