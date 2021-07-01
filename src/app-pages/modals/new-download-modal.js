@@ -146,7 +146,7 @@ const NewDownloadModal = connect(
               <DatePicker
                 id='startDate'
                 name='startDate'
-                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
+                className='w-56 border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 selected={payload.datetime_start}
                 showTimeSelect
                 dateFormat='MMMM d, yyyy h:mm aa'
@@ -195,7 +195,7 @@ const NewDownloadModal = connect(
               <DatePicker
                 id='endDate'
                 name='endDate'
-                className='border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
+                className='w-56 border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 selected={payload.datetime_end}
                 showTimeSelect
                 dateFormat='MMMM d, yyyy h:mm aa'
