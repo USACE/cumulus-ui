@@ -86,10 +86,28 @@ const TableRow = ({ item, doModalOpen }) => {
         )
       : '';
 
+  // const NewDownloadCopy = () => (
+  //   <svg
+  //     xmlns='http://www.w3.org/2000/svg'
+  //     className='h-6 w-6 inline text-gray-400 hover:text-gray-700'
+  //     fill='none'
+  //     viewBox='0 0 24 24'
+  //     stroke='currentColor'
+  //   >
+  //     <title>New Download using parameters</title>
+  //     <path
+  //       strokeLinecap='round'
+  //       strokeLinejoin='round'
+  //       strokeWidth={2}
+  //       d='M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3'
+  //     />
+  //   </svg>
+  // );
+
   const DownloadNow = ({ href }) => (
     <a href={href}>
       <svg
-        className='w-6 text-gray-500 hover:text-gray-800'
+        className='w-6 text-gray-500 hover:text-gray-800 inline'
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'
@@ -110,7 +128,7 @@ const TableRow = ({ item, doModalOpen }) => {
   const DownloadFailed = () => (
     <>
       <svg
-        className='w-6 text-red-600'
+        className='w-6 text-red-600 inline'
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 20'
         fill='currentColor'
@@ -158,6 +176,7 @@ const TableRow = ({ item, doModalOpen }) => {
         ) : item.status === 'FAILED' ? (
           <DownloadFailed />
         ) : null}
+        {/* <NewDownloadCopy/> */}
       </td>
     </tr>
   );
@@ -206,7 +225,7 @@ export default connect(
                 )}
               </div>
 
-              <div className='h-96 block overflow-y-auto w-full'>
+              <div className='w-full'>
                 <table className='min-w-full divide-y divide-gray-200 mt-5'>
                   <thead>
                     <tr>
