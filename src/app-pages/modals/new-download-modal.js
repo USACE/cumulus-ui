@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
 import { parseISO, isValid } from 'date-fns';
 import { SaveButton, CancelButton } from '../forms/buttons';
@@ -15,6 +15,7 @@ const NewDownloadModal = connect(
   'selectProductItemsArray',
   'doModalClose',
   'doDownloadRequest',
+  'doWatershedFetch',
   ({
     appDefaultsFormSelectPlaceholder,
     watershedItemsArray: watersheds,
@@ -25,6 +26,7 @@ const NewDownloadModal = connect(
     datetimeEnd,
     watershedSelected,
     productsSelected,
+    doWatershedFetch,
   }) => {
     const [payload, setPayload] = useState({
       datetime_start: datetimeStart || new Date(),
@@ -32,6 +34,10 @@ const NewDownloadModal = connect(
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],
     });
+
+    useEffect(() => {
+      doWatershedFetch();
+    }, [doWatershedFetch]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -149,6 +155,7 @@ const NewDownloadModal = connect(
                 className='w-56 border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 selected={payload.datetime_start}
                 showTimeSelect
+                todayButton='Today'
                 dateFormat='MMMM d, yyyy h:mm aa'
                 onChange={(date) =>
                   setPayload({
@@ -198,6 +205,7 @@ const NewDownloadModal = connect(
                 className='w-56 border-0 border-b-2 text-gray-500 border-gray-200 focus:ring-0 focus:border-black'
                 selected={payload.datetime_end}
                 showTimeSelect
+                todayButton='Today'
                 dateFormat='MMMM d, yyyy h:mm aa'
                 onChange={(date) =>
                   setPayload({
@@ -260,7 +268,7 @@ const NewDownloadModal = connect(
               />
             </div>
             <div className='mt-6 hidden'>
-              <label className='block mt-6 mb-2'>
+              <label className='block mt-8 mb-2'>
                 <span className='text-gray-700'>JSON Payload</span>
               </label>
               <div className=''>
@@ -272,7 +280,7 @@ const NewDownloadModal = connect(
               </div>
             </div>
 
-            <div className='flex mt-6'>
+            <div className='flex mt-8'>
               <SaveButton label='Submit' onClick={handleSubmit} />
               <CancelButton
                 className='ml-2'
