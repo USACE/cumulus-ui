@@ -82,8 +82,8 @@ const Faqs = () => {
               answer='Cumulus currently produces DSS version 7 downloads.'
             />
             <Entry
-              question='Example Question?'
-              answer='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget placerat lacus. Sed feugiat quis augue in tristique. Suspendisse malesuada porta ipsum at venenatis. Vivamus ultrices ultricies fringilla. Quisque molestie aliquet sodales. Phasellus at nisl sed eros facilisis hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In malesuada, justo a condimentum feugiat, arcu orci hendrerit orci, quis hendrerit neque nulla et urna. Pellentesque bibendum nisi vel ex sollicitudin malesuada. Phasellus pulvinar purus vel ipsum aliquam sagittis. Morbi tristique turpis sodales tempus aliquam. Etiam gravida, diam eget condimentum gravida, dolor nibh ullamcorper nunc, quis venenatis diam velit vel ipsum. '
+              question='What is SNODAS Interpolated?'
+              answer='SNODAS Interpolated provides estimates of snow pack parameters over water bodies. This may be useful for modeling water volume contained in the snowpack atop frozen lakes in cold climates. '
             />
           </ul>
         </div>
