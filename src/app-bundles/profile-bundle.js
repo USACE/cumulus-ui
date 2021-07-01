@@ -44,7 +44,10 @@ const profileBundle = {
       })
         .then((resp) => {
           if (resp.status === 404) {
-            return null;
+            console.log('New User; Redirect to /profile/create');
+            store.doUpdateUrl('/profile/create');
+            return {};
+            // return null;
           }
           return resp.json();
         })
