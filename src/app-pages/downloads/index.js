@@ -155,17 +155,22 @@ const TableRow = ({ item, doModalOpen }) => {
       </td>
       <td className='p-2 text-left text-sm text-gray-500'>
         <span className='block mb-1'>
-          Start: {format(parseISO(item.datetime_start), 'ddLLLyyyy @ p')}
+          Start: {format(parseISO(item.datetime_start), 'ddLLLyyyy p')}
         </span>
         <span className='block'>
-          End: {format(parseISO(item.datetime_end), 'ddLLLyyyy @ p')}
+          End: {format(parseISO(item.datetime_end), 'ddLLLyyyy p')}
         </span>
       </td>
       {/* Requested */}
       <td className='p-2 text-left'>
-        {formatDistanceToNow(parseISO(item.processing_start), {
-          addSuffix: true,
-        })}
+        <span className='block'>
+          {formatDistanceToNow(parseISO(item.processing_start), {
+            addSuffix: true,
+          })}
+        </span>
+        <span className='block text-sm text-gray-500'>
+          {format(parseISO(item.processing_start), 'ddLLLyyyy @ p')}
+        </span>
       </td>
       <td className='p-2 text-left'>{dur}</td>
       <td className=''>
