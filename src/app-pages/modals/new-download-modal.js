@@ -242,8 +242,8 @@ const NewDownloadModal = connect(
                   label: p.name,
                   enabled:
                     (!p.before && !p.after) ||
-                    parseISO(payload.datetime_start) > parseISO(p.before) ||
-                    parseISO(payload.datetime_end) < parseISO(p.after)
+                    payload.datetime_start > parseISO(p.before) ||
+                    payload.datetime_end < parseISO(p.after)
                       ? false
                       : true,
                 }))}
