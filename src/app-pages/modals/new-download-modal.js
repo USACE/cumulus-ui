@@ -28,8 +28,10 @@ const NewDownloadModal = connect(
     productsSelected,
     doWatershedFetch,
   }) => {
+    var now = new Date();
+    now = now.setMilliseconds(0);
     const [payload, setPayload] = useState({
-      datetime_start: datetimeStart || new Date(),
+      datetime_start: datetimeStart || new Date(now),
       datetime_end: datetimeEnd || new Date(),
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],
@@ -267,7 +269,7 @@ const NewDownloadModal = connect(
                 }}
               />
             </div>
-            <div className='mt-6 hidden'>
+            <div className='mt-6'>
               <label className='block mt-8 mb-2'>
                 <span className='text-gray-700'>JSON Payload</span>
               </label>
