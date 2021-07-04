@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
-// import Select from 'react-select';
-// import FormInput from '../forms/forms';
-// import { SaveButton, CancelButton } from '../forms/buttons';
-import { AddIcon, RemoveIcon } from '../admin/icons';
-import { Table } from '../admin/table';
 
 const EditProductTagsModal = connect(
-  'selectAppDefaultsFormSelectPlaceholder',
   'selectModalProps',
   'doProductTagAdd',
   'doProductTagRemove',
@@ -15,81 +9,82 @@ const EditProductTagsModal = connect(
   'doTagFetch',
   'doModalClose',
   ({
-    appDefaultsFormSelectPlaceholder,
     modalProps: p,
     doTagFetch,
     doProductTagAdd,
     doProductTagRemove,
-    tagItems: tags,
+    tagItems: allTags,
     doModalClose,
   }) => {
     useEffect(() => {
       doTagFetch();
     }, [doTagFetch]);
 
-    const [payload] = useState(p);
+    const [payload, setPayload] = useState(p);
 
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   if (!payload || (!payload.tags.length > 0 && p)) {
-    //     console.log('Missing one or more required fields for parameter');
-    //     return;
-    //   }
-    //   // doProductSave(payload);
-    //   doModalClose();
-    // };
-
-    // const handleToggle = (e) => {
-    //   e.preventDefault();
-    //   return;
-    // };
+    const handleToggle = (e, product_id, tag_id) => {
+      // If Unchecked
+      if (!e.target.checked) {
+        setPayload({
+          ...payload,
+          tags: payload.tags.filter((item) => item !== tag_id),
+        });
+        doProductTagRemove(product_id, tag_id);
+      } else {
+        //if checked
+        setPayload({
+          ...payload,
+          tags: payload.tags.concat(tag_id),
+        });
+        doProductTagAdd(product_id, tag_id);
+      }
+    };
 
     const TagsTable = ({ payload }) => {
       return (
-        <Table
-          headers={['Name', 'Description', 'Toggle']}
-          items={tags}
-          itemFields={[
-            {
-              key: 'name',
-              render: (name) => {
-                return (
-                  <span
-                    style={{
-                      backgroundColor: `#${name.color}`,
-                    }}
-                  >
-                    {name}
-                  </span>
-                );
-              },
-            },
-            {
-              key: 'description',
-              render: (description) => {
-                return (
-                  <span className='text-sm text-gray-500'>{description}</span>
-                );
-              },
-            },
-          ]}
-          tools={[
-            {
-              icon: <AddIcon />,
-              handleClick: (item) => {
-                // doModalOpen(EditUnitModal, item);
-                doProductTagAdd(payload.id, item.id);
-              },
-            },
-            {
-              icon: <RemoveIcon />,
-              handleClick: (item) => {
-                // doUnitDelete(item);
-                doProductTagRemove(payload.id, item.id);
-              },
-            },
-          ]}
-        />
+        <table className='w-full'>
+          <thead>
+            <tr className='bg-gray-200 text-gray-600'>
+              <th className='p-2'>Name</th>
+              <th>Description</th>
+              <th className='p-2'>Toggle</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allTags &&
+              payload &&
+              allTags.map((t, idx) => (
+                <tr className='border-b-2 border-gray-200' key={idx}>
+                  <td className='p-3'>
+                    <span
+                      className='rounded-xl p-1 text-sm'
+                      style={{ backgroundColor: `#${t.color}` }}
+                    >
+                      {t.name}
+                    </span>
+                  </td>
+                  <td>
+                    <span className='p-2 text-sm text-gray-600'>
+                      {t.description}
+                    </span>
+                  </td>
+                  <td className='p-3'>
+                    <input
+                      type='checkbox'
+                      {...(payload.tags.length &&
+                      payload.tags.indexOf(t.id) > -1
+                        ? { checked: true }
+                        : null)}
+                      onChange={(e) => handleToggle(e, payload.id, t.id)}
+                      //   onChange={(e) => setPayload({...payload})}
+                    />
+                    {/* <div>{JSON.stringify(payload.tags.indexOf(t.id))}</div> */}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+          {/* <div>{JSON.stringify(payload.tags)}</div> */}
+        </table>
       );
     };
 
