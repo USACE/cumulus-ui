@@ -269,7 +269,7 @@ const NewDownloadModal = connect(
                 }}
               />
             </div>
-            <div className='mt-6'>
+            <div className='mt-6 hidden'>
               <label className='block mt-8 mb-2'>
                 <span className='text-gray-700'>JSON Payload</span>
               </label>
