@@ -11,7 +11,7 @@ import routeBundle from './route-bundle';
 
 import cache from '../cache';
 import modalBundle from './modal-bundle';
-import accountdBundle from './account-bundle';
+// import accountdBundle from './account-bundle';
 import productBundle from './product-bundle';
 import profileBundle from './profile-bundle';
 import tagBundle from './tag-bundle';
@@ -49,7 +49,7 @@ export default composeBundles(
   createUrlBundle,
   modalBundle,
   routeBundle,
-  accountdBundle,
+  // accountdBundle,
   officeBundle,
   productBundle,
   profileBundle,

@@ -7,6 +7,7 @@ const profileBundle = {
     const initialState = {
       _shouldFetch: false,
       _lastFetch: null,
+      _lastError: null,
       myProfile: null,
     };
 
@@ -16,6 +17,8 @@ const profileBundle = {
           return Object.assign({}, state, { _shouldFetch: false });
         case 'PROFILE_FETCH_FINISH':
           return Object.assign({}, state, { myProfile: payload });
+        case 'PROFILE_FETCH_FAIL':
+          return { ...state, ...payload };
         case 'AUTH_LOGGED_OUT':
           return { ...state, myProfile: null };
         case 'PROFILE_TOKEN_CREATE_FINISH':
@@ -48,15 +51,20 @@ const profileBundle = {
             store.doUpdateUrl('/profile/create');
             return {};
             // return null;
+          } else if (resp.status === 200) {
+            return resp.json();
+          } else {
+            throw Error(resp.json());
           }
-          return resp.json();
         })
         .then((j) => {
-          console.log(j);
           dispatch({ type: 'PROFILE_FETCH_FINISH', payload: j });
         })
         .catch((err) => {
-          console.log(err);
+          dispatch({
+            type: 'PROFILE_FETCH_FAIL',
+            payload: { _lastError: err },
+          });
         });
     },
   doProfileSave:
@@ -142,6 +150,7 @@ const profileBundle = {
   selectProfileTokens: createSelector('selectProfileMyProfile', (profile) =>
     profile && profile.tokens && profile.tokens.length ? profile.tokens : []
   ),
+  selectProfileLastError: (state) => state.profile._lastError,
   reactProfileShouldFetch: createSelector(
     'selectProfileShouldFetch',
     (shouldFetch) => {

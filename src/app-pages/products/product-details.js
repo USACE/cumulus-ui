@@ -174,7 +174,7 @@ export default connect(
                             <Loader opt={'dissolve-cube'} color={'#9ae6b4'} />
                           ) : (
                             productYears
-                              .reverse()
+                              .slice()
                               .reverse()
                               .map((year, idx) => (
                                 <AvailabilityCalendar
