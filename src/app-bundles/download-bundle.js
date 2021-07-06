@@ -15,7 +15,7 @@ const downloadBundle = createRestBundle({
   postTemplate: `${apiURL}:/`,
   deleteTemplate: `${apiURL}:/`,
   fetchActions: [],
-  forceFetchActions: ['DOWNLOAD_REQUEST_FINISH', 'PROFILE_FETCH_FINISHED'],
+  forceFetchActions: ['DOWNLOAD_REQUEST_FINISH', 'PROFILE_FETCH_FINISH'],
   urlParamSelectors: [],
   sortBy: 'processing_start',
   sortAsc: false,
