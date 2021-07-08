@@ -28,8 +28,10 @@ const NewDownloadModal = connect(
     productsSelected,
     doWatershedFetch,
   }) => {
+    var now = new Date();
+    now = now.setMilliseconds(0);
     const [payload, setPayload] = useState({
-      datetime_start: datetimeStart || new Date(),
+      datetime_start: datetimeStart || new Date(now),
       datetime_end: datetimeEnd || new Date(),
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],

@@ -6,7 +6,7 @@ const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 const downloadBundle = createRestBundle({
   name: 'download',
   uid: 'id',
-  prefetch: true,
+  prefetch: false,
   staleAfter: 0,
   persist: false,
   routeParam: '',
@@ -15,7 +15,7 @@ const downloadBundle = createRestBundle({
   postTemplate: `${apiURL}:/`,
   deleteTemplate: `${apiURL}:/`,
   fetchActions: [],
-  forceFetchActions: ['DOWNLOAD_REQUEST_FINISH', 'AUTH_LOGGED_IN'],
+  forceFetchActions: ['DOWNLOAD_REQUEST_FINISH', 'PROFILE_FETCH_FINISH'],
   urlParamSelectors: [],
   sortBy: 'processing_start',
   sortAsc: false,
