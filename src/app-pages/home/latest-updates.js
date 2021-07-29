@@ -33,6 +33,11 @@ function LatestUpdates() {
       <div className='container px-5 py-5 mx-auto flex flex-wrap'>
         <div className='w-full text-2xl font-bold py-5'>Latest Updates</div>
         <Entry
+          date='July 2021'
+          title='National Snow & Ice Data Center (NSIDC) Archive Added'
+          content='Added daily data set of 4 km snow water equivalent (SWE) and snow depth over the contiguous United States from 1981 to 2020. Product was developed at the University of Arizona (UA) under the support of the NASA MAP and SMAP Programs.'
+        />
+        <Entry
           date='June 2021'
           title='MBRFC (KRF) Forecast and Airtemp Products Added'
           content='Added additional gridded products krf qpe, krf qpf, krf airtemp to Cumulus. KRF products are related to the Missouri Basin River Forecast Center (MBRFC).'
