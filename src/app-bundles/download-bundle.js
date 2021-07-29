@@ -1,5 +1,6 @@
 import createRestBundle from './create-rest-bundle';
 import { createSelector } from 'redux-bundler';
+import { subDays } from 'date-fns';
 
 const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 
@@ -64,7 +65,17 @@ const downloadBundle = createRestBundle({
           : null;
       }
     ),
+    selectDownloadItemsPast15d: createSelector(
+      'selectDownloadItems',
+      (downloadItems) => {
+        const threshold_date = subDays(new Date(), 15);
+        return downloadItems.filter(
+          (item) => Date.parse(item.processing_start) >= threshold_date
+        );
+      }
+    ),
   },
+
   reduceFurther: (state, { type, payload }) => {
     switch (type) {
       case 'DOWNLOAD_REQUEST_START':
