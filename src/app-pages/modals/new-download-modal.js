@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
-import { parseISO, isValid } from 'date-fns';
+import { parseISO, isValid, sub, setHours, setMinutes } from 'date-fns';
 import { SaveButton, CancelButton } from '../forms/buttons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -28,10 +28,14 @@ const NewDownloadModal = connect(
     productsSelected,
     doWatershedFetch,
   }) => {
-    var now = new Date();
+    let now = new Date();
     now = now.setMilliseconds(0);
+    const defaultStart = setMinutes(
+      setHours(sub(new Date(now), { hours: 72 }), 6),
+      0
+    );
     const [payload, setPayload] = useState({
-      datetime_start: datetimeStart || new Date(now),
+      datetime_start: datetimeStart || defaultStart,
       datetime_end: datetimeEnd || new Date(),
       watershed_id: watershedSelected || null,
       product_id: productsSelected || [],
