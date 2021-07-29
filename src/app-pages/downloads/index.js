@@ -37,11 +37,8 @@ const Products = connect(
         {downloadProducts &&
           productsObj &&
           downloadProducts.map((dp, idx) => (
-            <a href={'/products/' + productsObj[dp].id}>
-              <span
-                className='inline-block bg-gray-300 hover:bg-blue-300 cursor-pointer mr-1 mb-1 p-1 text-xs rounded'
-                key={idx}
-              >
+            <a key={idx} href={'/products/' + productsObj[dp].id}>
+              <span className='inline-block bg-gray-200 hover:bg-blue-300 cursor-pointer mr-1 mb-1 p-1 text-xs rounded'>
                 {productsObj[dp].name}
               </span>
             </a>
@@ -197,10 +194,10 @@ const TableHeader = ({ title }) => (
 );
 
 export default connect(
-  'selectDownloadItemsArray',
+  'selectDownloadItemsPast15d',
   'selectProfileMyProfile',
   'doModalOpen',
-  ({ downloadItemsArray: items, profileMyProfile: profile, doModalOpen }) => {
+  ({ downloadItemsPast15d: items, profileMyProfile: profile, doModalOpen }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -235,7 +232,9 @@ export default connect(
                   <thead>
                     <tr>
                       {profile &&
-                        HEADERS.map((h, idx) => <TableHeader title={h} />)}
+                        HEADERS.map((h, idx) => (
+                          <TableHeader title={h} key={idx} />
+                        ))}
                     </tr>
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200'>
