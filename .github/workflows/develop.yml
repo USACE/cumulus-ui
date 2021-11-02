@@ -11,8 +11,8 @@ on:
 jobs:
   build:
     env:
-      REACT_APP_CUMULUS_API_URL: https://develop-cumulus-api.rsgis.dev
-      REACT_APP_SHARED_API_URL: https://develop-shared-api.rsgis.dev
+      REACT_APP_CUMULUS_API_URL: https://develop-cumulus-api.corps.cloud
+      REACT_APP_SHARED_API_URL: https://develop-shared-api.corps.cloud
       REACT_APP_ISDEVELOPMENT: true
     runs-on: ubuntu-latest
     strategy:
@@ -30,7 +30,8 @@ jobs:
 
       - name: Deploy to Dev
         env:
-          AWS_DEFAULT_REGION: ${{ secrets.CWBICI_DEVELOP_AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.CWBICI_DEVELOP_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CWBICI_DEVELOP_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.CASTLECI_AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.CASTLECI_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CASTLECI_AWS_SECRET_ACCESS_KEY }}
+          CASTLECI_S3_BUCKET_APPS_DEVELOP: ${{ secrets.CASTLECI_S3_BUCKET_APPS_DEVELOP }}
         run: npm run deploy-develop
