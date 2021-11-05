@@ -36,8 +36,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "deploy-develop": "aws s3 rm s3://$CASTLECI_S3_BUCKET_APPS_DEVELOP/cumulus --recursive && aws s3 cp ./build/ s3://$CASTLECI_S3_BUCKET_APPS_DEVELOP/cumulus --recursive",
-    "deploy-stable": "aws s3 rm s3://cwbi-apps-stable/cumulus --recursive && aws s3 cp ./build/ s3://cwbi-apps-stable/cumulus --recursive"
+    "deploy-develop": "aws s3 rm s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus --recursive && aws s3 cp ./build/ s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus --recursive",
+    "deploy-stable": "aws s3 rm s3://$CASTLECI_STABLE_S3_BUCKET_APPS/cumulus --recursive && aws s3 cp ./build/ s3://$CASTLECI_STABLE_S3_BUCKET_APPS/cumulus --recursive"
   },
   "eslintConfig": {
     "extends": [
