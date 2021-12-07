@@ -24,7 +24,7 @@ const myWatershedsBundle = createRestBundle({
         dispatch({ type: 'MYWATERSHEDS_ADD_START' });
 
         //   const apiRoot = store.selectApiRoot();
-        const authToken = store.selectAuthTokenRaw();
+        const authToken = store.selectAuthToken();
 
         fetch(`${apiURL}/my_watersheds/${watershed.id}/add`, {
           method: 'POST',
@@ -65,7 +65,7 @@ const myWatershedsBundle = createRestBundle({
         dispatch({ type: 'MYWATERSHEDS_REMOVE_START' });
 
         //   const apiRoot = store.selectApiRoot();
-        const authToken = store.selectAuthTokenRaw();
+        const authToken = store.selectAuthToken();
 
         const state = store.selectMyWatershedsState();
         const stateNew = { ...state };

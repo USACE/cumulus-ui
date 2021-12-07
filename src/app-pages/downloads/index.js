@@ -195,9 +195,13 @@ const TableHeader = ({ title }) => (
 
 export default connect(
   'selectDownloadItemsPast15d',
-  'selectProfileMyProfile',
+  'selectAuthIsLoggedIn',
   'doModalOpen',
-  ({ downloadItemsPast15d: items, profileMyProfile: profile, doModalOpen }) => {
+  ({
+    downloadItemsPast15d: items,
+    authIsLoggedIn: isLoggedIn,
+    doModalOpen,
+  }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -219,7 +223,7 @@ export default connect(
                 <PageHeading heading='My Downloads' />
 
                 {/* <NewDownloadButton /> */}
-                {profile && (
+                {isLoggedIn && (
                   <NewButton
                     label={'New Download'}
                     onClick={() => doModalOpen(NewDownloadModal, {})}
@@ -231,14 +235,14 @@ export default connect(
                 <table className='min-w-full divide-y divide-gray-200 mt-5'>
                   <thead>
                     <tr>
-                      {profile &&
+                      {isLoggedIn &&
                         HEADERS.map((h, idx) => (
                           <TableHeader title={h} key={idx} />
                         ))}
                     </tr>
                   </thead>
                   <tbody className='bg-white divide-y divide-gray-200'>
-                    {profile ? (
+                    {isLoggedIn ? (
                       items.map((item, index) => (
                         <TableRow
                           key={index}

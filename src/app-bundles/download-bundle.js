@@ -27,7 +27,7 @@ const downloadBundle = createRestBundle({
         dispatch({ type: 'DOWNLOAD_REQUEST_START' });
 
         // const apiRoot = store.selectApiRoot();
-        const authToken = store.selectAuthTokenRaw();
+        const authToken = store.selectAuthToken();
 
         fetch(`${apiURL}/my_downloads`, {
           method: 'POST',

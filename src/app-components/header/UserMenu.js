@@ -6,11 +6,23 @@ import UserAvatar from '../../images/user-avatar-32.png';
 import { connect } from 'redux-bundler-react';
 
 const UserMenu = connect(
-  'selectProfileMyProfile',
+  'selectAuthIsLoggedIn',
+  'selectAuthUsername',
+  'selectAuthRoles',
   'doUpdateUrl',
   'doAuthLogout',
   'doAuthLogin',
-  ({ profileMyProfile: profile, doUpdateUrl, doAuthLogout, doAuthLogin }) => {
+  ({
+    authIsLoggedIn: isLoggedIn,
+    authUsername: username,
+    authRoles: roles,
+    doUpdateUrl,
+    doAuthLogout,
+    doAuthLogin,
+  }) => {
+    // User Is Admin
+    const isAdmin =
+      isLoggedIn && roles && roles.indexOf('application.admin') !== -1;
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const trigger = useRef(null);
@@ -79,7 +91,7 @@ const UserMenu = connect(
       );
     };
 
-    return !profile ? (
+    return !isLoggedIn ? (
       <Anonymous />
     ) : (
       <div className='relative inline-flex'>
@@ -99,7 +111,7 @@ const UserMenu = connect(
           />
           <div className='flex items-center truncate'>
             <span className='truncate ml-2 text-sm font-medium group-hover:text-gray-800'>
-              {profile.username}
+              {username}
             </span>
             <svg
               className='w-3 h-3 flex-shrink-0 ml-2 fill-current text-gray-400'
@@ -126,25 +138,13 @@ const UserMenu = connect(
             onBlur={() => setDropdownOpen(false)}
           >
             <div className='pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200'>
-              <div className='font-medium text-gray-800'>
-                {profile.username}
-              </div>
+              <div className='font-medium text-gray-800'>{username}</div>
               <div className='text-xs text-gray-500 italic'>
-                {(profile.is_admin && 'Administrator') || 'User'}
+                {(isAdmin && 'Administrator') || 'User'}
               </div>
             </div>
             <ul>
-              <li>
-                <div
-                  className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3 cursor-pointer'
-                  onClick={() => {
-                    doUpdateUrl('/profile');
-                  }}
-                >
-                  My Profile
-                </div>
-              </li>
-              {profile.is_admin && (
+              {isAdmin && (
                 <li>
                   <div
                     className='font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3 cursor-pointer'
@@ -152,7 +152,7 @@ const UserMenu = connect(
                       doUpdateUrl('/admin');
                     }}
                   >
-                    {(profile.is_admin && 'Admin') || null}
+                    {(isAdmin && 'Admin') || null}
                   </div>
                 </li>
               )}
