@@ -80,7 +80,7 @@ class ApiError extends Error {
 const createJwtApiBundle = (opts) => {
   const defaults = {
     name: 'api',
-    tokenSelector: 'selectAuthTokenRaw',
+    tokenSelector: 'selectAuthToken',
     unless: null,
   };
   const config = Object.assign({}, defaults, opts);

@@ -4,15 +4,10 @@ import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
 import { connect } from 'redux-bundler-react';
 
-import MyTokens from './my-tokens';
-
 export default connect(
-  'selectProfileMyProfile',
+  'selectAuthIsLoggedIn',
   'selectAuthUsername',
-  (props) => {
-    const profile = props.profileMyProfile;
-    const user = props.authUsername;
-
+  ({ authIsLoggedIn: isLoggedIn, profile = {}, authUsername: username }) => {
     function formatAuthUsername(username) {
       const parts = username.split('.');
       if (parts.length === 2) {
@@ -25,7 +20,7 @@ export default connect(
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-      profile && (
+      isLoggedIn && (
         <div className='flex h-screen overflow-hidden'>
           {/* Sidebar */}
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -47,22 +42,17 @@ export default connect(
                       <div className='grid grid-flow-col grid-cols-6 grid-rows-3 gap-4 p-4 border-gray-100 border-t-4'>
                         <div className='font-semibold text-lg'>Name:</div>
                         <div className='col-start-2 col-end-7 text-lg'>
-                          {formatAuthUsername(user)}
+                          {formatAuthUsername(username)}
                         </div>
                         <div className='font-semibold text-lg'>Email:</div>
                         <div className='col-start-2 col-end-7 text-lg'>
-                          {profile.email}
+                          {(profile && profile.email) || ''}
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* <!--second row --> */}
-                  <div className='grid grid-cols-1 w-full 2xl:w-2/3'>
-                    <div className='m-3 p-3 bg-white min-h-0 shadow-md rounded'>
-                      <MyTokens />
-                    </div>
-                  </div>
                 </div>
               </div>
             </main>

@@ -14,8 +14,6 @@ import AdminParameters from '../app-pages/admin/parameters/index';
 import Products from '../app-pages/products/products';
 import ProductDetails from '../app-pages/products/product-details';
 import Downloads from '../app-pages/downloads/index';
-import Profile from '../app-pages/profile/index';
-import ProfileCreate from '../app-pages/profile/create';
 import Help from '../app-pages/help/index';
 import Docs from '../app-pages/docs/index';
 import Contact from '../app-pages/contact/index';
@@ -35,8 +33,6 @@ export default createRouteBundle({
   '/products': Products,
   '/products/:product_id': ProductDetails,
   '/downloads': Downloads,
-  '/profile': Profile,
-  '/profile/create': ProfileCreate,
   '/help': Help,
   '/docs': Docs,
   '/contact': Contact,
