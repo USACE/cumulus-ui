@@ -41,7 +41,7 @@ function Home() {
                   rel='noreferrer'
                   href='https://github.com/USACE/cumulus/issues/new/choose'
                 >
-                  <div class='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
+                  <div className='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 512 512'
@@ -74,7 +74,7 @@ function Home() {
               </div>
               <div className='p-4 md:w-1/3 sm:w-1/2 w-full'>
                 <a href='mailto:CWMS-GriddedData-Support@usace.army.mil'>
-                  <div class='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
+                  <div className='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       className='text-indigo-500 w-12 h-12 mb-3 inline-block'

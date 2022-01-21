@@ -56,8 +56,8 @@ function RtsScript() {
             <PageHeading heading='CWMS CAVI/HEC RTS Cumulus Script Setup' />
 
             <div className='px-5 py-10 mt-5 mx-auto flex flex-wrap bg-white'>
-              <div class='flex flex-wrap w-ful'>
-                <div class='lg:w-2/5 md:w-1/2 md:pr-10 md:py-6'>
+              <div className='flex flex-wrap w-ful'>
+                <div className='lg:w-2/5 md:w-1/2 md:pr-10 md:py-6'>
                   <Step
                     heading='Step 1'
                     body={

@@ -10,7 +10,6 @@ const Entry = (props) => {
         {/* {empty dot} */}
       </div>
       <div className='flex-grow md:pl-6 pl-4 flex sm:items-center items-start flex-col sm:flex-row'>
-        {/* <div class='flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center'> */}
         <div className='flex-shrink-0 text-gray-500 inline-flex items-center justify-center text-sm'>
           {props.date}
         </div>

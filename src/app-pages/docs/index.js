@@ -37,7 +37,7 @@ function Home() {
             <div className='flex flex-wrap -m-4 text-center'>
               <div className='p-4 md:w-1/3 sm:w-1/2 w-full'>
                 <a href='/docs/api'>
-                  <div class='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
+                  <div className='border-2 border-gray-200 px-4 py-6 rounded-lg bg-white shadow-md hover:shadow-lg'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
