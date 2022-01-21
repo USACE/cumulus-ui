@@ -1,4 +1,5 @@
 import React from 'react';
+import pkg from '../../../package.json';
 
 const Footer = () => {
   return (
@@ -26,7 +27,9 @@ const Footer = () => {
             </svg>
             <span className='ml-3 text-xl'>Cumulus</span>
           </span>
-          <p className='text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4'>v0.8</p>
+          <p className='text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4'>
+            v{pkg.version}
+          </p>
           <span className='inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start'>
             ERDC-CRREL RS/GIS
           </span>
