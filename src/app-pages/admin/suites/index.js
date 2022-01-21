@@ -6,29 +6,43 @@ import Header from '../../../app-components/Header';
 import Footer from '../../../app-components/footer/footer';
 import SuitesTable from './suites-table';
 
-function SuitesUnits() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+import { connect } from 'redux-bundler-react';
 
-  return (
-    <div className='flex h-screen overflow-hidden'>
-      {/* Sidebar */}
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+const SuitesUnits = connect(
+  'selectAuthIsLoggedIn',
+  'selectAuthRoles',
+  ({ authIsLoggedIn: isLoggedIn, authRoles: roles }) => {
+    // User Is Admin
+    const isAdmin =
+      isLoggedIn && roles && roles.indexOf('application.admin') !== -1;
 
-      {/* Content area */}
-      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
-        {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    if (!isAdmin) {
+      return 'not authorized';
+    }
 
-        <main className='container mx-auto h-full'>
-          <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            {/* Main content */}
-            <SuitesTable />
-          </div>
-        </main>
-        <Footer />
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    return (
+      <div className='flex h-screen overflow-hidden'>
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        {/* Content area */}
+        <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
+          {/*  Site header */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+          <main className='container mx-auto h-full'>
+            <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
+              {/* Main content */}
+              <SuitesTable />
+            </div>
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
 
 export default SuitesUnits;
