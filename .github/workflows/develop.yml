@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     env:
+      REACT_APP_AUTH_HOST: https://develop-auth.corps.cloud/auth
+      REACT_APP_AUTH_REDIRECT_URL: https://develop-cumulus.corps.cloud
       REACT_APP_CUMULUS_API_URL: https://develop-cumulus-api.corps.cloud
       REACT_APP_SHARED_API_URL: https://develop-shared-api.corps.cloud
       REACT_APP_ISDEVELOPMENT: true

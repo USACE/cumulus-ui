@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'redux-bundler-react';
 // import { NavLink, useLocation } from 'react-router-dom';
+import pkg from '../../package.json';
 
 const Sidebar = connect(
   'selectPathname',
@@ -181,7 +182,7 @@ const Sidebar = connect(
             {/* Logo */}
 
             <div className='block'>
-              <span className='block text-3xl text-white'>
+              <span className='inline text-3xl text-white'>
                 <a href='/'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -205,6 +206,9 @@ const Sidebar = connect(
                   </svg>
                   Cumulus
                 </a>
+              </span>
+              <span className='inline ml-2 text-gray-500 text-xs'>
+                v{pkg.version}
               </span>
             </div>
           </div>
