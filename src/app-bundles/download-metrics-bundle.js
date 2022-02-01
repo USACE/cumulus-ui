@@ -9,7 +9,7 @@ export default createRestBundle({
   staleAfter: 300000, // 300000 milliseconds = 5min
   persist: true,
   routeParam: '',
-  getTemplate: `${apiURL}/downloads/metrics`,
+  getTemplate: `${apiURL}/metrics/downloads`,
   putTemplate: '',
   postTemplate: '',
   deleteTemplate: '',
