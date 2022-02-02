@@ -1,4 +1,4 @@
-import createRestBundle from './create-rest-bundle';
+import createRestBundle from '@usace/create-rest-bundle';
 
 const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 
