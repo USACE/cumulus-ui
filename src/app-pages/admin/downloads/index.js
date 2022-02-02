@@ -1,14 +1,14 @@
 import React from 'react';
-import HomeStats from './home-stats';
+import DownloadStats from './download-stats';
 
-import AdminWrapper from '../../app-components/admin/AdminWrapper';
+import AdminWrapper from '../../../app-components/admin/AdminWrapper';
 
-export default function AdminHome() {
+export default function AdminDownloads() {
   return (
     <AdminWrapper>
-      <HomeStats />
+      <DownloadStats />
       <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-        {/* Main home content */}
+        {/* Main content */}
 
         <div className=''>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
