@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 
 import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
-// import WelcomeBanner from '../../app-components/dashboard/WelcomeBanner';
-// import FilterButton from '../../app-components/actions/FilterButton';
-// import Datepicker from '../../app-components/actions/Datepicker';
 import LatestUpdates from './latest-updates';
 import HomeBanner from './home-banner';
 // import Banner from '../../app-components/Banner';

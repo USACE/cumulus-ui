@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'redux-bundler-react';
-import Sidebar from './Sidebar';
+import Sidebar from '../../app-components/Sidebar';
+//import Sidebar from './Sidebar';
 import Header from '../../app-components/Header';
 import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
 
