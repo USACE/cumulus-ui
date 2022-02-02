@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
+import Sidebar from '../../app-components/Sidebar';
 import Header from '../../app-components/Header';
 
 function Watersheds() {

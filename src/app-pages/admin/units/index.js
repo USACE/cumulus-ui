@@ -1,48 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import Sidebar from '../Sidebar';
-import Header from '../../../app-components/Header';
-// import HomeStats from './home-stats';
-import Footer from '../../../app-components/footer/footer';
 import UnitsTable from './units-table';
 
-import { connect } from 'redux-bundler-react';
+import AdminWrapper from '../../../app-components/admin/AdminWrapper';
 
-const AdminUnits = connect(
-  'selectAuthIsLoggedIn',
-  'selectAuthRoles',
-  ({ authIsLoggedIn: isLoggedIn, authRoles: roles }) => {
-    // User Is Admin
-    const isAdmin =
-      isLoggedIn && roles && roles.indexOf('application.admin') !== -1;
+export default function AdminParameters() {
+  return (
+    <AdminWrapper>
+      <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
+        {/* Main content */}
 
-    if (!isAdmin) {
-      return 'not authorized';
-    }
-
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    return (
-      <div className='flex h-screen overflow-hidden'>
-        {/* Sidebar */}
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-        {/* Content area */}
-        <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
-          {/*  Site header */}
-          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-          <main className='container mx-auto h-full'>
-            <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-              {/* Main content */}
-              <UnitsTable />
-            </div>
-          </main>
-          <Footer />
-        </div>
+        <UnitsTable />
       </div>
-    );
-  }
-);
-
-export default AdminUnits;
+    </AdminWrapper>
+  );
+}

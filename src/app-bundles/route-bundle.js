@@ -11,6 +11,7 @@ import AdminAccounts from '../app-pages/admin/accounts/index';
 import AdminUnits from '../app-pages/admin/units/index';
 import AdminSuites from '../app-pages/admin/suites/index';
 import AdminParameters from '../app-pages/admin/parameters/index';
+import AdminDownloads from '../app-pages/admin/downloads/index';
 import Products from '../app-pages/products/products';
 import ProductDetails from '../app-pages/products/product-details';
 import Downloads from '../app-pages/downloads/index';
@@ -30,6 +31,7 @@ export default createRouteBundle({
   '/admin/units': AdminUnits,
   '/admin/suites': AdminSuites,
   '/admin/parameters': AdminParameters,
+  '/admin/downloads': AdminDownloads,
   '/products': Products,
   '/products/:product_id': ProductDetails,
   '/downloads': Downloads,
