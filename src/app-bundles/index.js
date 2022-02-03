@@ -4,14 +4,13 @@ import {
   createUrlBundle,
 } from 'redux-bundler';
 
-import createAuthBundle from './create-keycloak-auth-bundle';
-import createJwtApiBundle from './create-jwt-api-bundle';
+import createAuthBundle from '@usace/create-keycloak-auth-bundle';
+import createJwtApiBundle from '@usace/create-jwt-api-bundle';
 
 import routeBundle from './route-bundle';
 
 import cache from '../cache';
 import modalBundle from './modal-bundle';
-// import accountdBundle from './account-bundle';
 import productBundle from './product-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
@@ -42,7 +41,6 @@ export default composeBundles(
   createUrlBundle,
   modalBundle,
   routeBundle,
-  // accountdBundle,
   officeBundle,
   productBundle,
   suiteBundle,
