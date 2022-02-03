@@ -4,8 +4,8 @@ import {
   createUrlBundle,
 } from 'redux-bundler';
 
-import createAuthBundle from './create-keycloak-auth-bundle';
-import createJwtApiBundle from './create-jwt-api-bundle';
+import authBundle from '@usace/create-keycloak-auth-bundle';
+import createJwtBundle from '@usace/create-jwt-api-bundle';
 
 import routeBundle from './route-bundle';
 
@@ -55,7 +55,7 @@ export default composeBundles(
   downloadBundle,
   downloadMetricsBundle,
   // myWatershedsBundle,
-  createAuthBundle({
+  authBundle({
     name: 'auth',
     host: process.env.REACT_APP_AUTH_HOST,
     realm: 'water',
@@ -69,7 +69,7 @@ export default composeBundles(
     // mockToken: process.env.NODE_ENV === 'development' ? mockTokenUser : null, // Mock Token User
     // mockToken: process.env.NODE_ENV === 'development' ? mockTokenAdmin : null, // Mock Token Admin
   }),
-  createJwtApiBundle({
+  createJwtBundle({
     root: process.env.REACT_APP_CUMULUS_API_URL,
     unless: {
       // GET requests do not include token unless path starts with /my_
