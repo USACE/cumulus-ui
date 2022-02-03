@@ -1,0 +1,58 @@
+{
+  "name": "cumulus-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@headlessui/react": "^0.0.0-insiders.6fc28c6",
+    "@heroicons/react": "^1.0.5",
+    "@tailwindcss/forms": "^0.4.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@usace/create-jwt-api-bundle": "^0.1.2",
+    "@usace/create-keycloak-auth-bundle": "^0.1.2",
+    "@usace/create-rest-bundle": "^0.1.2",
+    "date-fns": "^2.28.0",
+    "internal-nav-helper": "^3.1.0",
+    "moment": "^2.29.1",
+    "money-clip": "^3.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "redux-bundler": "^28.0.3",
+    "redux-bundler-react": "^1.2.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy-tailwindui": "aws s3 rm s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus-tailwindui --recursive && aws s3 cp ./build/ s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus-tailwindui --recursive",
+    "deploy-develop": "aws s3 rm s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus --recursive && aws s3 cp ./build/ s3://$CASTLECI_DEVELOP_S3_BUCKET_APPS/cumulus --recursive",
+    "deploy-stable": "aws s3 rm s3://$CASTLECI_STABLE_S3_BUCKET_APPS/cumulus --recursive && aws s3 cp ./build/ s3://$CASTLECI_STABLE_S3_BUCKET_APPS/cumulus --recursive"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18"
+  }
+}

@@ -1,0 +1,31 @@
+name: CI Build User Interface
+
+on:
+  push:
+    branches:
+      - tailwindui
+jobs:
+  build:
+    env:
+      REACT_APP_AUTH_HOST: https://develop-auth.corps.cloud/auth
+      REACT_APP_AUTH_REDIRECT_URL: https://develop-cumulus-tailwindui.corps.cloud
+      REACT_APP_CUMULUS_API_URL: https://develop-cumulus-api.corps.cloud
+      REACT_APP_SHARED_API_URL: https://develop-shared-api.corps.cloud
+      REACT_APP_ISDEVELOPMENT: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js v16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm run build
+
+      - name: Deploy to Dev
+        env:
+          AWS_REGION: ${{ secrets.CASTLECI_DEVELOP_AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.CASTLECI_DEVELOP_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CASTLECI_DEVELOP_AWS_SECRET_ACCESS_KEY }}
+          CASTLECI_DEVELOP_S3_BUCKET_APPS: ${{ secrets.CASTLECI_DEVELOP_S3_BUCKET_APPS }}
+        run: npm run deploy-tailwindui
