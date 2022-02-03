@@ -14,7 +14,7 @@ export default createRestBundle({
   deleteTemplate: `${apiURL}/watersheds/:item.id`,
   fetchActions: [],
   urlParamSelectors: [],
-  forceFetchActions: [],
+  forceFetchActions: ['AUTH_UPDATED'],
   sortBy: '',
   sortAsc: false,
   addons: {},

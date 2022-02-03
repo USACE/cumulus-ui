@@ -15,7 +15,7 @@ export default createRestBundle({
   deleteTemplate: `${apiURL}/parameters/:item.id`,
   fetchActions: [],
   urlParamSelectors: [],
-  forceFetchActions: [],
+  forceFetchActions: ['AUTH_UPDATED'],
   sortBy: 'name',
   sortAsc: true,
   addons: {},
