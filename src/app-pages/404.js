@@ -6,17 +6,32 @@ export default function Example() {
         <main className='flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex-shrink-0 flex justify-center'>
             <a href='/' className='inline-flex'>
-              <span className='sr-only'>Workflow</span>
-              <img
-                className='h-12 w-auto'
-                src='https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600'
-                alt=''
-              />
+              <span className='sr-only'>Cumulus</span>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-blue-500 h-24 w-auto'
+              >
+                <line x1='8' y1='19' x2='8' y2='21'></line>
+                <line x1='8' y1='13' x2='8' y2='15'></line>
+                <line x1='16' y1='19' x2='16' y2='21'></line>
+                <line x1='16' y1='13' x2='16' y2='15'></line>
+                <line x1='12' y1='21' x2='12' y2='23'></line>
+                <line x1='12' y1='15' x2='12' y2='17'></line>
+                <path d='M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25'></path>
+              </svg>
             </a>
           </div>
           <div className='py-16'>
             <div className='text-center'>
-              <p className='text-sm font-semibold text-indigo-600 uppercase tracking-wide'>
+              <p className='text-sm font-semibold text-blue-600 uppercase tracking-wide'>
                 404 error
               </p>
               <h1 className='mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl'>
@@ -28,7 +43,7 @@ export default function Example() {
               <div className='mt-6'>
                 <a
                   href='/'
-                  className='text-base font-medium text-indigo-600 hover:text-indigo-500'
+                  className='text-base font-medium text-blue-600 hover:text-indigo-500'
                 >
                   Go back home<span aria-hidden='true'> &rarr;</span>
                 </a>
