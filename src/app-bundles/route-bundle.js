@@ -1,7 +1,7 @@
-import { createRouteBundle } from "redux-bundler";
+import { createRouteBundle } from 'redux-bundler';
 
-import Home from "../app-pages/home";
-import fourOhFour from "../app-pages/404";
+import Home from '../app-pages/home';
+import fourOhFour from '../app-pages/404';
 // import AdminDashboard from '../app-pages/admin';
 // import AdminProducts from '../app-pages/admin/products/index';
 // import AdminTags from '../app-pages/admin/tags/index';
@@ -21,7 +21,9 @@ import fourOhFour from "../app-pages/404";
 // import DocsRtsScript from '../app-pages/docs/rts-script';
 
 export default createRouteBundle({
-  "/": Home,
+  '/': Home,
+  '/products': Home,
+  '/download': Home,
   // '/admin': AdminDashboard,
   // '/admin/products': AdminProducts,
   // '/admin/tags': AdminTags,
@@ -39,5 +41,5 @@ export default createRouteBundle({
   // '/contact': Contact,
   // '/docs/api': DocsApi,
   // '/docs/rts-script': DocsRtsScript,
-  "*": fourOhFour,
+  '*': fourOhFour,
 });

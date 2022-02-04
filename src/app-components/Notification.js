@@ -1,8 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
-import { Transition } from "@headlessui/react";
-import { CheckCircleIcon } from "@heroicons/react/outline";
-import { XIcon } from "@heroicons/react/solid";
+import { Fragment, useState } from 'react';
+import { Transition } from '@headlessui/react';
+import { CheckCircleIcon } from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/solid';
 
 export default function Example() {
   const [show, setShow] = useState(true);
