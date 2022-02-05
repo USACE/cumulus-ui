@@ -1,16 +1,16 @@
 import React from 'react';
-import { connect } from 'redux-bundler-react';
 import Modal from './app-components/Modal';
-import Notification from './app-components/Notification';
+import AppContainer from './app-container/app-container';
+// import Notification from './app-components/Notification';
 
-const App = connect('selectRoute', ({ route: Route }) => {
+const App = () => {
   return (
     <>
-      <Notification />
-      <Route />
+      {/* <Notification /> */}
+      <AppContainer />
       <Modal />
     </>
   );
-});
+};
 
 export default App;
