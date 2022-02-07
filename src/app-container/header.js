@@ -2,7 +2,7 @@ import ProfileMenu from '../app-components/ProfileMenu';
 
 import { MenuAlt2Icon } from '@heroicons/react/outline';
 
-export default ({ setMobileMenuOpen }) => {
+export default function Header({ setMobileMenuOpen }) {
   return (
     <header className='w-full'>
       <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex'>
@@ -45,4 +45,4 @@ export default ({ setMobileMenuOpen }) => {
       </div>
     </header>
   );
-};
+}
