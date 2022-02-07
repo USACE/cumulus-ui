@@ -6,8 +6,9 @@ import { connect } from 'redux-bundler-react';
 export default connect(
   'selectModalContent',
   'selectModalProps',
+  'selectModalOnClose',
   'doModalClose',
-  ({ modalContent: ModalContent, modalProps, doModalClose }) => {
+  ({ modalContent: ModalContent, modalProps, modalOnClose, doModalClose }) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -21,6 +22,10 @@ export default connect(
     const onClose = () => {
       // Modal Fade-Out
       setShow(false);
+      // onClose Callback for a specific modal
+      if (modalOnClose) {
+        modalOnClose();
+      }
       // Allow 1s delay for smooth transition
       setTimeout(() => doModalClose(), 300);
     };

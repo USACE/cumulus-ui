@@ -21,6 +21,7 @@ import watershedBundle from './watershed-bundle';
 import selectBundle from './select-bundle';
 import selectProductAvailabilityBundle from './product-availability-bundle';
 import downloadBundle from './download-bundle';
+import downloadModalBundle from './download-modal-bundle';
 import downloadMetricsBundle from './download-metrics-bundle';
 
 const mockTokens = {
@@ -53,6 +54,7 @@ export default composeBundles(
   selectBundle,
   selectProductAvailabilityBundle,
   downloadBundle,
+  downloadModalBundle,
   downloadMetricsBundle,
   createAuthBundle({
     name: 'auth',
