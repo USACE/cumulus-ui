@@ -1,5 +1,5 @@
 import { createSelector } from 'redux-bundler';
-import { PurchaseModal } from '../app-components/modals/purchase-modal';
+import { DownloadModal } from '../app-components/modals/download-modal';
 
 const downloadModalBundle = {
   name: 'downloadModal',
@@ -15,7 +15,7 @@ const downloadModalBundle = {
       // New hash object with modal=download removed
       const newHashObj = store.selectHashObject();
       delete newHashObj.modal;
-      store.doModalOpen(PurchaseModal, {}, () => {
+      store.doModalOpen(DownloadModal, {}, () => {
         store.doUpdateHash(newHashObj);
       });
     },
@@ -25,7 +25,7 @@ const downloadModalBundle = {
     (hashObject, content) => {
       if (
         hashObject['modal'] !== 'download' ||
-        (content && content === PurchaseModal)
+        (content && content === DownloadModal)
       ) {
         return null;
       }

@@ -13,7 +13,12 @@ import { Dialog, Transition } from '@headlessui/react';
 const sidebarNavigation = [
   { name: 'Home', href: '/', icon: HomeIcon, current: false },
   { name: 'Products', href: '/products', icon: CollectionIcon, current: false },
-  { name: 'Download', href: '/download', icon: DownloadIcon, current: false },
+  {
+    name: 'Download',
+    href: '#modal=download',
+    icon: DownloadIcon,
+    current: false,
+  },
 ];
 
 const SidebarItem = ({ name, href, current }) => {

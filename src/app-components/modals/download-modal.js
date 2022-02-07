@@ -8,7 +8,7 @@ import { CheckIcon } from '@heroicons/react/outline';
 //       (not from a connected bundle method). The parent Modal.js component
 //       combines the onClose function passed to doModalOpen(content, props, onClose)
 //       with other onClose functions necessary for smooth transitions
-const PurchaseModal = connect(({ onClose }) => {
+const DownloadModal = connect(({ onClose }) => {
   return (
     <>
       <div>
@@ -20,7 +20,7 @@ const PurchaseModal = connect(({ onClose }) => {
             as='h3'
             className='text-lg leading-6 font-medium text-gray-900'
           >
-            Payment successful
+            Download successful
           </Dialog.Title>
           <div className='mt-2'>
             <p className='text-sm text-gray-500'>
@@ -43,4 +43,4 @@ const PurchaseModal = connect(({ onClose }) => {
   );
 });
 
-export { PurchaseModal, PurchaseModal as default };
+export { DownloadModal, DownloadModal as default };
