@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'redux-bundler-react';
+import DateRangeSlider from './date-range-slider';
 import ProductsTable from './products-table';
 import ButtonGroup from '../../app-components/button-group/button-group';
 import ButtonGroupButton from '../../app-components/button-group/button-group-button';
@@ -97,6 +98,11 @@ export default connect(
             />
           </span>
         </div>
+
+        <div className='flex-grow w-full mx-auto flex'>
+          <DateRangeSlider />
+        </div>
+
         <div className='flex-grow w-full mx-auto flex mt-5'>
           <div className='flex-1 min-w-0 flex'>
             {filtersActive ? (
