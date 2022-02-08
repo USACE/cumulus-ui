@@ -17,7 +17,7 @@ export default function Example() {
                 strokeWidth='2'
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                className='text-blue-500 h-24 w-auto'
+                className='text-indigo-700 h-24 w-auto'
               >
                 <line x1='8' y1='19' x2='8' y2='21'></line>
                 <line x1='8' y1='13' x2='8' y2='15'></line>
@@ -31,7 +31,7 @@ export default function Example() {
           </div>
           <div className='py-16'>
             <div className='text-center'>
-              <p className='text-sm font-semibold text-blue-600 uppercase tracking-wide'>
+              <p className='text-sm font-semibold text-indigo-700 uppercase tracking-wide'>
                 404 error
               </p>
               <h1 className='mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl'>
@@ -43,7 +43,7 @@ export default function Example() {
               <div className='mt-6'>
                 <a
                   href='/'
-                  className='text-base font-medium text-blue-600 hover:text-indigo-500'
+                  className='text-base font-medium text-indigo-700 hover:text-indigo-500'
                 >
                   Go back home<span aria-hidden='true'> &rarr;</span>
                 </a>

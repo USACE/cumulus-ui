@@ -12,6 +12,7 @@ import fourOhFour from '../app-pages/404';
 // import AdminParameters from '../app-pages/admin/parameters/index';
 // import AdminDownloads from '../app-pages/admin/downloads/index';
 import Products from '../app-pages/products/products';
+import Profile from '../app-pages/profile/profile';
 // import ProductDetails from '../app-pages/products/product-details';
 // import Downloads from '../app-pages/downloads/index';
 // import Help from '../app-pages/help/index';
@@ -23,6 +24,7 @@ import Products from '../app-pages/products/products';
 export default createRouteBundle({
   '/': Home,
   '/download': Home,
+  '/profile': Profile,
   // '/admin': AdminDashboard,
   // '/admin/products': AdminProducts,
   // '/admin/tags': AdminTags,
