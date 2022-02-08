@@ -68,15 +68,14 @@ export default composeBundles(
     // mockToken: process.env.NODE_ENV === 'development' ? mockTokenAdmin : null, // Mock Token Admin
   }),
   createJwtApiBundle({
-    root: process.env.REACT_APP_CUMULUS_API_URL,
     skipTokenConfig: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
-      custom: ({ method, path }) => {
+      custom: ({ method, url }) => {
         if (method === 'GET') {
           // Include Token on Any Routes that start with /my_
           // or are explicitly whitelisted in the object
-          if (includeTokenRoutes.hasOwnProperty(path)) {
+          if (includeTokenRoutes.hasOwnProperty(url)) {
             return false;
           }
           return true;
