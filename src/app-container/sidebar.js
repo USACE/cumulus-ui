@@ -6,6 +6,7 @@ import {
   DownloadIcon,
   HomeIcon,
   XIcon,
+  SupportIcon,
 } from '@heroicons/react/outline';
 import { classNames } from '../utils';
 import { Dialog, Transition } from '@headlessui/react';
@@ -17,6 +18,12 @@ const sidebarNavigation = [
     name: 'Download',
     href: '#modal=download',
     icon: DownloadIcon,
+    current: false,
+  },
+  {
+    name: 'Support',
+    href: '/support',
+    icon: SupportIcon,
     current: false,
   },
 ];
