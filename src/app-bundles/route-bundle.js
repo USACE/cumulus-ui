@@ -13,13 +13,14 @@ import fourOhFour from '../app-pages/404';
 // import AdminDownloads from '../app-pages/admin/downloads/index';
 import Products from '../app-pages/products/products';
 import Profile from '../app-pages/profile/profile';
+import Support from '../app-pages/support/support';
+import DocsApi from '../app-pages/support/docs/api';
+import DocsRtsScript from '../app-pages/support/docs/rts-script';
 // import ProductDetails from '../app-pages/products/product-details';
 // import Downloads from '../app-pages/downloads/index';
 // import Help from '../app-pages/help/index';
 // import Docs from '../app-pages/docs/index';
 // import Contact from '../app-pages/contact/index';
-// import DocsApi from '../app-pages/docs/api';
-// import DocsRtsScript from '../app-pages/docs/rts-script';
 
 export default createRouteBundle({
   '/': Home,
@@ -35,12 +36,13 @@ export default createRouteBundle({
   // '/admin/parameters': AdminParameters,
   // '/admin/downloads': AdminDownloads,
   '/products': Products,
+  '/support': Support,
+  '/support/docs/api': DocsApi,
+  '/support/docs/rts-script': DocsRtsScript,
   // '/products/:product_id': ProductDetails,
   // '/downloads': Downloads,
   // '/help': Help,
   // '/docs': Docs,
   // '/contact': Contact,
-  // '/docs/api': DocsApi,
-  // '/docs/rts-script': DocsRtsScript,
   '*': fourOhFour,
 });
