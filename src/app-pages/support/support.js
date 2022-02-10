@@ -9,6 +9,7 @@ const GitHubIcon = (props) => {
       viewBox='0 0 512 512'
       className={props.className}
       stroke='currentColor'
+      fill='currentColor'
     >
       <path
         strokeLinecap='round'
@@ -53,12 +54,12 @@ const items = [
 
 export default function Support() {
   return (
-    <div className='pb-10'>
+    <div className='pb-10 bg-gray-100'>
       <div className='max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8'>
         <div className='bg-white rounded-2xl px-6 py-16 sm:p-16 shadow-md mb-10'>
           <div className='max-w-xl mx-auto lg:max-w-none'>
             <div className='text-center'>
-              <h2 className='text-2xl font-extrabold tracking-tight text-gray-900'>
+              <h2 className='text-3xl font-extrabold tracking-tight text-gray-900'>
                 How can we help?
               </h2>
             </div>

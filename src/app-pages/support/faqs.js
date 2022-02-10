@@ -45,7 +45,7 @@ const Faqs = () => {
           <p className='text-gray-500 text-base lg:text-md uppercase leading-tight mb-4'>
             let's start with the basics
           </p>
-          <h1 className='px-2 xl:px-0 xl:text-4xl md:text-3xl text-2xl font-extrabold text-gray-800'>
+          <h1 className='px-2 xl:px-0 xl:text-3xl md:text-3xl text-2xl font-extrabold text-gray-800'>
             Frequently Asked Questions
           </h1>
         </div>
