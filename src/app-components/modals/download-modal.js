@@ -1,7 +1,14 @@
+import React from 'react';
+import { connect } from 'redux-bundler-react';
+
 import { Dialog } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/outline';
 
-const PurchaseModal = ({ onClose }) => {
+// Note: onClose is always passed from the parent Modal.js component
+//       (not from a connected bundle method). The parent Modal.js component
+//       combines the onClose function passed to doModalOpen(content, props, onClose)
+//       with other onClose functions necessary for smooth transitions
+const DownloadModal = connect(({ onClose }) => {
   return (
     <>
       <div>
@@ -13,7 +20,7 @@ const PurchaseModal = ({ onClose }) => {
             as='h3'
             className='text-lg leading-6 font-medium text-gray-900'
           >
-            Payment successful
+            Download successful
           </Dialog.Title>
           <div className='mt-2'>
             <p className='text-sm text-gray-500'>
@@ -34,6 +41,6 @@ const PurchaseModal = ({ onClose }) => {
       </div>
     </>
   );
-};
+});
 
-export default PurchaseModal;
+export { DownloadModal, DownloadModal as default };
