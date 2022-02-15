@@ -12,6 +12,7 @@ import routeBundle from './route-bundle';
 import cache from '../cache';
 import modalBundle from './modal-bundle';
 import productBundle from './product-bundle';
+import productFilterBundle from './product-filter-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
 import officeBundle from './office-bundle';
@@ -46,6 +47,7 @@ export default composeBundles(
   routeBundle,
   officeBundle,
   productBundle,
+  productFilterBundle,
   suiteBundle,
   tagBundle,
   unitBundle,

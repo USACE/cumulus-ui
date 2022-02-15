@@ -1,32 +1,47 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import DateRangeSlider from './date-range-slider';
 import ProductsTable from './products-table';
 import ButtonGroup from '../../app-components/button-group/button-group';
 import ButtonGroupButton from '../../app-components/button-group/button-group-button';
 import FilterPanel from './filter-panel';
+import TagFilter from './tag-filter';
 
 export default connect(
-  'selectProductItems',
+  'selectProductFilterResults',
+  'selectProductFilterFilterString',
+  'selectProductFilterApplyDateFilter',
+  'selectProductDateRangeFrom',
+  'selectProductDateRangeTo',
   'doProductFetch',
-  ({ productItems: products }) => {
+  'doProductFilterSetFilterString',
+  'doProductFilterSetDateFrom',
+  'doProductFilterSetDateTo',
+  'doProductFilterSetApplyDateFilter',
+  ({
+    productFilterResults: products,
+    productFilterFilterString: filterString,
+    productFilterApplyDateFilter: applyDateFilter,
+    productDateRangeFrom: rangeFrom,
+    productDateRangeTo: rangeTo,
+    doProductFilterSetFilterString: setFilterString,
+    doProductFilterSetDateFrom: setFilterDateFrom,
+    doProductFilterSetDateTo: setFilterDateTo,
+    doProductFilterSetApplyDateFilter: setApplyDateFilter,
+  }) => {
+    // show / hide the filter panel
     const [filtersActive, setFiltersActive] = useState(false);
+
     // could use a boolean here, but just in case we'll use a string key so we could add more options later
     const [activeView, setActiveView] = useState('table');
-    const [filterString, setFilterString] = useState('');
 
-    // filter projects based on a stupid string match for the filter component
-    const productsFiltered = products.filter((product, i, arr) => {
-      // could get fancy with some regex, but why
-      if (
-        Object.values(product)
-          .join(' ')
-          .toUpperCase()
-          .indexOf(filterString.toUpperCase()) !== -1
-      )
-        return true;
-      return false;
-    });
+    const dateUpdateCallback = useCallback(
+      (e) => {
+        setFilterDateFrom(e.from);
+        setFilterDateTo(e.to);
+      },
+      [setFilterDateFrom, setFilterDateTo]
+    );
 
     return (
       <>
@@ -89,6 +104,7 @@ export default connect(
               </svg>
             </div>
             <input
+              autoComplete='off'
               value={filterString}
               onChange={(e) => {
                 setFilterString(e.target.value);
@@ -119,22 +135,54 @@ export default connect(
           </ButtonGroup>
         </div>
 
-        <div className='w-full mx-auto flex'>
-          <DateRangeSlider />
+        <div className='w-full mx-auto flex ml-5'>
+          <div className='relative flex items-start'>
+            <div className='flex items-center h-5'>
+              <input
+                id='comments'
+                aria-describedby='comments-description'
+                name='comments'
+                type='checkbox'
+                className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
+                aria-checked={applyDateFilter}
+                checked={applyDateFilter}
+                onChange={(e) => {
+                  setApplyDateFilter(e.target.checked);
+                }}
+              />
+            </div>
+            <div className='ml-3 text-sm'>
+              <label htmlFor='comments' className='font-medium text-gray-700'>
+                Filter by Date Range
+              </label>
+            </div>
+          </div>
         </div>
+
+        {applyDateFilter ? (
+          <div className='w-full mx-auto flex mt-5'>
+            <DateRangeSlider
+              minDate={rangeFrom}
+              maxDate={rangeTo}
+              onChange={dateUpdateCallback}
+            />
+          </div>
+        ) : null}
 
         <div className='flex-grow w-full mx-auto flex mt-5'>
           <div className='flex-1 min-w-0 flex'>
             {filtersActive ? (
               <div className='border-b border-gray-200 border-b-0 flex-shrink-0 w-80 border-r border-t border-gray-200 bg-white rounded-r-lg'>
                 <div className='h-full pl-4 pr-6 py-6'>
-                  <FilterPanel activeView={activeView} />
+                  <FilterPanel activeView={activeView}>
+                    <TagFilter />
+                  </FilterPanel>
                 </div>
               </div>
             ) : null}
 
             <div className='h-full min-w-0 flex-1'>
-              <ProductsTable products={productsFiltered} />
+              <ProductsTable products={products} />
             </div>
           </div>
         </div>

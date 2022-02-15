@@ -1,6 +1,6 @@
 import ProductsTableRow from './products-table-row';
 
-export default function ProductsTable({ products }) {
+export default function ProductsTable({ products = [] }) {
   return (
     <div className='flex flex-col ml-5 mr-5'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -25,16 +25,13 @@ export default function ProductsTable({ products }) {
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                   >
-                    First Record
+                    Timespan
                   </th>
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                   >
                     Stats
-                  </th>
-                  <th scope='col' className='relative px-6 py-3'>
-                    <span className='sr-only'>Edit</span>
                   </th>
                 </tr>
               </thead>
