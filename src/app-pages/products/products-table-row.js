@@ -29,9 +29,37 @@ const Tag = ({ tags, id }) => {
 
 export default connect(
   'selectTagItemsObject',
-  function ProductsTableRow({ product, tagItemsObject: tags }) {
+  'selectProductSelectSelected',
+  'doProductSelectSetSelected',
+  function ProductsTableRow({
+    product,
+    tagItemsObject: tags,
+    productSelectSelected: selectedProducts,
+    doProductSelectSetSelected,
+  }) {
+    const selected = selectedProducts.indexOf(product.id) !== -1;
+    const toggleSelected = (checked) => {
+      if (checked) {
+        doProductSelectSetSelected([...selectedProducts, product.id]);
+      } else {
+        doProductSelectSetSelected([
+          ...selectedProducts.splice(selectedProducts.indexOf(product.id), 1),
+        ]);
+      }
+    };
+
     return (
       <tr key={product.id}>
+        <td className='px-6 py-4 whitespace-nowrap' title='Queue for Download'>
+          <input
+            type='checkbox'
+            className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
+            checked={selected}
+            onChange={(e) => {
+              toggleSelected(e.target.checked);
+            }}
+          />
+        </td>
         <td className='px-6 py-4 whitespace-nowrap'>
           <div className='flex items-center'>
             <div className='flex-shrink-0 h-10 w-10'>

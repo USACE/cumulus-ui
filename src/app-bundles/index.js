@@ -13,6 +13,7 @@ import cache from '../cache';
 import modalBundle from './modal-bundle';
 import productBundle from './product-bundle';
 import productFilterBundle from './product-filter-bundle';
+import productSelectBundle from './product-select-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
 import officeBundle from './office-bundle';
@@ -48,6 +49,7 @@ export default composeBundles(
   officeBundle,
   productBundle,
   productFilterBundle,
+  productSelectBundle,
   suiteBundle,
   tagBundle,
   unitBundle,

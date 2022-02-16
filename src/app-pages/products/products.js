@@ -111,9 +111,31 @@ export default connect(
               }}
               type='text'
               name='search'
-              className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md inline-flex'
+              className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-l-md inline-flex'
               placeholder='Filter...'
             />
+            <button
+              disabled={!filterString}
+              type='button'
+              className='-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+              onClick={() => {
+                setFilterString('');
+              }}
+            >
+              <span>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6 text-gray-400'
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'
+                  />
+                </svg>
+              </span>
+            </button>
           </span>
           <ButtonGroup className='ml-5'>
             <ButtonGroupButton title='Download Selection'>
@@ -139,9 +161,9 @@ export default connect(
           <div className='relative flex items-start'>
             <div className='flex items-center h-5'>
               <input
-                id='comments'
-                aria-describedby='comments-description'
-                name='comments'
+                id='filterbydate'
+                aria-describedby='filterbydate-description'
+                name='filterbydate'
                 type='checkbox'
                 className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
                 aria-checked={applyDateFilter}
@@ -152,7 +174,10 @@ export default connect(
               />
             </div>
             <div className='ml-3 text-sm'>
-              <label htmlFor='comments' className='font-medium text-gray-700'>
+              <label
+                htmlFor='filterbydate'
+                className='font-medium text-gray-700'
+              >
                 Filter by Date Range
               </label>
             </div>
