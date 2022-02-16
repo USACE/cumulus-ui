@@ -93,6 +93,19 @@ export default createRestBundle({
       }
     ),
 
+    selectProductParametersAsObjects: createSelector(
+      'selectProductParameters',
+      (parameters) => {
+        return parameters.map((p, i) => {
+          return {
+            id: btoa(p),
+            name: p,
+            description: '',
+          };
+        });
+      }
+    ),
+
     selectProductDateRangeFrom: createSelector(
       'selectProductItemsArray',
       (items) => {

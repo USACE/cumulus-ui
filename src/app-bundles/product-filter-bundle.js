@@ -12,6 +12,7 @@ const productFilterBundle = {
       dateFrom: new Date(),
       dateTo: new Date(),
       tags: [],
+      parameters: [],
     };
 
     return (state = initialData, { type, payload }) => {
@@ -44,6 +45,10 @@ const productFilterBundle = {
     return state.productFilter.tags;
   },
 
+  selectProductFilterParameters: (state) => {
+    return state.productFilter.parameters;
+  },
+
   selectProductFilterResults: createSelector(
     'selectProductItems',
     'selectProductFilterFilterString',
@@ -51,7 +56,16 @@ const productFilterBundle = {
     'selectProductFilterDateFrom',
     'selectProductFilterDateTo',
     'selectProductFilterTags',
-    (items, filterString, applyDateFilter, dateFrom, dateTo, tags) => {
+    'selectProductFilterParameters',
+    (
+      items,
+      filterString,
+      applyDateFilter,
+      dateFrom,
+      dateTo,
+      tags,
+      parameters
+    ) => {
       return items.filter((product) => {
         let pass = true;
 
@@ -84,14 +98,20 @@ const productFilterBundle = {
 
         // apply tag filters
         if (tags.length > 0) {
-          let matchTag = false;
+          let matchFound = false;
           for (var t = 0; t < product.tags.length; t++) {
             if (tags.indexOf(product.tags[t]) !== -1) {
-              matchTag = true;
+              matchFound = true;
               break;
             }
           }
-          pass = matchTag;
+          pass = matchFound;
+        }
+
+        // apply parameter filters - we used the base64 version of the string since
+        // we need a unique id and can't guarantee array indexing...
+        if (parameters.length > 0) {
+          if (parameters.indexOf(btoa(product.parameter)) === -1) pass = false;
         }
 
         return pass;
@@ -150,6 +170,17 @@ const productFilterBundle = {
         type: 'PRODUCT_FILTER_SET_VALUE',
         payload: {
           tags,
+        },
+      });
+    },
+
+  doProductFilterSetParameters:
+    (parameters) =>
+    ({ dispatch }) => {
+      dispatch({
+        type: 'PRODUCT_FILTER_SET_VALUE',
+        payload: {
+          parameters,
         },
       });
     },

@@ -6,6 +6,7 @@ import ButtonGroup from '../../app-components/button-group/button-group';
 import ButtonGroupButton from '../../app-components/button-group/button-group-button';
 import FilterPanel from './filter-panel';
 import TagFilter from './tag-filter';
+import ParameterFilter from './parameter-filter';
 
 export default connect(
   'selectProductFilterResults',
@@ -201,6 +202,7 @@ export default connect(
                 <div className='h-full pl-4 pr-6 py-6'>
                   <FilterPanel activeView={activeView}>
                     <TagFilter />
+                    <ParameterFilter />
                   </FilterPanel>
                 </div>
               </div>
