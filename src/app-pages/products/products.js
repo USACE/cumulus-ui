@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import DateRangeSlider from './date-range-slider';
-import ProductsTable from './products-table';
+import ProductsTable from './products-table/products-table';
+import ProductsMap from './products-map/map';
 import ButtonGroup from '../../app-components/button-group/button-group';
 import ButtonGroupButton from '../../app-components/button-group/button-group-button';
 import FilterPanel from './filter-panel';
@@ -158,7 +159,7 @@ export default connect(
           </ButtonGroup>
         </div>
 
-        <div className='w-full mx-auto flex ml-5'>
+        <div className='w-full mx-auto flex ml-11'>
           <div className='relative flex items-start'>
             <div className='flex items-center h-5'>
               <input
@@ -209,7 +210,11 @@ export default connect(
             ) : null}
 
             <div className='h-full min-w-0 flex-1'>
-              <ProductsTable products={products} />
+              {activeView === 'table' ? (
+                <ProductsTable products={products} />
+              ) : (
+                <ProductsMap products={products} />
+              )}
             </div>
           </div>
         </div>

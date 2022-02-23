@@ -5,6 +5,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
+    "@observablehq/plot": "^0.4.1",
     "@tailwindcss/forms": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -12,6 +13,7 @@
     "@usace/create-jwt-api-bundle": "^0.1.2",
     "@usace/create-keycloak-auth-bundle": "^0.1.2",
     "@usace/create-rest-bundle": "^0.1.2",
+    "d3": "^7.3.0",
     "date-fns": "^2.28.0",
     "internal-nav-helper": "^3.1.0",
     "money-clip": "^3.0.5",
