@@ -15,7 +15,7 @@ export default createRestBundle({
   putTemplate: `${apiUrl}/products/:item.id`,
   postTemplate: `${apiUrl}/products`,
   deleteTemplate: `${apiUrl}/products/:item.id`,
-  fetchActions: ['AUTH_LOGGED_IN'],
+  fetchActions: ['AUTH_LOGGED_IN', 'AUTH_UPDATED'],
   urlParamSelectors: ['selectProductIdByRoute'],
   forceFetchActions: ['PRODUCT_SAVE_FINISHED'],
   sortBy: '',

@@ -23,6 +23,7 @@ import selectProductAvailabilityBundle from './product-availability-bundle';
 import downloadBundle from './download-bundle';
 import downloadModalBundle from './download-modal-bundle';
 import downloadMetricsBundle from './download-metrics-bundle';
+import adminDownloadBundle from './admin-download-bundle';
 
 const mockTokens = {
   ADMIN:
@@ -56,6 +57,7 @@ export default composeBundles(
   downloadBundle,
   downloadModalBundle,
   downloadMetricsBundle,
+  adminDownloadBundle,
   createAuthBundle({
     name: 'auth',
     host: process.env.REACT_APP_AUTH_HOST,
