@@ -6,6 +6,7 @@ import { Table } from '../../../app-components/admin/Table';
 // import { TagIcon, EditIcon, DeleteIcon } from '../icons';
 // import { NewButton } from '../../forms/buttons';
 import { TagIcon, PencilAltIcon } from '@heroicons/react/outline';
+import { parseISO, formatDistanceToNowStrict } from 'date-fns';
 
 const DownloadTable = connect(
   'doModalOpen',
@@ -43,9 +44,20 @@ const DownloadTable = connect(
       ) : null;
     };
 
+    const LastFile = (dt) => {
+      return dt ? (
+        formatDistanceToNowStrict(parseISO(dt), {
+          unit: 'hour',
+          addSuffix: true,
+        })
+      ) : (
+        <span className='text-gray-300'>not set</span>
+      );
+    };
+
     return (
       <Table
-        headers={['Name', 'Parameter', 'Tags', 'Actions']}
+        headers={['Name', 'Parameter', 'Tags', 'Last File', 'Actions']}
         items={items}
         itemFields={[
           { key: 'name' },
@@ -54,6 +66,10 @@ const DownloadTable = connect(
             key: 'parameter',
           },
           { key: 'tags', render: DisplayTags },
+          {
+            key: 'before',
+            render: LastFile,
+          },
           // {
           //   key: 'status',
           //   render: (status) => {

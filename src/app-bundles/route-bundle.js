@@ -2,7 +2,7 @@ import { createRouteBundle } from 'redux-bundler';
 
 import Home from '../app-pages/home';
 import fourOhFour from '../app-pages/404';
-import AdminHome from '../app-pages/admin/admin';
+import AdminHome from '../app-pages/admin/home/home';
 // import AdminDashboard from '../app-pages/admin';
 import AdminProducts from '../app-pages/admin/products/products';
 import AdminDownloads from '../app-pages/admin/downloads/downloads';

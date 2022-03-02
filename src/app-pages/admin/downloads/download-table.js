@@ -7,7 +7,7 @@ const DownloadTable = connect(
   'doModalOpen',
   'selectAdminDownloadItems',
 
-  ({ doModalOpen, adminDownloadItems: items }) => {
+  ({ doModalOpen, adminDownloadItems: items, limitRows }) => {
     // const xitems = [
     //   {
     //     id: '88ed388f-4982-486b-9cda-7852e8aa5164',
@@ -28,7 +28,7 @@ const DownloadTable = connect(
     // ];
 
     // Limit items while testing
-    items = items.slice(0, 5);
+    items = items.slice(0, limitRows);
 
     const statusStyles = {
       SUCCESS: 'bg-green-100 text-green-800',
@@ -80,7 +80,7 @@ const DownloadTable = connect(
   }
 );
 
-export default connect('doModalOpen', ({ doModalOpen }) => (
+export default connect('doModalOpen', ({ doModalOpen, limitRows }) => (
   <>
     <div className='py-3'>
       <div className='flex justify-end'>
@@ -90,6 +90,6 @@ export default connect('doModalOpen', ({ doModalOpen }) => (
         /> */}
       </div>
     </div>
-    <DownloadTable />
+    <DownloadTable limitRows={limitRows} />
   </>
 ));

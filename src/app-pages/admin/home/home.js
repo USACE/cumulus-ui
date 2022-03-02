@@ -1,8 +1,8 @@
 import React from 'react';
-import DownloadTable from './download-table';
-import TopWatershedsTable from './top-watersheds-table';
+
+import DownloadTable from '../downloads/download-table';
 import AdminWrapper from '../../../app-components/admin/AdminWrapper';
-import DownloadStats from './download-stats';
+import AdminHomeStats from './home-stats';
 
 export default function AdminProducts() {
   return (
@@ -12,20 +12,15 @@ export default function AdminProducts() {
 
         <div>
           <h3 className='text-lg leading-6 font-medium text-gray-900'>
-            Downloads
+            Admin Home
           </h3>
-          <DownloadStats />
+          <AdminHomeStats />
         </div>
 
         <h3 className='text-lg leading-6 font-medium text-gray-900 mt-10'>
           Recent downloads
         </h3>
-
-        <DownloadTable limitRows={5} />
-        <h3 className='text-lg leading-6 font-medium text-gray-900 mt-10'>
-          Top Watersheds by Download
-        </h3>
-        <TopWatershedsTable />
+        <DownloadTable limitRows={10} />
       </div>
     </AdminWrapper>
   );
