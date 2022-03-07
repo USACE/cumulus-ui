@@ -1,3 +1,4 @@
+import { createSelector } from 'redux-bundler';
 import createRestBundle from '@usace/create-rest-bundle';
 
 const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
@@ -18,5 +19,16 @@ export default createRestBundle({
   forceFetchActions: ['AUTH_UPDATED'],
   sortBy: '',
   sortAsc: true,
-  addons: {},
+  addons: {
+    selectAdminDownloadByStatus: createSelector(
+      'selectAdminDownloadItems',
+      (downloads) => {
+        const obj = {};
+        downloads.forEach((d) => {
+          obj[d.status] = d;
+        });
+        return obj;
+      }
+    ),
+  },
 });
