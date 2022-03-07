@@ -42,7 +42,7 @@ const Table = ({ headers, items, itemFields, tools }) => {
                       className='px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500'
                       key={idx}
                     >
-                      {!f.render ? p[f.key] : f.render(p[f.key])}
+                      {!f.render ? p[f.key] : f.render(p)}
                     </td>
                   ))}
 
