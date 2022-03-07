@@ -24,12 +24,12 @@ const DownloadTable = connect(
     //   return classes.filter(Boolean).join(' ');
     // }
 
-    const DisplayTags = (productTags) => {
+    const DisplayTags = ({ tags }) => {
       return tagsObj && Object.keys(tagsObj).length !== 0 ? (
         <div>
           {/* {JSON.stringify(productTags.productTags)} */}
-          {productTags &&
-            productTags.map((productTagId, idx) => (
+          {tags &&
+            tags.map((productTagId, idx) => (
               <span
                 key={idx}
                 style={{
@@ -44,9 +44,9 @@ const DownloadTable = connect(
       ) : null;
     };
 
-    const LastFile = (dt) => {
-      return dt ? (
-        formatDistanceToNowStrict(parseISO(dt), {
+    const LastFile = ({ before }) => {
+      return before ? (
+        formatDistanceToNowStrict(parseISO(before), {
           unit: 'hour',
           addSuffix: true,
         })
