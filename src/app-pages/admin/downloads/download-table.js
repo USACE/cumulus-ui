@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'redux-bundler-react';
 import { Table } from '../../../app-components/admin/Table';
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, formatDistanceStrict } from 'date-fns';
 
 const DownloadTable = connect(
   'doModalOpen',
@@ -42,25 +42,53 @@ const DownloadTable = connect(
 
     return (
       <Table
-        headers={['Watershed', 'Products', 'Requested', 'Status', '']}
+        headers={[
+          'Watershed',
+          'Products',
+          'Time Window',
+          'Requested',
+          'Processing Time',
+          'Status',
+          '',
+        ]}
         items={items}
         itemFields={[
           { key: 'watershed_name' },
           {
             key: 'product_id',
-            render: (product_id) => {
+            render: ({ product_id }) => {
               return product_id.length;
             },
           },
           {
+            key: 'datetime_start',
+            render: (item) => {
+              return formatDistanceStrict(
+                parseISO(item.datetime_start),
+                parseISO(item.datetime_end)
+              );
+            },
+          },
+          {
             key: 'processing_start',
-            render: (processing_start) => {
-              return format(parseISO(processing_start), 'dd-LLL-yyyy @ p');
+            render: (item) => {
+              return format(parseISO(item.processing_start), 'dd-LLL-yyyy @ p');
+            },
+          },
+          {
+            key: 'processing_start',
+            render: (item) => {
+              return item.processing_end
+                ? formatDistanceStrict(
+                    parseISO(item.processing_start),
+                    parseISO(item.processing_end)
+                  )
+                : '-';
             },
           },
           {
             key: 'status',
-            render: (status) => {
+            render: ({ status }) => {
               return (
                 <span
                   className={classNames(
