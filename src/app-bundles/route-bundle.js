@@ -17,7 +17,7 @@ import Profile from '../app-pages/profile/profile';
 import Support from '../app-pages/support/support';
 import DocsApi from '../app-pages/support/docs/api';
 import DocsRtsScript from '../app-pages/support/docs/rts-script';
-// import Downloads from '../app-pages/downloads/index';
+import Downloads from '../app-pages/downloads/downloads';
 // import Help from '../app-pages/help/index';
 // import Docs from '../app-pages/docs/index';
 // import Contact from '../app-pages/contact/index';
@@ -40,7 +40,7 @@ export default createRouteBundle({
   '/support': Support,
   '/support/docs/api': DocsApi,
   '/support/docs/rts-script': DocsRtsScript,
-  // '/downloads': Downloads,
+  '/downloads': Downloads,
   // '/help': Help,
   // '/docs': Docs,
   // '/contact': Contact,

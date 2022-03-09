@@ -1,3 +1,5 @@
+import { createSelector } from 'redux-bundler';
+
 const productSelectBundle = {
   name: 'productSelect',
 
@@ -16,9 +18,21 @@ const productSelectBundle = {
     };
   },
 
+  // returns array of IDs
   selectProductSelectSelected: (state) => {
     return state.productSelect.selected;
   },
+
+  // returns filtered list of products, only the selected ones
+  selectProductSelectProducts: createSelector(
+    'selectProductItems',
+    'selectProductSelectSelected',
+    (products, selected) => {
+      return products.filter((p) => {
+        return selected.indexOf(p.id) !== -1;
+      });
+    }
+  ),
 
   doProductSelectToggleAll:
     () =>

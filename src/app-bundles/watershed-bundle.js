@@ -1,3 +1,4 @@
+import { createSelector } from 'redux-bundler';
 import createRestBundle from '@usace/create-rest-bundle';
 const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 
@@ -17,5 +18,17 @@ export default createRestBundle({
   forceFetchActions: ['AUTH_UPDATED'],
   sortBy: '',
   sortAsc: false,
-  addons: {},
+  addons: {
+    selectWatershedDistricts: createSelector(
+      'selectWatershedItems',
+      (watersheds) => {
+        const districts = [];
+        watersheds.forEach((watershed) => {
+          if (districts.indexOf(watershed.office_symbol) === -1)
+            districts.push(watershed.office_symbol);
+        });
+        return districts.sort();
+      }
+    ),
+  },
 });

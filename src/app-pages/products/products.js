@@ -8,24 +8,30 @@ import ButtonGroupButton from '../../app-components/button-group/button-group-bu
 import FilterPanel from './filter-panel';
 import TagFilter from './tag-filter';
 import ParameterFilter from './parameter-filter';
+import DownloadModal from './download-modal';
 
 export default connect(
+  'selectAuthIsLoggedIn',
   'selectProductFilterResults',
   'selectProductFilterFilterString',
   'selectProductFilterApplyDateFilter',
   'selectProductDateRangeFrom',
   'selectProductDateRangeTo',
-  'doProductFetch',
+  'selectProductSelectSelected',
+  'doModalOpen',
   'doProductFilterSetFilterString',
   'doProductFilterSetDateFrom',
   'doProductFilterSetDateTo',
   'doProductFilterSetApplyDateFilter',
   ({
+    authIsLoggedIn,
     productFilterResults: products,
     productFilterFilterString: filterString,
     productFilterApplyDateFilter: applyDateFilter,
     productDateRangeFrom: rangeFrom,
     productDateRangeTo: rangeTo,
+    productSelectSelected: selectedProducts,
+    doModalOpen,
     doProductFilterSetFilterString: setFilterString,
     doProductFilterSetDateFrom: setFilterDateFrom,
     doProductFilterSetDateTo: setFilterDateTo,
@@ -39,11 +45,17 @@ export default connect(
 
     const dateUpdateCallback = useCallback(
       (e) => {
+        console.log('setting date', e.from, e.to);
         setFilterDateFrom(e.from);
         setFilterDateTo(e.to);
       },
       [setFilterDateFrom, setFilterDateTo]
     );
+
+    // open the download modal
+    const handleDownloadClick = useCallback(() => {
+      doModalOpen(DownloadModal);
+    }, [doModalOpen]);
 
     return (
       <>
@@ -140,7 +152,11 @@ export default connect(
             </button>
           </span>
           <ButtonGroup className='ml-5'>
-            <ButtonGroupButton title='Download Selection'>
+            <ButtonGroupButton
+              title='Download Selection'
+              disabled={!authIsLoggedIn || selectedProducts.length === 0}
+              onClick={handleDownloadClick}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-6 w-6'

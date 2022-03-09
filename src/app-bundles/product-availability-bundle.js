@@ -24,7 +24,9 @@ export default createRestBundle({
       (availability, productYears) => {
         if (!availability || !productYears) return {};
         const availabilityByYear = {};
+
         productYears.forEach((year, i) => {
+          console.log(year);
           availabilityByYear[year] = [];
 
           const waterYearStart = new Date(`10-01-${year - 1}`);
@@ -43,12 +45,16 @@ export default createRestBundle({
             };
           });
 
+          // could split these up by year to make this more efficient
           availability.date_counts.forEach(({ date, count = 0 }) => {
             const day = new Date(date);
-            const x = utcWeek.count(waterYearStart, day);
-            const y = day.getUTCDay();
-            console.log(day, count, x, y);
-            dayCache[`${x}-${y}`].count = count;
+            const yr = day.getFullYear();
+            if (yr === year) {
+              const x = utcWeek.count(waterYearStart, day);
+              const y = day.getUTCDay();
+              console.log(day, count, x, y);
+              dayCache[`${x}-${y}`].count = count;
+            }
           });
 
           availabilityByYear[year] = Object.values(dayCache);

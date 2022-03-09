@@ -5,7 +5,7 @@ import useElementSize from '../../../custom-hooks/useElementSize';
 import { mergeRefs } from '../../../utils';
 
 // width to height ratio to make our cells square
-const ratio = 640 / 130;
+const ratio = 640 / 112;
 
 export default function WaterYearHeatMap({ year = 2022, data }) {
   const values = data[year];
@@ -31,24 +31,18 @@ export default function WaterYearHeatMap({ year = 2022, data }) {
       height: width / ratio,
       width: width,
       x: {
-        axis: 'bottom',
+        axis: 'top',
         ticks: Number(Object.keys(ticks)),
         tickFormat: (i) => {
           return ticks[i];
         },
         tickSize: 0,
-        tickPadding: 0,
         align: 0.5,
-        padding: 0,
-        nice: true,
       },
       y: {
         padding: 0,
         tickFormat: Plot.formatWeekday('en', 'narrow'),
         tickSize: 0,
-      },
-      fy: {
-        reverse: true,
       },
       color: {
         type: 'diverging',
