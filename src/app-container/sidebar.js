@@ -1,40 +1,32 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { classNames } from '../utils';
+import { connect } from 'redux-bundler-react';
+import { Fragment } from 'react';
 
 import {
   CollectionIcon,
   DownloadIcon,
   HomeIcon,
-  MenuAlt2Icon,
   XIcon,
+  SupportIcon,
 } from '@heroicons/react/outline';
-import { SearchIcon } from '@heroicons/react/solid';
-import ProfileMenu from '../app-components/ProfileMenu';
+import { classNames } from '../utils';
+import { Dialog, Transition } from '@headlessui/react';
 
 const sidebarNavigation = [
-  { name: 'Home', href: '/', icon: HomeIcon, current: false },
-  { name: 'Products', href: '/products', icon: CollectionIcon, current: false },
-  { name: 'Download', href: '/download', icon: DownloadIcon, current: false },
+  { name: 'Home', href: '/', icon: HomeIcon },
+  { name: 'Products', href: '/products', icon: CollectionIcon },
+  {
+    name: 'Downloads',
+    href: '/downloads',
+    icon: DownloadIcon,
+  },
+  {
+    name: 'Support',
+    href: '/support',
+    icon: SupportIcon,
+  },
 ];
 
-const SidebarItem = ({ name, href, icon, current }) => {
+const SidebarItem = ({ name, href, current }) => {
   return (
     <a
       key={name}
@@ -59,21 +51,12 @@ const SidebarItem = ({ name, href, icon, current }) => {
   );
 };
 
-export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  return (
-    <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full overflow-hidden">
-        ```
-      */}
-      <div className='h-full flex'>
-        {/* Narrow sidebar */}
+export default connect(
+  'selectPathname',
+  ({ pathname, mobileMenuOpen, setMobileMenuOpen }) => {
+    return (
+      <>
+        {/* Desktop menu */}
         <div className='hidden w-28 bg-indigo-700 overflow-y-auto md:block'>
           <div className='w-full py-6 flex flex-col items-center'>
             <div className='flex-shrink-0 flex items-center flex-col'>
@@ -100,30 +83,33 @@ export default function Example() {
               <div className='text-blue-50 font-extralight'>Cumulus</div>
             </div>
             <div className='flex-1 mt-6 w-full px-2 space-y-1'>
-              {sidebarNavigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-indigo-800 text-white'
-                      : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
-                    'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  <item.icon
+              {sidebarNavigation.map((item) => {
+                const current = item.href === pathname;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
                     className={classNames(
-                      item.current
-                        ? 'text-white'
-                        : 'text-indigo-300 group-hover:text-white',
-                      'h-6 w-6'
+                      current
+                        ? 'bg-indigo-800 text-white'
+                        : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',
+                      'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
                     )}
-                    aria-hidden='true'
-                  />
-                  <span className='mt-2'>{item.name}</span>
-                </a>
-              ))}
+                    aria-current={current ? 'page' : undefined}
+                  >
+                    <item.icon
+                      className={classNames(
+                        current
+                          ? 'text-white'
+                          : 'text-indigo-300 group-hover:text-white',
+                        'h-6 w-6'
+                      )}
+                      aria-hidden='true'
+                    />
+                    <span className='mt-2'>{item.name}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -187,7 +173,7 @@ export default function Example() {
                     <nav className='h-full flex flex-col'>
                       <div className='space-y-1'>
                         {sidebarNavigation.map((item) => (
-                          <SidebarItem {...item} />
+                          <SidebarItem key={item.name} {...item} />
                         ))}
                       </div>
                     </nav>
@@ -200,72 +186,7 @@ export default function Example() {
             </div>
           </Dialog>
         </Transition.Root>
-
-        {/* Content area */}
-        <div className='flex-1 flex flex-col overflow-hidden'>
-          <header className='w-full'>
-            <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex'>
-              <button
-                type='button'
-                className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
-                onClick={() => setMobileMenuOpen(true)}
-              >
-                <span className='sr-only'>Open sidebar</span>
-                <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
-              </button>
-              <div className='flex-1 flex justify-between px-4 sm:px-6'>
-                <div className='flex-1 flex'>
-                  <form className='w-full flex md:ml-0' action='#' method='GET'>
-                    <label htmlFor='search-field' className='sr-only'>
-                      Search all files
-                    </label>
-                    <div className='relative w-full text-gray-400 focus-within:text-gray-600'>
-                      <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center'>
-                        <SearchIcon
-                          className='flex-shrink-0 h-5 w-5'
-                          aria-hidden='true'
-                        />
-                      </div>
-                      <input
-                        name='search-field'
-                        id='search-field'
-                        className='h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400'
-                        placeholder='Search'
-                        type='search'
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className='ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6'>
-                  {/* Profile dropdown */}
-                  <ProfileMenu />
-                </div>
-              </div>
-            </div>
-          </header>
-
-          {/* Main content */}
-          <div className='flex-1 flex items-stretch overflow-hidden'>
-            <main className='flex-1 overflow-y-auto'>
-              {/* Primary column */}
-              <section
-                aria-labelledby='primary-heading'
-                className='min-w-0 flex-1 h-full flex flex-col lg:order-last'
-              >
-                <h1 id='primary-heading' className='sr-only'>
-                  Photos
-                </h1>
-                {/* Your content */}
-              </section>
-            </main>
-
-            {/* Secondary column (hidden on smaller screens) */}
-            <aside className='hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block'>
-              {/* Your content */}
-            </aside>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+      </>
+    );
+  }
+);

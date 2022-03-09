@@ -6,8 +6,9 @@ import { connect } from 'redux-bundler-react';
 export default connect(
   'selectModalContent',
   'selectModalProps',
+  'selectModalOnClose',
   'doModalClose',
-  ({ modalContent: ModalContent, modalProps, doModalClose }) => {
+  ({ modalContent: ModalContent, modalProps, modalOnClose, doModalClose }) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -21,6 +22,10 @@ export default connect(
     const onClose = () => {
       // Modal Fade-Out
       setShow(false);
+      // onClose Callback for a specific modal
+      if (modalOnClose) {
+        modalOnClose();
+      }
       // Allow 1s delay for smooth transition
       setTimeout(() => doModalClose(), 300);
     };
@@ -29,10 +34,10 @@ export default connect(
       <Transition.Root show={show} as={Fragment}>
         <Dialog
           as='div'
-          className='fixed z-10 inset-0 overflow-y-auto'
+          className='fixed z-10 inset-0 overflow-y-auto rounded-lg'
           onClose={onClose}
         >
-          <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+          <div className='flex items-end justify-center min-h-screen text-center sm:block'>
             <Transition.Child
               as={Fragment}
               enter='ease-out duration-300'
@@ -61,7 +66,7 @@ export default connect(
               leaveFrom='opacity-100 translate-y-0 sm:scale-100'
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
-              <div className='inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6'>
+              <div className='inline-block align-bottom bg-white rounded-lg text-left  shadow-xl transform transition-all lg:max-w-xl md:max-w-md sm:my-8 sm:align-middle sm:max-w-sm sm:w-full'>
                 {ModalContent && (
                   <ModalContent onClose={onClose} {...modalProps} />
                 )}
