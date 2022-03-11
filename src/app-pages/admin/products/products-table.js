@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'redux-bundler-react';
 import EditProductModal from '../../../app-components/admin/modals/edit-product-modal';
-// import EditProductTagsModal from '../../modals/edit-product-tags-modal';
+import EditProductTagsModal from '../../../app-components/admin/modals/edit-product-tags-modal';
 import { Table } from '../../../app-components/admin/Table';
 // import { TagIcon, EditIcon, DeleteIcon } from '../icons';
 // import { NewButton } from '../../forms/buttons';
@@ -90,7 +90,7 @@ const DownloadTable = connect(
           {
             icon: <TagIcon className='w-5 text-gray-600' />,
             handleClick: (item) => {
-              // doModalOpen(EditProductTagsModal, item);
+              doModalOpen(EditProductTagsModal, item);
             },
           },
           {
