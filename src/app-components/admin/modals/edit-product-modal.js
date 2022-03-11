@@ -85,7 +85,7 @@ const EditProductModal = connect(
 
     return (
       <div
-        className='mx-auto flex items-center justify-center w-full'
+        className='mx-auto w-full'
         role='dialog'
         aria-modal='true'
         aria-labelledby='modal-headline'
@@ -278,35 +278,12 @@ const EditProductModal = connect(
             </div>
 
             {/* <div className='mt-3'>
-              <label className='block mt-6 mb-2 w-full' forhtml='tags'>
-                <span className='text-gray-600'>Tags</span>
-              </label>
-              <Select
-                isMulti
-                placeholder={appDefaultsFormSelectPlaceholder}
-                options={tags.map((t, index) => ({
-                  value: t.id,
-                  label: t.name,
-                }))}
-                onChange={(selectedOption) => {
-                  setPayload({
-                    ...payload,
-                    tags:
-                      selectedOption && selectedOption.length
-                        ? selectedOption.map((s) => s.value)
-                        : [],
-                  });
-                }}
-              />
-            </div> */}
-
-            <div className='mt-3'>
               <textarea
                 className='w-full h-20 text-gray-400'
                 readOnly
                 value={JSON.stringify(payload)}
               ></textarea>
-            </div>
+            </div> */}
 
             <div className='mt-6'>
               <SaveButton label='Save' onClick={handleSubmit} />
