@@ -17,7 +17,12 @@ export default createRestBundle({
   deleteTemplate: `${apiUrl}/products/:item.id`,
   fetchActions: ['AUTH_LOGGED_IN', 'AUTH_UPDATED'],
   urlParamSelectors: ['selectProductIdByRoute'],
-  forceFetchActions: ['PRODUCT_SAVE_FINISHED'],
+  forceFetchActions: [
+    'PRODUCT_SAVE_FINISHED',
+    'PRODUCT_TAG_ADD_FINISH',
+    'PRODUCT_TAG_REMOVE_FINISH',
+    'TAG_DELETE_FINISHED',
+  ],
   sortBy: '',
   sortAsc: false,
   reduceFurther: (state, { type, payload }) => {
