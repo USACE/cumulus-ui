@@ -13,12 +13,12 @@ import AdminTags from '../app-pages/admin/tags/tags';
 // import AdminSuites from '../app-pages/admin/suites/index';
 // import AdminParameters from '../app-pages/admin/parameters/index';
 import Products from '../app-pages/products/products';
+import ProductDetails from '../app-pages/products/product-details';
 import Profile from '../app-pages/profile/profile';
 import Support from '../app-pages/support/support';
 import DocsApi from '../app-pages/support/docs/api';
 import DocsRtsScript from '../app-pages/support/docs/rts-script';
-// import ProductDetails from '../app-pages/products/product-details';
-// import Downloads from '../app-pages/downloads/index';
+import Downloads from '../app-pages/downloads/downloads';
 // import Help from '../app-pages/help/index';
 // import Docs from '../app-pages/docs/index';
 // import Contact from '../app-pages/contact/index';
@@ -38,11 +38,11 @@ export default createRouteBundle({
   // '/admin/parameters': AdminParameters,
 
   '/products': Products,
+  '/products/:product_id': ProductDetails,
   '/support': Support,
   '/support/docs/api': DocsApi,
   '/support/docs/rts-script': DocsRtsScript,
-  // '/products/:product_id': ProductDetails,
-  // '/downloads': Downloads,
+  '/downloads': Downloads,
   // '/help': Help,
   // '/docs': Docs,
   // '/contact': Contact,

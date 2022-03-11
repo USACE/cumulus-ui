@@ -5,3 +5,7 @@
 /* * {
   border: 1px solid red;
 } */
+
+.thumb-pointer-events-auto::-webkit-slider-thumb {
+  pointer-events: auto;
+}

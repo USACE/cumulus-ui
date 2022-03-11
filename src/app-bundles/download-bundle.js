@@ -22,7 +22,7 @@ const downloadBundle = createRestBundle({
   sortAsc: false,
   addons: {
     doDownloadRequest:
-      (payload) =>
+      (payload, callback) =>
       ({ store, dispatch }) => {
         dispatch({ type: 'DOWNLOAD_REQUEST_START' });
 
@@ -40,10 +40,12 @@ const downloadBundle = createRestBundle({
           if (!response.ok) {
             console.log('ERROR in Download Request');
             console.log(`Request returned a ${response.status}`);
+            callback(`Request returned a ${response.status}`);
           }
           dispatch({
             type: 'DOWNLOAD_REQUEST_FINISH',
           });
+          callback();
         });
       },
     reactDownloadInProgress: createSelector(

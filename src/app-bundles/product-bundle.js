@@ -1,6 +1,6 @@
 import createRestBundle from '@usace/create-rest-bundle';
 import { createSelector } from 'redux-bundler';
-import moment from 'moment';
+import { getMonth, getYear, isAfter, isBefore } from 'date-fns';
 
 const apiUrl = process.env.REACT_APP_CUMULUS_API_URL;
 
@@ -9,7 +9,7 @@ export default createRestBundle({
   uid: 'id',
   prefetch: true,
   staleAfter: 30000, //5min
-  persist: true,
+  persist: false,
   routeParam: 'product_id',
   getTemplate: `${apiUrl}/products`,
   putTemplate: `${apiUrl}/products/:item.id`,
@@ -55,16 +55,13 @@ export default createRestBundle({
         if (product && product.after && product.before) {
           // Water year runs October --> September
           // (not Jan - Dec). If in October, add a year
-          const momentAfter = moment(product.after);
+          const after = new Date(product.after);
           const yearAfter =
-            momentAfter.month() > 8
-              ? momentAfter.year() + 1
-              : momentAfter.year();
-          const momentBefore = moment(product.before);
+            getMonth(after) > 8 ? getYear(after) + 1 : getYear(after);
+
+          const before = new Date(product.before);
           const yearBefore =
-            momentBefore.month() > 8
-              ? momentBefore.year() + 1
-              : momentBefore.year();
+            getMonth(before) > 8 ? getYear(before) + 1 : getYear(before);
 
           let years = [];
           for (var y = yearAfter; y <= yearBefore; y++) {
@@ -81,15 +78,16 @@ export default createRestBundle({
       (items) => {
         const obj = {};
         items.forEach((item) => {
-          if (obj.hasOwnProperty(item.group)) {
-            obj[item.group].push(item);
+          if (obj.hasOwnProperty(item.parameter)) {
+            obj[item.parameter].push(item);
             return;
           }
-          obj[item.group] = [item];
+          obj[item.parameter] = [item];
         });
         return obj;
       }
     ),
+
     selectProductParameters: createSelector(
       'selectProductByParameter',
       (obj) => {
@@ -99,6 +97,48 @@ export default createRestBundle({
         return Object.keys(obj);
       }
     ),
+
+    selectProductParametersAsObjects: createSelector(
+      'selectProductParameters',
+      (parameters) => {
+        return parameters.map((p, i) => {
+          return {
+            id: btoa(p),
+            name: p,
+            description: '',
+          };
+        });
+      }
+    ),
+
+    selectProductDateRangeFrom: createSelector(
+      'selectProductItemsArray',
+      (items) => {
+        let out = new Date('01-Jan-3000');
+        items.forEach((p) => {
+          if (p.productfile_count > 0) {
+            const d = new Date(p.after);
+            if (isBefore(d, out)) out = d;
+          }
+        });
+        return out;
+      }
+    ),
+
+    selectProductDateRangeTo: createSelector(
+      'selectProductItemsArray',
+      (items) => {
+        let out = new Date('01-Jan-1980');
+        items.forEach((p) => {
+          if (p.productfile_count > 0) {
+            const d = new Date(p.before);
+            if (isAfter(d, out)) out = d;
+          }
+        });
+        return out;
+      }
+    ),
+
     doProductTagRemove:
       (productId, tagId) =>
       ({ dispatch, store, apiDelete }) => {
@@ -117,6 +157,7 @@ export default createRestBundle({
           }
         );
       },
+
     doProductTagAdd:
       (productId, tagId) =>
       ({ dispatch, store, apiPost }) => {

@@ -12,6 +12,8 @@ import routeBundle from './route-bundle';
 import cache from '../cache';
 import modalBundle from './modal-bundle';
 import productBundle from './product-bundle';
+import productFilterBundle from './product-filter-bundle';
+import productSelectBundle from './product-select-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
 import officeBundle from './office-bundle';
@@ -47,6 +49,8 @@ export default composeBundles(
   routeBundle,
   officeBundle,
   productBundle,
+  productFilterBundle,
+  productSelectBundle,
   suiteBundle,
   tagBundle,
   unitBundle,
@@ -74,7 +78,7 @@ export default composeBundles(
   }),
   createJwtApiBundle({
     root: process.env.REACT_APP_CUMULUS_API_URL,
-    unless: {
+    skipTokenConfig: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
       custom: ({ method, path }) => {
