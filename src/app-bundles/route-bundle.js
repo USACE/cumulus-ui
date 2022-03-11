@@ -6,7 +6,7 @@ import AdminHome from '../app-pages/admin/home/home';
 // import AdminDashboard from '../app-pages/admin';
 import AdminProducts from '../app-pages/admin/products/products';
 import AdminDownloads from '../app-pages/admin/downloads/downloads';
-// import AdminTags from '../app-pages/admin/tags/index';
+import AdminTags from '../app-pages/admin/tags/tags';
 // import AdminWatersheds from '../app-pages/admin/watersheds/index';
 // import AdminAccounts from '../app-pages/admin/accounts/index';
 // import AdminUnits from '../app-pages/admin/units/index';
@@ -30,7 +30,7 @@ export default createRouteBundle({
   '/admin': AdminHome,
   '/admin/products': AdminProducts,
   '/admin/downloads': AdminDownloads,
-  // '/admin/tags': AdminTags,
+  '/admin/tags': AdminTags,
   // '/admin/watersheds': AdminWatersheds,
   // '/admin/accounts': AdminAccounts,
   // '/admin/units': AdminUnits,

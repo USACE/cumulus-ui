@@ -16,6 +16,7 @@ const AdminNavbar = connect('selectUrlObject', ({ urlObject: urlObj }) => {
       href: '/admin/downloads',
     },
     { name: 'Products', href: '/admin/products' },
+    { name: 'Tags', href: '/admin/tags' },
   ];
 
   return (
