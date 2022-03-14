@@ -1,4 +1,4 @@
-import createRestBundle from './create-rest-bundle';
+import createRestBundle from '@usace/create-rest-bundle';
 import { createSelector } from 'redux-bundler';
 import { subDays } from 'date-fns';
 

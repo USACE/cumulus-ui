@@ -1,6 +1,6 @@
 {
   "name": "cumulus-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
@@ -8,6 +8,9 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "@usace/create-jwt-api-bundle": "^0.1.2",
+    "@usace/create-keycloak-auth-bundle": "^0.1.2",
+    "@usace/create-rest-bundle": "^0.1.2",
     "ag-grid-react": "^25.3.0",
     "date-fns": "^2.21.3",
     "internal-nav-helper": "^3.1.0",

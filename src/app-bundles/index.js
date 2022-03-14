@@ -4,14 +4,13 @@ import {
   createUrlBundle,
 } from 'redux-bundler';
 
-import createAuthBundle from './create-keycloak-auth-bundle';
-import createJwtApiBundle from './create-jwt-api-bundle';
+import createAuthBundle from '@usace/create-keycloak-auth-bundle';
+import createJwtApiBundle from '@usace/create-jwt-api-bundle';
 
 import routeBundle from './route-bundle';
 
 import cache from '../cache';
 import modalBundle from './modal-bundle';
-// import accountdBundle from './account-bundle';
 import productBundle from './product-bundle';
 import tagBundle from './tag-bundle';
 import unitBundle from './unit-bundle';
@@ -42,7 +41,6 @@ export default composeBundles(
   createUrlBundle,
   modalBundle,
   routeBundle,
-  // accountdBundle,
   officeBundle,
   productBundle,
   suiteBundle,
@@ -70,15 +68,14 @@ export default composeBundles(
     // mockToken: process.env.NODE_ENV === 'development' ? mockTokenAdmin : null, // Mock Token Admin
   }),
   createJwtApiBundle({
-    root: process.env.REACT_APP_CUMULUS_API_URL,
-    unless: {
+    skipTokenConfig: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
-      custom: ({ method, path }) => {
+      custom: ({ method, url }) => {
         if (method === 'GET') {
           // Include Token on Any Routes that start with /my_
           // or are explicitly whitelisted in the object
-          if (includeTokenRoutes.hasOwnProperty(path)) {
+          if (includeTokenRoutes.hasOwnProperty(url)) {
             return false;
           }
           return true;

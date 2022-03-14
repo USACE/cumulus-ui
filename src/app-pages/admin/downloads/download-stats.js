@@ -26,7 +26,7 @@ const HomeStats = connect(
         </svg>
       );
     };
-    return (
+    return downloadMetrics.length ? (
       <section className='text-gray-600 body-font'>
         <div className='container px-5 py-5 mx-auto'>
           <div className='flex flex-wrap -m-4 text-center'>
@@ -69,6 +69,8 @@ const HomeStats = connect(
           </div>
         </div>
       </section>
+    ) : (
+      'no downloads to display'
     );
   }
 );
