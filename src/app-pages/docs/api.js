@@ -8,7 +8,7 @@ const ApiDoc = () => (
     <Header />
     <RedocStandalone
       spec={
-        'https://raw.githubusercontent.com/USACE/cumulus-api/develop/apidoc.yaml'
+        'https://raw.githubusercontent.com/USACE/cumulus-api/stable/docs/apidoc.yaml'
       }
     />
   </>
