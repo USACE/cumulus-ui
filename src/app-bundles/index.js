@@ -25,6 +25,7 @@ import selectProductAvailabilityBundle from './product-availability-bundle';
 import downloadBundle from './download-bundle';
 import downloadModalBundle from './download-modal-bundle';
 import downloadMetricsBundle from './download-metrics-bundle';
+import adminDownloadBundle from './admin-download-bundle';
 
 const mockTokens = {
   ADMIN:
@@ -34,12 +35,6 @@ const mockTokens = {
 const mockUser = process.env.REACT_APP_AUTH_MOCK_USER
   ? process.env.REACT_APP_AUTH_MOCK_USER.toUpperCase()
   : null;
-
-// Include Token With GET Request on These Routes
-const includeTokenRoutes = {
-  '/downloads': true,
-  [`${process.env.REACT_APP_CUMULUS_API_URL}/my_downloads`]: true,
-};
 
 export default composeBundles(
   createCacheBundle({ cacheFn: cache.set }),
@@ -60,6 +55,7 @@ export default composeBundles(
   downloadBundle,
   downloadModalBundle,
   downloadMetricsBundle,
+  adminDownloadBundle,
   createAuthBundle({
     name: 'auth',
     host: process.env.REACT_APP_AUTH_HOST,
@@ -79,16 +75,20 @@ export default composeBundles(
     skipTokenConfig: {
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
-      custom: ({ method, path }) => {
+      custom: ({ method, url }) => {
+        // default to skipping the token
+        let ret = true;
         if (method === 'GET') {
-          // Include Token on Any Routes that start with /my_
-          // or are explicitly whitelisted in the object
-          if (includeTokenRoutes.hasOwnProperty(path)) {
-            return false;
+          // Include Token on Any Routes that match any of the following patterns
+          const includeTokenFor = ['/my_', 'download'];
+          for (const path of includeTokenFor) {
+            if (url.indexOf(path) !== -1) {
+              ret = false;
+              break;
+            }
           }
-          return true;
         }
-        return false;
+        return ret;
       },
     },
   })
