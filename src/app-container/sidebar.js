@@ -18,6 +18,7 @@ const sidebarNavigation = [
     name: 'Downloads',
     href: '/downloads',
     icon: DownloadIcon,
+    authenticated: true,
   },
   {
     name: 'Support',
@@ -53,38 +54,42 @@ const SidebarItem = ({ name, href, current }) => {
 
 export default connect(
   'selectPathname',
-  ({ pathname, mobileMenuOpen, setMobileMenuOpen }) => {
+  'selectAuthIsLoggedIn',
+  ({ pathname, authIsLoggedIn, mobileMenuOpen, setMobileMenuOpen }) => {
     return (
       <>
         {/* Desktop menu */}
         <div className='hidden w-28 bg-indigo-700 overflow-y-auto md:block'>
           <div className='w-full py-6 flex flex-col items-center'>
-            <div className='flex-shrink-0 flex items-center flex-col'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='36'
-                height='36'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-blue-50'
-              >
-                <line x1='8' y1='19' x2='8' y2='21'></line>
-                <line x1='8' y1='13' x2='8' y2='15'></line>
-                <line x1='16' y1='19' x2='16' y2='21'></line>
-                <line x1='16' y1='13' x2='16' y2='15'></line>
-                <line x1='12' y1='21' x2='12' y2='23'></line>
-                <line x1='12' y1='15' x2='12' y2='17'></line>
-                <path d='M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25'></path>
-              </svg>
-              <div className='text-blue-50 font-extralight'>Cumulus</div>
-            </div>
+            <a href='/'>
+              <div className='flex-shrink-0 flex items-center flex-col'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='36'
+                  height='36'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  className='text-blue-50'
+                >
+                  <line x1='8' y1='19' x2='8' y2='21'></line>
+                  <line x1='8' y1='13' x2='8' y2='15'></line>
+                  <line x1='16' y1='19' x2='16' y2='21'></line>
+                  <line x1='16' y1='13' x2='16' y2='15'></line>
+                  <line x1='12' y1='21' x2='12' y2='23'></line>
+                  <line x1='12' y1='15' x2='12' y2='17'></line>
+                  <path d='M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25'></path>
+                </svg>
+                <div className='text-blue-50 font-extralight'>Cumulus</div>
+              </div>
+            </a>
             <div className='flex-1 mt-6 w-full px-2 space-y-1'>
               {sidebarNavigation.map((item) => {
                 const current = item.href === pathname;
+                if (item.authenticated && !authIsLoggedIn) return null;
                 return (
                   <a
                     key={item.name}
