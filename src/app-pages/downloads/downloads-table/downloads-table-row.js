@@ -3,7 +3,6 @@ import {
   formatDistanceToNow,
   formatDistanceStrict,
   format,
-  differenceInSeconds,
   parseISO,
 } from 'date-fns';
 
