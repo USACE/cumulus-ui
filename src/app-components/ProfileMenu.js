@@ -93,6 +93,22 @@ const ProfileMenu = connect(
                 </a>
               )}
             </Menu.Item>
+            {/* Admin */}
+            {authRolesObj['application.admin'] && (
+              <Menu.Item key='admin'>
+                {({ active }) => (
+                  <a
+                    href='/admin'
+                    className={classNames(
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700'
+                    )}
+                  >
+                    Admin
+                  </a>
+                )}
+              </Menu.Item>
+            )}
             {/* Sign Out */}
             <Menu.Item key='logout'>
               {({ active }) => (
