@@ -76,19 +76,21 @@ export default composeBundles(
       // GET requests do not include token unless path starts with /my_
       // Need token to figure out who "me" is
       custom: ({ method, url }) => {
-        // default to skipping the token
-        let ret = true;
+        // Skip including JWT Bearer Token on all GET requests UNLESS URL pathaname starts with /my_
+        // or it's defined in token_routes array
         if (method === 'GET') {
-          // Include Token on Any Routes that match any of the following patterns
-          const includeTokenFor = ['/my_', 'download'];
-          for (const path of includeTokenFor) {
-            if (url.indexOf(path) !== -1) {
-              ret = false;
-              break;
-            }
+          const urlObj = new URL(url);
+          const token_routes = {
+            '/my_downloads': true,
+            '/downloads': true,
+          };
+          if (urlObj.pathname && token_routes[urlObj.pathname]) {
+            return false;
           }
+          return true;
         }
-        return ret;
+        // Include JWT Bearer Token on all other requests
+        return false;
       },
     },
   })
