@@ -32,7 +32,8 @@ C438.72,472.145,512,375.857,512,262.353C512,120.401,397.376,5.329,255.968,5.329z
 const items = [
   {
     name: 'API Documentation',
-    href: '/support/docs/api',
+    href: 'https://petstore.swagger.io/?url=https://raw.githubusercontent.com/USACE/cumulus-api/stable/docs/apidoc.yaml',
+    target: '_blank',
     icon: BookOpenIcon,
     description:
       'Interacting with Cumulus using external applications/scripts.',
@@ -40,12 +41,14 @@ const items = [
   {
     name: 'CWMS CAVI/HEC RTS Script Setup',
     href: '/support/docs/rts-script',
+    target: '_self',
     icon: DesktopComputerIcon,
     description: 'Download grids within the CWMS CAVI or HEC RTS',
   },
   {
     name: 'Contact the Dev Team',
     href: 'https://github.com/USACE/cumulus/issues',
+    target: '_blank',
     icon: GitHubIcon,
     description:
       'Report an issue/bug, ask a question or provide feedback. (external link to Github.com)',
@@ -65,7 +68,7 @@ export default function Support() {
             </div>
             <div className='mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3'>
               {items.map((item) => (
-                <a key={item.name} href={item.href}>
+                <a key={item.name} href={item.href} target={item.target}>
                   <div
                     key={item.name}
                     className='text-center sm:flex sm:text-left lg:block lg:text-center'
@@ -76,7 +79,7 @@ export default function Support() {
                       </div>
                     </div>
                     <div className='mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0'>
-                      <h3 className='text-sm font-medium lg:text-md text-gray-900'>
+                      <h3 className='text-sm font-medium lg:text-lg text-gray-900'>
                         {item.name}
                       </h3>
                       <p className='mt-2 text-sm text-gray-500'>
