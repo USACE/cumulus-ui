@@ -6,6 +6,7 @@ const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 export default createRestBundle({
   name: 'adminDownload',
   uid: 'id',
+  allowRoles: ['application.admin'],
   prefetch: true,
   staleAfter: 300000, // 300000 milliseconds = 5min
   persist: true,

@@ -12,7 +12,7 @@ export default connect(
   }) {
     return (
       <FilterPanelGroup
-        title='Filter By Tag'
+        title='Filter By Parameter'
         checkedItems={filterParameters}
         items={parameters}
         onChange={doProductFilterSetParameters}

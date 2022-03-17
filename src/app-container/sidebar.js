@@ -1,5 +1,6 @@
 import { connect } from 'redux-bundler-react';
 import { Fragment } from 'react';
+import pkg from '../../package.json';
 
 import {
   CollectionIcon,
@@ -84,6 +85,7 @@ export default connect(
                   <path d='M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25'></path>
                 </svg>
                 <div className='text-blue-50 font-extralight'>Cumulus</div>
+                <div className='ml-2 text-xs text-gray-400'>v{pkg.version}</div>
               </div>
             </a>
             <div className='flex-1 mt-6 w-full px-2 space-y-1'>
