@@ -6,7 +6,7 @@ export default connect(
   'selectProductByRoute',
   ({ productByRoute: product }) => {
     return (
-      <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
+      <div className='bg-white shadow-md overflow-hidden sm:rounded-lg'>
         <div className='px-4 py-5 sm:px-6'>
           <h3 className='text-lg leading-6 font-medium text-gray-900'>
             Product Metadata
@@ -29,7 +29,7 @@ export default connect(
             </div>
             <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>
-                Earliest Product
+                Earliest Record
               </dt>
               <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                 {product.after}
@@ -43,7 +43,7 @@ export default connect(
             </div>
             <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>
-                Latest Product
+                Latest Record
               </dt>
               <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                 {product.before}
@@ -55,7 +55,26 @@ export default connect(
                 </div>
               </dd>
             </div>
-            <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            {product.last_forecast_version && product.last_forecast_version && (
+              <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>
+                  Latest Forecast
+                </dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+                  {product.last_forecast_version}
+                  <div className='text-sm text-gray-900'>
+                    {product.last_forecast_version &&
+                      formatDistanceToNow(
+                        new Date(product.last_forecast_version),
+                        {
+                          addSuffix: true,
+                        }
+                      )}
+                  </div>
+                </dd>
+              </div>
+            )}
+            <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>
                 Availability
               </dt>
@@ -70,19 +89,19 @@ export default connect(
                   )}
               </dd>
             </div>
-            <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>Total Files</dt>
               <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                 {product.productfile_count}
               </dd>
             </div>
-            <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>DSS Version</dt>
               <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                 {product.dss_fpart}
               </dd>
             </div>
-            <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>Tags</dt>
               <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                 <ProductTags product={product} />
