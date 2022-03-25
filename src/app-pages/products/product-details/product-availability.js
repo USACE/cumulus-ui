@@ -57,7 +57,7 @@ export default connect(
                     key={year}
                     width={'100%'}
                     year={year}
-                    data={productAvailability}
+                    data={Object.values(productAvailability[year])}
                   />
                 );
               })}
