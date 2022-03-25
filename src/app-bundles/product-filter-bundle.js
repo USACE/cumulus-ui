@@ -18,7 +18,6 @@ const productFilterBundle = {
     return (state = initialData, { type, payload }) => {
       switch (type) {
         case 'PRODUCT_FILTER_SET_VALUE':
-          console.log(type, payload);
           return { ...state, ...payload };
         default:
           return state;
