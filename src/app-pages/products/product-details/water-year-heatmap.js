@@ -8,8 +8,6 @@ import { mergeRefs } from '../../../utils';
 const ratio = 640 / 112;
 
 export default function WaterYearHeatMap({ year = 2022, data }) {
-  const values = data[year];
-
   const ticks = useMemo(() => {
     const waterYearStart = new Date(`10-01-${year - 1}`);
     const waterYearEnd = new Date(`10-01-${year}`);
@@ -26,7 +24,7 @@ export default function WaterYearHeatMap({ year = 2022, data }) {
   const [sizeRef, { width }] = useElementSize();
 
   useEffect(() => {
-    if (!values) return null;
+    if (!data) return null;
     const Chart = Plot.plot({
       height: width / ratio,
       width: width,
@@ -45,28 +43,32 @@ export default function WaterYearHeatMap({ year = 2022, data }) {
         tickSize: 0,
       },
       color: {
-        type: 'diverging',
+        type: 'threshold',
+        domain: [0, 1, 24], // max is hours in the day
         scheme: 'bugn',
       },
       marks: [
-        Plot.cell(values, {
+        Plot.cell(data, {
           x: (d) => d.x,
           y: (d) => d.y,
-          fill: (d) => d.count,
-          // title: (d, i) =>
-          //   i > 0
-          //     ? (
-          //         ((d.Close - DJI[i - 1].Close) / DJI[i - 1].Close) *
-          //         100
-          //       ).toFixed(1)
-          //     : NaN,
+          fill: (d) => (d.count ? d.count : -1),
+          title: (d, i) => {
+            return `${d.date.toLocaleDateString()} - ${d.count} files`;
+          },
+          text: (d) => d.count,
           inset: 0.6,
         }),
+        // Possibly turn this on via config?
+        // Plot.text(data, {
+        //   x: (d) => d.x,
+        //   y: (d) => d.y,
+        //   text: (d) => (d.count ? d.count : ''),
+        // }),
       ],
     });
     elRef.current.append(Chart);
     return () => Chart.remove();
-  }, [elRef, values, ticks, width]);
+  }, [elRef, data, ticks, width]);
 
   return (
     <div className='w-full'>
