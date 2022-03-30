@@ -17,6 +17,7 @@ export default connect(
   'doProductFilterSetDateTo',
   'doModalClose',
   'doDownloadRequest',
+  'doUpdateUrl',
   ({
     productSelectProducts: products,
     productSelectSelected: selectedProducts,
@@ -27,6 +28,7 @@ export default connect(
     // doProductSelectSetSelected,
     doModalClose,
     doDownloadRequest,
+    doUpdateUrl,
   }) => {
     // const toggleSelected = (checked, id) => {
     //   if (checked) {
@@ -65,6 +67,7 @@ export default connect(
               console.log('need to put this in the UI to tell the user', err);
             } else {
               doModalClose();
+              doUpdateUrl('/downloads');
             }
           }
         );

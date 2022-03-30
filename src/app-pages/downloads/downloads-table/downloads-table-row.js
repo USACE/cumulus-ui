@@ -6,8 +6,28 @@ import {
   parseISO,
 } from 'date-fns';
 
+const Products = connect(
+  'selectProductItemsObject',
+  'doProductFetch',
+  ({ productItemsObject: productsObj, downloadProducts }) => {
+    return (
+      <div className='max-w-md'>
+        {downloadProducts &&
+          Object.keys(productsObj).length &&
+          downloadProducts.map((dp, idx) => (
+            <a key={idx} href={'/products/' + productsObj[dp].id}>
+              <span className='inline-block bg-gray-200 hover:bg-indigo-300 cursor-pointer mr-1 mb-1 p-1 text-xs rounded whitespace-nowrap'>
+                {productsObj[dp].name}
+              </span>
+            </a>
+          ))}
+      </div>
+    );
+  }
+);
+
 export default connect(function DownloadsTableRow({ item, productsById }) {
-  const product = productsById[item.product_id] || { name: 'Not Found...' };
+  //const product = productsById[item.product_id] || { name: 'Not Found...' };
   const duration =
     item && item.processing_start && item.processing_end
       ? formatDistanceStrict(
@@ -16,33 +36,37 @@ export default connect(function DownloadsTableRow({ item, productsById }) {
           { roundingMethod: 'ceil' }
         )
       : item.status;
-  console.log(
-    item,
-    'start',
-    item.processing_start,
-    parseISO(item.processing_start)
-  );
-  console.log('end', item.processing_end, parseISO(item.processing_end));
+  // console.log(
+  //   item,
+  //   'start',
+  //   item.processing_start,
+  //   parseISO(item.processing_start)
+  // );
+  // console.log('end', item.processing_end, parseISO(item.processing_end));
   return (
     <tr>
       <td className='px-6 py-4 whitespace-nowrap' title='Queue for Download'>
         {item.watershed_name}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap'>{product.name}</td>
+      <td className='px-6 py-4'>
+        <Products downloadProducts={item.product_id} />
+      </td>
       <td className='px-6 py-4 whitespace-nowrap  text-sm text-gray-500'>
         {
           <>
+            <div className='text-black'>
+              {formatDistanceStrict(
+                new Date(item.datetime_start),
+                new Date(item.datetime_end)
+              )}
+            </div>
             <div title={item.datetime_start}>
               From:{' '}
-              {formatDistanceToNow(new Date(item.datetime_start), {
-                addSuffix: true,
-              })}
+              {format(new Date(item.datetime_start), 'yyyy-MM-dd kk:mm O')}
             </div>
             <div title={item.datetime_end}>
-              To:{' '}
-              {formatDistanceToNow(new Date(item.datetime_end), {
-                addSuffix: true,
-              })}
+              <span className='mr-4'>To:</span>{' '}
+              {format(new Date(item.datetime_end), 'yyyy-MM-dd kk:mm O')}
             </div>
           </>
         }
@@ -50,7 +74,7 @@ export default connect(function DownloadsTableRow({ item, productsById }) {
       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
         {
           <>
-            <div title={item.datetime_start}>
+            <div title={item.datetime_start} className='text-black'>
               {' '}
               {formatDistanceToNow(new Date(item.processing_start), {
                 addSuffix: true,
@@ -58,7 +82,7 @@ export default connect(function DownloadsTableRow({ item, productsById }) {
             </div>
             <div title={item.datetime_end}>
               {' '}
-              {format(new Date(item.datetime_end), 'MM/dd/yyyy k:mm O')}
+              {format(new Date(item.processing_start), 'yyyy-MM-dd kk:mm O')}
             </div>
           </>
         }
