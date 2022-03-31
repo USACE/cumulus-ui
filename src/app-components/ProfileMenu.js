@@ -80,7 +80,7 @@ const ProfileMenu = connect(
         >
           <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
             {/* Your Profile */}
-            <Menu.Item key='profile'>
+            {/* <Menu.Item key='profile'>
               {({ active }) => (
                 <a
                   href='/profile'
@@ -92,7 +92,7 @@ const ProfileMenu = connect(
                   My Profile
                 </a>
               )}
-            </Menu.Item>
+            </Menu.Item> */}
             {/* Admin */}
             {authRolesObj['application.admin'] && (
               <Menu.Item key='admin'>
