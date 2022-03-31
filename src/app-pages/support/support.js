@@ -40,8 +40,8 @@ const items = [
   },
   {
     name: 'CWMS CAVI/HEC RTS Script Setup',
-    href: '/support/docs/rts-script',
-    target: '_self',
+    href: 'https://github.com/USACE/rts-utils/wiki',
+    target: '_blank',
     icon: DesktopComputerIcon,
     description: 'Download grids within the CWMS CAVI or HEC RTS',
   },
