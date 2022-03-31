@@ -179,7 +179,7 @@ export default connect(
                   I don't have the time to figure out how to keep it closed...
                   */}
                   <label className='block text-sm font-medium text-gray-700'>
-                    Start Date/Time
+                    *Start Date/Time
                   </label>
                   <DatePicker
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
@@ -193,7 +193,7 @@ export default connect(
 
                 <div className='col'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    End Date/Time
+                    *End Date/Time
                   </label>
                   <DatePicker
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
@@ -205,6 +205,7 @@ export default connect(
                   />
                 </div>
               </div>
+              <div className='text-sm text-gray-400'>*Times are local</div>
             </div>
           </fieldset>
 
