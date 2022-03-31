@@ -2,6 +2,18 @@ import { connect } from 'redux-bundler-react';
 
 const timeline = [
   {
+    date: 'Mar 2022',
+    title: 'NDGD RTMA Precip 1hr archives loaded for WY2020.',
+    content:
+      'Added approx 8,355 files/hours for Oct-2019 - Jun-2021 to fill data gaps.',
+  },
+  {
+    date: 'Mar 2022',
+    title: 'Fixed HRRR DSS results showing as cumulative.',
+    content:
+      'Set duration to zero, resulting in a blank E-Part.  CWMS should now treat records as instantaneous.',
+  },
+  {
     date: 'Jan 2022',
     title: 'MARFC 6hr forecasted surface temperatures',
     content:
