@@ -32,7 +32,7 @@ C438.72,472.145,512,375.857,512,262.353C512,120.401,397.376,5.329,255.968,5.329z
 const items = [
   {
     name: 'API Documentation',
-    href: 'https://petstore.swagger.io/?url=https://raw.githubusercontent.com/USACE/cumulus-api/stable/docs/apidoc.yaml',
+    href: 'https://usace.github.io/cumulus-api/api-docs/index.html',
     target: '_blank',
     icon: BookOpenIcon,
     description:
