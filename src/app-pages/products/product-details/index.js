@@ -14,7 +14,7 @@ export default connect(
               <h1 className='text-3xl font-bold leading-tight text-gray-900'>
                 {product.name}
               </h1>
-              <p className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+              <p className='mt-3 text-gray-500 text-md sm:mx-auto md:text-lg lg:mx-0'>
                 {product.description}
               </p>
             </div>
