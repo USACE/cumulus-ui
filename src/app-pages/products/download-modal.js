@@ -43,9 +43,7 @@ export default connect(
     const [start, setStart] = useState(
       setHours(setMinutes(new Date(dateFrom), 0), 0)
     );
-    const [end, setEnd] = useState(
-      setHours(setMinutes(new Date(dateTo), 0), 0)
-    );
+    const [end, setEnd] = useState(new Date(dateTo));
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedWatershed, setSelectedWatershed] = useState('');
 
@@ -203,6 +201,7 @@ export default connect(
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setEnd}
                   />
+                  {console.log(end)}
                 </div>
               </div>
               <div className='text-sm text-gray-400'>*Times are local</div>
