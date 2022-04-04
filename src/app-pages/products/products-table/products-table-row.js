@@ -15,9 +15,8 @@ export default connect(
       if (checked) {
         doProductSelectSetSelected([...selectedProducts, product.id]);
       } else {
-        doProductSelectSetSelected([
-          ...selectedProducts.splice(selectedProducts.indexOf(product.id), 1),
-        ]);
+        selectedProducts.splice(selectedProducts.indexOf(product.id), 1);
+        doProductSelectSetSelected([...selectedProducts]);
       }
     };
 
