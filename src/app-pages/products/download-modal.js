@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import DatePicker from 'react-datepicker';
-import { setHours, setMinutes } from 'date-fns';
+import { setHours, setMinutes, addDays, differenceInDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import { classNames } from '../../utils';
 
@@ -50,6 +50,8 @@ export default connect(
     let formReady = true;
     if (formReady && selectedProducts.length < 1) formReady = false;
     if (formReady && !selectedWatershed) formReady = false;
+    if (formReady && differenceInDays(end, start) > 365) formReady = false;
+    if (formReady && end < start) formReady = false;
 
     const handleFormSubmit = () => {
       if (formReady) {
@@ -200,6 +202,8 @@ export default connect(
                     todayButton='Today'
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setEnd}
+                    minDate={start}
+                    maxDate={addDays(new Date(start), 365)}
                   />
                   {console.log(end)}
                 </div>
