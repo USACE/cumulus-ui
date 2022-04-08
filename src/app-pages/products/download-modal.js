@@ -53,7 +53,7 @@ export default connect(
     if (formReady && !selectedWatershed) formReady = false;
     if (formReady && differenceInDays(end, start) > 365) {
       formReady = false;
-      errMsg = 'Time window to large. (365 day max)';
+      errMsg = 'Time window too large. (365 day max)';
     }
     if (formReady && end < start) formReady = false;
 
