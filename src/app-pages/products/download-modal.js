@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'redux-bundler-react';
 import DatePicker from 'react-datepicker';
-import { setHours, setMinutes } from 'date-fns';
+import { setHours, setMinutes, addDays, differenceInDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import { classNames } from '../../utils';
 
@@ -48,8 +48,14 @@ export default connect(
     const [selectedWatershed, setSelectedWatershed] = useState('');
 
     let formReady = true;
+    let errMsg = null;
     if (formReady && selectedProducts.length < 1) formReady = false;
     if (formReady && !selectedWatershed) formReady = false;
+    if (formReady && differenceInDays(end, start) > 365) {
+      formReady = false;
+      errMsg = 'Time window too large. (365 day max)';
+    }
+    if (formReady && end < start) formReady = false;
 
     const handleFormSubmit = () => {
       if (formReady) {
@@ -181,11 +187,14 @@ export default connect(
                   </label>
                   <DatePicker
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                    autoComplete='off'
                     selected={start}
                     showTimeSelect
                     todayButton='Today'
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setStart}
+                    showMonthDropdown
+                    showYearDropdown
                   />
                 </div>
 
@@ -195,16 +204,26 @@ export default connect(
                   </label>
                   <DatePicker
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                    autoComplete='off'
                     selected={end}
                     showTimeSelect
                     todayButton='Today'
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setEnd}
+                    minDate={start}
+                    maxDate={addDays(new Date(start), 365)}
+                    showMonthDropdown
+                    showYearDropdown
                   />
-                  {console.log(end)}
+                  {/* {console.log(end)} */}
                 </div>
               </div>
               <div className='text-sm text-gray-400'>*Times are local</div>
+              {errMsg && (
+                <div className='text-sm bg-red-100 p-3 text-red-600 font-bold'>
+                  {errMsg}
+                </div>
+              )}
             </div>
           </fieldset>
 
