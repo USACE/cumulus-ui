@@ -88,7 +88,8 @@ export default connect(function DownloadsTableRow({ item, productsById }) {
         }
       </td>
       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-        {duration}
+        {/* Show percent complete while in progress */}
+        {duration === 'INITIATED' ? item.progress + '% complete' : duration}
       </td>
       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
         <button
