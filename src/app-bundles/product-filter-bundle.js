@@ -97,7 +97,7 @@ const productFilterBundle = {
         }
 
         // apply tag filters
-        if (tags.length > 0) {
+        if (pass && tags.length > 0) {
           let matchFound = false;
           for (var t = 0; t < product.tags.length; t++) {
             if (tags.indexOf(product.tags[t]) !== -1) {
