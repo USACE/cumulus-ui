@@ -45,7 +45,6 @@ export default connect(
 
     const dateUpdateCallback = useCallback(
       (e) => {
-        console.log('setting date', e.from, e.to);
         setFilterDateFrom(e.from);
         setFilterDateTo(e.to);
       },
