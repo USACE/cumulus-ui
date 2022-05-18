@@ -85,7 +85,7 @@ export default connect(
                   {product.name}
                 </div>
                 <div className='text-sm text-gray-500 truncate'>
-                  {product.description}
+                  {product.suite}
                 </div>
               </a>
             </div>
