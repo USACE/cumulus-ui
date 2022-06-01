@@ -4,6 +4,8 @@ import { subDays } from 'date-fns';
 
 const apiURL = process.env.REACT_APP_CUMULUS_API_URL;
 
+const pollIntervalMs = 3000;
+
 const downloadBundle = createRestBundle({
   name: 'download',
   uid: 'id',
@@ -48,22 +50,24 @@ const downloadBundle = createRestBundle({
           callback();
         });
       },
+    doDownloadPoll:
+      () =>
+      ({ store }) => {
+        setTimeout(() => {
+          store.doDownloadFetch();
+        }, pollIntervalMs);
+      },
     reactDownloadInProgress: createSelector(
       'selectDownloadItemsArray',
       'selectDownloadIsLoading',
-      'selectAppTime',
-      'selectDownloadLastFetch',
-      (downloads, isLoading, now, lastFetch) => {
-        // Short-Circuit; If isLoading or last fetch < 2s ago, do not trigger another fetch
-        // If state change from isLoading: True --> False then check for in
-        // progress downloads and kick-off another fetch as necessary
-        if (isLoading || now - new Date(lastFetch) < 2000) {
+      (downloads, isLoading) => {
+        if (isLoading) {
           return null;
         }
         return downloads.filter(
           (d) => d.status === 'INITIATED' && d.progress < 100
         ).length
-          ? { actionCreator: 'doDownloadFetch' }
+          ? { actionCreator: 'doDownloadPoll' }
           : null;
       }
     ),
