@@ -52,8 +52,7 @@ const downloadBundle = createRestBundle({
       },
     doDownloadPoll:
       () =>
-      ({ dispatch, store }) => {
-        dispatch({ type: 'DOWNLOAD_POLL' });
+      ({ store }) => {
         setTimeout(() => {
           store.doDownloadFetch();
         }, pollIntervalMs);
@@ -85,7 +84,6 @@ const downloadBundle = createRestBundle({
 
   reduceFurther: (state, { type, payload }) => {
     switch (type) {
-      case 'DOWNLOAD_POLL':
       case 'DOWNLOAD_REQUEST_START':
       case 'DOWNLOAD_REQUEST_FINISH':
         return Object.assign({}, state, payload);
