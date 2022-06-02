@@ -51,9 +51,9 @@ export default connect(
     let errMsg = null;
     if (formReady && selectedProducts.length < 1) formReady = false;
     if (formReady && !selectedWatershed) formReady = false;
-    if (formReady && differenceInDays(end, start) > 365) {
+    if (formReady && differenceInDays(end, start) > 182) {
       formReady = false;
-      errMsg = 'Time window too large. (365 day max)';
+      errMsg = 'Time window too large. (6 months max)';
     }
     if (formReady && end < start) formReady = false;
 
