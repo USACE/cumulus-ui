@@ -124,7 +124,7 @@ export default connect(
               }}
               type='text'
               name='search'
-              className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-l-md inline-flex'
+              className='focus:ring-indigo-500 focus:border-indigo-500 w-full pl-10 sm:text-sm border-gray-300 rounded-l-md inline-flex'
               placeholder='Filter...'
             />
             <button
@@ -170,11 +170,16 @@ export default connect(
                   d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
                 />
               </svg>
+              {selectedProducts.length > 0 ? (
+                <div className='bg-indigo-600 text-white rounded-full px-1 ml-1 text-xs'>
+                  {selectedProducts.length}
+                </div>
+              ) : null}
             </ButtonGroupButton>
           </ButtonGroup>
         </div>
 
-        <div className='w-full mx-auto flex ml-11'>
+        <div className='flex mx-auto ml-11'>
           <div className='relative flex items-start'>
             <div className='flex items-center h-5'>
               <input
@@ -211,11 +216,11 @@ export default connect(
           </div>
         ) : null}
 
-        <div className='flex-grow w-full mx-auto flex mt-5'>
+        <div className='flex-grow w-full mt-5 overflow-x-hidden max-h-full'>
           <div className='flex-1 min-w-0 flex'>
             {filtersActive ? (
-              <div className='border-b border-gray-200 border-b-0 flex-shrink-0 w-80 border-r border-t border-gray-200 bg-white rounded-r-lg'>
-                <div className='h-full pl-4 pr-6 py-6'>
+              <div className='flex-shrink-0 w-80 bg-white border-gray-100 border-2 ml-5 rounded-lg'>
+                <div className='h-full ml-5 pl-4 pr-6 py-6'>
                   <FilterPanel activeView={activeView}>
                     <TagFilter />
                     <ParameterFilter />

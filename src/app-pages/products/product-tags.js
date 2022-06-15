@@ -19,7 +19,7 @@ const Tag = ({ tags, id }) => {
   //     ? 'bg-cyan-300'
   //     : 'bg-red-800'
   // );
-  return (
+  return tag ? (
     <span
       className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full'
       style={{ backgroundColor: `#${tag.color}` }}
@@ -27,7 +27,7 @@ const Tag = ({ tags, id }) => {
     >
       {tag.name}
     </span>
-  );
+  ) : null;
 };
 
 export default connect(
