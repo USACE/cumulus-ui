@@ -25,20 +25,19 @@ export default connect(
     productFilterDateTo: dateTo,
     watershedItems: watersheds,
     watershedDistricts: districts,
-    // doProductSelectSetSelected,
+    doProductSelectSetSelected,
     doModalClose,
     doDownloadRequest,
     doUpdateUrl,
   }) => {
-    // const toggleSelected = (checked, id) => {
-    //   if (checked) {
-    //     doProductSelectSetSelected([...selectedProducts, id]);
-    //   } else {
-    //     doProductSelectSetSelected([
-    //       ...selectedProducts.splice(selectedProducts.indexOf(id), 1),
-    //     ]);
-    //   }
-    // };
+    const toggleSelected = (checked, id) => {
+      if (checked) {
+        doProductSelectSetSelected([...selectedProducts, id]);
+      } else {
+        selectedProducts.splice(selectedProducts.indexOf(id), 1);
+        doProductSelectSetSelected([...selectedProducts]);
+      }
+    };
 
     const [start, setStart] = useState(
       setHours(setMinutes(new Date(dateFrom), 0), 0)
@@ -232,8 +231,7 @@ export default connect(
               Requested Products
             </legend>
             <p className='mt-1 text-sm text-gray-500'>
-              Read only, click cancel to return to the product search tool and
-              update your selection if needed.
+              Uncheck a product to remove it from the list.
             </p>
             <div className='mt-4 space-y-4 max-h-[50%]'>
               {products.map((product) => {
@@ -250,8 +248,8 @@ export default connect(
                           // disabling for now, this is a little bit confusing as the product
                           // just dissapears when you click it... not going to spend the time
                           // to get a better workflow right now.
-                          return null;
-                          //toggleSelected(e.target.checked, product.id);
+                          //return null;
+                          toggleSelected(e.target.checked, product.id);
                         }}
                         className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
                       />
