@@ -3,6 +3,26 @@ import { connect } from 'redux-bundler-react';
 import { Table } from '../../../app-components/admin/Table';
 import { parseISO, format, formatDistanceStrict } from 'date-fns';
 
+const Products = connect(
+  'selectProductItemsObject',
+  'doProductFetch',
+  ({ productItemsObject: productsObj, downloadProducts }) => {
+    return (
+      <div className='max-w-md inline-block'>
+        {downloadProducts &&
+          Object.keys(productsObj).length &&
+          downloadProducts.map((dp, idx) => (
+            <a key={idx} href={'/products/' + productsObj[dp].id}>
+              <span className='inline-block bg-gray-200 hover:bg-indigo-300 cursor-pointer mr-1 mb-1 p-1 text-xs rounded whitespace-nowrap'>
+                {productsObj[dp].name}
+              </span>
+            </a>
+          ))}
+      </div>
+    );
+  }
+);
+
 const DownloadTable = connect(
   'doModalOpen',
   'selectAdminDownloadItems',
@@ -57,8 +77,10 @@ const DownloadTable = connect(
           {
             key: 'product_id',
             render: ({ product_id }) => {
-              return product_id.length;
+              // return product_id.length;
+              return <Products downloadProducts={product_id} />;
             },
+            className: '!whitespace-normal max-w-96',
           },
           {
             key: 'datetime_start',
