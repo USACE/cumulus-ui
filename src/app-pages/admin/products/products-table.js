@@ -44,70 +44,74 @@ const DownloadTable = connect(
       ) : null;
     };
 
-    const LastFile = ({ before }) => {
-      return before ? (
-        formatDistanceToNowStrict(parseISO(before), {
-          unit: 'hour',
-          addSuffix: true,
-        })
-      ) : (
-        <span className='text-gray-300'>not set</span>
-      );
+    const LastFile = ({ before, last_forecast_version }) => {
+      return last_forecast_version
+        ? formatDistanceToNowStrict(parseISO(last_forecast_version), {
+            //unit: 'hour',
+            addSuffix: true,
+          })
+        : before &&
+            formatDistanceToNowStrict(parseISO(before), {
+              //unit: 'hour',
+              addSuffix: true,
+            });
     };
 
     return (
-      <Table
-        headers={['Name', 'Parameter', 'Tags', 'Last File', 'Actions']}
-        items={items}
-        itemFields={[
-          { key: 'name' },
+      items && (
+        <Table
+          headers={['Name', 'Parameter', 'Tags', 'Last File', 'Actions']}
+          items={items}
+          itemFields={[
+            { key: 'name' },
 
-          {
-            key: 'parameter',
-          },
-          { key: 'tags', render: DisplayTags },
-          {
-            key: 'before',
-            render: LastFile,
-          },
-          // {
-          //   key: 'status',
-          //   render: (status) => {
-          //     return (
-          //       <span
-          //         className={classNames(
-          //           statusStyles[status],
-          //           'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
-          //         )}
-          //       >
-          //         {status}
-          //       </span>
-          //     );
-          //   },
-          // },
-        ]}
-        tools={[
-          {
-            icon: <TagIcon className='w-5 text-gray-600' />,
-            handleClick: (item) => {
-              doModalOpen(EditProductTagsModal, item);
+            {
+              key: 'parameter',
             },
-          },
-          {
-            icon: <PencilAltIcon className='w-5 text-gray-600' />,
-            handleClick: (item) => {
-              doModalOpen(EditProductModal, item);
+            { key: 'tags', render: DisplayTags },
+            {
+              key: 'before',
+              render: LastFile,
             },
-          },
-          // {
-          //   icon: null,
-          //   handleClick: (item) => {
-          //     //   doProductDelete(item);
-          //   },
-          // },
-        ]}
-        // tools={[]}
-      />
+            // {
+            //   key: 'status',
+            //   render: (status) => {
+            //     return (
+            //       <span
+            //         className={classNames(
+            //           statusStyles[status],
+            //           'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
+            //         )}
+            //       >
+            //         {status}
+            //       </span>
+            //     );
+            //   },
+            // },
+          ]}
+          tools={[
+            {
+              icon: <TagIcon className='w-5 text-gray-600' />,
+              handleClick: (item) => {
+                doModalOpen(EditProductTagsModal, item);
+              },
+            },
+            {
+              icon: <PencilAltIcon className='w-5 text-gray-600' />,
+              handleClick: (item) => {
+                doModalOpen(EditProductModal, item);
+              },
+            },
+            // {
+            //   icon: null,
+            //   handleClick: (item) => {
+            //     //   doProductDelete(item);
+            //   },
+            // },
+          ]}
+          // tools={[]}
+        />
+      )
     );
   }
 );

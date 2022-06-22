@@ -17,7 +17,7 @@ export default createRestBundle({
   deleteTemplate: '',
   fetchActions: [],
   urlParamSelectors: [],
-  forceFetchActions: ['AUTH_UPDATED'],
+  forceFetchActions: ['AUTH_UPDATED', 'DOWNLOAD_REQUEST_FINISH'],
   sortBy: '',
   sortAsc: true,
   addons: {

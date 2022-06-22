@@ -39,7 +39,9 @@ const Table = ({ headers, items, itemFields, tools }) => {
                 ? null
                 : itemFields.map((f, idx) => (
                     <td
-                      className='px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500'
+                      className={`px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500 ${
+                        f.className || ''
+                      }`}
                       key={idx}
                     >
                       {!f.render ? p[f.key] : f.render(p)}
