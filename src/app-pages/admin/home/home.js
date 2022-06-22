@@ -20,7 +20,9 @@ export default function AdminProducts() {
         <h3 className='text-lg leading-6 font-medium text-gray-900 mt-10'>
           Recent downloads
         </h3>
-        <DownloadTable limitRows={10} />
+        <div className='h-[40rem] overflow-y-auto'>
+          <DownloadTable limitRows={20} />
+        </div>
       </div>
     </AdminWrapper>
   );
