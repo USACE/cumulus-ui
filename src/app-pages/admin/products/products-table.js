@@ -44,22 +44,17 @@ const DownloadTable = connect(
       ) : null;
     };
 
-    const LastFile = ({ before }) => {
-      return before
-        ? formatDistanceToNowStrict(parseISO(before), {
-            //unit: 'hour',
-            addSuffix: true,
-          })
-        : null;
-    };
-
-    const LastForecast = ({ last_forecast_version }) => {
+    const LastFile = ({ before, last_forecast_version }) => {
       return last_forecast_version
         ? formatDistanceToNowStrict(parseISO(last_forecast_version), {
             //unit: 'hour',
             addSuffix: true,
           })
-        : null;
+        : before &&
+            formatDistanceToNowStrict(parseISO(before), {
+              //unit: 'hour',
+              addSuffix: true,
+            });
     };
 
     return (
@@ -76,7 +71,7 @@ const DownloadTable = connect(
             { key: 'tags', render: DisplayTags },
             {
               key: 'before',
-              render: LastForecast || LastFile,
+              render: LastFile,
             },
             // {
             //   key: 'status',
