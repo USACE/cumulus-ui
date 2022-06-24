@@ -2,6 +2,18 @@ import { connect } from 'redux-bundler-react';
 
 const timeline = [
   {
+    date: 'Jun 2022',
+    title: 'Download speed improvements, DSS packager memory leak resolved',
+    content:
+      'DSS Packager refactored using custom C code to convert tifs to DSS.',
+  },
+  {
+    date: 'Jun 2022',
+    title: 'NDGD RTMA Airtemp 1hr (partial) archives loaded for WY2019-2021.',
+    content:
+      'Added approx 5,351 files/hours for Jan-2019 - Jun-2021 to fill data gaps.',
+  },
+  {
     date: 'May 2022',
     title: 'Fixed NBM QPF Precip 1hr.',
     content:
