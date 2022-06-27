@@ -60,6 +60,35 @@ const DownloadTable = connect(
       return classes.filter(Boolean).join(' ');
     }
 
+    const DownloadButton = ({ item }) => {
+      return (
+        <button
+          onClick={() => {
+            window.open(item.file);
+          }}
+          title='Download Data'
+          type='button'
+          className='inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30'
+          disabled={item.status !== 'SUCCESS'}
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
+            />
+          </svg>
+        </button>
+      );
+    };
+
     return (
       <Table
         headers={[
@@ -69,6 +98,7 @@ const DownloadTable = connect(
           'Requested',
           'Processing Time',
           'Status',
+          'File',
           '',
         ]}
         items={items}
@@ -121,6 +151,12 @@ const DownloadTable = connect(
                   {status}
                 </span>
               );
+            },
+          },
+          {
+            key: 'file',
+            render: (item) => {
+              return <DownloadButton item={item} />;
             },
           },
         ]}
