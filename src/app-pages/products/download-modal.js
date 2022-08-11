@@ -52,6 +52,7 @@ export default connect(
     const [end, setEnd] = useState(new Date(dateTo));
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedWatershed, setSelectedWatershed] = useState('');
+    const [selectedFormat, setSelectedFormat] = useState('dss7');
 
     let formReady = true;
     let errMsg = null;
@@ -71,6 +72,7 @@ export default connect(
             datetime_end: end,
             watershed_id: selectedWatershed,
             product_id: selectedProducts,
+            format: selectedFormat,
           },
           (err) => {
             if (err) {
@@ -83,6 +85,12 @@ export default connect(
         );
       }
     };
+
+    // TODO: Move to domain value in the database w/ corresponding api endpoint
+    const downloadFormats = [
+      { abbreviation: 'dss7', name: 'HEC-DSS v7' },
+      { abbreviation: 'tgz-cog', name: 'Cloud Optimized GeoTiff .tar.gz' },
+    ];
 
     return (
       <div className='shadow rounded-md overflow-hidden'>
@@ -237,6 +245,42 @@ export default connect(
                   {differenceInHours(end, start) + ' hours'})
                 </div>
               )}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend className='text-base font-medium text-gray-900'>
+              Download Options
+            </legend>
+            <div className='mt-4 space-y-4'>
+              <div className='grid grid-cols-1 gap-6'>
+                <div className='col'>
+                  <label
+                    htmlFor='format'
+                    className='block text-sm font-medium text-gray-700'
+                  >
+                    Format
+                  </label>
+                  <select
+                    id='download-format'
+                    name='download-format'
+                    value={selectedFormat}
+                    onChange={(e) => {
+                      setSelectedFormat(e.target.value);
+                    }}
+                    autoComplete='format-name'
+                    className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                  >
+                    {' '}
+                    {downloadFormats.map((f) => {
+                      return (
+                        <option key={f.abbreviation} value={f.abbreviation}>
+                          {f.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
             </div>
           </fieldset>
 
