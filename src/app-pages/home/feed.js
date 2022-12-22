@@ -2,6 +2,18 @@ import { connect } from 'redux-bundler-react';
 
 const timeline = [
   {
+    date: 'Dec 2022',
+    title: 'NERFC 1hr QPE',
+    content:
+      'Added Northeast River Forecast Center (NERFC) 1 hour observed (QPE) precipitation.',
+  },
+  {
+    date: 'Dec 2022',
+    title: 'NWRFC 6hr QPE, QPF, QTE, QTF',
+    content:
+      'Added Northwest River Forecast Center (NWRFC) 6 hour observed (QPE) and forecasted (QPF) precipitation along with observed (QTE) and forecasted (QTF) temperature.',
+  },
+  {
     date: 'Jun 2022',
     title: 'Download speed improvements, DSS packager memory leak resolved',
     content:
