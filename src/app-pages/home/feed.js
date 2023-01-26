@@ -14,6 +14,18 @@ const timeline = [
       'Added Northwest River Forecast Center (NWRFC) 6 hour observed (QPE) and forecasted (QPF) precipitation along with observed (QTE) and forecasted (QTF) temperature.',
   },
   {
+    date: 'Aug 2022',
+    title: 'NCEP STAGE4 MOSAIC QPE',
+    content:
+      'Added National Centers for Environmental Predictions (NCEP) 1hr, 6hr and 24hr observed (QPE) precipitation. These CONUS products are a precipitation estimate by the 12 River Forecast Centers (RFCs).',
+  },
+  {
+    date: 'Aug 2022',
+    title: 'ABRFC QPE 1hr',
+    content:
+      'Added Arkansas-Red Basin River Forecast Center (ABRFC) 1 hour observed (QPE) precipitation',
+  },
+  {
     date: 'Jun 2022',
     title: 'Download speed improvements, DSS packager memory leak resolved',
     content:
