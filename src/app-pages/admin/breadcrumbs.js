@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { ChevronRightIcon, HomeIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon, HomeIcon } from '@heroicons/react/24/solid';
 
 const pages = [
   { name: 'Projects', href: '#', current: false },

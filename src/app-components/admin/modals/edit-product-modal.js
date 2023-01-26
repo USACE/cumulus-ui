@@ -13,9 +13,10 @@ const EditProductModal = connect(
   'selectSuiteItems',
   'selectSuiteItemsObject',
   'doTagFetch',
-  'doSuiteFetch',
   'doParameterFetch',
   'doUnitFetch',
+  'doSuiteFetch',
+  'doModalClose',
   ({
     appDefaultsFormSelectPlaceholder,
     modalProps: p,
@@ -29,7 +30,7 @@ const EditProductModal = connect(
     doParameterFetch,
     doUnitFetch,
     doSuiteFetch,
-    onClose,
+    doModalClose,
   }) => {
     const [payload, setPayload] = useState({
       id: (p && p.id) || null,
@@ -47,6 +48,7 @@ const EditProductModal = connect(
       unit_id: (p && p.unit_id) || null,
       unit: p && p.unit,
       suite_id: (p && p.suite_id) || null,
+      dss_datatype_id: (p && p.dss_datatype_id) || null,
       // suite: p && p.suite,
     });
 
@@ -66,7 +68,8 @@ const EditProductModal = connect(
         !payload.parameter_id ||
         !payload.unit_id ||
         !payload.suite_id ||
-        !payload.dss_fpart
+        !payload.dss_fpart ||
+        !payload.dss_datatype_id
       ) {
         console.log('Missing one or more required fields for product');
         return;
@@ -76,8 +79,8 @@ const EditProductModal = connect(
       doUnitFetch();
       // doTagFetch();
       doSuiteFetch();
-      //doModalClose();
-      onClose();
+      doModalClose();
+      //onClose();
       console.log(parameters);
     };
 
@@ -103,7 +106,7 @@ const EditProductModal = connect(
                 viewBox='0 0 24 24'
                 xmlns='http://www.w3.org/2000/svg'
                 onClick={(e) => {
-                  onClose();
+                  doModalClose();
                 }}
               >
                 <path
@@ -292,7 +295,7 @@ const EditProductModal = connect(
                 className='ml-2'
                 label='Cancel'
                 onClick={(e) => {
-                  onClose();
+                  doModalClose();
                 }}
               />
             </div>
