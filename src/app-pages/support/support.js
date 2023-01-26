@@ -1,4 +1,4 @@
-import { BookOpenIcon, DesktopComputerIcon } from '@heroicons/react/outline';
+import { BookOpenIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 
 import Faqs from './faqs';
 
@@ -42,7 +42,7 @@ const items = [
     name: 'CWMS CAVI/HEC RTS Script Setup',
     href: 'https://github.com/USACE/rts-utils/wiki',
     target: '_blank',
-    icon: DesktopComputerIcon,
+    icon: ComputerDesktopIcon,
     description: 'Download grids within the CWMS CAVI or HEC RTS',
   },
   {

@@ -1,6 +1,6 @@
 import ProfileMenu from '../app-components/ProfileMenu';
 
-import { MenuAlt2Icon } from '@heroicons/react/outline';
+import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
 
 export default function Header({ setMobileMenuOpen }) {
   return (
@@ -12,7 +12,7 @@ export default function Header({ setMobileMenuOpen }) {
           onClick={() => setMobileMenuOpen(true)}
         >
           <span className='sr-only'>Open sidebar</span>
-          <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
+          <Bars3BottomLeftIcon className='h-6 w-6' aria-hidden='true' />
         </button>
         <div className='flex-1 flex justify-between px-4 sm:px-6'>
           <div className='flex-1 flex'>

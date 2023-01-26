@@ -5,7 +5,7 @@ import EditProductTagsModal from '../../../app-components/admin/modals/edit-prod
 import { Table } from '../../../app-components/admin/Table';
 // import { TagIcon, EditIcon, DeleteIcon } from '../icons';
 // import { NewButton } from '../../forms/buttons';
-import { TagIcon, PencilAltIcon } from '@heroicons/react/outline';
+import { TagIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import { parseISO, formatDistanceToNowStrict } from 'date-fns';
 
 const DownloadTable = connect(
@@ -97,7 +97,7 @@ const DownloadTable = connect(
               },
             },
             {
-              icon: <PencilAltIcon className='w-5 text-gray-600' />,
+              icon: <PencilSquareIcon className='w-5 text-gray-600' />,
               handleClick: (item) => {
                 doModalOpen(EditProductModal, item);
               },

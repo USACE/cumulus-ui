@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/outline';
+import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/24/outline';
 
 const Entry = ({ question, answer }) => {
   const [q, setq] = useState(question);
