@@ -3,28 +3,28 @@ import { Fragment } from 'react';
 import pkg from '../../package.json';
 
 import {
-  CollectionIcon,
-  DownloadIcon,
+  RectangleStackIcon,
+  ArrowDownTrayIcon,
   HomeIcon,
-  XIcon,
-  SupportIcon,
-} from '@heroicons/react/outline';
+  XMarkIcon,
+  LifebuoyIcon,
+} from '@heroicons/react/24/outline';
 import { classNames } from '../utils';
 import { Dialog, Transition } from '@headlessui/react';
 
 const sidebarNavigation = [
   { name: 'Home', href: '/', icon: HomeIcon },
-  { name: 'Products', href: '/products', icon: CollectionIcon },
+  { name: 'Products', href: '/products', icon: RectangleStackIcon },
   {
     name: 'Downloads',
     href: '/downloads',
-    icon: DownloadIcon,
+    icon: ArrowDownTrayIcon,
     authenticated: true,
   },
   {
     name: 'Support',
     href: '/support',
-    icon: SupportIcon,
+    icon: LifebuoyIcon,
   },
 ];
 
@@ -41,13 +41,13 @@ const SidebarItem = ({ name, href, current }) => {
       )}
       aria-current={current ? 'page' : undefined}
     >
-      <icon
+      <span
         className={classNames(
           current ? 'text-white' : 'text-indigo-300 group-hover:text-white',
           'mr-3 h-6 w-6'
         )}
         aria-hidden='true'
-      />
+      ></span>
       <span>{name}</span>
     </a>
   );
@@ -161,7 +161,7 @@ export default connect(
                         className='h-12 w-12 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white'
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <XIcon
+                        <XMarkIcon
                           className='h-6 w-6 text-white'
                           aria-hidden='true'
                         />

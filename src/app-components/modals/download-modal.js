@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'redux-bundler-react';
 
 import { Dialog } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/outline';
+import { CheckIcon } from '@heroicons/react/24/outline';
 
 // Note: onClose is always passed from the parent Modal.js component
 //       (not from a connected bundle method). The parent Modal.js component
