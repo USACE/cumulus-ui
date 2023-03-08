@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import {
   setHours,
   setMinutes,
-  addDays,
+  addHours,
   // differenceInDays,
   differenceInHours,
   formatDistance,
@@ -49,7 +49,11 @@ export default connect(
     const [start, setStart] = useState(
       setHours(setMinutes(new Date(dateFrom), 0), 0)
     );
-    const [end, setEnd] = useState(new Date(dateTo));
+    const currentDate = new Date();
+
+    // End date for download modal should not go beyond current date/time
+    const endDate = dateTo > currentDate ? currentDate : dateTo;
+    const [end, setEnd] = useState(endDate);
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedWatershed, setSelectedWatershed] = useState('');
     const [selectedFormat, setSelectedFormat] = useState('dss7');
@@ -207,6 +211,7 @@ export default connect(
                     todayButton='Today'
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setStart}
+                    maxDate={currentDate}
                     showMonthDropdown
                     showYearDropdown
                   />
@@ -225,7 +230,9 @@ export default connect(
                     dateFormat='MMMM d, yyyy h:mm aa'
                     onChange={setEnd}
                     minDate={start}
-                    maxDate={addDays(new Date(start), 365)}
+                    minTime={start}
+                    maxTime={addHours(currentDate, 2)}
+                    maxDate={currentDate}
                     showMonthDropdown
                     showYearDropdown
                   />
