@@ -1,10 +1,23 @@
 import { connect } from 'redux-bundler-react';
 import { formatDistanceToNow, formatDistance } from 'date-fns';
 import ProductTags from '../product-tags';
+import { ClockIcon } from '@heroicons/react/24/outline';
 
 export default connect(
   'selectProductByRoute',
-  ({ productByRoute: product }) => {
+  'selectProductIngestStatusItemsObject',
+  'selectTagItemsObject',
+
+  ({
+    productByRoute: product,
+    productIngestStatusItemsObject: productStatusObj,
+    tagItemsObject: tagObj,
+  }) => {
+    const productHasTag = (tag, productTags, tagObj) => {
+      // loop over the assigned product tags searching for a match to tag
+      return Boolean(productTags.find((pt) => tagObj[pt]?.name === tag));
+    };
+
     return (
       <div className='bg-white shadow-md overflow-hidden sm:rounded-lg'>
         <div className='px-4 py-5 sm:px-6'>
@@ -74,6 +87,20 @@ export default connect(
                 </dd>
               </div>
             )}
+
+            {/* Check for late product */}
+            {!productStatusObj[product.slug]?.is_current &&
+            !productHasTag('Archive', product.tags, tagObj) ? (
+              <div className='bg-red-100 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dd className='mt-1 text-sm text-red-900 sm:mt-0 sm:col-span-3'>
+                  Last Received:{' '}
+                  {productStatusObj[product.slug]?.actual_timedelta} ago.
+                  Threshold is{' '}
+                  {productStatusObj[product.slug]?.acceptable_timedelta}
+                </dd>
+              </div>
+            ) : null}
+
             <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>
                 Availability

@@ -1,14 +1,19 @@
 import { connect } from 'redux-bundler-react';
 import { formatDistanceToNow, formatDistance } from 'date-fns';
 import ProductTags from '../product-tags';
+import { ClockIcon } from '@heroicons/react/24/outline';
 
 export default connect(
   'selectProductSelectSelected',
   'doProductSelectSetSelected',
+  'selectProductIngestStatusItemsObject',
+  'selectTagItemsObject',
   function ProductsTableRow({
     product,
     productSelectSelected: selectedProducts,
     doProductSelectSetSelected,
+    productIngestStatusItemsObject: productStatusObj,
+    tagItemsObject: tagObj,
   }) {
     const selected = selectedProducts.indexOf(product.id) !== -1;
     const toggleSelected = (checked) => {
@@ -18,6 +23,11 @@ export default connect(
         selectedProducts.splice(selectedProducts.indexOf(product.id), 1);
         doProductSelectSetSelected([...selectedProducts]);
       }
+    };
+
+    const productHasTag = (tag, productTags, tagObj) => {
+      // loop over the assigned product tags searching for a match to tag
+      return Boolean(productTags.find((pt) => tagObj[pt]?.name === tag));
     };
 
     return (
@@ -81,8 +91,24 @@ export default connect(
             </div>
             <div className='ml-4 max-w-md'>
               <a href={`/products/${product.id}`}>
-                <div className='text-sm font-medium text-gray-900'>
+                <div className='flex text-sm font-medium text-gray-900'>
                   {product.name}
+                  {!productStatusObj[product.slug]?.is_current &&
+                  !productHasTag('Archive', product.tags, tagObj) ? (
+                    <>
+                      <span
+                        title={`Last product was ${
+                          productStatusObj[product.slug]?.actual_timedelta
+                        } ago. Threshold is ${
+                          productStatusObj[product.slug]?.acceptable_timedelta
+                        }`}
+                        className='ml-2 inline-flex items-center gap-x-1 rounded-md bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10'
+                      >
+                        <ClockIcon className='text-red-700 w-4' />
+                        Late
+                      </span>
+                    </>
+                  ) : null}
                 </div>
                 <div className='text-sm text-gray-500 truncate'>
                   {product.suite}
