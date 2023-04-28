@@ -89,14 +89,14 @@ export default connect(
             )}
 
             {/* Check for late product */}
-            {!productStatusObj[product.slug].is_current &&
+            {!productStatusObj[product.slug]?.is_current &&
             !productHasTag('Archive', product.tags, tagObj) ? (
               <div className='bg-red-100 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
                 <dd className='mt-1 text-sm text-red-900 sm:mt-0 sm:col-span-3'>
                   Last Received:{' '}
-                  {productStatusObj[product.slug].actual_timedelta} ago.
+                  {productStatusObj[product.slug]?.actual_timedelta} ago.
                   Threshold is{' '}
-                  {productStatusObj[product.slug].acceptable_timedelta}
+                  {productStatusObj[product.slug]?.acceptable_timedelta}
                 </dd>
               </div>
             ) : null}

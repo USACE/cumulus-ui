@@ -93,14 +93,14 @@ export default connect(
               <a href={`/products/${product.id}`}>
                 <div className='flex text-sm font-medium text-gray-900'>
                   {product.name}
-                  {!productStatusObj[product.slug].is_current &&
+                  {!productStatusObj[product.slug]?.is_current &&
                   !productHasTag('Archive', product.tags, tagObj) ? (
                     <>
                       <span
                         title={`Last product was ${
-                          productStatusObj[product.slug].actual_timedelta
+                          productStatusObj[product.slug]?.actual_timedelta
                         } ago. Threshold is ${
-                          productStatusObj[product.slug].acceptable_timedelta
+                          productStatusObj[product.slug]?.acceptable_timedelta
                         }`}
                         className='ml-2 inline-flex items-center gap-x-1 rounded-md bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10'
                       >
