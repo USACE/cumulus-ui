@@ -1,7 +1,6 @@
 import { connect } from 'redux-bundler-react';
 import { formatDistanceToNow, formatDistance } from 'date-fns';
 import ProductTags from '../product-tags';
-import { ClockIcon } from '@heroicons/react/24/outline';
 
 export default connect(
   'selectProductByRoute',
