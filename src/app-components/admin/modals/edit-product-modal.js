@@ -12,6 +12,7 @@ const EditProductModal = connect(
   'selectParameterItemsArray',
   'selectSuiteItems',
   'selectSuiteItemsObject',
+  'selectDssDatatypeItems',
   'doTagFetch',
   'doParameterFetch',
   'doUnitFetch',
@@ -25,6 +26,7 @@ const EditProductModal = connect(
     tagItemsArray: tags,
     suiteItems: suites,
     selectSuiteItemsObject: suiteObj,
+    dssDatatypeItems: dssDatatypes,
     unitItemsArray: units,
     parameterItemsArray: parameters,
     doParameterFetch,
@@ -49,6 +51,7 @@ const EditProductModal = connect(
       unit: p && p.unit,
       suite_id: (p && p.suite_id) || null,
       dss_datatype_id: (p && p.dss_datatype_id) || null,
+      dss_datatype: (p && p.dss_datatype) || null,
       // suite: p && p.suite,
     });
 
@@ -58,7 +61,7 @@ const EditProductModal = connect(
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(typeof payload.temporal_duration);
+      //console.log(typeof payload.temporal_duration);
       if (
         !payload ||
         (!payload.id && p) ||
@@ -75,13 +78,13 @@ const EditProductModal = connect(
         return;
       }
       doProductSave(payload);
-      doParameterFetch();
-      doUnitFetch();
+      // doParameterFetch();
+      //doUnitFetch();
       // doTagFetch();
-      doSuiteFetch();
+      //doSuiteFetch();
       doModalClose();
       //onClose();
-      console.log(parameters);
+      //console.log(parameters);
     };
 
     // const [color, setColor] = useState(t.color);
@@ -147,7 +150,7 @@ const EditProductModal = connect(
                 </label>
                 <input
                   disabled
-                  className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2'
+                  className='w-full border-2 rounded border-gray-200 focus:ring-0 focus:border-black p-2 bg-gray-100 text-gray-400'
                   defaultValue={payload.label}
                   maxLength={40}
                   onChange={(e) =>
@@ -209,6 +212,42 @@ const EditProductModal = connect(
                   }
                 />
               </div>
+
+              <div>
+                <label className='block mt-4 w-full' forhtml='unit'>
+                  <span className='text-gray-600'>DSS DataType</span>
+                </label>
+                <Select
+                  isDisabled
+                  placeholder={p && p.dss_datatype}
+                  options={dssDatatypes.map((d, idx) => ({
+                    value: d.id,
+                    label: d.name,
+                  }))}
+                  onChange={(e) =>
+                    setPayload({
+                      ...payload,
+                      dss_datatype_id: e.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label className='block mt-4 w-full' forhtml='dss_fpart'>
+                  <span className='text-gray-600'>DSS F-Part</span>
+                </label>
+                <input
+                  disabled
+                  className='w-full border-2 border-gray-200 text-gray-400 focus:ring-0 focus:border-black p-1 bg-gray-100'
+                  defaultValue={payload.dss_fpart}
+                  maxLength={30}
+                  onChange={(e) =>
+                    setPayload({ ...payload, dss_fpart: e.target.value })
+                  }
+                />
+              </div>
+
               <div>
                 <label
                   className='block mt-4 w-full'
@@ -218,7 +257,7 @@ const EditProductModal = connect(
                 </label>
                 <input
                   disabled
-                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  className='w-full border-2 border-gray-200 text-gray-400 focus:ring-0 focus:border-black p-2 bg-gray-100'
                   defaultValue={payload.temporal_resolution}
                   maxLength={5}
                   onChange={(e) =>
@@ -239,7 +278,7 @@ const EditProductModal = connect(
                 </label>
                 <input
                   disabled
-                  className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
+                  className='w-full border-2 border-gray-200 text-gray-400 focus:ring-0 focus:border-black p-2 bg-gray-100'
                   defaultValue={payload.temporal_duration}
                   maxLength={5}
                   onChange={(e) =>
@@ -263,21 +302,6 @@ const EditProductModal = connect(
                   setPayload({ ...payload, description: e.target.value })
                 }
               ></textarea>
-            </div>
-
-            <div className='mt-3'>
-              <label className='block mt-4 w-full' forhtml='dss_fpart'>
-                <span className='text-gray-600'>DSS F-Part</span>
-              </label>
-              <input
-                disabled
-                className='w-full border-2 border-gray-200 focus:ring-0 focus:border-black p-2'
-                defaultValue={payload.dss_fpart}
-                maxLength={30}
-                onChange={(e) =>
-                  setPayload({ ...payload, dss_fpart: e.target.value })
-                }
-              />
             </div>
 
             {/* <div className='mt-3'>
