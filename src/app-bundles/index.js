@@ -27,6 +27,7 @@ import downloadModalBundle from './download-modal-bundle';
 import downloadMetricsBundle from './download-metrics-bundle';
 import adminDownloadBundle from './admin-download-bundle';
 import productIngestStatusBundle from './project-ingest-status';
+import dssDatatypeBundle from './dss-datatype-bundle';
 
 const mockTokens = {
   ADMIN:
@@ -58,6 +59,7 @@ export default composeBundles(
   downloadMetricsBundle,
   adminDownloadBundle,
   productIngestStatusBundle,
+  dssDatatypeBundle,
   createAuthBundle({
     name: 'auth',
     host: process.env.REACT_APP_AUTH_HOST,
