@@ -41,7 +41,6 @@ const downloadBundle = createRestBundle({
         }).then((response) => {
           if (!response.ok) {
             console.log('ERROR in Download Request');
-            console.log(`Request returned a ${response.status}`);
             callback(`Request returned a ${response.status}`);
           }
           dispatch({
