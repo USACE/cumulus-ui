@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import {
   setHours,
   setMinutes,
-  addHours,
+  // addHours,
   // differenceInDays,
   differenceInHours,
   formatDistance,
@@ -231,7 +231,7 @@ export default connect(
                     onChange={setEnd}
                     minDate={start}
                     minTime={start}
-                    maxTime={addHours(currentDate, 2)}
+                    maxTime={setHours(setMinutes(new Date(), 30), 23)}
                     maxDate={currentDate}
                     showMonthDropdown
                     showYearDropdown
